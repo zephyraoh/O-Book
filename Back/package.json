@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "DEBUG=*,-express:*,-nodemon*,-send*,-body-parser* npx nodemon"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,8 @@
     "debug": "^4.3.4",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-jsdoc-swagger": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.3"
   },
   "devDependencies": {
