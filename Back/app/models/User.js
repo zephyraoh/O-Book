@@ -12,8 +12,8 @@ const client = require('../config/db');
  * @property {string} email- User email
  * @property {number} zipcode- User postal code
  * @property {string} localisation- User localisation
- * @property {string} biographie- User biographie
- * @property {string} profile_picture- User profile picture url
+ * @property {string} biography- User biographie
+ * @property {string} profilePicture- User profile picture url
  */
 
 module.exports = class User extends CoreDatamapper {
@@ -28,7 +28,7 @@ module.exports = class User extends CoreDatamapper {
         this.email = user.email;
         this.zipcode = user.zipcode;
         this.localisation = user.localisation;
-        this.biographie = user.biographie;
+        this.biography = user.biography;
         this.profile_picture = user.profile_picture;
     }
 

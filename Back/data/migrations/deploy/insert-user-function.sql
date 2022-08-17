@@ -4,7 +4,7 @@ BEGIN;
 
 CREATE FUNCTION insert_user(user_data json) RETURNS "user" AS $$
     INSERT INTO "user"
-    ("firstname", "lastname", "username", "password", "email", "zipcode", "localisation", "biographie", "profile_picture")
+    ("firstname", "lastname", "username", "password", "email", "zipcode", "localisation", "biography", "profile_picture")
     VALUES (
         user_data->>'firstname',
         user_data->>'lastname',
@@ -13,7 +13,7 @@ CREATE FUNCTION insert_user(user_data json) RETURNS "user" AS $$
         user_data->>'email',
         user_data->>'zipcode',
         user_data->>'localisation',
-        user_data->>'biographie',
+        user_data->>'biography',
         COALESCE(user_data->>'profile_picture', null)
     )
     RETURNING *
