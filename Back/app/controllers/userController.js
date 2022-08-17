@@ -68,8 +68,8 @@ const userController = {
         });
 
         // Insertion du nouvel utilisateur en BDD
-        const results = await newUser.create();
-        res.json(results);
+        await newUser.create();
+        res.status(200).json('New user created');
     },
 
     async signin(req, res) {
