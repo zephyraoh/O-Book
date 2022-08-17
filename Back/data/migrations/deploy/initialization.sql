@@ -32,6 +32,7 @@ CREATE TABLE "user" (
     "firstname" TEXT NOT NULL,
     "lastname" TEXT NOT NULL,
     "username" TEXT NOT NULL UNIQUE,
+    "password" TEXT NOT NULL,
     "email" mail NOT NULL,
     "zipcode" french_zipcode NOT NULL,
     "localisation" TEXT NOT NULL,

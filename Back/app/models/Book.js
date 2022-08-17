@@ -1,4 +1,6 @@
 const CoreDatamapper = require('./coreDatamapper');
+// Import du client
+const client = require('../config/db');
 
 /**
  * "Book" Model Object
@@ -19,12 +21,13 @@ module.exports = class Book extends CoreDatamapper {
      * @param {number} libraryId - Library Id
      * @returns Books or undefined if there's no library Id match
      */
+    // eslint-disable-next-line class-methods-use-this
     async findByLibrary(libraryId) {
         const sql = {
             text: 'SELECT * FROM books_by_library WHERE library_id = $1',
             values: [libraryId],
         };
-        const results = await client.query(sql):
+        const results = await client.query(sql);
         if (results.rowCount === 0) {
             return undefined;
         }
