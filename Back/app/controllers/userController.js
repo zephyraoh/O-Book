@@ -30,24 +30,24 @@ const userController = {
             || !zipcode
             || !localisation
             || !biographie) {
-            throw new Error('Missing informations');
+            throw new AuthError('Wrong input');
         }
 
         // Vérifier que le user n'existe pas déjà en BDD avec son email
-        const userByEmail = User.findSome('email', email);
+        const userByEmail = User.findOne('email', email);
         if (userByEmail) {
-            throw new Error('Email already used');
+            throw new AuthError('Email already used');
         }
 
         // Vérifier que le user n'existe pas déjà avec son username
-        const userByUsername = User.findSome('username', username);
+        const userByUsername = User.findOne('username', username);
         if (userByUsername) {
-            throw new Error('Username already used');
+            throw new AuthError('Username already used');
         }
 
         // Comparer les MDP
         if (password !== passwordConfirm) {
-            throw new Error('Password and Password confirmation must match');
+            throw new AuthError('Password and Password confirmation must match');
         }
 
         // Hashage du MDP
@@ -81,7 +81,7 @@ const userController = {
         }
 
         // On vérifie que l'utilisateur existe bien en BDD
-        const user = User.findSome('email', email);
+        const user = User.findOne('email', email);
         if (!user) {
             throw new AuthError('This email does not exist');
         }
@@ -92,8 +92,8 @@ const userController = {
             throw new AuthError('Wrong password');
         }
 
+        // Génération et envoi du token au client
         const token = jwt.create(user);
-        // On renvoi le token
         res.json(token);
     },
 };

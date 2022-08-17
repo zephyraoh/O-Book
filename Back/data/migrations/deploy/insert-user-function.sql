@@ -2,7 +2,7 @@
 
 BEGIN;
 
-CREATE FUNCTION insert_user(user_data json) RETURNS user AS $$
+CREATE FUNCTION insert_user(user_data json) RETURNS "user" AS $$
     INSERT INTO "user"
     ("firstname", "lastname", "username", "password", "email", "zipcode", "localisation", "biographie", "profile_picture")
     VALUES (
@@ -14,7 +14,7 @@ CREATE FUNCTION insert_user(user_data json) RETURNS user AS $$
         user_data->>'zipcode',
         user_data->>'localisation',
         user_data->>'biographie',
-        user_data->>'profile_picture',
+        COALESCE(user_data->>'profile_picture', null)
     )
     RETURNING *
 $$ LANGUAGE sql STRICT;

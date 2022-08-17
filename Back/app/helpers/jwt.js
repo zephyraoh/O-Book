@@ -41,7 +41,7 @@ module.exports = {
                 throw new AuthError(error.message);
             }
         } else if (typeof req.headers.authorization !== 'undefined') {
-            throw new Error('Missing token');
+            throw new AuthError('Missing token');
         }
         return null;
     },
