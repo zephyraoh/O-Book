@@ -11,8 +11,7 @@ module.exports = class CoreDataMapper {
 
     static async findByPk(id) {
         const sql = {
-            text: `SELECT * FROM ${this.tableName}
-                WHERE id=$1`,
+            text: `SELECT * FROM "${this.tableName}" WHERE id=$1`,
             values: [id],
         };
         const results = await client.query(sql);
@@ -21,8 +20,7 @@ module.exports = class CoreDataMapper {
 
     static async findOne(field, value) {
         const sql = {
-            text: `SELECT * FROM ${this.tableName}
-                WHERE ${field}=$1`,
+            text: `SELECT * FROM "${this.tableName}" WHERE ${field}=$1`,
             values: [value],
         };
         const results = await client.query(sql);

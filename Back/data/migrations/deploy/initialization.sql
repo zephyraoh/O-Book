@@ -36,7 +36,7 @@ CREATE TABLE "user" (
     "email" mail NOT NULL,
     "zipcode" french_zipcode NOT NULL,
     "localisation" TEXT NOT NULL,
-    "biographie" TEXT NOT NULL,
+    "biography" TEXT NOT NULL,
     "profile_picture" TEXT DEFAULT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ DEFAULT NULL
@@ -52,14 +52,8 @@ CREATE TABLE "book" (
 CREATE TABLE "library" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "user_id" INT NOT NULL REFERENCES "user"("id"),
-    "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
-    "updated_at" TIMESTAMPTZ DEFAULT NULL
-);
-
-CREATE TABLE "library_has_book" (
-    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "library_id" INT NOT NULL REFERENCES "library"("id"),
     "book_id" INT NOT NULL REFERENCES "book"("id"),
+    "is_available" BOOLEAN NOT NULL DEFAULT false,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ DEFAULT NULL
 );
@@ -69,7 +63,7 @@ CREATE TABLE "loan" (
     "status" TEXT NOT NULL,
     "loan_date" TIMESTAMPTZ DEFAULT NULL, 
     "user_id" INT NOT NULL REFERENCES "user"("id"),
-    "library_has_book_id" INT NOT NULL REFERENCES "library_has_book"("id"),
+    "library_id" INT NOT NULL REFERENCES "library"("id"),
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ DEFAULT NULL
 );
@@ -81,8 +75,5 @@ CREATE TABLE "user_has_tag" (
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ DEFAULT NULL
 );
-
-ALTER TABLE "user" 
-    ADD COLUMN "library_id" INT NOT NULL REFERENCES "library"("id");
 
 COMMIT;

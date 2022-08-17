@@ -16,7 +16,7 @@ const userController = {
             email,
             zipcode,
             localisation,
-            biographie,
+            biography,
             profilePicture,
         } = req.body;
 
@@ -26,21 +26,22 @@ const userController = {
             || !lastname
             || !username
             || !password
+            || !passwordConfirm
             || !email
             || !zipcode
             || !localisation
-            || !biographie) {
+            || !biography) {
             throw new AuthError('Wrong input');
         }
 
         // Vérifier que le user n'existe pas déjà en BDD avec son email
-        const userByEmail = User.findOne('email', email);
+        const userByEmail = await User.findOne('email', email);
         if (userByEmail) {
             throw new AuthError('Email already used');
         }
 
         // Vérifier que le user n'existe pas déjà avec son username
-        const userByUsername = User.findOne('username', username);
+        const userByUsername = await User.findOne('username', username);
         if (userByUsername) {
             throw new AuthError('Username already used');
         }
@@ -62,13 +63,13 @@ const userController = {
             email,
             zipcode,
             localisation,
-            biographie,
+            biography,
             profile_picture: profilePicture,
         });
 
         // Insertion du nouvel utilisateur en BDD
         const results = await newUser.create();
-        res.json(results.rows[0]);
+        res.json(results);
     },
 
     async signin(req, res) {
@@ -81,7 +82,7 @@ const userController = {
         }
 
         // On vérifie que l'utilisateur existe bien en BDD
-        const user = User.findOne('email', email);
+        const user = await User.findOne('email', email);
         if (!user) {
             throw new AuthError('This email does not exist');
         }
@@ -96,6 +97,7 @@ const userController = {
         const token = jwt.create(user);
         res.json(token);
     },
+
 };
 
 module.exports = userController;
