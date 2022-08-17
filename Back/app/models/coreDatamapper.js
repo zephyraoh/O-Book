@@ -18,4 +18,14 @@ module.exports = class CoreDataMapper {
         const results = await client.query(sql);
         return results.rows[0];
     }
+
+    static async findSome(field, value) {
+        const sql = {
+            text: `SELECT * FROM ${this.tableName}
+                WHERE ${field}=$1`,
+            values: [value],
+        };
+        const results = await client.query(sql);
+        return results.rows[0];
+    }
 };

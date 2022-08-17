@@ -3,3 +3,4 @@
 
 initialization 2022-08-16T08:02:04Z Justine Blanchet <blanchet.justine@laposte.net> # DB initialization
 books_view 2022-08-16T13:21:14Z Justine Blanchet <blanchet.justine@laposte.net> # Add view to get books with library_id
+insert-user-function 2022-08-17T08:15:58Z Justine Blanchet <blanchet.justine@laposte.net> # Add insert user function

@@ -1,5 +1,6 @@
 // Import du CoreDatamapper, class parente des Models
 const CoreDatamapper = require('./coreDatamapper');
+const client = require('../config/db');
 
 /**
  * "User" Model Object
@@ -29,5 +30,14 @@ module.exports = class User extends CoreDatamapper {
         this.localisation = user.localisation;
         this.biographie = user.biographie;
         this.profile_picture = user.profile_picture;
+    }
+
+    async create() {
+        const sql = {
+            text: 'SELECT * FROM insert_user($1)',
+            values: [this],
+        };
+        const results = await client.query(sql);
+        return results.rows[0];
     }
 };

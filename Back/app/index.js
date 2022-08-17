@@ -16,6 +16,9 @@ const app = express();
 // On fourni l'app au middleware API Docs
 apidocs(app);
 
+// On active le middleware pour parser le payload urlencoded
+app.use(express.urlencoded({ extended: true }));
+
 // On fourni le routeur au serveur express
 app.use(router);
 
