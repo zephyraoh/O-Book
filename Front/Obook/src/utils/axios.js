@@ -1,10 +1,13 @@
 import axs from 'axios';
 
-const axios = axs.create({
+export const axiosBooksApi = axs.create({
 	baseURL: 'https://www.googleapis.com/books/v1/volumes?q=',
 });
 
-export default axios;
+
+export const axiosServerDB = axs.create({
+	baseURL: '',//URL DU FUTUR SERVEUR BACK O'BOOK
+});
 
 
 // Clé de Duke : AIzaSyCm9tT-3u51_XjhduEm-zZUFfz-W_O0_Fg /* à mettre dans le .env de React un jour
