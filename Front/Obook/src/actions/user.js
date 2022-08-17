@@ -7,7 +7,7 @@ export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
 //séparation entre action demandant une confirmation et autres infos secondaires
 export const CHANGE_USER_INFO_MISC = 'CHANGE_USER_INFO_MISC'; 
 //zipcode, area, labels, bio, pic
-
+export const SET_USER_DATA ='SET_USER_DATA';
 
 
 export const setUserField = (value, name) => ({

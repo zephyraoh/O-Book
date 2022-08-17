@@ -1,5 +1,5 @@
-import { SET_SEARCH } from "../store/actions";
-import {SET_BOOKS} from "../store/actions";
+import { SET_SEARCH } from "../actions/books";
+import {SET_BOOKS} from "../actions/books";
 
 
 // initialstate : search vide et librairie API à affichier vide

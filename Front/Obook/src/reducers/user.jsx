@@ -1,14 +1,17 @@
+import { SET_USER_FIELD, SET_USER_DATA, LOGOUT }  from "../actions/user";
+
+
 export const initialState = {
   username: null,  
   token: null,
-  logged: false,
+  isLogged: false,
   email: '',
   password:'',
   };
   
   const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
-      case CHANGE_USER_FIELD
+      case SET_USER_FIELD:
       return{
         ...state,
         //action modulable qui s'appliquera aux deux champs email et password
