@@ -1,16 +1,15 @@
-import { useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchField } from '../../actions/books';
 const SearchForm=()=>{
 
 
     const dispatch = useDispatch();
     
     const handleChange = (e) => {
-        console.log("something changed !")
         dispatch(setSearchField(e.target.value))
-        
     }
 
+    const value = useSelector(state => state.search.searchValue);
    
     
     return (

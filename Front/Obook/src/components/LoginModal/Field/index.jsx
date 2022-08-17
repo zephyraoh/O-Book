@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import './styles.scss';
 
-export default Field = ({
+const Field = ({
     value,
     type,
     name,
@@ -13,7 +13,7 @@ export default Field = ({
         onChange(evt.target.value, name)
     };
 
-
+    const inputId = `field-${ name }`;
     return (
         <div className={ value.length>0 ? 'field field--has-content': 'field'}>
             <input
@@ -31,9 +31,9 @@ export default Field = ({
 
 Field.propTypes = {
     value: PropTypes.string,
-    type: Proptypes.string,
-    name: Proptypes.string.isRequired,
-    placeholder: Proptypes.string.isRequired,
+    type: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    placeholder: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired
 }
 
@@ -43,3 +43,4 @@ Field.defaultProps = {
     type: 'text',
 }
 
+export default Field;

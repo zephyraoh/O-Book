@@ -1,5 +1,5 @@
 import { setUserData, SIGN_IN, LOGOUT, DEL_ACCOUNT, CHANGE_USER_INFO, CHANGE_USER_INFO_MISC } from '../actions/user';
-import axiosServerDB from '../utils/axios';
+import { axiosServerDB } from '../utils/axios';
 
 
 

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { GET_BOOKS, setBooks } from '../actions';
+import { GET_BOOKS, setBooks } from '../actions/books';
 
 
 
-const api = (store) => (next) => async (action) => {
+const searchMiddleware = (store) => (next) => async (action) => {
 
   switch (action.type) {
     case GET_BOOKS: {
@@ -20,4 +20,4 @@ const api = (store) => (next) => async (action) => {
   }
 };
 
-export default api;
+export default searchMiddleware;

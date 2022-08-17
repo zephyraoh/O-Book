@@ -1,10 +1,10 @@
 import { LoginModal } from "../LoginModal/LoginModal";
 import SearchForm from "../SearchForm";
-
-const isLogged = useSelector(state => state.user.isLogged);
+import { useSelector } from "react-redux";
 
 const Header=()=>{
     
+    const isLogged = useSelector(state => state.user.isLogged);
         return (
         <>
             <ul>
