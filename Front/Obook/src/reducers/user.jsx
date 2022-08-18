@@ -6,7 +6,9 @@ export const initialState = {
   token: null,
   isLogged: false,
   email: '',
-  password:'',
+  password: '',
+  newEmail: '',
+  newPassword: ''
   };
   
   const reducer = (state = initialState, action = {}) => {

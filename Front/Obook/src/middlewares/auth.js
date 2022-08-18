@@ -1,4 +1,4 @@
-import { setUserData, SIGN_IN, LOGOUT, DEL_ACCOUNT, CHANGE_USER_INFO, CHANGE_USER_INFO_MISC } from '../actions/user';
+import { setUserData, SIGN_IN, SIGN_UP, LOGOUT, DEL_ACCOUNT, CHANGE_USER_INFO, CHANGE_USER_INFO_MISC } from '../actions/user';
 import { axiosServerDB } from '../utils/axios';
 
 
@@ -27,7 +27,21 @@ const authMiddleware = (store) => (next) => async (action) => {
 			store.dispatch(setUserData(data));
 			// Je déclenche l'action qui va aller récupérer mes recettes favorites
 			// store.dispatch(fetchFavorites());
+			console.log('It worked !!! >>>>>', data )
 			break;
+		}
+		case SIGN_UP:{
+
+			const {user:{newEmail, newPassword}} = store.getState();
+
+			const response = await axiosServerDB.post('/createuser', {
+				newEmail,
+				newPassword,
+			})
+			// Vérification de la création d'un user ou s'il est déjà présent en BDD en fonction du status réponse serveur TODO :
+			// response.ok ? store.dispatch(setCreationConfirmation(true)) : store.dispatch(setCreationConfirmation(false))
+			
+			console.log('User created !!!')
 		}
 		default: 
 			next(action); 
