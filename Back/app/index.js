@@ -1,6 +1,7 @@
 // Import du module express
 const express = require('express');
 // Import du router
+const cors = require('cors');
 const router = require('./routers');
 
 // Import JS Doc Swagger
@@ -12,6 +13,7 @@ const errorHandler = require('./helpers/errorHandler');
 
 // Création du serveur express
 const app = express();
+app.use(cors('*'));
 
 // On fourni l'app au middleware API Docs
 apidocs(app);

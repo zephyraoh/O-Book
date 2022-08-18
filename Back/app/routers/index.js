@@ -10,6 +10,9 @@ const auth = require('../middlewares/auth');
 // Import des controllers
 const userController = require('../controllers/userController');
 const libraryController = require('../controllers/libraryController');
+const tagController = require('../controllers/tagController');
+const loanController = require('../controllers/loanController');
+const bookController = require('../controllers/bookController');
 
 /// Inscription / Connexion
 /**
@@ -20,7 +23,7 @@ const libraryController = require('../controllers/libraryController');
  * @return {string} 200 - success response - application/json
  * @return {string} 400 - user error response - application/json
  */
-router.post('/login', controllerHandler(userController.signin));
+router.post('/login', controllerHandler(userController.login));
 /**
  * POST /createuser
  * @summary Create new user
@@ -31,26 +34,36 @@ router.post('/login', controllerHandler(userController.signin));
  */
 router.post('/createuser', controllerHandler(userController.createUser));
 
-/// Infos personnelles utilisateur
-router.route('mylibrary')
+/// Profil personnel utilisateur
+router.route('/profile')
     /**
-     * GET /mylibrary
-     * @summary Get user personnal library
+     * GET /profile
+     * @summary Get personnal profile informations
      * @tags User
      * @return {string} 200 - success response - application/json
      * @return {string} 400 - user error response - application/json
      */
-    .get(auth, controllerHandler(libraryController.getMyLibrary));
+    .get(auth, controllerHandler(userController.getProfile))
+    .post(auth, controllerHandler(userController.updateProfile))
+    .delete(auth, controllerHandler(userController.deleteProfile));
+
+/// Infos personnelles utilisateur
 /**
- * GET /profile
- * @summary Get personnal profile informations
+ * GET /mylibrary
+ * @summary Get user personnal library
  * @tags User
  * @return {string} 200 - success response - application/json
  * @return {string} 400 - user error response - application/json
  */
-router.get('/profile', auth, controllerHandler(userController.getPersonnalInformations));
+router.get('/mylibrary', auth, controllerHandler(libraryController.getMyLibrary));
+router.post('/mylibrary/addBook', auth, controllerHandler(libraryController.addBookInLibrary));
+router.patch('/mylibrary/book/:id', auth, controllerHandler(libraryController.updateBookInLibrary));
+router.delete('/mylibrary/book/:id', auth, controllerHandler(libraryController.deleteBookFromLibrary));
 
-// Librairie autre utilisateur
+/// Infos de contact de l'utilisateur prêteur
+router.get('/userinfos/:userName', controllerHandler(userController.getContactInfos));
+
+/// Librairie autre utilisateur
 /**
  * GET /library/:id
  * @summary Get other user library
@@ -58,7 +71,23 @@ router.get('/profile', auth, controllerHandler(userController.getPersonnalInform
  * @return {string} 200 - success response - application/json
  * @return {string} 400 - user error response - application/json
  */
-router.get('/library/:id', controllerHandler(libraryController.getLibrary));
+router.get('/library/:userName', controllerHandler(libraryController.getLibrary));
+
+/// Gestion des emprunts
+router.post('/loan', auth, controllerHandler(loanController.generateLoan));
+router.patch('/loan/:id', auth, controllerHandler(loanController.updateLoan));
+
+router.get('/loans', controllerHandler(loanController.getLoans));
+
+/// Récupération des informations de livres
+router.get('/books', controllerHandler(bookController.getBooks));
+router.get('/books/:googleId', controllerHandler(bookController.getUsersByBook));
+
+/// Gestion des tags
+router.get('/tags', controllerHandler(tagController.getTags));
+router.get('/tags', auth, controllerHandler(tagController.getTagsByUser));
+router.post('/addTag', auth, controllerHandler(tagController.addTagToUser));
+router.delete('/removeTage', auth, controllerHandler(tagController.removeTagFromUser));
 
 // Test de route authentifiée
 router.get('/users', auth, controllerHandler(userController.getAllUsers));

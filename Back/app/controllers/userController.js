@@ -72,7 +72,7 @@ const userController = {
         res.status(200).json('New user created');
     },
 
-    async signin(req, res) {
+    async login(req, res) {
         // Récupération des données utilisateur
         const { email, password } = req.body;
 
@@ -96,6 +96,22 @@ const userController = {
         // Génération et envoi du token au client
         const token = jwt.create(user);
         res.json(token);
+    },
+
+    async getProfile(req, res) {
+        // Renvoyer les infos personnelles de l'utilisateur
+    },
+
+    async updateProfile(req, res) {
+        // Modifier les infos personnelles de l'utilisateur
+    },
+
+    async deleteProfile(req, res) {
+        // Supprimer le profil d'un utilisateur
+    },
+
+    async getContactInfos(req, res) {
+        // Récupérer les infos de contact de l'utilisateur prêteur
     },
 
     async getAllUsers(req, res) {
