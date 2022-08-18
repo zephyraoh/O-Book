@@ -1,6 +1,7 @@
 import Field from "./Field";
+import Button from "./Button";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserField } from "../../actions/user"
+import { setUserField, signIn } from "../../actions/user"
 
 
 
@@ -24,20 +25,19 @@ export const LoginModal=()=>{
 		dispatch(setUserField(value, name));
 	};
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+		dispatch(signIn());
+    
+	};
+
     return (
-    <>
+    <form onSubmit={handleSubmit}>
     <h2>Connexion ou Inscription</h2>
     {/* //form de login */}
     <Field value = {email}  name = "email" placeholder="email" onChange={onChange} />
-    <Field value = {password} name = "password" placeholder="Mot de Passe" onChange={onChange} /> 
-  </>
+    <Field value = {password} name = "password" placeholder="Mot de Passe" onChange={onChange} />
+    <Button name="Se connecter" value="loginButton" className="login-button" />
+  </form>
   )
-}
-
-// changeField, 
-//= const handleChangeField = (value, name) => {
-    // dispatch(changeUserField(value, name));
-// };
-
-
-
+};
