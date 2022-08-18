@@ -12,7 +12,7 @@ const client = require('../config/db');
  * @property {number} userId - User id who borrows the book
  */
 
-module.exports = class loan extends CoreDatamapper {
+module.exports = class Loan extends CoreDatamapper {
     static tableName = 'library';
 
     constructor(loan) {

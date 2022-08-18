@@ -29,14 +29,14 @@ CREATE TABLE "tag" (
 
 CREATE TABLE "user" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "firstname" TEXT NOT NULL,
-    "lastname" TEXT NOT NULL,
+    "firstname" TEXT DEFAULT NULL,
+    "lastname" TEXT DEFAULT NULL,
     "username" TEXT NOT NULL UNIQUE,
     "password" TEXT NOT NULL,
     "email" mail NOT NULL,
-    "zipcode" french_zipcode NOT NULL,
-    "localisation" TEXT NOT NULL,
-    "biography" TEXT NOT NULL,
+    "zipcode" french_zipcode DEFAULT NULL,
+    "localisation" TEXT DEFAULT NULL,
+    "biography" TEXT DEFAULT NULL,
     "profile_picture" TEXT DEFAULT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
     "updated_at" TIMESTAMPTZ DEFAULT NULL

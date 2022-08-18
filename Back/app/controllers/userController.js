@@ -8,29 +8,17 @@ const userController = {
     async createUser(req, res) {
         // Récupération des données utilisateur
         const {
-            firstname,
-            lastname,
             username,
             password,
             passwordConfirm,
             email,
-            zipcode,
-            localisation,
-            biography,
-            profilePicture,
         } = req.body;
 
         // Vérifier que les champs obligatoires ont été renseignés
-        if (
-            !firstname
-            || !lastname
-            || !username
+        if (!username
             || !password
             || !passwordConfirm
-            || !email
-            || !zipcode
-            || !localisation
-            || !biography) {
+            || !email) {
             throw new AuthError('Wrong input');
         }
 
@@ -56,15 +44,9 @@ const userController = {
 
         // Création d'un nouvel utilisateur
         const newUser = new User({
-            firstname,
-            lastname,
             username,
             password: hashedPassword,
             email,
-            zipcode,
-            localisation,
-            biography,
-            profile_picture: profilePicture,
         });
 
         // Insertion du nouvel utilisateur en BDD
