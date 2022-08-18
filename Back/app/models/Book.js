@@ -6,7 +6,7 @@ const client = require('../config/db');
  * "Book" Model Object
  * @typedef {object} BookModel
  * @property {string} google_api_id - Google API id of the book
- */
+*/
 
 module.exports = class Book extends CoreDatamapper {
     static tableName = 'book';
