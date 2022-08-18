@@ -18,6 +18,7 @@ apidocs(app);
 
 // On active le middleware pour parser le payload urlencoded
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // On fourni le routeur au serveur express
 app.use(router);
