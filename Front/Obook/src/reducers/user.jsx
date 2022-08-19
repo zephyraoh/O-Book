@@ -7,8 +7,10 @@ export const initialState = {
   isLogged: false,
   email: '',
   password: '',
+  newUserName:'',
   newEmail: '',
-  newPassword: ''
+  newPassword: '',
+  newPasswordConfirm:'',
   };
   
   const reducer = (state = initialState, action = {}) => {

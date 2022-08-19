@@ -40,8 +40,3 @@ const searchMiddleware = (store) => (next) => async (action) => {
 };
 
 export default searchMiddleware;
-
-// recherche globale = 'https://www.googleapis.com/books/v1/volumes?q={recherche}'
-// recherche par titre = 'https://www.googleapis.com/books/v1/volumes?q=intitle:{recherche}'
-// recherche par auteur = 'https://www.googleapis.com/books/v1/volumes?q=inauthor:{recherche}'
-// recherche par genre = 'https://www.googleapis.com/books/v1/volumes?q=subject:{recherche}'

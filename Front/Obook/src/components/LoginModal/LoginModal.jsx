@@ -25,8 +25,9 @@ export const LoginModal=()=>{
     const password = useSelector(state => state.user.password);
     const newEmail = useSelector(state => state.user.newEmail);
     const newPassword = useSelector(state => state.user.newPassword);
-    
-    
+    const newPasswordConfirm = useSelector(state => state.user.newPasswordConfirm);
+    const newUserName = useSelector(state => state.user.newUserName); 
+    //destructuring possible 
 
     const onChange = (value, name) => {
 		dispatch(setUserField(value, name));
@@ -43,7 +44,9 @@ export const LoginModal=()=>{
 		dispatch(signUp());
 
 	};
-
+  const handleClick = (e)=>{
+    setLoginForm(!loginForm)
+  }
   const [loginForm, setLoginForm] = useState(true);
     return (
 
@@ -55,19 +58,20 @@ export const LoginModal=()=>{
         <Field value= {email} type= "email" name= "email" placeholder="email" onChange={onChange} />
         <Field value= {password} type= "password" name= "password" placeholder="Mot de Passe" onChange={onChange} />
         <Button name="Se connecter" value="loginButton" className="login-button" />
-        <a>Pas encore inscrit ?</a>
+        <a onClick={handleClick}>Pas encore inscrit ?</a>
       </form>
       )}
       
       { !loginForm && (
       <form className="login-form" onSubmit={handleSubmitSignUp}>
         <h2>Inscription</h2>
-        {/* //form de login */}
+        {/* //form de sign up */}
         <Field value= {newUserName} type= "text" name= "newUserName" placeholder = "Nom d'utilisateur" onChange={onChange} />
         <Field value= {newEmail} type= "email" name= "newEmail" placeholder = "Email" onChange={onChange} />
         <Field value= {newPassword} type= "password" name= "newPassword" placeholder = "Mot de Passe" onChange={onChange} />
         <Field value= {newPasswordConfirm} type= "password" name= "newPasswordConfirm" placeholder = "Confirmez le Mot de Passe" onChange={onChange} />
         <Button name="S'inscrire" value="signupButton" className="signup-button" />
+        <a onClick={handleClick}>Déjà inscrit ?</a>
       </form>
       )}
       </div>
