@@ -11,3 +11,7 @@ export const setBooks =(data)=>({
   type : SET_BOOKS,
   payload: data,
 })
+
+export const getBooks = ()=>({
+  type : GET_BOOKS,
+})

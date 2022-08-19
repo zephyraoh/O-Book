@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchField } from '../../actions/books';
+import { getBooks, setSearchField } from '../../actions/books';
+import { axiosBooksApi } from '../../utils/axios';
 import Button from '../LoginModal/Button';
+import SearchFilters from './SearchFilters';
 
 const SearchForm=()=>{
 
@@ -13,7 +15,8 @@ const SearchForm=()=>{
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('submit');
+        dispatch(getBooks())
+    
     };
 
     const value = useSelector(state => state.search.searchValue);
@@ -23,17 +26,7 @@ const SearchForm=()=>{
     <form action="" onSubmit={handleSubmit}>
         <input type="text" className="search-form__input" value={value} onChange={handleChange}/>
         <Button name="Valider" value="searchButton" className="search-button" />
-        <div>
-            <label htmlFor="all">Tous</label>
-            <input type="radio" name="booksearch" id="all" /> 
-            <label htmlFor="title">Titre</label>
-            <input type="radio" name="booksearch" id="title" />
-            <label htmlFor="author">Auteur</label>
-            <input type="radio" name="booksearch" id="author" />
-            <label htmlFor="genre">Genre</label>
-            <input type="radio" name="booksearch" id="genre" />
-            
-        </div>
+        <SearchFilters />
     </form>
     )
 }

@@ -1,12 +1,22 @@
+import { useSelector } from 'react-redux';
+import BookMini from './BookCard';
 import './styles.scss';
-import BookMini from './BookMini';
 
-const BooksResults = () => (
+const BooksResults = () => {
+  
+
+  const booksData = useSelector(state =>state.search.booksData) ;
+
+  return(
   <div>
-    Books result :
-    <BookMini />
+    {/* Books result : */}
+    {/*  */}
+    {/* booksData.map(book => {
+      <BookMini key = {book.id} {...book}>
+    } */}
     <BookMini />
   </div>
-);
+  )
+};
 
 export default BooksResults;
