@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getBooks, setSearchField } from '../../actions/books';
-import { axiosBooksApi } from '../../utils/axios';
 import Button from '../LoginModal/Button';
 import SearchFilters from './SearchFilters';
 

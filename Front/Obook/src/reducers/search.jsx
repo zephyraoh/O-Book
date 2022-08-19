@@ -1,4 +1,4 @@
-import { SET_SEARCH } from "../actions/books";
+import { SET_SEARCH, SET_SELECTED_FILTER } from "../actions/books";
 import {SET_BOOKS} from "../actions/books";
 
 
@@ -8,6 +8,7 @@ export const initialState = {
     booksData:[
       // à insert : un fichier json d'un livre pour tester la mise en page sans requête.
     ],
+    selectedSearchFilter: 'all'
   };
   
   const reducer = (state = initialState, action = {}) => {
@@ -23,6 +24,11 @@ export const initialState = {
             //retour du nouveau state chargé de la valeur de la librairie requêtée 
             ...state,
               booksData: action.payload,
+          }
+        case SET_SELECTED_FILTER:
+          return{
+            ...state,
+            selectedSearchFilter: action.payload,
           }
       default:
         return state;
