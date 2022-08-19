@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "DEBUG=*,-express:*,-nodemon*,-send*,-body-parser* npx nodemon"
+    "dev": "DEBUG=*,-express:*,-nodemon*,-send*,-body-parser* npx nodemon",
+    "resetDB" : "sqitch revert -y; sqitch deploy; psql -U spedata -d obook -f data/seeding.sql"
   },
   "keywords": [],
   "author": "",

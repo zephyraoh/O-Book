@@ -21,7 +21,51 @@ module.exports = class Library extends CoreDatamapper {
         this.is_available = library.is_available;
     }
 
-    async create() {
+    // eslint-disable-next-line class-methods-use-this
+    static async getPersonnalLibraryDetails(id) {
+        const sql = {
+            text: 'SELECT * FROM personnal_library_details WHERE "user"."id"=$1',
+            values: [id],
+        };
+        const results = await client.query(sql);
+        return results.rows[0];
+    }
 
+    // eslint-disable-next-line class-methods-use-this
+    static async getUserLibraryDetails(username) {
+        const sql = {
+            text: 'SELECT * FROM user_library_details WHERE "user"."id"=$1',
+            values: [username],
+        };
+        const results = await client.query(sql);
+        return results.rows[0];
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    static async isBookInLibrary(googleApiId) {
+        const sql = {
+            text: 'SELECT * FROM "book_in_library" WHERE "book"."google_api_id" = $1',
+            values: [googleApiId],
+        };
+        const results = await client.query(sql);
+        return results.rows;
+    }
+
+    static async update(isAvailable, libraryId) {
+        const sql = {
+            text: 'SELECT * FROM update_library($1, $2)',
+            values: [isAvailable, libraryId],
+        };
+        const result = await client.query(sql);
+        return result.rows[0];
+    }
+
+    async insert() {
+        const sql = {
+            text: 'SELECT * FROM add_book_to_library($1, $2)',
+            values: [this.user_id, this.book_id],
+        };
+        const result = await client.query(sql);
+        return result.rows[0];
     }
 };

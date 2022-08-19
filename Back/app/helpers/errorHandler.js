@@ -8,6 +8,9 @@ module.exports = (err, req, res, next) => {
         statusCode = err.infos?.statusCode ?? 400;
         message = err.message;
     } else if (err.name === 'AuthentificationError') {
+        statusCode = 403;
+        message = err.message;
+    } else if (err.name === 'ClientError') {
         statusCode = 400;
         message = err.message;
     } else if (err.name === 'ValidationError') {

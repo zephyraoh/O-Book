@@ -32,9 +32,36 @@ module.exports = class User extends CoreDatamapper {
         this.profile_picture = user.profile_picture;
     }
 
+    static async getProfileInformations(id) {
+        const sql = {
+            text: 'SELECT * FROM "profile_informations" WHERE "id"=$1',
+            values: [id],
+        };
+        const result = await client.query(sql);
+        return result.rows[0];
+    }
+
+    static async getContactInformations(username) {
+        const sql = {
+            text: 'SELECT * FROM "profile_informations" WHERE "username"=$1',
+            values: [username],
+        };
+        const result = await client.query(sql);
+        return result.rows[0];
+    }
+
     async create() {
         const sql = {
             text: 'SELECT * FROM insert_user($1)',
+            values: [this],
+        };
+        const results = await client.query(sql);
+        return results.rows[0];
+    }
+
+    async update() {
+        const sql = {
+            text: 'SELECT * FROM update_user($1)',
             values: [this],
         };
         const results = await client.query(sql);
