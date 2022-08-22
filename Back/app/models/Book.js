@@ -21,14 +21,14 @@ module.exports = class Book extends CoreDatamapper {
         return results.rows;
     }
 
-    static async getBooksByLibraryId(libraryId) {
+    static async getBookByLibraryId(libraryId) {
         const sql = {
-            text: `SELECT * FROM ${this.tableName} JOIN "library" ON "library"."book_id" = "book"."id" WHERE "library"."id"=$1`,
+            text: `SELECT "book"."id", "book"."google_api_id" FROM ${this.tableName} JOIN "library" ON "library"."book_id" = "book"."id" WHERE "library"."id"=$1`,
             values: [libraryId],
         };
 
         const results = await client.query(sql);
-        return results.rows;
+        return results.rows[0];
     }
 
     // eslint-disable-next-line class-methods-use-this

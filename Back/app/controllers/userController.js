@@ -3,6 +3,7 @@ const AuthError = require('../errors/authError');
 const ClientError = require('../errors/clientError');
 const jwt = require('../helpers/jwt');
 const User = require('../models/User');
+const libraryController = require('./libraryController');
 
 const userController = {
     // Fonction pour créer un nouvel utilisateur
@@ -78,7 +79,13 @@ const userController = {
 
         // Génération et envoi du token au client
         const token = jwt.create(user);
-        res.json(token);
+        req.user = user;
+
+        const library = await libraryController.myLibrary(req);
+        res.json({
+            token,
+            library,
+        });
     },
 
     async getProfile(req, res) {

@@ -59,5 +59,20 @@ SELECT
     "tel"
 FROM "user";
 
+CREATE VIEW "loan_details" AS 
+SELECT 
+    "loan"."id" as loanId,
+	"loan"."status",
+	"loan"."date",
+	"loan"."user_id" as userId,
+	"user"."username",
+	"user"."profile_picture",
+    "library"."id" as libraryId,
+    "book"."google_api_id"
+FROM "loan"
+JOIN "library" ON "library"."id" = "loan"."library_id"
+JOIN "user" ON "user"."id" = "loan"."user_id"
+JOIN "book" ON "book"."id" = "library"."book_id"
+;
 
 COMMIT;

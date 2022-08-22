@@ -5,7 +5,7 @@
 @endpoint = http://localhost:5999
 
 #########################
-#         USER         #
+#          USER         #
 #########################
 
 ### Login user : Generate token 
@@ -13,7 +13,7 @@ POST {{ endpoint }}/login
 content-type: application/json
 
 {
-    "email": "ju@gmail.com",
+    "email": "duke@gmail.com",
     "password": "azerty1234"
 }
 
@@ -57,3 +57,64 @@ Authorization: Bearer {token}
 
 ### Get contact informations
 GET {{ endpoint }}/userinfos/test
+
+#########################
+#         LIBRARY       #
+#########################
+
+### Get my library informations
+GET {{ endpoint }}/mylibrary
+Authorization: Bearer {token}
+
+### Add book in my library
+POST {{ endpoint }}/mylibrary/addBook
+Authorization: Bearer {token}
+content-type: application/json
+
+{
+    "googleApiId": "np2VDAAAQBAJ"
+}
+
+### Update library
+POST {{ endpoint }}/mylibrary/book/15
+Authorization: Bearer {token}
+content-type: application/json
+
+{
+    "isAvailable": "true"
+}
+
+#########################
+#          TAGS         #
+#########################
+
+### Get all tags
+GET {{ endpoint }}/tags
+
+### Add tag to user
+POST {{ endpoint }}/addTag
+Authorization: Bearer {token}
+content-type: application/json
+
+{
+    "tagId": "4"
+}
+
+### Remove tag from user
+DELETE {{ endpoint }}/removeTag
+Authorization: Bearer {token}
+content-type: application/json
+
+{
+    "tagId": "4"
+}
+
+#########################
+#         BOOKS         #
+#########################
+
+### Get all books
+GET {{ endpoint }}/books
+
+### Get user by books
+GET {{ endpoint }}/books/AyOyDwAAQBAJ

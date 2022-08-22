@@ -29,6 +29,15 @@ module.exports = class Loan extends CoreDatamapper {
         return results.rows;
     }
 
+    static async getLoanByLibrary(libraryId) {
+        const sql = {
+            text: 'SELECT * FROM "loan_details" WHERE libraryId=$1',
+            values: [libraryId],
+        };
+        const results = await client.query(sql);
+        return results.rows;
+    }
+
     static async isLoanExist(userId, libraryId) {
         const sql = {
             text: `SELECT * FROM ${this.tableName} WHERE "user_id"=$1 AND "library_id"=$2`,

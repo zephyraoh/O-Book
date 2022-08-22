@@ -5,22 +5,43 @@ const Loan = require('../models/Loan');
 const ClientError = require('../errors/clientError');
 
 const libraryController = {
-    async getMyLibrary(req, res) {
+    async myLibrary(req) {
         // Récupérer toutes les infos personnelles de librairie d'un utilisateur
         const id = Number(req.user.id);
         const user = await User.getProfileInformations(id);
-        const library = await Library.findSome('user_id', id);
-        const books = await Book.getBooksByLibraryId(library[0].id);
+        const libraries = await Library.findSome('user_id', id);
+        if (!libraries) {
+            return user;
+        }
+        const books = [];
+        const lends = [];
+        if (Array.isArray(libraries)) {
+            libraries.forEach(async (library) => {
+                const book = await Book.getBookByLibraryId(library.id);
+                books.push(book);
+                const lend = await Loan.getLoanByLibrary(library.id);
+                lends.push(lend);
+            });
+        } else {
+            const book = await Book.getBookByLibraryId(libraries.id);
+            const lend = await Loan.getLoanByLibrary(libraries.id);
+            books.push(book);
+            lends.push(lend);
+        }
         // Emprunts utilisateur
         const borrow = await Loan.findSome('user_id', id);
         // Prêts utilisateur
-        const lend = await Loan.findSome('library_id', library[0].id);
-        res.json({
+        return {
             user,
             books,
+            lends,
             borrow,
-            lend,
-        });
+        };
+    },
+
+    async getMyLibrary(req, res) {
+        const library = await libraryController.myLibrary(req);
+        res.json(library);
     },
 
     async addBookInLibrary(req, res) {

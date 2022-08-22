@@ -37,7 +37,7 @@ module.exports = class Tag extends CoreDatamapper {
 
     static async removeTagFromUser(tagId, userId) {
         const sql = {
-            text: 'DELETE * FROM "user_has_tag" WHERE "tag_id"=$1 AND "user_id"=$2',
+            text: 'DELETE FROM "user_has_tag" WHERE "tag_id"=$1 AND "user_id"=$2',
             values: [tagId, userId],
         };
         await client.query(sql);
