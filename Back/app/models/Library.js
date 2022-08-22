@@ -24,7 +24,7 @@ module.exports = class Library extends CoreDatamapper {
     // eslint-disable-next-line class-methods-use-this
     static async getPersonnalLibraryDetails(id) {
         const sql = {
-            text: 'SELECT * FROM personnal_library_details WHERE "user"."id"=$1',
+            text: 'SELECT * FROM personnal_library_details WHERE userId"=$1',
             values: [id],
         };
         const results = await client.query(sql);

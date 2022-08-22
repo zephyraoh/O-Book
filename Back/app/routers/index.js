@@ -44,7 +44,7 @@ router.route('/profile')
      * @return {string} 400 - user error response - application/json
      */
     .get(auth, controllerHandler(userController.getProfile))
-    .post(auth, controllerHandler(userController.updateProfile))
+    .patch(auth, controllerHandler(userController.updateProfile))
     .delete(auth, controllerHandler(userController.deleteProfile));
 
 /// Infos personnelles utilisateur
@@ -61,7 +61,7 @@ router.patch('/mylibrary/book/:id', auth, controllerHandler(libraryController.up
 router.delete('/mylibrary/book/:id', auth, controllerHandler(libraryController.deleteBookFromLibrary));
 
 /// Infos de contact de l'utilisateur prêteur
-router.get('/userinfos/:userName', controllerHandler(userController.getContactInfos));
+router.get('/userinfos/:username', controllerHandler(userController.getContactInfos));
 
 /// Librairie autre utilisateur
 /**
@@ -71,7 +71,7 @@ router.get('/userinfos/:userName', controllerHandler(userController.getContactIn
  * @return {string} 200 - success response - application/json
  * @return {string} 400 - user error response - application/json
  */
-router.get('/library/:userName', controllerHandler(libraryController.getLibrary));
+router.get('/library/:username', controllerHandler(libraryController.getLibrary));
 
 /// Gestion des emprunts
 router.post('/loan', auth, controllerHandler(loanController.generateLoan));

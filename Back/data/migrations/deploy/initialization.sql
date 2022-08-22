@@ -8,6 +8,12 @@ CREATE DOMAIN mail AS TEXT
     )
 ;
 
+CREATE DOMAIN tel AS TEXT
+    CHECK(
+        VALUE ~ '^0[1-9][0-9]{8}$'
+    )
+;
+
 CREATE DOMAIN french_zipcode AS TEXT
     CHECK(
         VALUE ~ '^0[1-9]\d{3}$' -- code postaux metropole de 01 a 09
@@ -36,7 +42,7 @@ CREATE TABLE "user" (
     "email" mail NOT NULL,
     "zipcode" french_zipcode DEFAULT NULL,
     "localisation" TEXT DEFAULT NULL,
-    "tel" INT DEFAULT NULL,
+    "tel" tel DEFAULT NULL,
     "biography" TEXT DEFAULT NULL,
     "profile_picture" TEXT DEFAULT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),

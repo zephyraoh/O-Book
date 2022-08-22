@@ -18,18 +18,21 @@ module.exports = class CoreDataMapper {
         return results.rows[0];
     }
 
-    static async findOne(field, value) {
+    static async findSome(field, value) {
         const sql = {
             text: `SELECT * FROM "${this.tableName}" WHERE ${field}=$1`,
             values: [value],
         };
         const results = await client.query(sql);
-        return results.rows[0];
+        if (results.rowCount === 0 || results.rowCount === 1) {
+            return results.rows[0];
+        }
+        return results.rows;
     }
 
     static async delete(id) {
         const sql = {
-            text: `DELETE * FROM "${this.tableName}" WHERE "id"=$1`,
+            text: `DELETE FROM "${this.tableName}" WHERE "id"=$1`,
             values: [id],
         };
         await client.query(sql);

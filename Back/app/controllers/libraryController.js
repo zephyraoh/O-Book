@@ -1,27 +1,39 @@
-const Library = require('../models/Tag');
+const Library = require('../models/Library');
 const Book = require('../models/Book');
+const User = require('../models/User');
+const Loan = require('../models/Loan');
 const ClientError = require('../errors/clientError');
 
 const libraryController = {
     async getMyLibrary(req, res) {
         // Récupérer toutes les infos personnelles de librairie d'un utilisateur
         const id = Number(req.user.id);
-        const library = await Library.getPersonnalLibraryDetails(id);
-        res.json(library);
+        const user = await User.getProfileInformations(id);
+        const library = await Library.findSome('user_id', id);
+        const books = await Book.getBooksByLibraryId(library[0].id);
+        // Emprunts utilisateur
+        const borrow = await Loan.findSome('user_id', id);
+        // Prêts utilisateur
+        const lend = await Loan.findSome('library_id', library[0].id);
+        res.json({
+            user,
+            books,
+            borrow,
+            lend,
+        });
     },
 
     async addBookInLibrary(req, res) {
         // Ajouter un livre à la librairie d'un utilisateur
         // Récupération du googleApiId
-        const googleApiId = Number(req.body.googleApiId);
-
+        const { googleApiId } = req.body;
         // Récupération du userId
         const userId = Number(req.user.id);
 
         // Vérifier si le livre existe déjà en BDD
-        const book = await Book.findOne('google_api_id', googleApiId);
+        const book = await Book.findSome('google_api_id', googleApiId);
         let bookId;
-        if (!book) {
+        if (book.length === 0) {
             const newBook = new Book(googleApiId);
             const insertedBook = await newBook.insert();
             bookId = insertedBook.id;
@@ -34,10 +46,8 @@ const libraryController = {
             user_id: userId,
             book_id: bookId,
         });
-        await newLibrary.insert();
-        newLibrary.reload();
-
-        res.json(newLibrary);
+        const insertedLibrary = await newLibrary.insert();
+        res.json(insertedLibrary);
     },
 
     async updateBookInLibrary(req, res) {
@@ -54,7 +64,7 @@ const libraryController = {
         }
 
         // Modification de la librairie
-        const updatedLibrary = Library.update(isAvailable, libraryId);
+        const updatedLibrary = await Library.update(isAvailable, libraryId);
 
         res.json(updatedLibrary);
     },

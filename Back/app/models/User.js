@@ -10,7 +10,8 @@ const client = require('../config/db');
  * @property {string} username - User username
  * @property {string} password - User password
  * @property {string} email - User email
- * @property {number} zipcode - User postal code
+ * @property {number} tel - User tel
+ * @property {string} zipcode - User postal code
  * @property {string} localisation - User localisation
  * @property {string} biography - User biographie
  * @property {string} profilePicture - User profile picture url
@@ -28,6 +29,7 @@ module.exports = class User extends CoreDatamapper {
         this.email = user.email;
         this.zipcode = user.zipcode;
         this.localisation = user.localisation;
+        this.tel = user.tel;
         this.biography = user.biography;
         this.profile_picture = user.profile_picture;
     }
@@ -59,10 +61,10 @@ module.exports = class User extends CoreDatamapper {
         return results.rows[0];
     }
 
-    async update() {
+    async update(id) {
         const sql = {
-            text: 'SELECT * FROM update_user($1)',
-            values: [this],
+            text: 'SELECT * FROM update_user($1, $2)',
+            values: [this, id],
         };
         const results = await client.query(sql);
         return results.rows[0];

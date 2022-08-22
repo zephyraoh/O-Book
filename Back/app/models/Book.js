@@ -10,13 +10,23 @@ const client = require('../config/db');
 module.exports = class Book extends CoreDatamapper {
     static tableName = 'book';
 
-    constructor(book) {
+    constructor(googleApiId) {
         super();
-        this.google_api_id = book.google_api_id;
+        this.google_api_id = googleApiId;
     }
 
     static async getLastBooks() {
         const sql = `SELECT * FROM ${this.tableName} ORDER BY "created_at" LIMIT 50`;
+        const results = await client.query(sql);
+        return results.rows;
+    }
+
+    static async getBooksByLibraryId(libraryId) {
+        const sql = {
+            text: `SELECT * FROM ${this.tableName} JOIN "library" ON "library"."book_id" = "book"."id" WHERE "library"."id"=$1`,
+            values: [libraryId],
+        };
+
         const results = await client.query(sql);
         return results.rows;
     }

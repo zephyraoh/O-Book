@@ -4,6 +4,6 @@ BEGIN;
 
 DROP TABLE "tag", "user", "book", "library", "loan", "user_has_tag";
 
-DROP DOMAIN "mail", "french_zipcode";
+DROP DOMAIN "mail", "tel", "french_zipcode";
 
 COMMIT;

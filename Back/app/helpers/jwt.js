@@ -6,7 +6,7 @@ const secret = process.env.JWT_SECRET || 'secretphrase';
 module.exports = {
     create(userData) {
         const options = {};
-        options.expiresIn = 200;
+        options.expiresIn = 1000;
 
         const user = {
             id: userData.id,

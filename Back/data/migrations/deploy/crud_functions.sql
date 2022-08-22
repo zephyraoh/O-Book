@@ -13,27 +13,27 @@ CREATE FUNCTION insert_user(user_data json) RETURNS "user" AS $$
         user_data->>'email',
         user_data->>'zipcode',
         user_data->>'localisation',
-        (user_data->>'tel')::int,
+        user_data->>'tel',
         user_data->>'biography',
         user_data->>'profile_picture'
     )
     RETURNING *
 $$ LANGUAGE sql STRICT;
 
-CREATE FUNCTION update_user(user_data json) RETURNS "user" AS $$
+CREATE FUNCTION update_user(user_data json, user_id int) RETURNS "user" AS $$
     UPDATE "user" SET
-        "firstname" = COALESCE(user_data->>'firstname', firstname),
-        "lastname" = COALESCE(user_data->>'lastname', lastname),
-        "username" = COALESCE(user_data->>'username', username),
-        "password" = COALESCE(user_data->>'password', password),
-        "email" = COALESCE(user_data->>'email', email),
-        "zipcode" = COALESCE(user_data->>'zipcode', zipcode),
-        "localisation" = COALESCE(user_data->>'localisation', localisation),
-        "tel" = COALESCE((user_data->>'tel')::int, tel),
-        "biography" = COALESCE(user_data->>'biography', biography),
-        "profile_picture" = COALESCE(user_data->>'profile_picture', profile_picture),
+        "firstname" = user_data->>'firstname',
+        "lastname" = user_data->>'lastname',
+        "username" = user_data->>'username',
+        "password" = user_data->>'password',
+        "email" = user_data->>'email',
+        "zipcode" = user_data->>'zipcode',
+        "localisation" = user_data->>'localisation',
+        "tel" = user_data->>'tel',
+        "biography" = user_data->>'biography',
+        "profile_picture" = user_data->>'profile_picture',
         "updated_at"=now()
-    WHERE "id" = (user_data->>'id')::int
+    WHERE "id" = user_id::int
     RETURNING *
 $$ LANGUAGE sql STRICT;
 

@@ -2,36 +2,6 @@
 
 BEGIN;
 
-CREATE VIEW "personnal_library_details" AS
-SELECT 
-    "tag"."id" as tagId,
-    "tag"."label",
-    "user"."id" as userId,
-    "user"."firstname",
-    "user"."lastname",
-    "user"."username",
-    "user"."email",
-    "user"."zipcode",
-    "user"."localisation",
-    "user"."tel",
-    "user"."biography",
-    "user"."profile_picture",
-    "library"."id" as libraryId,
-    "library"."is_available",
-    "book"."id" as bookId,
-    "book"."google_api_id",
-    "loan"."id" as loanId,
-    "loan"."status",
-    "loan"."date",
-    "loan"."user_id" as borrowerId,
-    "loan"."library_id" as libraryLender
-FROM "tag"
-JOIN "user_has_tag" ON "user_has_tag"."tag_id" = "tag"."id"
-JOIN "user" ON "user"."id" = "user_has_tag"."user_id"
-JOIN "library" ON "library"."user_id" = "user"."id"
-JOIN "book" ON "book"."id" = "library"."book_id"
-JOIN "loan" ON "loan"."library_id" = "library"."id" OR "loan"."user_id" = "user"."id";
-
 CREATE VIEW "user_library_details" AS
 SELECT
     "tag"."id" as tagId,

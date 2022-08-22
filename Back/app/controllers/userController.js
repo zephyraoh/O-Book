@@ -24,13 +24,13 @@ const userController = {
         }
 
         // Vérifier que le user n'existe pas déjà en BDD avec son email
-        const userByEmail = await User.findOne('email', email);
+        const userByEmail = await User.findSome('email', email);
         if (userByEmail) {
             throw new AuthError('Email already used');
         }
 
         // Vérifier que le user n'existe pas déjà avec son username
-        const userByUsername = await User.findOne('username', username);
+        const userByUsername = await User.findSome('username', username);
         if (userByUsername) {
             throw new AuthError('Username already used');
         }
@@ -65,7 +65,7 @@ const userController = {
         }
 
         // On vérifie que l'utilisateur existe bien en BDD
-        const user = await User.findOne('email', email);
+        const user = await User.findSome('email', email);
         if (!user) {
             throw new AuthError('This email does not exist');
         }
@@ -94,16 +94,32 @@ const userController = {
         // Récupération de l'id de l'utilisateur
         const userId = Number(req.user.id);
 
-        // Création d'une nouvelle instance de User en lui passant l'id de l'utilisateur à modifier
-        // Et en lui passant les informations reçues en POST grâce au spread operator(...)
+        // Récupération de l'utilisateur en BDD
+        const oldUser = await User.findByPk(userId);
+
+        // Si on reçoit une information avec un nouveau MDP
+        if (req.body.password) {
+            // Comparaison MDP saisi et celui enregistré en BDD
+            const comparePassword = compareSync(req.body.oldPassword, oldUser.password);
+            if (!comparePassword) {
+                throw new AuthError('Wrong password');
+            }
+            // Vérifier que password et passwordConfirm sont identiques
+            if (req.body.password !== req.body.passwordConfirm) {
+                throw new AuthError('Password must match with password confirm');
+            }
+            // Hashage du nouveau MDP
+            req.body.password = hashSync(req.body.password, 10);
+        }
+        // Création d'une nouvelle instance de User en lui passant ses anciennes informations
+        // Que l'on surcharge avec les nouvelles infos saisies grâce au spread operator (...)
         const updatedUser = new User({
-            id: userId,
+            ...oldUser,
             ...req.body,
         });
-        // Mise à jour du user et rechargement des données
-        await updatedUser.update();
-        updatedUser.reload();
-        res.json(updatedUser);
+        // Mise à jour du user
+        const user = await updatedUser.update(userId);
+        res.json(user);
     },
 
     async deleteProfile(req, res) {
@@ -121,7 +137,7 @@ const userController = {
         const { username } = req.params;
 
         // Vérifier que l'utilisateur existe bien en BDD
-        const user = await User.findOne('username', username);
+        const user = await User.findSome('username', username);
         if (!user) {
             throw new ClientError('This user does not exist');
         }
