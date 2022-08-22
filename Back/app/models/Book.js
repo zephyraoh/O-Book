@@ -1,5 +1,4 @@
 const CoreDatamapper = require('./coreDatamapper');
-// Import du client
 const client = require('../config/db');
 
 /**
@@ -16,21 +15,19 @@ module.exports = class Book extends CoreDatamapper {
         this.google_api_id = book.google_api_id;
     }
 
-    /**
-     * Get all books by libraryId
-     * @param {number} libraryId - Library Id
-     * @returns Books or undefined if there's no library Id match
-     */
-    // eslint-disable-next-line class-methods-use-this
-    async findByLibrary(libraryId) {
-        const sql = {
-            text: 'SELECT * FROM books_by_library WHERE library_id = $1',
-            values: [libraryId],
-        };
+    static async getLastBooks() {
+        const sql = `SELECT * FROM ${this.tableName} ORDER BY "created_at" LIMIT 50`;
         const results = await client.query(sql);
-        if (results.rowCount === 0) {
-            return undefined;
-        }
         return results.rows;
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    async insert() {
+        const sql = {
+            text: 'SELECT * FROM insert_book($1)',
+            values: [this.google_api_id],
+        };
+        const result = await client.query(sql);
+        return result.rows[0];
     }
 };

@@ -36,6 +36,7 @@ CREATE TABLE "user" (
     "email" mail NOT NULL,
     "zipcode" french_zipcode DEFAULT NULL,
     "localisation" TEXT DEFAULT NULL,
+    "tel" INT DEFAULT NULL,
     "biography" TEXT DEFAULT NULL,
     "profile_picture" TEXT DEFAULT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -61,7 +62,7 @@ CREATE TABLE "library" (
 CREATE TABLE "loan" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "status" TEXT NOT NULL,
-    "loan_date" TIMESTAMPTZ DEFAULT NULL, 
+    "date" TIMESTAMPTZ DEFAULT NULL, 
     "user_id" INT NOT NULL REFERENCES "user"("id"),
     "library_id" INT NOT NULL REFERENCES "library"("id"),
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),

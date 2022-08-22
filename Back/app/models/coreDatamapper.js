@@ -26,4 +26,12 @@ module.exports = class CoreDataMapper {
         const results = await client.query(sql);
         return results.rows[0];
     }
+
+    static async delete(id) {
+        const sql = {
+            text: `DELETE * FROM "${this.tableName}" WHERE "id"=$1`,
+            values: [id],
+        };
+        await client.query(sql);
+    }
 };

@@ -1,5 +1,6 @@
 const { hashSync, compareSync } = require('bcrypt');
 const AuthError = require('../errors/authError');
+const ClientError = require('../errors/clientError');
 const jwt = require('../helpers/jwt');
 const User = require('../models/User');
 
@@ -82,18 +83,53 @@ const userController = {
 
     async getProfile(req, res) {
         // Renvoyer les infos personnelles de l'utilisateur
+        // Récupération de l'id de l'utilisateur
+        const userId = Number(req.user.id);
+        const user = await User.getProfileInformations(userId);
+        res.json(user);
     },
 
     async updateProfile(req, res) {
         // Modifier les infos personnelles de l'utilisateur
+        // Récupération de l'id de l'utilisateur
+        const userId = Number(req.user.id);
+
+        // Création d'une nouvelle instance de User en lui passant l'id de l'utilisateur à modifier
+        // Et en lui passant les informations reçues en POST grâce au spread operator(...)
+        const updatedUser = new User({
+            id: userId,
+            ...req.body,
+        });
+        // Mise à jour du user et rechargement des données
+        await updatedUser.update();
+        updatedUser.reload();
+        res.json(updatedUser);
     },
 
     async deleteProfile(req, res) {
         // Supprimer le profil d'un utilisateur
+        // Récupération de l'id du user
+        const userId = Number(req.user.id);
+        // Suppression de l'utilisateur
+        await User.delete(userId);
+        res.status(200).json('User removed');
     },
 
     async getContactInfos(req, res) {
         // Récupérer les infos de contact de l'utilisateur prêteur
+        // Récupérer le username de l'utilisateur
+        const { username } = req.params;
+
+        // Vérifier que l'utilisateur existe bien en BDD
+        const user = await User.findOne('username', username);
+        if (!user) {
+            throw new ClientError('This user does not exist');
+        }
+
+        // Récupérer les infos de contact
+        const contactInfos = await User.getContactInformations(username);
+
+        res.json(contactInfos);
     },
 
     async getAllUsers(req, res) {

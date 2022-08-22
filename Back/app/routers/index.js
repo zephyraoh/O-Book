@@ -85,7 +85,6 @@ router.get('/books/:googleId', controllerHandler(bookController.getUsersByBook))
 
 /// Gestion des tags
 router.get('/tags', controllerHandler(tagController.getTags));
-router.get('/tags', auth, controllerHandler(tagController.getTagsByUser));
 router.post('/addTag', auth, controllerHandler(tagController.addTagToUser));
 router.delete('/removeTage', auth, controllerHandler(tagController.removeTagFromUser));
 
