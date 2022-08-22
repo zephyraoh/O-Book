@@ -1,4 +1,4 @@
--- Deploy o-book:library_details_view to pg
+-- Deploy o-book:views to pg
 
 BEGIN;
 

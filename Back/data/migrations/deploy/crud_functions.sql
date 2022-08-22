@@ -4,7 +4,7 @@ BEGIN;
 
 CREATE FUNCTION insert_user(user_data json) RETURNS "user" AS $$
     INSERT INTO "user"
-    ("firstname", "lastname", "username", "password", "email", "zipcode", "localisation", "biography", "profile_picture")
+    ("firstname", "lastname", "username", "password", "email", "zipcode", "localisation", "tel", "biography", "profile_picture")
     VALUES (
         user_data->>'firstname',
         user_data->>'lastname',
@@ -13,7 +13,7 @@ CREATE FUNCTION insert_user(user_data json) RETURNS "user" AS $$
         user_data->>'email',
         user_data->>'zipcode',
         user_data->>'localisation',
-        user_data->>'tel',
+        (user_data->>'tel')::int,
         user_data->>'biography',
         user_data->>'profile_picture'
     )
@@ -34,16 +34,7 @@ CREATE FUNCTION update_user(user_data json) RETURNS "user" AS $$
         "profile_picture" = COALESCE(user_data->>'profile_picture', profile_picture),
         "updated_at"=now()
     WHERE "id" = (user_data->>'id')::int
-    RETURNING 
-        "firstname",
-        "lastname",
-        "username",
-        "email",
-        "zipcode",
-        "localisation",
-        "tel",
-        "biography",
-        "profile_picture"
+    RETURNING *
 $$ LANGUAGE sql STRICT;
 
 CREATE FUNCTION add_tag_to_user(tagId int, userId int) RETURNS "user_has_tag" AS
@@ -86,8 +77,8 @@ $$ LANGUAGE sql STRICT;
 CREATE FUNCTION update_loan(loan_data json) RETURNS "loan" AS
 $$ 
     UPDATE "loan" SET
-        "status"=COALESCE(loan_data->>status, null),
-        "date"=COALESCE((loan_data->>date)::timestamptz, null),
+        "status"=COALESCE(loan_data->>'status', null),
+        "date"=COALESCE((loan_data->>'date')::timestamptz, null),
         "updated_at"=now()
     RETURNING *
 $$ LANGUAGE sql STRICT;

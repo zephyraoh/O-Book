@@ -1,4 +1,4 @@
--- Revert o-book:library_details_view from pg
+-- Revert o-book:views from pg
 
 BEGIN;
 

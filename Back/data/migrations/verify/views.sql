@@ -1,4 +1,4 @@
--- Verify o-book:library_details_view on pg
+-- Verify o-book:views on pg
 
 BEGIN;
 
