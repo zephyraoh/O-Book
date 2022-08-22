@@ -1,6 +1,7 @@
 import { GET_BOOKS, setBooks } from '../actions/books';
 import { axiosBooksApi } from '../utils/axios';
 
+const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 
 const searchMiddleware = (store) => (next) => async (action) => {
 
@@ -27,8 +28,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
         }
       }
       
-      // searchValue = 'flowers+inauthor:keyes&key=AIzaSyCm9tT-3u51_XjhduEm-zZUFfz-W_O0_Fg'
-      const { data } = await axiosBooksApi.get(`${searchURL}&key=AIzaSyCm9tT-3u51_XjhduEm-zZUFfz-W_O0_Fg`);
+      const { data } = await axiosBooksApi.get(`${searchURL}&key=${apiKey}`);
       console.log("middleware data ", data)
       store.dispatch(setBooks(data));
       break;

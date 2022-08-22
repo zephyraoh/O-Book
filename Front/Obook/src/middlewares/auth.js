@@ -38,6 +38,7 @@ const authMiddleware = (store) => (next) => async (action) => {
 				newEmail,
 				newPassword,
 			})
+			console.log(response);
 			// Vérification de la création d'un user ou s'il est déjà présent en BDD en fonction du status réponse serveur TODO :
 			// response.ok ? store.dispatch(setCreationConfirmation(true)) : store.dispatch(setCreationConfirmation(false))
 			

@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux"
-import { setSelectedFilter } from "../../../actions/books"
-import { useSelector } from "react-redux"
+import { setSelectedFilter } from "../../../../actions/books"
 const SearchFilters = ()=> {
 
     const dispatch =useDispatch() 
@@ -11,7 +10,7 @@ const SearchFilters = ()=> {
 
     return (
         <div>
-            <input type="radio" value= "all" name="booksearch" id="all" onChange = {handleChange} /> 
+            <input type="radio" value= "all" name="booksearch" defaultChecked id="all" onChange = {handleChange} /> 
             <label htmlFor="all">Tous</label>
             <input type="radio" value= "title" name="booksearch" id="title" onChange = {handleChange}/>
             <label htmlFor="title">Titre</label>

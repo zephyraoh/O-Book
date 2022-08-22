@@ -10,10 +10,6 @@ export const axiosServerDB = axs.create({
 });
 
 
-// Clé de Duke : AIzaSyCm9tT-3u51_XjhduEm-zZUFfz-W_O0_Fg /* à mettre dans le .env de React un jour
-
-// modèle : https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyCm9tT-3u51_XjhduEm-zZUFfz-W_O0_Fg
-
 // Lien de la doc : https://developers.google.com/books/docs/v1/using
 
 // recherche globale = 'https://www.googleapis.com/books/v1/volumes?q={recherche}'

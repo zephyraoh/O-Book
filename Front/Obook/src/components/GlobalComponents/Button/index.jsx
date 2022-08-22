@@ -5,10 +5,11 @@ const Button = ({
     name,
     value,
     className,
+    type
 }) => {
 
     return (
-        <button type="submit" value= {value} className={className}>{name} </button>
+        <button type={type} value= {value} className={className}>{name} </button>
     );
 };
 
