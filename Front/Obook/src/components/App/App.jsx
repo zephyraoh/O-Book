@@ -9,7 +9,7 @@ import { faMagnifyingGlass, faBookOpen, faHouse, faUser, faCircleXmark } from '@
 library.add(faMagnifyingGlass, faBookOpen, faHouse, faUser,faCircleXmark);
 
 //Actions components
-import { getProfile } from '../../actions/user';
+import { getMemberProfile } from '../../actions/user';
 
 //App Components
 import BooksResults from '../GlobalComponents/BooksResults';
@@ -17,7 +17,6 @@ import Header from '../GlobalComponents/Header';
 import DesktopMenu from '../GlobalComponents/DeskTopMyLibraryMenu';
 import Footer from '../GlobalComponents/Footer';
 import MobileMenu from '../GlobalComponents/Footer/MobileMenu';
-import Button from '../GlobalComponents/Button';
 
 //Page Components
 import Home from '../PageSpecificComponents/Home';
@@ -36,15 +35,15 @@ function App() {
   const [isAccountPage, setAccountPage]= useState(false);
   const dispatch = useDispatch()
   
-const handleClick = () => {
+const handleClick = (e) => {
   console.log("i got clicked !")
-  dispatch(getProfile());
+  dispatch(getMemberProfile(e.target.value));
 }
 
   return (
     <div className="App">
      <Header /> 
-     <button onClick={handleClick}>Test button</button>
+     <button value ="zephyraoh" name="profile of user Zephyraoh" onClick={handleClick}>Test button</button>
      <Routes>
        <Route path="/" element= {<Home />} />
        <Route path="/account" element= {<Account />} />

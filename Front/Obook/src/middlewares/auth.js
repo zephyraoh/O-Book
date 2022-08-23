@@ -1,5 +1,5 @@
 import { compose } from 'redux';
-import { setUserData, SIGN_IN, SIGN_UP, LOGOUT, DEL_ACCOUNT, CHANGE_USER_INFO, CHANGE_USER_INFO_MISC, CLEAR_PASSWORDS, GET_PROFILE } from '../actions/user';
+import { setUserData, SIGN_IN, SIGN_UP, LOGOUT, DEL_ACCOUNT, CHANGE_USER_INFO, CHANGE_USER_INFO_MISC, CLEAR_PASSWORDS, GET_MY_PROFILE, GET_MEMBER_PROFILE } from '../actions/user';
 import { axiosServerDB } from '../utils/axios';
 
 
@@ -24,13 +24,18 @@ const authMiddleware = (store) => (next) => async (action) => {
 			// Cela me permet de ne plus avoir à spéficier dans chaque requête ses headers
 			axiosServerDB.defaults.headers.common.Authorization = `Bearer ${ data.token }`;
 
-			// Je stock les informations reçu au login dans mon store
-			store.dispatch(setUserData(data));
-			// Je déclenche l'action qui va aller récupérer mes recettes favorites
-			// store.dispatch(fetchFavorites());
-			console.log('It worked !!! >>>>>', data )
-			const {user} = store.getState()
-			console.log(user)
+			// Objet transitoire pour add les data au state.user via le dispatch(setUserData)
+			const correctedData ={
+				library:{
+					books: data.library.books,
+					borrow: data.library.borrow,
+					lends: data.library.lends
+				},
+				token: data.token,
+				isLogged: data.isLogged,
+				...data.library.userInfos,
+			}
+			store.dispatch(setUserData(correctedData));
 			break;
 		}
 		case SIGN_UP: {
@@ -52,14 +57,22 @@ const authMiddleware = (store) => (next) => async (action) => {
 			// response.ok ? store.dispatch(setCreationConfirmation(true)) : store.dispatch(setCreationConfirmation(false))
 			
 		}
-		case GET_PROFILE: {
+		case GET_MY_PROFILE: {
 			try{
-				const { data } = await axiosServerDB.get('/profile')
+				const { data } = await axiosServerDB.get('/mylibrary')
 			console.log("receiving profile data !!!>>>", data);
 		}catch(error){
-			console.log('error getting profile >>>', error)
+			console.log('error getting profile >>>', error);
 		}
-	}
+		}
+		case GET_MEMBER_PROFILE: {
+			try{
+				const { data } = await axiosServerDB.get(`/library/${action.payload}`)
+				console.log(`receiving profile data of member ${action.payload} !!!>>>`, data);
+		}catch(error){
+			// console.log('error getting profile >>>', error);
+		}
+		}
 		default: 
 			next(action); 
 	} 

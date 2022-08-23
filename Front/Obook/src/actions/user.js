@@ -10,7 +10,10 @@ export const DEL_ACCOUNT = 'DEL_ACCOUNT';
 export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
 //séparation entre action demandant une confirmation et autres infos secondaires
 export const CHANGE_USER_INFO_MISC = 'CHANGE_USER_INFO_MISC'; 
-export const GET_PROFILE = 'GET_PROFILE'; 
+
+// actions requêtant au serveur les données user / another member
+export const GET_MY_PROFILE = 'GET_PROFILE'; 
+export const GET_MEMBER_PROFILE = 'GET_MEMBER_PROFILE'
 //zipcode, area, labels, bio, pic
 
 export const setUserField = (value, name) => ({
@@ -35,15 +38,20 @@ export const clearPasswords = () =>({
 	type: CLEAR_PASSWORDS,
 });
 
-export const getProfile = () => ({
-	type: GET_PROFILE,
-});
-
 export const setCreationConfirmation = (data)=>({
 	type : SETCREATIONCONFIRMATION,
 	data,
 })
 
 export const logout = () => ({
-  type: LOGOUT,
+	type: LOGOUT,
+});
+
+export const getMyProfile = () => ({
+	type: GET_MY_PROFILE,
+});
+
+export const getMemberProfile = (username) => ({
+	type: GET_MEMBER_PROFILE,
+	payload: username
 });
