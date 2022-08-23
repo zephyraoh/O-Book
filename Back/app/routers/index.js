@@ -81,7 +81,7 @@ router.get('/loans', controllerHandler(loanController.getLoans));
 
 /// Récupération des informations de livres
 router.get('/books', controllerHandler(bookController.getBooks));
-router.get('/books/:googleId', controllerHandler(bookController.getUsersByBook));
+router.get('/book/:googleId', controllerHandler(bookController.getUsersByBook));
 
 /// Gestion des tags
 router.get('/tags', controllerHandler(tagController.getTags));

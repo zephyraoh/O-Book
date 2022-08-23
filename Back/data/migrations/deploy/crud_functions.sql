@@ -69,17 +69,18 @@ $$ LANGUAGE sql STRICT;
 
 CREATE FUNCTION create_loan(userId int, libraryId int) RETURNS "loan" AS
 $$
-    INSERT INTO "loan" ("user_id", "library_id") VALUES
-    (userId::int, libraryId::int)
+    INSERT INTO "loan" ("user_id", "library_id", "status") VALUES
+    (userId, libraryId, 'En attente de validation')
     RETURNING *
 $$ LANGUAGE sql STRICT;
 
-CREATE FUNCTION update_loan(loan_data json) RETURNS "loan" AS
+CREATE FUNCTION update_loan(loan_data json, loan_id int) RETURNS "loan" AS
 $$ 
     UPDATE "loan" SET
         "status"=COALESCE(loan_data->>'status', null),
         "date"=COALESCE((loan_data->>'date')::timestamptz, null),
         "updated_at"=now()
+    WHERE "loan"."id"=loan_id
     RETURNING *
 $$ LANGUAGE sql STRICT;
 

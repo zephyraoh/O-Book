@@ -24,7 +24,7 @@ module.exports = class Loan extends CoreDatamapper {
     }
 
     static async getLastLoans() {
-        const sql = `SELECT * FROM ${this.tableName} ORDER BY "created_at LIMIT 50`;
+        const sql = `SELECT * FROM ${this.tableName} ORDER BY "created_at" LIMIT 50`;
         const results = await client.query(sql);
         return results.rows;
     }
@@ -33,6 +33,15 @@ module.exports = class Loan extends CoreDatamapper {
         const sql = {
             text: 'SELECT * FROM "loan_details" WHERE libraryId=$1',
             values: [libraryId],
+        };
+        const results = await client.query(sql);
+        return results.rows;
+    }
+
+    static async getLoanByUser(userId) {
+        const sql = {
+            text: 'SELECT * FROM "loan_details" WHERE userId=$1',
+            values: [userId],
         };
         const results = await client.query(sql);
         return results.rows;
@@ -48,10 +57,10 @@ module.exports = class Loan extends CoreDatamapper {
         return result.rows[0];
     }
 
-    static async update(loan) {
+    static async update(loan, loanId) {
         const sql = {
-            text: 'SELECT * FROM update_loan($1)',
-            values: [loan],
+            text: 'SELECT * FROM update_loan($1, $2)',
+            values: [loan, loanId],
         };
         const result = await client.query(sql);
         return result.rows[0];
@@ -59,7 +68,7 @@ module.exports = class Loan extends CoreDatamapper {
 
     async insert() {
         const sql = {
-            text: 'SELECT * FROM insert_loan($1, $2)',
+            text: 'SELECT * FROM create_loan($1, $2)',
             values: [this.user_id, this.library_id],
         };
 
