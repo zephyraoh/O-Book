@@ -23,7 +23,7 @@ const authMiddleware = (store) => (next) => async (action) => {
 			// Une fois connecté, je modifie les headers de base de mon instance axios
 			// Cela me permet de ne plus avoir à spéficier dans chaque requête ses headers
 			axiosServerDB.defaults.headers.common.Authorization = `Bearer ${ data.token }`;
-
+			console.log(data);
 			// Objet transitoire pour add les data au state.user via le dispatch(setUserData)
 			const correctedData ={
 				library:{
@@ -34,8 +34,10 @@ const authMiddleware = (store) => (next) => async (action) => {
 				token: data.token,
 				isLogged: data.isLogged,
 				...data.library.userInfos,
+				tags: data.library.tags,
 			}
 			store.dispatch(setUserData(correctedData));
+			console.log(correctedData);
 			break;
 		}
 		case SIGN_UP: {

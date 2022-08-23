@@ -43,7 +43,7 @@ const handleClick = (e) => {
   return (
     <div className="App">
      <Header /> 
-     <button value ="zephyraoh" name="profile of user Zephyraoh" onClick={handleClick}>Test button</button>
+     <button value ="zephyr" name="profile of user Zephyr" onClick={handleClick}>Test button</button>
      <Routes>
        <Route path="/" element= {<Home />} />
        <Route path="/account" element= {<Account />} />
