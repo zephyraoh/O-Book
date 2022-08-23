@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import Button from "../../GlobalComponents/Button";
 import './styles.scss';
 
 
@@ -8,9 +9,9 @@ const MyLibraryMenu = ()=>{
 
     return (
         <nav className="menu">
-            <Button type="text" value = "Ma Bibliothèque" className = {className} name= "Ma Bibliothèque" />
-            <Button type="text" value = "Mes Prêts" className = {className} name= "Mes Prêts"/>
-            <Button type="text" value = "Mes Emprunts" className = {className} name= "Mes Emprunts"/>
+            <Button type="button" value = "Ma Bibliothèque"  name= "Ma Bibliothèque"  />
+            <Button type="button" value = "Mes Prêts"  name= "Mes Prêts"/>
+            <Button type="button" value = "Mes Emprunts"  name= "Mes Emprunts"/>
                 {/*
                 Ma Bibliothèque 
                 Mes Prêts

@@ -3,10 +3,10 @@ import { SET_USER_FIELD, SET_USER_DATA, LOGOUT, CLEAR_PASSWORDS }  from "../acti
 
 export const initialState = {
   username: null,  
-  email: '',
+  email: 'duke@gmail.com',
   token: null,
   isLogged: false,
-  password: '',
+  password: 'azerty1234',
   newUserName:'',
   newEmail: '',
   newPassword: '',
