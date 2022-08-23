@@ -1,7 +1,6 @@
 import { compose } from 'redux';
-import { setUserData, SIGN_IN, SIGN_UP, LOGOUT, DEL_ACCOUNT, CHANGE_USER_INFO, CHANGE_USER_INFO_MISC, CLEAR_PASSWORDS, GET_MY_PROFILE, GET_MEMBER_PROFILE } from '../actions/user';
+import { setUserData, SIGN_IN, SIGN_UP, LOGOUT, DEL_ACCOUNT, CHANGE_USER_INFO, CHANGE_USER_INFO_MISC, CLEAR_PASSWORDS, GET_MY_PROFILE, GET_MEMBER_PROFILE, SET_USER_LABEL } from '../actions/user';
 import { axiosServerDB } from '../utils/axios';
-
 
 
 const authMiddleware = (store) => (next) => async (action) => { 
@@ -71,9 +70,19 @@ const authMiddleware = (store) => (next) => async (action) => {
 			try{
 				const { data } = await axiosServerDB.get(`/library/${action.payload}`)
 				console.log(`receiving profile data of member ${action.payload} !!!>>>`, data);
+				store.dispatch(setVisitedProfileData)
+
 		}catch(error){
 			// console.log('error getting profile >>>', error);
 		}
+		}
+		case SET_USER_LABEL:{
+			try{
+				const { data } = await axiosServerDB.post('/account')
+				console.log("received data on user label change >>>>", data)
+			}catch(error){
+				console.log("error setting label", error);
+			}
 		}
 		default: 
 			next(action); 

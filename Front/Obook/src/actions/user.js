@@ -10,7 +10,7 @@ export const DEL_ACCOUNT = 'DEL_ACCOUNT';
 export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
 //séparation entre action demandant une confirmation et autres infos secondaires
 export const CHANGE_USER_INFO_MISC = 'CHANGE_USER_INFO_MISC'; 
-
+export const SET_USER_LABEL = 'SET_USER_LABEL';
 // actions requêtant au serveur les données user / another member
 export const GET_MY_PROFILE = 'GET_PROFILE'; 
 export const GET_MEMBER_PROFILE = 'GET_MEMBER_PROFILE'
@@ -47,6 +47,10 @@ export const logout = () => ({
 	type: LOGOUT,
 });
 
+export const SetUserLabel = (label) =>({
+	type: SET_USER_LABEL,
+	payload: label,
+})
 export const getMyProfile = () => ({
 	type: GET_MY_PROFILE,
 });
