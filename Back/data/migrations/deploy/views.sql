@@ -30,7 +30,8 @@ SELECT
     "user"."zipcode",
     "user"."localisation",
     "user"."profile_picture",
-    "library"."id" as libraryId
+    "library"."id" as libraryId,
+    "book"."google_api_id"
 FROM "user"
 JOIN "library" ON "library"."user_id" = "user"."id"
 JOIN "book" ON "book"."id" = "library"."book_id"

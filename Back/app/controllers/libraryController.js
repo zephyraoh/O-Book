@@ -3,36 +3,31 @@ const Book = require('../models/Book');
 const User = require('../models/User');
 const Loan = require('../models/Loan');
 const ClientError = require('../errors/clientError');
+const Tag = require('../models/Tag');
 
 const libraryController = {
     async myLibrary(req) {
-        // Récupérer toutes les infos personnelles de librairie d'un utilisateur
+        // Récupérer l'id de l'utilisateur
         const id = Number(req.user.id);
+        // Récupérer les infos de profil de l'utilisateur
         const user = await User.getProfileInformations(id);
+        const tags = await Tag.getTagsByUserId(id);
+        // Récupérer les livres en librairie de l'utilisateur
         const libraries = await Library.findSome('user_id', id);
-        if (!libraries) {
-            return user;
-        }
         const books = [];
         const lends = [];
-        if (Array.isArray(libraries)) {
-            libraries.forEach(async (library) => {
-                const book = await Book.getBookByLibraryId(library.id);
-                books.push(book);
-                const lend = await Loan.getLoanByLibrary(library.id);
-                lends.push(lend);
-            });
-        } else {
-            const book = await Book.getBookByLibraryId(libraries.id);
-            const lend = await Loan.getLoanByLibrary(libraries.id);
+        libraries.forEach(async (library) => {
+            const book = await Book.getBookByLibraryId(library.id);
             books.push(book);
+            const lend = await Loan.getLoanByLibrary(library.id);
             lends.push(lend);
-        }
+        });
         // Emprunts utilisateur
-        const borrow = await Loan.findSome('user_id', id);
+        const borrow = await Loan.getLoanByUser(id);
         // Prêts utilisateur
         return {
-            user,
+            userInfos: user,
+            tags,
             books,
             lends,
             borrow,
@@ -52,9 +47,9 @@ const libraryController = {
         const userId = Number(req.user.id);
 
         // Vérifier si le livre existe déjà en BDD
-        const book = await Book.findSome('google_api_id', googleApiId);
+        const book = await Book.findOne('google_api_id', googleApiId);
         let bookId;
-        if (book.length === 0) {
+        if (!book) {
             const newBook = new Book(googleApiId);
             const insertedBook = await newBook.insert();
             bookId = insertedBook.id;
@@ -106,8 +101,14 @@ const libraryController = {
     async getLibrary(req, res) {
         // Récupérer les infos de librairie d'un autre utiliateur
         const { username } = req.params;
-        const library = await Library.getUserLibraryDetails(username);
-        res.json(library);
+        const userInfos = await User.getUserInformations(username);
+        const tags = await Tag.getTagsByUserId(userInfos.id);
+        const books = await Book.getBooksByUserId(userInfos.id);
+        res.json({
+            userInfos,
+            tags,
+            books,
+        });
     },
 };
 

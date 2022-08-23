@@ -34,7 +34,7 @@ module.exports = class Library extends CoreDatamapper {
     // eslint-disable-next-line class-methods-use-this
     static async getUserLibraryDetails(username) {
         const sql = {
-            text: 'SELECT * FROM user_library_details WHERE "user"."id"=$1',
+            text: 'SELECT * FROM user_library_details WHERE username=$1',
             values: [username],
         };
         const results = await client.query(sql);
@@ -44,7 +44,7 @@ module.exports = class Library extends CoreDatamapper {
     // eslint-disable-next-line class-methods-use-this
     static async isBookInLibrary(googleApiId) {
         const sql = {
-            text: 'SELECT * FROM "book_in_library" WHERE "book"."google_api_id" = $1',
+            text: 'SELECT * FROM "book_in_library" WHERE "google_api_id" = $1',
             values: [googleApiId],
         };
         const results = await client.query(sql);

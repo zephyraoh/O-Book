@@ -25,13 +25,13 @@ const userController = {
         }
 
         // Vérifier que le user n'existe pas déjà en BDD avec son email
-        const userByEmail = await User.findSome('email', email);
+        const userByEmail = await User.findOne('email', email);
         if (userByEmail) {
             throw new AuthError('Email already used');
         }
 
         // Vérifier que le user n'existe pas déjà avec son username
-        const userByUsername = await User.findSome('username', username);
+        const userByUsername = await User.findOne('username', username);
         if (userByUsername) {
             throw new AuthError('Username already used');
         }
@@ -66,7 +66,7 @@ const userController = {
         }
 
         // On vérifie que l'utilisateur existe bien en BDD
-        const user = await User.findSome('email', email);
+        const user = await User.findOne('email', email);
         if (!user) {
             throw new AuthError('This email does not exist');
         }
@@ -84,6 +84,7 @@ const userController = {
         const library = await libraryController.myLibrary(req);
         res.json({
             token,
+            isLogged: true,
             library,
         });
     },
@@ -126,6 +127,7 @@ const userController = {
         });
         // Mise à jour du user
         const user = await updatedUser.update(userId);
+        delete user.password;
         res.json(user);
     },
 
@@ -144,7 +146,7 @@ const userController = {
         const { username } = req.params;
 
         // Vérifier que l'utilisateur existe bien en BDD
-        const user = await User.findSome('username', username);
+        const user = await User.findOne('username', username);
         if (!user) {
             throw new ClientError('This user does not exist');
         }

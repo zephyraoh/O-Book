@@ -34,6 +34,7 @@ module.exports = class User extends CoreDatamapper {
         this.profile_picture = user.profile_picture;
     }
 
+    // Informations personnelles de profil
     static async getProfileInformations(id) {
         const sql = {
             text: 'SELECT * FROM "profile_informations" WHERE "id"=$1',
@@ -43,9 +44,20 @@ module.exports = class User extends CoreDatamapper {
         return result.rows[0];
     }
 
+    // Informations de contact au moment de l'acceptation d'un prêt
     static async getContactInformations(username) {
         const sql = {
             text: 'SELECT * FROM "profile_informations" WHERE "username"=$1',
+            values: [username],
+        };
+        const result = await client.query(sql);
+        return result.rows[0];
+    }
+
+    // Informations publiques d'un utilisateur en fonction de son username
+    static async getUserInformations(username) {
+        const sql = {
+            text: `SELECT "id", "username", "zipcode", "localisation", "biography", "profile_picture" FROM "${this.tableName}" WHERE username=$1`,
             values: [username],
         };
         const result = await client.query(sql);

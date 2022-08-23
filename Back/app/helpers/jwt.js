@@ -15,10 +15,7 @@ module.exports = {
             email: userData.email,
         };
 
-        return {
-            token: jwt.sign(user, secret, options),
-            expiresIn: options.expiresIn,
-        };
+        return jwt.sign(user, secret, options);
     },
 
     verify(token) {
