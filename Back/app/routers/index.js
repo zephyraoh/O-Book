@@ -19,18 +19,18 @@ const bookController = require('../controllers/bookController');
  * POST /login
  * @summary User connexion to generate token
  * @tags User
- * @param {string} request.body.required - User email
- * @return {string} 200 - success response - application/json
- * @return {string} 400 - user error response - application/json
+ * @param {LoginDataModel} request.body.required - User connexion data
+ * @return {LogedModel} 200 - success response - application/json
+* @return {ClientError} 400 - user error response - application/json
  */
 router.post('/login', controllerHandler(userController.login));
 /**
  * POST /createuser
  * @summary Create new user
  * @tags User
- * @param {UserModel} request.body.required - User data to add to DB
- * @return {string} 200 - success response - application/json
- * @return {string} 400 - user error response - application/json
+ * @param {CreateUserModel} request.body.required - User informations
+ * @return {string} 200 - User created - application/json
+* @return {ClientError} 400 - user error response - application/json
  */
 router.post('/createuser', controllerHandler(userController.createUser));
 
@@ -40,27 +40,85 @@ router.route('/profile')
      * GET /profile
      * @summary Get personnal profile informations
      * @tags User
-     * @return {string} 200 - success response - application/json
-     * @return {string} 400 - user error response - application/json
+     * @security BearerAuth
+     * @return {UserModel} 200 - success response - application/json
+     * @return {AuthError} 403 - Authentification failed - application/json
      */
     .get(auth, controllerHandler(userController.getProfile))
+    /**
+     * PATCH /profile
+     * @summary Update personnal profile informations
+     * @tags User
+     * @param {UpdateUserModel} request.body.required - User informations
+     * @security BearerAuth
+     * @return {UserModel} 200 - success response - application/json
+     * @return {AuthError} 403 - Authentification failed - application/json
+     * @return {ClientError} 400 - user error response - application/json
+     */
     .patch(auth, controllerHandler(userController.updateProfile))
+    /**
+     * DELETE /profile
+     * @summary Delete user's profile
+     * @tags User
+     * @security BearerAuth
+     * @return {string} 200 - "User deleted" - application/json
+     * @return {AuthError} 403 - Authentification failed - application/json
+     */
     .delete(auth, controllerHandler(userController.deleteProfile));
 
 /// Infos personnelles utilisateur
 /**
  * GET /mylibrary
- * @summary Get user personnal library
- * @tags User
- * @return {string} 200 - success response - application/json
- * @return {string} 400 - user error response - application/json
+ * @summary Get user's personnal library
+ * @tags Library
+ * @security BearerAuth
+ * @return {PersonnalLibraryModel} 200 - success response - application/json
+ * @return {AuthError} 403 - Authentification failed - application/json
  */
 router.get('/mylibrary', auth, controllerHandler(libraryController.getMyLibrary));
+/**
+ * POST /mylibrary/addBook
+ * @summary Add book in user's library
+ * @tags Library
+ * @security BearerAuth
+ * @param {AddLibraryModel} request.body.required - Book informations
+ * @return {LibraryModel} 200 - success response - application/json
+ * @return {AuthError} 403 - Authentification failed - application/json
+ */
 router.post('/mylibrary/addBook', auth, controllerHandler(libraryController.addBookInLibrary));
+/**
+ * PATCH /mylibrary/book/:id
+ * @summary Update user's library
+ * @tags Library
+ * @security BearerAuth
+ * @param {number} id.path.required - Library identifier
+ * @param {UpdateLibraryModel} request.body.required - Availability of the book
+ * @return {LibraryModel} 200 - success response - application/json
+ * @return {AuthError} 403 - Authentification failed - application/json
+ * @return {ClientError} 400 - user error response - application/json
+ */
 router.patch('/mylibrary/book/:id', auth, controllerHandler(libraryController.updateBookInLibrary));
+/**
+ * DELETE /mylibrary/book/:id
+ * @summary Delete user's library
+ * @tags Library
+ * @security BearerAuth
+ * @param {number} id.path.required - Library identifier
+ * @return {string} 200 - "Library deleted" - application/json
+ * @return {AuthError} 403 - Authentification failed - application/json
+ * @return {ClientError} 400 - user error response - application/json
+ */
 router.delete('/mylibrary/book/:id', auth, controllerHandler(libraryController.deleteBookFromLibrary));
 
 /// Infos de contact de l'utilisateur prêteur
+/**
+ * GET /userinfos/:username
+ * @summary Get contact informations
+ * @tags User
+ * @param {number} username.path.required - User's username
+ * @return {UserModel} 200 - success response - application/json
+ * @return {ClientError} 400 - user error response - application/json
+ */
 router.get('/userinfos/:username', controllerHandler(userController.getContactInfos));
 
 /// Librairie autre utilisateur
@@ -68,13 +126,33 @@ router.get('/userinfos/:username', controllerHandler(userController.getContactIn
  * GET /library/:id
  * @summary Get other user library
  * @tags Visitor
- * @return {string} 200 - success response - application/json
- * @return {string} 400 - user error response - application/json
+ * @param {number} username.path.required - User's username
+ * @return {LibraryModel} 200 - success response - application/json
+ * @return {ClientError} 400 - user error response - application/json
  */
 router.get('/library/:username', controllerHandler(libraryController.getLibrary));
 
 /// Gestion des emprunts
+/**
+ * GET /loan
+ * @summary Generate new loan
+ * @tags Loan
+ * @security BearerAuth
+ * @return {string} 200 - "" - application/json
+ * @return {AuthError} 403 - Authentification failed - application/json
+ * @return {ClientError} 400 - user error response - application/json
+ */
 router.post('/loan', auth, controllerHandler(loanController.generateLoan));
+/**
+ * PATCH /loans/book/:id
+ * @summary update borrow book
+ * @tags loans
+ * @security BearerAuth
+ * @param {number} id.path.required - user Id
+ * @return {string} 200 - "" - application/json
+ * @return {AuthError} 403 - Authentification failed - application/json
+ * @return {ClientError} 400 - user error response - application/json
+ */
 router.patch('/loan/:id', auth, controllerHandler(loanController.updateLoan));
 
 router.get('/loans', controllerHandler(loanController.getLoans));
@@ -84,8 +162,35 @@ router.get('/books', controllerHandler(bookController.getBooks));
 router.get('/book/:googleId', controllerHandler(bookController.getUsersByBook));
 
 /// Gestion des tags
+/**
+ * GET /tags
+ * @summary Get all tags
+ * @tags Tag
+ * @return {[TagModel]} 200 - success response - application/json
+ * @return {ApiError} 400 - Internal Server Error - application/json
+ */
 router.get('/tags', controllerHandler(tagController.getTags));
-router.post('/addTag', auth, controllerHandler(tagController.addTagToUser));
-router.delete('/removeTag', auth, controllerHandler(tagController.removeTagFromUser));
+/**
+ * POST /addtag
+ * @summary add tags from user
+ * @tags Tag
+ * @security BearerAuth
+ * @param {UpdateTagModel} request.body.required - Tag identifier
+ * @return {TagModel} 200 - success response - application/json
+ * @return {AuthError} 403 - Authentification failed - application/json
+ * @return {ClientError} 400 - user error response - application/json
+ */
+router.post('/addtag', auth, controllerHandler(tagController.addTagToUser));
+/**
+ * PATCH /removetag
+ * @summary Remove tag
+ * @tags Tag
+ * @security BearerAuth
+ * @param {UpdateTagModel} request.body.required - Tag identifier
+ * @return {string} 200 - Association removed - application/json
+ * @return {AuthError} 403 - Authentification failed - application/json
+ * @return {ClientError} 400 - user error response - application/json
+ */
+router.delete('/removetag', auth, controllerHandler(tagController.removeTagFromUser));
 
 module.exports = router;

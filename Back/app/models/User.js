@@ -8,13 +8,54 @@ const client = require('../config/db');
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} username - User username
- * @property {string} password - User password
  * @property {string} email - User email
- * @property {number} tel - User tel
+ * @property {string} tel - User phone
  * @property {string} zipcode - User postal code
  * @property {string} localisation - User localisation
  * @property {string} biography - User biographie
  * @property {string} profilePicture - User profile picture url
+ */
+
+/**
+ * "CreateUser" Model Object
+ * @typedef {object} CreateUserModel
+ * @property {string} username - User pseudo
+ * @property {string} email - User email
+ * @property {string} password - User password
+ * @property {string} passwordConfirm - User password confirmation
+ */
+
+/**
+ * "UpdateUser" Model Object
+ * @typedef {object} UpdateUserModel
+ * @property {string} username - User pseudo
+ * @property {string} email - User email
+ * @property {string} oldPassword - User old password
+ * @property {string} password - User new password
+ * @property {string} passwordConfirm - User new password confirmation
+ * @property {string} firstname - User firstname
+ * @property {string} lastname - User lastnameconfirmation
+ * @property {string} zipcode - User postal code
+ * @property {string} localisation - User localisation
+ * @property {string} biography - User biographie
+ * @property {string} profilePicture - User profile picture url
+ */
+
+/**
+ * "LoginData" Model Object
+ * @typedef {object} LoginDataModel
+ * @property {string} email - User email
+ * @property {string} password - User password
+ */
+
+/**
+ * "Loged" Model Object
+ * @typedef {object} LogedModel
+ * @property {string} token - Token
+ * @property {UserModel} userInfos - User personnal informations
+ * @property {BookModel} books - User's books
+ * @property {LoanModel} lends - User's lends
+ * @property {LoanModel} borrow - User's borrow
  */
 
 module.exports = class User extends CoreDatamapper {

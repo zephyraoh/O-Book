@@ -11,6 +11,27 @@ const client = require('../config/db');
  * @property {boolean} is_available - Availability of the book
  */
 
+/**
+ * "PersonnalLibrary" Model Object
+ * @typedef {object} PersonnalLibraryModel
+ * @property {UserModel} userInfos - User personnal informations
+ * @property {BookModel} books - User's books
+ * @property {LoanModel} lends - User's lends
+ * @property {LoanModel} borrow - User's borrow
+ */
+
+/**
+ * "AddLibrary" Model Object
+ * @typedef {object} AddLibraryModel
+ * @property {string} googleApiId - Book's Google API Id
+ */
+
+/**
+ * "UpdateLibrary" Model Object
+ * @typedef {object} UpdateLibraryModel
+ * @property {boolean} isAvailable - Availability of the book
+ */
+
 module.exports = class Library extends CoreDatamapper {
     static tableName = 'library';
 

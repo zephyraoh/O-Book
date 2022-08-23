@@ -43,7 +43,6 @@ module.exports = class Book extends CoreDatamapper {
         return results.rows;
     }
 
-    // eslint-disable-next-line class-methods-use-this
     async insert() {
         const sql = {
             text: 'SELECT * FROM insert_book($1)',

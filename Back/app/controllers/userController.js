@@ -114,7 +114,7 @@ const userController = {
             }
             // Vérifier que password et passwordConfirm sont identiques
             if (req.body.password !== req.body.passwordConfirm) {
-                throw new AuthError('Password must match with password confirm');
+                throw new ClientError('Password must match with password confirm');
             }
             // Hashage du nouveau MDP
             req.body.password = hashSync(req.body.password, 10);

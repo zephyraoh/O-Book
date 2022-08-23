@@ -5,9 +5,17 @@ const client = require('../config/db');
 /**
  * "Tag" Model Object
  * @typedef {object} TagModel
+ * @property {number} id - Identifier
  * @property {string} label - Label
  *
 */
+
+/**
+ * "AddTag" Model Object
+ * @typedef {object} UpdateTagModel
+ * @property {string} tagId - Tag id
+ */
+
 module.exports = class Tag extends CoreDatamapper {
     static tableName = 'tag';
 
