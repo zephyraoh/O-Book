@@ -4,7 +4,10 @@ const client = require('../config/db');
 /**
  * "Book" Model Object
  * @typedef {object} BookModel
+ * @property {number} id - Book id
  * @property {string} google_api_id - Google API id of the book
+ * @property {string} created_at - Book's creation date
+ * @property {string} updated_at - Book's update date
 */
 
 module.exports = class Book extends CoreDatamapper {

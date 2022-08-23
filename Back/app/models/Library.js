@@ -6,9 +6,12 @@ const client = require('../config/db');
 /**
  * "Library" Model Object
  * @typedef {object} LibraryModel
+ * @property {number} id - Library id
  * @property {number} user_id - User id
  * @property {number} book_id - Book id
  * @property {boolean} is_available - Availability of the book
+ * @property {string} created_at - Library's creation date
+ * @property {string} updated_at - Library's update date
  */
 
 /**

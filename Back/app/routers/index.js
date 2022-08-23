@@ -30,7 +30,7 @@ router.post('/login', controllerHandler(userController.login));
  * @tags User
  * @param {CreateUserModel} request.body.required - User informations
  * @return {string} 200 - User created - application/json
-* @return {ClientError} 400 - user error response - application/json
+ * @return {ClientError} 400 - user error response - application/json
  */
 router.post('/createuser', controllerHandler(userController.createUser));
 
@@ -125,7 +125,7 @@ router.get('/userinfos/:username', controllerHandler(userController.getContactIn
 /**
  * GET /library/:id
  * @summary Get other user library
- * @tags Visitor
+ * @tags Library
  * @param {number} username.path.required - User's username
  * @return {LibraryModel} 200 - success response - application/json
  * @return {ClientError} 400 - user error response - application/json
@@ -134,31 +134,55 @@ router.get('/library/:username', controllerHandler(libraryController.getLibrary)
 
 /// Gestion des emprunts
 /**
- * GET /loan
+ * POST /loan
  * @summary Generate new loan
  * @tags Loan
  * @security BearerAuth
- * @return {string} 200 - "" - application/json
+ * @param {AddLoanModel} request.body.required - Library identifier
+ * @return {LoanModel} 200 - success response- application/json
  * @return {AuthError} 403 - Authentification failed - application/json
  * @return {ClientError} 400 - user error response - application/json
  */
 router.post('/loan', auth, controllerHandler(loanController.generateLoan));
 /**
- * PATCH /loans/book/:id
- * @summary update borrow book
- * @tags loans
+ * PATCH /loans/:id
+ * @summary Update loan status
+ * @tags Loan
  * @security BearerAuth
- * @param {number} id.path.required - user Id
- * @return {string} 200 - "" - application/json
+ * @param {number} id.path.required - Loan identifier
+ * @param {UpdateLoanModel} request.body.required - Loan status
+ * @return {LoanModel} 200 - success response- application/json
  * @return {AuthError} 403 - Authentification failed - application/json
  * @return {ClientError} 400 - user error response - application/json
  */
 router.patch('/loan/:id', auth, controllerHandler(loanController.updateLoan));
 
+/**
+ * GET /loans
+ * @summary Get last loans
+ * @tags Loan
+ * @return {[LoanModel]} 200 - success response - application/json
+ * @return {ApiError} 400 - Internal Server Error - application/json
+ */
 router.get('/loans', controllerHandler(loanController.getLoans));
 
 /// Récupération des informations de livres
+/**
+ * GET /books
+ * @summary Get last books
+ * @tags Book
+ * @return {[BookModel]} 200 - success response - application/json
+ * @return {ApiError} 400 - Internal Server Error - application/json
+ */
 router.get('/books', controllerHandler(bookController.getBooks));
+/**
+ * GET /book/:googleId
+ * @summary Get last books
+ * @tags Book
+ * @param {string} googleId.path.required - Book's Google API identifier
+ * @return {[UserModel]} 200 - success response - application/json
+ * @return {ApiError} 400 - Internal Server Error - application/json
+ */
 router.get('/book/:googleId', controllerHandler(bookController.getUsersByBook));
 
 /// Gestion des tags

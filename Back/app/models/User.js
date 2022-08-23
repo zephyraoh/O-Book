@@ -5,6 +5,7 @@ const client = require('../config/db');
 /**
  * "User" Model Object
  * @typedef {object} UserModel
+ * @property {number} id - User id
  * @property {string} firstname - User firstname
  * @property {string} lastname - User lastname
  * @property {string} username - User username
@@ -14,6 +15,8 @@ const client = require('../config/db');
  * @property {string} localisation - User localisation
  * @property {string} biography - User biographie
  * @property {string} profilePicture - User profile picture url
+ * @property {string} created_at - User's creation date
+ * @property {string} updated_at - User's update date
  */
 
 /**

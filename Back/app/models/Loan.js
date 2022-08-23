@@ -6,10 +6,25 @@ const client = require('../config/db');
 /**
  * "Loan" Model Object
  * @typedef {object} LoanModel
+ * @property {number} id - Loan id
  * @property {string} status - Loan status
- * @property {date} loanDate - Loan date
+ * @property {string} loanDate - Loan date
  * @property {number} libraryId - Library id who lends the book
  * @property {number} userId - User id who borrows the book
+ * @property {string} created_at - Loan's creation date
+ * @property {string} updated_at - Loan's update date
+ */
+
+/**
+ * "AddLoan" Model Object
+ * @typedef {object} AddLoanModel
+ * @property {string} libraryId - Library identifier who owns the book
+ */
+
+/**
+ * "UpdateLoan" Model Object
+ * @typedef {object} UpdateLoanModel
+ * @property {string} status - Status of the loan
  */
 
 module.exports = class Loan extends CoreDatamapper {

@@ -7,11 +7,13 @@ const client = require('../config/db');
  * @typedef {object} TagModel
  * @property {number} id - Identifier
  * @property {string} label - Label
+ * @property {string} created_at - Tag's creation date
+ * @property {string} updated_at - Tag's update date
  *
 */
 
 /**
- * "AddTag" Model Object
+ * "UpdateTag" Model Object
  * @typedef {object} UpdateTagModel
  * @property {string} tagId - Tag id
  */
