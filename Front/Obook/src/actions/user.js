@@ -2,6 +2,7 @@ export const SET_USER_FIELD = 'SET_USER_FIELD'; //change user field
 export const SET_USER_DATA ='SET_USER_DATA';
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_UP = 'SIGN_UP';
+export const CLEAR_PASSWORDS = 'CLEAR_PASSWORDS';
 export const SETCREATIONCONFIRMATION = 'SETCREATIONCONFIRMATION';
 export const LOGOUT = 'LOGOUT';
 export const DEL_ACCOUNT = 'DEL_ACCOUNT';
@@ -9,6 +10,7 @@ export const DEL_ACCOUNT = 'DEL_ACCOUNT';
 export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
 //séparation entre action demandant une confirmation et autres infos secondaires
 export const CHANGE_USER_INFO_MISC = 'CHANGE_USER_INFO_MISC'; 
+export const GET_PROFILE = 'GET_PROFILE'; 
 //zipcode, area, labels, bio, pic
 
 export const setUserField = (value, name) => ({
@@ -27,6 +29,14 @@ export const signIn = () => ({
 
 export const signUp = () => ({
 	type: SIGN_UP,
+});
+
+export const clearPasswords = () =>({
+	type: CLEAR_PASSWORDS,
+});
+
+export const getProfile = () => ({
+	type: GET_PROFILE,
 });
 
 export const setCreationConfirmation = (data)=>({

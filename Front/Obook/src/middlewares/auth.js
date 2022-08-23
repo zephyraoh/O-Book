@@ -1,4 +1,5 @@
-import { setUserData, SIGN_IN, SIGN_UP, LOGOUT, DEL_ACCOUNT, CHANGE_USER_INFO, CHANGE_USER_INFO_MISC } from '../actions/user';
+import { compose } from 'redux';
+import { setUserData, SIGN_IN, SIGN_UP, LOGOUT, DEL_ACCOUNT, CHANGE_USER_INFO, CHANGE_USER_INFO_MISC, CLEAR_PASSWORDS, GET_PROFILE } from '../actions/user';
 import { axiosServerDB } from '../utils/axios';
 
 
@@ -28,22 +29,37 @@ const authMiddleware = (store) => (next) => async (action) => {
 			// Je déclenche l'action qui va aller récupérer mes recettes favorites
 			// store.dispatch(fetchFavorites());
 			console.log('It worked !!! >>>>>', data )
+			const {user} = store.getState()
+			console.log(user)
 			break;
 		}
-		case SIGN_UP:{
+		case SIGN_UP: {
 
-			const {user:{newEmail, newPassword}} = store.getState();
-
-			const response = await axiosServerDB.post('/createuser', {
-				newEmail,
-				newPassword,
-			})
-			console.log(response);
+			const {user:{newUserName, newPasswordConfirm, newEmail, newPassword}} = store.getState();
+			try {
+				const response = await axiosServerDB.post('/createuser', {
+					username: newUserName,
+					email: newEmail,
+					password: newPassword,
+					passwordConfirm: newPasswordConfirm,
+				})
+				console.log(response);
+				console.log('User created !!!')
+			}catch(error){
+				console.log("ERROR >>>>", error.response.data);
+			}
 			// Vérification de la création d'un user ou s'il est déjà présent en BDD en fonction du status réponse serveur TODO :
 			// response.ok ? store.dispatch(setCreationConfirmation(true)) : store.dispatch(setCreationConfirmation(false))
 			
-			console.log('User created !!!')
 		}
+		case GET_PROFILE: {
+			try{
+				const { data } = await axiosServerDB.get('/profile')
+			console.log("receiving profile data !!!>>>", data);
+		}catch(error){
+			console.log('error getting profile >>>', error)
+		}
+	}
 		default: 
 			next(action); 
 	} 

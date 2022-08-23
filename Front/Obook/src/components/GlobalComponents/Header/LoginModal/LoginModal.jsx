@@ -2,10 +2,9 @@ import Field from "./Field";
 import Button from "../../Button";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { setUserField, signIn, signUp } from "../../../../actions/user";
+import { setUserField, signIn, signUp, clearPasswords } from "../../../../actions/user";
 import './styles.scss';
 import { NavLink } from "react-router-dom";
-
 
 
 /**
@@ -22,10 +21,10 @@ export const LoginModal=()=>{
     const dispatch = useDispatch();
     const email = useSelector(state => state.user.email);
     const password = useSelector(state => state.user.password);
+    const newUserName = useSelector(state => state.user.newUserName); 
     const newEmail = useSelector(state => state.user.newEmail);
     const newPassword = useSelector(state => state.user.newPassword);
     const newPasswordConfirm = useSelector(state => state.user.newPasswordConfirm);
-    const newUserName = useSelector(state => state.user.newUserName); 
     //destructuring possible 
 
     const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -38,13 +37,13 @@ export const LoginModal=()=>{
   const handleSubmitSignIn = (e) => {
     e.preventDefault();
 		dispatch(signIn());
-
+    dispatch(clearPasswords());
 	};
 
   const handleSubmitSignUp = (e) => {
     
     e.preventDefault();
-    
+    // vérification des mdp égaux et existants : refactorisable
     if(newPassword && newPasswordConfirm){
       if(newPasswordConfirm === newPassword){
         dispatch(signUp()),
@@ -57,6 +56,7 @@ export const LoginModal=()=>{
       setErrorMessage("Erreur : merci de renseigner les deux champs de mot de passe"),
       setIsPasswordValid(false)
     }
+    dispatch(clearPasswords());
 	};
 
   const handleClick = (e)=>{

@@ -9,7 +9,7 @@ const Header=()=>{
         <>
             <SearchForm />
             {/* attention pour la suite : ce sont les boutons de connexion qui doivent s'afficher ou non en fonction du booléen isLogged, et ensuite la modale onclick des boutons */}
-            {!isLogged && <LoginModal></LoginModal>} 
+            {!isLogged && <LoginModal />} 
         </>
         )
     }
