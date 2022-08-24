@@ -72,7 +72,7 @@ Authorization: Bearer {token}
 content-type: application/json
 
 {
-    "googleApiId": "np2VDAAAQBAJ"
+    "isbn": "np2VDAAAQBAJ"
 }
 
 ### Update library

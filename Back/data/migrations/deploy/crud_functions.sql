@@ -44,10 +44,10 @@ $$
     RETURNING *
 $$ LANGUAGE sql STRICT;
 
-CREATE FUNCTION insert_book(googleApiId text) RETURNS "book" AS
+CREATE FUNCTION insert_book(isbn text) RETURNS "book" AS
 $$
-    INSERT INTO "book" ("google_api_id") VALUES
-    (googleApiId)
+    INSERT INTO "book" ("isbn") VALUES
+    (isbn)
     RETURNING *
 $$ LANGUAGE sql STRICT;
 

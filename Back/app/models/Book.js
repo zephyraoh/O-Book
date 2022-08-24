@@ -5,7 +5,7 @@ const client = require('../config/db');
  * "Book" Model Object
  * @typedef {object} BookModel
  * @property {number} id - Book id
- * @property {string} google_api_id - Google API id of the book
+ * @property {string} isbn - ISBN number of the book
  * @property {string} created_at - Book's creation date
  * @property {string} updated_at - Book's update date
 */
@@ -13,9 +13,9 @@ const client = require('../config/db');
 module.exports = class Book extends CoreDatamapper {
     static tableName = 'book';
 
-    constructor(googleApiId) {
+    constructor(isbn) {
         super();
-        this.google_api_id = googleApiId;
+        this.isbn = isbn;
     }
 
     static async getLastBooks() {
@@ -26,7 +26,7 @@ module.exports = class Book extends CoreDatamapper {
 
     static async getBookByLibraryId(libraryId) {
         const sql = {
-            text: `SELECT "book"."id", "book"."google_api_id" FROM ${this.tableName} JOIN "library" ON "library"."book_id" = "book"."id" WHERE "library"."id"=$1`,
+            text: `SELECT "book"."id", "book"."isbn" FROM ${this.tableName} JOIN "library" ON "library"."book_id" = "book"."id" WHERE "library"."id"=$1`,
             values: [libraryId],
         };
 
@@ -49,7 +49,7 @@ module.exports = class Book extends CoreDatamapper {
     async insert() {
         const sql = {
             text: 'SELECT * FROM insert_book($1)',
-            values: [this.google_api_id],
+            values: [this.isbn],
         };
         const result = await client.query(sql);
         return result.rows[0];

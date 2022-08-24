@@ -10,9 +10,9 @@ const bookController = {
 
     async getUsersByBook(req, res) {
         // Récupérer tous les utilisateurs possédant un livre
-        // Récupération du googleApiId
-        const googleApiId = req.params.googleId;
-        const users = await Library.isBookInLibrary(googleApiId);
+        // Récupération du numéro ISBN
+        const { isbn } = req.params;
+        const users = await Library.isBookInLibrary(isbn);
         res.json(users);
     },
 

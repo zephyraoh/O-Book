@@ -41,16 +41,16 @@ const libraryController = {
 
     async addBookInLibrary(req, res) {
         // Ajouter un livre à la librairie d'un utilisateur
-        // Récupération du googleApiId
-        const { googleApiId } = req.body;
+        // Récupération du numéro ISBN du livre
+        const { isbn } = req.body;
         // Récupération du userId
         const userId = Number(req.user.id);
 
         // Vérifier si le livre existe déjà en BDD
-        const book = await Book.findOne('google_api_id', googleApiId);
+        const book = await Book.findOne('isbn', isbn);
         let bookId;
         if (!book) {
-            const newBook = new Book(googleApiId);
+            const newBook = new Book(isbn);
             const insertedBook = await newBook.insert();
             bookId = insertedBook.id;
         } else {

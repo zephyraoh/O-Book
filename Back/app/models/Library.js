@@ -26,7 +26,7 @@ const client = require('../config/db');
 /**
  * "AddLibrary" Model Object
  * @typedef {object} AddLibraryModel
- * @property {string} googleApiId - Book's Google API Id
+ * @property {string} isbn - Book's ISBN number
  */
 
 /**
@@ -66,10 +66,10 @@ module.exports = class Library extends CoreDatamapper {
     }
 
     // eslint-disable-next-line class-methods-use-this
-    static async isBookInLibrary(googleApiId) {
+    static async isBookInLibrary(isbn) {
         const sql = {
-            text: 'SELECT * FROM "book_in_library" WHERE "google_api_id" = $1',
-            values: [googleApiId],
+            text: 'SELECT * FROM "book_in_library" WHERE "isbn" = $1',
+            values: [isbn],
         };
         const results = await client.query(sql);
         return results.rows;

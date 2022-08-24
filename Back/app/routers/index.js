@@ -176,14 +176,14 @@ router.get('/loans', controllerHandler(loanController.getLoans));
  */
 router.get('/books', controllerHandler(bookController.getBooks));
 /**
- * GET /book/:googleId
+ * GET /book/:isbn
  * @summary Get last books
  * @tags Book
- * @param {string} googleId.path.required - Book's Google API identifier
+ * @param {string} isbn.path.required - Book's ISBN number
  * @return {[UserModel]} 200 - success response - application/json
  * @return {ApiError} 400 - Internal Server Error - application/json
  */
-router.get('/book/:googleId', controllerHandler(bookController.getUsersByBook));
+router.get('/book/:isbn', controllerHandler(bookController.getUsersByBook));
 
 /// Gestion des tags
 /**
@@ -196,7 +196,7 @@ router.get('/book/:googleId', controllerHandler(bookController.getUsersByBook));
 router.get('/tags', controllerHandler(tagController.getTags));
 /**
  * POST /addtag
- * @summary add tags from user
+ * @summary Add tag to user
  * @tags Tag
  * @security BearerAuth
  * @param {UpdateTagModel} request.body.required - Tag identifier
@@ -207,7 +207,7 @@ router.get('/tags', controllerHandler(tagController.getTags));
 router.post('/addtag', auth, controllerHandler(tagController.addTagToUser));
 /**
  * PATCH /removetag
- * @summary Remove tag
+ * @summary Remove tag from user
  * @tags Tag
  * @security BearerAuth
  * @param {UpdateTagModel} request.body.required - Tag identifier
