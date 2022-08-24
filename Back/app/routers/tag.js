@@ -35,7 +35,7 @@ router.post('/addtag', auth, controllerHandler(tagController.addTagToUser));
 
 // Dissocier un tag d'un utilisateur
 /**
-  * PATCH /removetag
+  * DELETE /removetag
   * @summary Remove tag from user
   * @tags Tag
   * @security BearerAuth
