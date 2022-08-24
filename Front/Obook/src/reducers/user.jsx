@@ -11,6 +11,7 @@ export const initialState = {
   newEmail: '',
   newPassword: '',
   newPasswordConfirm:'',
+  profilePicture:'https://res.cloudinary.com/obook/image/upload/v1661341818/vcyetnkhrahfxfyxrlhk.jpg',
   };
   
   const reducer = (state = initialState, action = {}) => {

@@ -43,7 +43,7 @@ export const setCreationConfirmation = (data)=>({
 	data,
 })
 
-export const logout = () => ({
+export const logOut = () => ({
 	type: LOGOUT,
 });
 

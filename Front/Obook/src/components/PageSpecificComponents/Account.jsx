@@ -1,28 +1,33 @@
-import { useDispatch } from "react-redux";
-import { SetUserLabel } from "../../actions/user";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserData, SetUserLabel } from "../../actions/user";
 import Axios from "axios";
 import { useState } from "react";
 
-
 const Account = () =>{
     const dispatch = useDispatch();
-    const [imageSelected, setImageSelected] = useState("")
-    const uploadImage = (e)=>{
 
-        //A dispatch dans une action middleware (auth?)
-        const selectedFiles = e.target.files;
-        console.log("last selected file ==>", selectedFiles[0]);
-        const formData = newFormData()
+    const userImg = useSelector(state=>state.user.profilePicture);
+    console.log(userImg);
+    
+
+
+    const [imageSelected, setImageSelected] = useState("")
+    // console.log("notre selected image", imageSelected)
+    const uploadImage = (e)=>{
+        // A dispatch dans une action middleware (auth?)
+        const formData = new FormData()
         formData.append("file", imageSelected)
         formData.append("upload_preset", "visitor of Obook website")
-        console.log("our final formData ==>", formData)
         
         Axios.post("https://api.cloudinary.com/v1_1/obook/upload",formData)
         .then((response)=>{
-            console.log(response)
-        })
-    }
-
+            console.log("J'ai fait une requête à cloudinary !")
+            const profilePicture = {profilePicture: response.data.secure_url};
+            console.log(profilePicture);
+            dispatch(setUserData(profilePicture));
+        });
+    };
+ 
     const handleClick = (e) => {
         console.log(`button ${e.target.value} clicked`);
         dispatch(SetUserLabel(e.target.value))
@@ -30,6 +35,8 @@ const Account = () =>{
 }
     return (
     <>
+
+    <img src={userImg}></img>
     <input type="file" onChange={event=>setImageSelected(event.target.files[0])}/>
     <button name="upload Image" onClick={uploadImage}>Upload Image</button>
         <button value ="Romans" name="profileLabelButton" onClick={handleClick}>Romans</button>
@@ -41,6 +48,8 @@ const Account = () =>{
         <button value ="Savoir" name="profileLabelButton" onClick={handleClick}>Savoir</button>
         <button value ="Loisirs" name="profileLabelButton" onClick={handleClick}>Loisirs</button>
         <button value ="Autres" name="profileLabelButton" onClick={handleClick}>Autres</button>
+
+        
     </>
     )
 };
