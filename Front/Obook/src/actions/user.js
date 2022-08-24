@@ -15,6 +15,8 @@ export const SET_USER_LABEL = 'SET_USER_LABEL';
 export const GET_MY_PROFILE = 'GET_PROFILE'; 
 export const GET_MEMBER_PROFILE = 'GET_MEMBER_PROFILE'
 //zipcode, area, labels, bio, pic
+// toggle de la modale de connexion/inscription
+export const TOGGLE_SIGN_IN_MODAL = 'TOGGLE_SIGN_IN_MODAL';
 
 export const setUserField = (value, name) => ({
 	type: SET_USER_FIELD,
@@ -59,3 +61,8 @@ export const getMemberProfile = (username) => ({
 	type: GET_MEMBER_PROFILE,
 	payload: username
 });
+
+export const toggleSignInModal = (boolean) =>({
+	type: TOGGLE_SIGN_IN_MODAL,
+	payload: boolean
+})

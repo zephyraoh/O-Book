@@ -1,4 +1,4 @@
-import { SET_USER_FIELD, SET_USER_DATA, LOGOUT, CLEAR_PASSWORDS }  from "../actions/user";
+import { SET_USER_FIELD, SET_USER_DATA, LOGOUT, CLEAR_PASSWORDS, TOGGLE_SIGN_IN_MODAL }  from "../actions/user";
 
 
 export const initialState = {
@@ -48,6 +48,13 @@ export const initialState = {
             // email: '',
             // password:'',
           };
+
+        case TOGGLE_SIGN_IN_MODAL:
+          console.log(state);
+          return{
+            ...state,
+            signInModal: action.payload,
+          }
 
       default:
         return state;

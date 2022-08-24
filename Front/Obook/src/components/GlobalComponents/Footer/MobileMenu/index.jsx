@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 
 //actions 
 import { getBooks, setSearchField } from '../../../../actions/books';
+import EscapeButton from '../../EscapeButton';
 
 
 const MobileMenu=()=>{
@@ -40,7 +41,7 @@ const MobileMenu=()=>{
                     <form onSubmit={handleSubmit}>
                         <SearchBar />
                     </form>
-                    <FontAwesomeIcon icon="fa-solid fa-circle-xmark" onClick={handleClick} />
+                    <EscapeButton onClick={handleClick}/>
                 </>
                  : 
                  <>

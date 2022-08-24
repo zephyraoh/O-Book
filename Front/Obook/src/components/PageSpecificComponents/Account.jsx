@@ -49,7 +49,7 @@ const Account = () =>{
         <button value ="Loisirs" name="profileLabelButton" onClick={handleClick}>Loisirs</button>
         <button value ="Autres" name="profileLabelButton" onClick={handleClick}>Autres</button>
 
-        
+
     </>
     )
 };
