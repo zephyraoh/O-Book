@@ -29,7 +29,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
       }
       
       const { data } = await axiosBooksApi.get(`${searchURL}&key=${apiKey}`);
-      console.log("middleware data ", data)
+      console.log("middleware data", data)
       store.dispatch(setBooks(data));
       break;
     }
