@@ -71,17 +71,18 @@ export const LoginModal=()=>{
   }
  
   const [loginForm, setLoginForm] = useState(true);
-  
+  const isLogged = useSelector(state => state.user.isLogged);
   
   return (
     
     <div className="login-modal">
       {/* si un jour on a le temps de refaire les imports : go tout faire en ternaire avec 2 sous composants LoginForm / SignUpForm */}
-      <EscapeButton onClick={handleQuit}/>
       
-
-      {loginForm?(
-        <>
+      
+    { !isLogged
+    &&(loginForm?(
+      <>
+      <EscapeButton onClick={handleQuit}/>
           {/* <LoginPartModal/> */}
           <form className="login-form" onSubmit={handleSubmitSignIn}>
             <h2>Connexion</h2>
@@ -94,6 +95,7 @@ export const LoginModal=()=>{
       </>
       ):
         <>
+        <EscapeButton onClick={handleQuit}/>
           {/* <SignInPartModal/> */}
           <form className="login-form" onSubmit={handleSubmitSignUp}>
             <h2>Inscription</h2>
@@ -107,7 +109,7 @@ export const LoginModal=()=>{
             {!isPasswordValid && <p>{errorMessage}</p>}
           </form>
         </>
-      };
+      )}
       </div>
 
   )

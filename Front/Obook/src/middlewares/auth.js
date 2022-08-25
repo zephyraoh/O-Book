@@ -22,7 +22,7 @@ const authMiddleware = (store) => (next) => async (action) => {
 			// Une fois connecté, je modifie les headers de base de mon instance axios
 			// Cela me permet de ne plus avoir à spéficier dans chaque requête ses headers
 			axiosServerDB.defaults.headers.common.Authorization = `Bearer ${ data.token }`;
-			console.log(data);
+			console.log("réponse serveur",data);
 			// Objet transitoire pour add les data au state.user via le dispatch(setUserData)
 			const correctedData ={
 				library:{
@@ -56,8 +56,38 @@ const authMiddleware = (store) => (next) => async (action) => {
 			}
 			// Vérification de la création d'un user ou s'il est déjà présent en BDD en fonction du status réponse serveur TODO :
 			// response.ok ? store.dispatch(setCreationConfirmation(true)) : store.dispatch(setCreationConfirmation(false))
-			
 		}
+// 		case CHANGE_USER_INFO:{
+// 			const {user:{lastName, firstName, userName, password, newPassword, newPasswordConfirm}} = store.getState();
+// 			try {
+// 				const response = await axiosServerDB.post('/createuser', {
+// 					lastname: lastName,
+// 					firstname: firstName,
+// 					username: userName,
+// 					email: newEmail,
+// 					oldPassword: password,
+// 					password: newPassword,
+// 					passwordConfirm: newPasswordConfirm,
+// 					zipcode: 
+
+// 				})
+// // 				firstname
+// // lastname
+// // username
+// // password
+// // email
+// // zipcode
+// // localisation
+// // tel
+// // biography
+// // profile_picture
+// 				console.log(response);
+// 				console.log('User created !!!')
+// 			}catch(error){
+// 				console.log("ERROR >>>>", error.response.data);
+// 			}
+// 		}
+
 		case GET_MY_PROFILE: {
 			try{
 				const { data } = await axiosServerDB.get('/mylibrary')

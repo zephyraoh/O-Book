@@ -2,8 +2,19 @@ import { SET_USER_FIELD, SET_USER_DATA, LOGOUT, CLEAR_PASSWORDS, TOGGLE_SIGN_IN_
 
 
 export const initialState = {
+  // user infos
+  firstName:'',
+  lastName:'',
   username: null,  
-  email: 'duke@gmail.com',
+  email: 'marwan@gmail.com',
+  // miscelleanous
+  profilePicture:'https://res.cloudinary.com/obook/image/upload/v1661341818/vcyetnkhrahfxfyxrlhk.jpg',
+  description:'',
+  zipcode:'',
+  localisation:'',
+  biography:'',
+  tel:'',
+  // connexion
   token: null,
   isLogged: false,
   password: 'azerty1234',
@@ -11,7 +22,6 @@ export const initialState = {
   newEmail: '',
   newPassword: '',
   newPasswordConfirm:'',
-  profilePicture:'https://res.cloudinary.com/obook/image/upload/v1661341818/vcyetnkhrahfxfyxrlhk.jpg',
   };
   
   const reducer = (state = initialState, action = {}) => {
