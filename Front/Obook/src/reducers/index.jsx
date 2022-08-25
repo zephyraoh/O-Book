@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 
 import userReducer from './user';
-import searchReducer from './search';
+import booksReducer from './books';
 import visitedProfileReducer from './visitedProfile';
 
 
 const rootReducer = combineReducers({
-    search: searchReducer,
+    books: booksReducer,
     user: userReducer,
     visitedProfile: visitedProfileReducer,
   });

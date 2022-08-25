@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { searchBooks } from '../../../actions/books';
+import { fetchBooks, searchBooks } from '../../../actions/books';
 import Button from '../Button';
 import SearchFilters from './SearchFilters';
 import SearchBar from './SearchBar/SearchBar';
@@ -11,7 +11,7 @@ const SearchForm=()=>{
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(searchBooks())
+        dispatch(fetchBooks())
     
     };
 

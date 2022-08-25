@@ -1,4 +1,4 @@
-import { SEARCH_BOOKS, setBooks, FETCH_BOOKS } from '../actions/books';
+import { SEARCH_BOOKS, FETCH_BOOKS, setBooksResultsInSearchState } from '../actions/books';
 import { ISBNApiGetBooks, ISBNApiSearchBar } from '../utils/axios';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -67,7 +67,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
 
       const booksArray = books.map(book => (book.isbn));
       
-     console.log(booksArray)
+      console.log("booksArray", booksArray)
 
       const options = {
         method: 'POST',
@@ -79,7 +79,9 @@ const searchMiddleware = (store) => (next) => async (action) => {
         data: `data: isbns=${[...booksArray]}`
       }
       const {data} = await axios.request(options);
-      console.log(data);
+      
+      store.dispatch(setBooksResultsInSearchState('myBooks', data))
+      console.log('on a dispatché l\'action setBooksResultsInSearchState')
     }
     default:
       next(action);

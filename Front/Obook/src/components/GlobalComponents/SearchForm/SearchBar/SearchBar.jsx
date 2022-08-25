@@ -10,7 +10,7 @@ const SearchBar =({className})=>{
     const handleChange = (e) => {
         dispatch(setSearchField(e.target.value))
     }
-    const value = useSelector(state => state.search.searchValue);
+    const value = useSelector(state => state.books.searchValue);
 
     return (        
         <input type="text" className= {className} value={value} onChange={handleChange}/>

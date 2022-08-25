@@ -10,7 +10,7 @@ import SearchForm from '../../SearchForm';
 import { useDispatch } from 'react-redux';
 
 //actions 
-import {searchBooks, setSearchField } from '../../../../actions/books';
+import {fetchBooks, searchBooks, setSearchField } from '../../../../actions/books';
 import EscapeButton from '../../EscapeButton';
 
 
@@ -30,7 +30,7 @@ const MobileMenu=()=>{
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(searchBooks())
+        dispatch(fetchBooks())
         endSearch()
     };
 

@@ -3,6 +3,7 @@ export const SEARCH_BOOKS ='SEARCH_BOOKS';
 export const SET_BOOKS ='SET_BOOKS';
 export const SET_SELECTED_FILTER = 'SET_SELECTED_FILTER';
 export const FETCH_BOOKS = 'FETCH_BOOKS';
+export const SET_BOOKS_RESULTS_IN_SEARCH_STATE = 'SET_BOOKS_RESULTS_IN_SEARCH_STATE'; 
 
 export const setSearchField = (search) => ({
   type: SET_SEARCH,
@@ -24,4 +25,10 @@ export const searchBooks = ()=>({
 
 export const fetchBooks = ()=>({
   type : FETCH_BOOKS,
+})
+
+export const setBooksResultsInSearchState = (name, bookData) => ({
+  type : SET_BOOKS_RESULTS_IN_SEARCH_STATE,
+  name,
+  bookData,
 })

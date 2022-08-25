@@ -60,7 +60,6 @@ export const initialState = {
           };
 
         case TOGGLE_SIGN_IN_MODAL:
-          console.log(state);
           return{
             ...state,
             signInModal: action.payload,
