@@ -1,6 +1,7 @@
 import { SEARCH_BOOKS, setBooks, FETCH_BOOKS } from '../actions/books';
 import { ISBNApiGetBooks, ISBNApiSearchBar } from '../utils/axios';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 
 const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
@@ -57,7 +58,17 @@ const searchMiddleware = (store) => (next) => async (action) => {
       break;
     }
     case FETCH_BOOKS: {
+      const { user: { library: {books} }} = store.getState();
+
+      console.log(books);
+            // const {search: {searchValue, selectedSearchFilter}} = store.getState();
+            // / const myBooks = useSelector((state => state.user.library.books))
       console.log('Looking for something');
+
+      const booksArray = books.map(book => (book.isbn));
+      
+     console.log(booksArray)
+
       const options = {
         method: 'POST',
         url: 'https://api2.isbndb.com/books/',
@@ -65,9 +76,8 @@ const searchMiddleware = (store) => (next) => async (action) => {
           Authorization: apiKey,
           'Content-Type': 'application/json'
         },
-        data: `data: isbns=2724289145,2266154117,`
-      };
-
+        data: `data: isbns=${[...booksArray]}`
+      }
       const {data} = await axios.request(options);
       console.log(data);
     }
