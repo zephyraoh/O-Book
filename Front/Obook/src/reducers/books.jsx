@@ -28,19 +28,20 @@ export const initialState = {
         //       oldData : action.payload,
         //   }
         case SET_SELECTED_FILTER:
-          console.log(state)
           return{
             ...state,
             selectedSearchFilter: action.payload,
           }
+
         case SET_BOOKS_RESULTS_IN_SEARCH_STATE:
-          console.log("PASSAGE DANS L'ACTION", action.name, state)
+          console.log(state);
           return{
             ...state,
-            // [action.name]: action.value,
-            booksData: action.value,
-
-          }
+            booksData: {
+              ...state.booksData,
+              [action.name]: [...action.bookData.data],
+              // searchedBooks: [...action.bookData.data],
+          }};
       default:
         return state;
     }

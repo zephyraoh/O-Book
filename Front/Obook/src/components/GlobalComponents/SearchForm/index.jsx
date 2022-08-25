@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { fetchBooks, searchBooks } from '../../../actions/books';
+import { fetchBooks } from '../../../actions/books';
 import Button from '../Button';
 import SearchFilters from './SearchFilters';
 import SearchBar from './SearchBar/SearchBar';

@@ -80,7 +80,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
       }
       const {data} = await axios.request(options);
       
-      store.dispatch(setBooksResultsInSearchState('myBooks', data))
+      store.dispatch(setBooksResultsInSearchState("myBooks", data))
       console.log('on a dispatché l\'action setBooksResultsInSearchState')
     }
     default:
