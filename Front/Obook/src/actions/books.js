@@ -1,7 +1,8 @@
 export const SET_SEARCH ='SET_SEARCH';
-export const GET_BOOKS ='GET_BOOKS';
+export const SEARCH_BOOKS ='SEARCH_BOOKS';
 export const SET_BOOKS ='SET_BOOKS';
 export const SET_SELECTED_FILTER = 'SET_SELECTED_FILTER';
+export const FETCH_BOOKS = 'FETCH_BOOKS';
 
 export const setSearchField = (search) => ({
   type: SET_SEARCH,
@@ -17,6 +18,10 @@ export const setBooks =(data)=>({
   payload: data,
 })
 
-export const getBooks = ()=>({
-  type : GET_BOOKS,
+export const searchBooks = ()=>({
+  type : SEARCH_BOOKS,
+})
+
+export const fetchBooks = ()=>({
+  type : FETCH_BOOKS,
 })

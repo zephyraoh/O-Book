@@ -24,12 +24,14 @@ const Header=()=>{
         return (
         <>
         {isLogged?
-        <button name="Logout button" onClick={handleLogOut}>Logout button</button>
+            <button name="Logout button" onClick={handleLogOut}>Logout button</button>
         :
-        <button name="Connexion/inscription" onClick={handleSignButton}>Connexion/inscription</button>}
-        <SearchForm />
-            {/* attention pour la suite : ce sont les boutons de connexion qui doivent s'afficher ou non en fonction du booléen isLogged, et ensuite la modale onclick des boutons */}
+        <>
+            {!isSignModalToggled&&<button name="Connexion/inscription" onClick={handleSignButton}>Connexion/inscription</button>}
+            <SearchForm />
             {isSignModalToggled && <LoginModal />} 
+            </>
+        }       
         </>
         )
     }

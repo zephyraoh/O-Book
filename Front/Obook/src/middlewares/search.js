@@ -1,4 +1,4 @@
-import { GET_BOOKS, setBooks } from '../actions/books';
+import { SEARCH_BOOKS, setBooks, FETCH_BOOKS } from '../actions/books';
 import { ISBNApiGetBooks, ISBNApiSearchBar } from '../utils/axios';
 import axios from 'axios';
 
@@ -8,7 +8,7 @@ const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 const searchMiddleware = (store) => (next) => async (action) => {
 
   switch (action.type) {
-    case GET_BOOKS: {
+    case SEARCH_BOOKS: {
       console.log('Looking for something');
       // const {search: {searchValue, selectedSearchFilter}} = store.getState();
 
