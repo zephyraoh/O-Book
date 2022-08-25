@@ -1,8 +1,17 @@
+import { useDispatch, useSelector } from "react-redux";
+
 const MyBooks = ()=>{
 
+    const dispatch = useDispatch();
+    const myBooks = useSelector((state => state.user.library.books))
+    console.log(myBooks);
     return (
-        "My Books"
-    //    {state.user.books.map(book=>( <BookCard/>))}
+        <>
+        <p>Test</p>
+        {myBooks.map(book => {
+            <p>I am a book</p>
+        })}
+        </>
     )
     
 };
