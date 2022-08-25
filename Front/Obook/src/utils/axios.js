@@ -17,12 +17,14 @@ export const ISBNApiSearchBar = axs.create({
 
 
 export const ISBNApiGetBooks = axs.create({
-	// method: 'post',
+	method: 'POST',
 	baseURL: 'https://api2.isbndb.com',
 	headers: {
 		'Authorization': apiKey,
-		'accept': 'application/json',
+		'content-type': 'application/json',
+		'accept': '*/*',
 	},
+	data: 'data: isbns=2724289145,2266154117,'
 });
 
 

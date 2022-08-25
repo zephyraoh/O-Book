@@ -1,12 +1,10 @@
 import { GET_BOOKS, setBooks } from '../actions/books';
 import { ISBNApiGetBooks, ISBNApiSearchBar } from '../utils/axios';
+import axios from 'axios';
+
 
 const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 
-// ----------- TESTS ---------- //
-// const data = ['0452284236', '2724289145', '0151010269' ];
-// const json = JSON.stringify(data);
-// const post_data = {json_data: json};
 const searchMiddleware = (store) => (next) => async (action) => {
 
   switch (action.type) {
@@ -18,12 +16,18 @@ const searchMiddleware = (store) => (next) => async (action) => {
       // --------- RESTE À INTÉGRER FILTRES DE RECHERCHE -------- //
       // const { data } = await ISBNApiSearchBar.get(searchValue);
 
+      const options = {
+        method: 'POST',
+        url: 'https://api2.isbndb.com/books/',
+        headers: {
+          Authorization: apiKey,
+          'Content-Type': 'application/json'
+        },
+        data: `data: isbns=2724289145,2266154117,`
+      };
 
-      // ----------RECHERCHE PAR ISBNS EN COURS----------------- //
-      // const dataJSON = JSON.stringify({data: 'isbns=0452284236,2266154117,2842281500'});
-      // ----------- TESTS ---------- //
-      const response = await ISBNApiGetBooks.post('/books', {data: 'isbns=0452284236,2266154117,2842281500'});
-      console.log(response);
+      const {data} = await axios.request(options);
+      console.log(data);
 
       // ----------- FILTRES DE RECHERCHE VERSION GOOGLE API ---------- //
       // let searchURL = '';
@@ -51,6 +55,21 @@ const searchMiddleware = (store) => (next) => async (action) => {
       // console.log("middleware data", data)
       // store.dispatch(setBooks(data));
       break;
+    }
+    case FETCH_BOOKS: {
+      console.log('Looking for something');
+      const options = {
+        method: 'POST',
+        url: 'https://api2.isbndb.com/books/',
+        headers: {
+          Authorization: apiKey,
+          'Content-Type': 'application/json'
+        },
+        data: `data: isbns=2724289145,2266154117,`
+      };
+
+      const {data} = await axios.request(options);
+      console.log(data);
     }
     default:
       next(action);
