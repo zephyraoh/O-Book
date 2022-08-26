@@ -1,4 +1,3 @@
-import { compose } from 'redux';
 import { setUserData, SIGN_IN, SIGN_UP, LOGOUT, DEL_ACCOUNT, CHANGE_USER_INFO, CHANGE_USER_INFO_MISC, CLEAR_PASSWORDS, GET_MY_PROFILE, GET_MEMBER_PROFILE, SET_USER_LABEL } from '../actions/user';
 import { axiosServerDB } from '../utils/axios';
 
@@ -36,7 +35,7 @@ const authMiddleware = (store) => (next) => async (action) => {
 				tags: data.library.tags,
 			}
 			store.dispatch(setUserData(correctedData));
-			console.log(correctedData);
+			console.log("infos serveur reçues à la connexion", correctedData);
 			break;
 		}
 		case SIGN_UP: {

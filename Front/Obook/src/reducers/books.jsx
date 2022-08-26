@@ -39,7 +39,7 @@ export const initialState = {
             ...state,
             booksData: {
               ...state.booksData,
-              [action.name]: [...action.bookData.data],
+              [action.name]: [...action.bookData],
               // searchedBooks: [...action.bookData.data],
           }};
       default:

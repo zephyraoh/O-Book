@@ -1,9 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchBooks } from "../../../actions/books";
+import BookCard from "../../GlobalComponents/BooksResults/BookCard";
+
 
 const MyBooks = ()=>{
     // Fonctions
     const dispatch = useDispatch();
     
+    useEffect(() => {
+        dispatch(fetchBooks());
+    }, []);
     // constantes
     const myBooks= useSelector(state=>state.books.booksData.myBooks);
     console.log("my books:",myBooks);
@@ -27,16 +34,17 @@ const MyBooks = ()=>{
     */
 
     return (
-        <>
-        <p>Test</p>
         
+        <>
+
         {myBooks.map((book) =>
         (
-        <BookCard key={book.isbn} {...book}/>
+        <BookCard key={book.libraryid} {...book}/>
         )
             
         )}
         </>
+        
     )
     
 };
