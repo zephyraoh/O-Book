@@ -61,6 +61,7 @@ $$ LANGUAGE sql STRICT;
 CREATE FUNCTION update_library(isAvailable boolean, libraryId int) RETURNS "library" AS
 $$ 
     UPDATE "library" SET
+    -- On peut aussi toggle la valeur de is_available avec NOT is_available
     "is_available"=isAvailable::boolean,
     "updated_at"=now()
     WHERE "id"=libraryId::int

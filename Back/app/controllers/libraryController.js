@@ -72,7 +72,6 @@ const libraryController = {
         const libraryId = Number(req.params.id);
         // Récupération de l'information isAvailable
         const { isAvailable } = req.body;
-
         // Vérifier si l'entrée en librairie existe bien
         const library = await Library.findByPk(libraryId);
         if (!library) {
