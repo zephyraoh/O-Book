@@ -4,6 +4,8 @@ export const SET_BOOKS ='SET_BOOKS';
 export const SET_SELECTED_FILTER = 'SET_SELECTED_FILTER';
 export const FETCH_BOOKS = 'FETCH_BOOKS';
 export const SET_BOOKS_RESULTS_IN_SEARCH_STATE = 'SET_BOOKS_RESULTS_IN_SEARCH_STATE'; 
+export const SEND_MY_BOOKS_AVAILABILITY = 'SEND_MY_BOOKS_AVAILABILITY';
+export const SET_MY_BOOKS_AVAILABILITY = 'SET_MY_BOOKS_AVAILABILITY'; 
 
 export const setSearchField = (search) => ({
   type: SET_SEARCH,
@@ -31,4 +33,15 @@ export const setBooksResultsInSearchState = (name, bookData) => ({
   type : SET_BOOKS_RESULTS_IN_SEARCH_STATE,
   name,
   bookData,
+})
+
+export const sendMyBookAvailability =(is_available, libraryId) =>({
+  type :SEND_MY_BOOKS_AVAILABILITY,
+  libraryId,
+  is_available,
+})
+
+export const setMyBooksAvailability =(data) =>({
+  type : SET_MY_BOOKS_AVAILABILITY,
+  payload: data,
 })

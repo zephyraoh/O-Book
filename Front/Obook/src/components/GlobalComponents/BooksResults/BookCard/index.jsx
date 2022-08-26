@@ -1,5 +1,6 @@
+import { sendMyBookAvailability } from "../../../../actions/books";
 import { useDispatch } from "react-redux";
-
+import { useSelector } from "react-redux";
 const BookCard=({
     libraryid,
     image,
@@ -11,16 +12,17 @@ const BookCard=({
     
     const dispatch = useDispatch();
     const handleAvailabilityToggle= (e) =>{
-        dispatch(setMyBookAvailability(e.target.value))
+        console.log('button clicked');
+        dispatch(sendMyBookAvailability(is_available, e.target.value))
     }
-     
+     console.log("STATE.BOOK.BOOKSDATA", useSelector(state=>state.books.booksData))
     return (
         <>
             <img src = { image }/>
             <h1>{title}</h1>
             <h4>{author}</h4>
             {synopsis? <p> {synopsis}</p> : <p>Pas de synopsis disponible </p>}
-            {is_available? <button value = {libraryid} onClick={handleClick}>Disponible </button> : <button>Indisponible</button>}
+            {is_available? <button value = {libraryid} onClick={handleAvailabilityToggle}>Disponible </button> : <button value = {libraryid} onClick={handleAvailabilityToggle}>Indisponible</button>}
             {/* //? à faire : bouton disponible / Indisponible */}
             {/* reprendre l'algo de O'fig pour les étoiles RATING HERE*/ }
      </>

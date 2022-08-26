@@ -1,5 +1,6 @@
-import { setUserData, SIGN_IN, SIGN_UP, LOGOUT, DEL_ACCOUNT, CHANGE_USER_INFO, CHANGE_USER_INFO_MISC, CLEAR_PASSWORDS, GET_MY_PROFILE, GET_MEMBER_PROFILE, SET_USER_LABEL } from '../actions/user';
 import { axiosServerDB } from '../utils/axios';
+import { SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability } from '../actions/books';
+import { setUserData, SIGN_IN, SIGN_UP, GET_MY_PROFILE, GET_MEMBER_PROFILE, SET_USER_LABEL } from '../actions/user';
 
 
 const authMiddleware = (store) => (next) => async (action) => { 
@@ -112,7 +113,20 @@ const authMiddleware = (store) => (next) => async (action) => {
 			}catch(error){
 				console.log("error setting label", error);
 			}
+		}set
+		case SEND_MY_BOOKS_AVAILABILITY :{
+			try{
+				console.log("on entre dans l'action SEND MY BOOKS", action.libraryId, !action.is_available);
+				const {data} = await axiosServerDB.patch(`/mylibrary/book/${action.libraryId}`, {"isAvailable": !action.is_available})
+				console.log("réponse serveur", data)
+				console.log("Telling server the book with library id ", action.libraryId,"is", !action.is_available)
+				store.dispatch(setMyBooksAvailability(data));
+
+			}catch(err){
+				console.log("Telling server the book with library id ", action.libraryId,"is", !action.is_available,"errer", err);
+			}
 		}
+		
 		default: 
 			next(action); 
 	} 

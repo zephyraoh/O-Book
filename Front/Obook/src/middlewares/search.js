@@ -48,14 +48,14 @@ const searchMiddleware = (store) => (next) => async (action) => {
     case FETCH_BOOKS: {
       const { user: { library: {books} }} = store.getState();
       //! A FAIRE : GENERALISER LA FONCTION AVEC LA REQUETE DE LIBRARY PLUS QUE DE BOOKS
-      console.log("LE BOOKS LOG ==>", books);
+      // console.log("LE BOOKS LOG ==>", books);
             // const {search: {searchValue, selectedSearchFilter}} = store.getState();
             // / const myBooks = useSelector((state => state.user.library.books))
-      console.log('Fetching books');
+      // console.log('Fetching books');
 
       const booksArray = books.map(book => (book.isbn));
       
-      console.log("booksArray", booksArray)
+      // console.log("booksArray", booksArray)
 
       const options = {
         method: 'POST',
@@ -80,7 +80,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
       const booksPreApi = books;
       const booksPostApi = data.data;
       const justineBooks = [];
-      console.log('test des valeurs de test', booksPreApi, booksPostApi)
+      // console.log('test des valeurs de test', booksPreApi, booksPostApi)
       booksPreApi.forEach(bookAPI => {
         booksPostApi.forEach(bookISBN => {
           if(bookAPI.isbn === bookISBN.isbn) {
@@ -94,7 +94,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
 
 
       store.dispatch(setBooksResultsInSearchState("myBooks", justineBooks))
-      console.log('on a dispatché l\'action setBooksResultsInSearchState')
+      // console.log('on a dispatché l\'action setBooksResultsInSearchState')
 
 
       // TEST A VERIFIER
