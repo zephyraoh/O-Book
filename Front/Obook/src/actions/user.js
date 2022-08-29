@@ -1,4 +1,5 @@
 export const SET_USER_FIELD = 'SET_USER_FIELD'; //change user field
+export const SET_USER_MODIFY_ACCOUNT_FIELD = 'SET_USER_MODIFY_ACCOUNT_FIELD'; //change user field
 export const SET_USER_DATA ='SET_USER_DATA';
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_UP = 'SIGN_UP';
@@ -20,6 +21,11 @@ export const TOGGLE_SIGN_IN_MODAL = 'TOGGLE_SIGN_IN_MODAL';
 
 export const setUserField = (value, name) => ({
 	type: SET_USER_FIELD,
+	value,
+	name,
+});
+export const setUserModifyAccountField = (value, name) => ({
+	type: SET_USER_MODIFY_ACCOUNT_FIELD,
 	value,
 	name,
 });

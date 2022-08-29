@@ -1,4 +1,4 @@
-import { SET_USER_FIELD, SET_USER_DATA, LOGOUT, CLEAR_PASSWORDS, TOGGLE_SIGN_IN_MODAL }  from "../actions/user";
+import { SET_USER_FIELD, SET_USER_DATA, LOGOUT, CLEAR_PASSWORDS, TOGGLE_SIGN_IN_MODAL, SET_USER_MODIFY_ACCOUNT_FIELD }  from "../actions/user";
 
 
 export const initialState = {
@@ -9,7 +9,6 @@ export const initialState = {
   email: 'marwan@gmail.com',
   // miscelleanous
   profilePicture:'https://res.cloudinary.com/obook/image/upload/v1661341818/vcyetnkhrahfxfyxrlhk.jpg',
-  description:'',
   zipcode:'',
   localisation:'',
   biography:'',
@@ -22,6 +21,24 @@ export const initialState = {
   newEmail: '',
   newPassword: '',
   newPasswordConfirm:'',
+  accountModifications: {
+    //user infos
+    newProfilePicture: '',
+    newFirstName:'',
+    newLastName:'',
+    newUsername: '',  
+    newBiography:'',
+    newLocalisation:'',
+    newZipcode:'',
+    //connexion
+    oldPassword: '',
+    newPassword: '',
+    newPasswordConfirm:'',
+    
+    
+    
+    tel:'',
+  }
   };
   
   const reducer = (state = initialState, action = {}) => {
@@ -31,6 +48,16 @@ export const initialState = {
         ...state,
         //action modulable qui s'appliquera aux deux champs email et password , tl-dr champ contrôlé
         [action.name]: action.value,
+      }
+      
+      case SET_USER_MODIFY_ACCOUNT_FIELD:
+      return{
+        ...state,
+        //action modulable qui s'appliquera aux deux champs email et password , tl-dr champ contrôlé
+        accountModifications:{
+          ...state.accountModifications,
+          [action.name]: action.value,
+        },
       }
 
       case SET_USER_DATA:
