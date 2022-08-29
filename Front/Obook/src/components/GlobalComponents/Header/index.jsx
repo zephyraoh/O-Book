@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOut } from '../../../actions/user';
 import Button from '../Button';
 import { toggleSignInModal } from '../../../actions/user';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const Header=()=>{
 
@@ -23,15 +25,18 @@ const Header=()=>{
     const isSignModalToggled =useSelector (state=>state.user.signInModal)
         return (
         <>
+        <div className='flex justify-evenly items-center h-24 border-y border-[#292F44] border-solid'>
+            <h2 className='text-2xl p-4 font-semibold'><FontAwesomeIcon icon="fa-book-open" />O'BOOK</h2>      
         {isLogged?
-            <button name="Logout button" onClick={handleLogOut}>Logout button</button>
+            <button className='p-3 m-3 bg-[#292F44] text-[#F5F5F5] rounded-md' name="Logout button" onClick={handleLogOut}>Logout button</button>
         :
         <>
-            {!isSignModalToggled&&<button name="Connexion/inscription" onClick={handleSignButton}>Connexion/inscription</button>}
+            {!isSignModalToggled&&<button className='p-3 m-3 bg-[#292F44] text-[#F5F5F5] rounded-md' name="Connexion/inscription" onClick={handleSignButton}>Connexion/inscription</button>}
             <SearchForm />
             {isSignModalToggled && <LoginModal />} 
             </>
         }       
+        </div>
         </>
         )
     }

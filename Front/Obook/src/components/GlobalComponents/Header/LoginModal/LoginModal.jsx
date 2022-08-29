@@ -75,23 +75,23 @@ export const LoginModal=()=>{
   
   return (
     
-    <div className="login-modal">
+    <div className="login-modal bg-[#F5F5F5] mx-5 my-20 rounded-md h-1/2 ">
       {/* si un jour on a le temps de refaire les imports : go tout faire en ternaire avec 2 sous composants LoginForm / SignUpForm */}
       
       
     { !isLogged
     &&(loginForm?(
       <>
-      <EscapeButton onClick={handleQuit}/>
           {/* <LoginPartModal/> */}
           <form className="login-form" onSubmit={handleSubmitSignIn}>
-            <h2>Connexion</h2>
+            <h2 className="text-xl p-5">Connexion</h2>
             {/* //form de login */}
-            <Field value= {email} type= "email" name= "email" placeholder="email" onChange={onChange} />
+            <Field value= {email} type= "email" name= "email" placeholder="Email" onChange={onChange} />
             <Field value= {password} type= "password" name= "password" placeholder="Mot de Passe" onChange={onChange} />
-            <Button name="Se connecter" type="submit" value="loginButton" className="login-button" />
-            <a onClick={handleClick}>Pas encore inscrit ?</a>
+            <Button name="Se connecter" type="submit" value="loginButton" className="login-button rounded" />
+            <a className='block' onClick={handleClick}>Pas encore inscrit ?</a>
           </form>
+      <EscapeButton onClick={handleQuit}/>
       </>
       ):
         <>

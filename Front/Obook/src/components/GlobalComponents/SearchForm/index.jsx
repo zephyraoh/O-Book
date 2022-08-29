@@ -19,9 +19,11 @@ const SearchForm=()=>{
    
     
     return (
-    <form onSubmit={handleSubmit}>
-        <SearchBar className= "search-form__input"/>
-        <Button type ="submit" name="Valider" value="searchButton" className="search-button" />
+    <form className='mobile:hidden' onSubmit={handleSubmit}>
+        <div className= 'flex'>
+            <SearchBar className= "search-form__input rounded-md h-6 w-2/3"/>
+            <Button type ="submit" name="Valider" value="searchButton" className="search-button" />
+        </div>
         <SearchFilters />
     </form>
     )

@@ -2,7 +2,17 @@
 module.exports = {
   content: ['./src/**/*.{jsx, js}'],
   theme: {
-    extend: {},
-  },
-  plugins: [],
+    fontFamily: {
+      sans: ['Graphik', 'sans-serif'],
+    },
+    extend: {
+      screens: {
+        'mobile':'10px',
+        'desktop': '768px',
+      }
+    },
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
+}
 }

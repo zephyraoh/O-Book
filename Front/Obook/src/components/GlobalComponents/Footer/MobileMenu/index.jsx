@@ -35,20 +35,20 @@ const MobileMenu=()=>{
     };
 
     return (
-        <nav className='bg-orange-300'>
+        <nav className='flex w-11/12 h-15 justify-center items-center content-between absolute bottom-3 desktop:hidden'>
             {isSearchBarActive? 
                 <>
                     <form onSubmit={handleSubmit}>
-                        <SearchBar />
+                        <SearchBar className='search-form__input rounded-md h-10 w-full' />
                     </form>
                     <EscapeButton onClick={handleClick}/>
                 </>
                  : 
                  <>
-                    <FontAwesomeIcon icon= "magnifying-glass" onClick={handleClick} /> 
-                    <NavLink to ="/"><FontAwesomeIcon icon= "house"/></NavLink>
-                    <NavLink to ="/mylibrary"><FontAwesomeIcon icon= "fa-book-open" /></NavLink>
-                    <NavLink to = "/account"><FontAwesomeIcon icon= "user" /></NavLink>
+                    <FontAwesomeIcon className='h-10 p-6 text-[#292F44] block' icon= "magnifying-glass" onClick={handleClick} /> 
+                    <NavLink to ="/"><FontAwesomeIcon className='h-10 p-6 text-[#292F44] block' icon= "house"/></NavLink>
+                    <NavLink to ="/mylibrary"><FontAwesomeIcon className='h-10 p-6 text-[#292F44] block' icon= "fa-book-open" /></NavLink>
+                    <NavLink to = "/account"><FontAwesomeIcon className='h-10 p-6 text-[#292F44] block' icon= "user" /></NavLink>
                 </>
             }
         </nav>
