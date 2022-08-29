@@ -35,7 +35,7 @@ const MobileMenu=()=>{
     };
 
     return (
-        <nav>
+        <nav className='bg-orange-300'>
             {isSearchBarActive? 
                 <>
                     <form onSubmit={handleSubmit}>
