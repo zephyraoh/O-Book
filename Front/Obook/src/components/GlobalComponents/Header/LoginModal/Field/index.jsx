@@ -21,7 +21,7 @@ const Field = ({
             onChange = { handleChange }
             id = { inputId }
             type = { type }
-            className = 'field-input rounded-md m-1 h-14 p-2'
+            className = 'field-input rounded-md m-1 h-14 p-2 w-2/3'
             placeholder={ placeholder }
             name = { name }
             />

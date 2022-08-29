@@ -85,7 +85,7 @@ const Account = () =>{
     <button name="upload Image" onClick={uploadImage}>Upload Image</button>
 
     {/* Infos "secondaires" */}
-    <Field value={newBiography} type="text" name="biography" placeholder="Bio" onChange={handleChange}/>
+    <Field value={newBiography} type="text" name="biography" placeholder="Bio" onChange={handleChange} className="w-1/2"/>
     <Field value={newLocalisation}type="text" name="localisation" placeholder="Région" onChange={handleChange}/>
     <Field value={newZipcode} type="text" name="zipcode" placeholder="Code postal" onChange={handleChange}/> 
 

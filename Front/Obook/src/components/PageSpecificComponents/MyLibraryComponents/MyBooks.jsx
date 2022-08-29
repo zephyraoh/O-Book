@@ -8,11 +8,19 @@ const MyBooks = ()=>{
     // Fonctions
     const dispatch = useDispatch();
     
+    const libraryFilter = useSelector(state=>state.books.libraryFilter)
+    console.log(libraryFilter)
+    
     useEffect(() => {
         dispatch(fetchBooks());
+        console.log("fetching from myBooks")
     }, []);
     // constantes
+
+    const books= useSelector(state=>state.books);
     const myBooks= useSelector(state=>state.books.booksData.myBooks);
+    // const myLends= useSelector(state=>state.books.booksData.myBooks);
+    // const myLoans= useSelector(state=>state.books.booksData.myBooks);
     console.log("my books:",myBooks);
     
     // fonctions
@@ -32,20 +40,22 @@ const MyBooks = ()=>{
     title_long: "Un(e)secte" 
 }
     */
-
-    return (
-        
-        <>
-        {myBooks.map((book) =>
-        (
-        <BookCard key={book.libraryid} {...book}/>
+// {switch (libraryFilter){
+//     case "allMyBooks":
+        return (
+            <>
+                {myBooks.map((book) =>
+                    (<BookCard key={book.libraryid} {...book}/>)
+                )}
+            </>
         )
-            
-        )}
-        </>
+  
+        // case "myLoans":
+        //     return (
+
+        }
+
         
-    )
-    
-};
+;
 
 export default MyBooks

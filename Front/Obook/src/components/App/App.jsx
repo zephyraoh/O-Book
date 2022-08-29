@@ -48,7 +48,7 @@ const isSignModalToggled =useSelector (state=>state.user.signInModal)
      <Header className="bg-gray-400"/> 
      <button value ="zephyr" name="profile of user Zephyr" onClick={handleClick}>Test button</button>
      <Routes>
-       <Route path="/" element= {<Home />} />
+       <Route path="/" element= {<Home/>} />
        <Route
        path="/mylibrary"
        element={isLogged? 

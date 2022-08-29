@@ -15,7 +15,6 @@ const BookCard=({
         console.log('button clicked');
         dispatch(sendMyBookAvailability(is_available, e.target.value))
     }
-     console.log("STATE.BOOK.BOOKSDATA", useSelector(state=>state.books.booksData))
     return (
         <>
             <img src = { image }/>

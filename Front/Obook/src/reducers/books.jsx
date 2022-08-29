@@ -1,9 +1,10 @@
-import { SET_BOOKS_RESULTS_IN_SEARCH_STATE, SET_SEARCH, SET_SELECTED_FILTER, SET_MY_BOOKS_AVAILABILITY } from "../actions/books";
+import { SET_BOOKS, SET_BOOKS_RESULTS_IN_SEARCH_STATE, SET_SEARCH, SET_SELECTED_FILTER, SET_MY_BOOKS_AVAILABILITY, SET_MY_LIBRARY_FILTER } from "../actions/books";
 
 
 // initialstate : search vide et librairie API à affichier vide
 export const initialState = {
     searchValue: '',
+    libraryFilter: "allMyBooks",
     booksData:{
       searchedBooks:[],
       myBooks:[],
@@ -24,7 +25,7 @@ export const initialState = {
         //   return{
         //     //retour du nouveau state chargé de la valeur de la librairie requêtée 
         //     ...state,
-        //       oldData : action.payload,
+        //       data : action.payload,
         //   }
         case SET_SELECTED_FILTER:
           return{
@@ -32,13 +33,21 @@ export const initialState = {
             selectedSearchFilter: action.payload,
           }
 
+          case SET_BOOKS:
+            return{
+              ...state,
+              booksData: {
+                ...state.booksData,
+                searchedBooks: action.payload
+              }
+            }
+
         case SET_BOOKS_RESULTS_IN_SEARCH_STATE:
           return{
             ...state,
             booksData: {
               ...state.booksData,
               [action.name]: [...action.bookData],
-              // searchedBooks: [...action.bookData.data],
           }};
           
           case SET_MY_BOOKS_AVAILABILITY:
@@ -61,6 +70,11 @@ export const initialState = {
               })
             }
           };
+          case SET_MY_LIBRARY_FILTER:
+            return{
+              ...state,
+              libraryFilter: action.payload
+            }
       default:
         return state;
     }

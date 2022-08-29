@@ -1,4 +1,6 @@
 import Button from "../../GlobalComponents/Button";
+import { useSelector, useDispatch} from 'react-redux';
+
 import './styles.scss';
 
 
@@ -6,16 +8,19 @@ import './styles.scss';
 
 const MyLibraryMenu = ()=>{
 
+     // const
+     const libraryFilter = useSelector(state=>state.books.libraryFilter)
+     console.log(libraryFilter);
+
+     const handleClick = (e) =>{
+         setLibraryFilter(e.target.value)
+         console.log("setting myLibrary with filter : ", e.target.value)
+     }
     return (
         <nav className="menu">
-            <Button type="button" value = "Ma Bibliothèque"  name= "Ma Bibliothèque"  />
-            <Button type="button" value = "Mes Prêts"  name= "Mes Prêts"/>
-            <Button type="button" value = "Mes Emprunts"  name= "Mes Emprunts"/>
-                {/*
-                Ma Bibliothèque 
-                Mes Prêts
-                Mes Emprunts  */}
-          
+            <button type="button" value = "allMyBooks"  name= "Ma Bibliothèque" onClick={handleClick} />
+            <button type="button" value = "myLends"  name= "Mes Prêts" onClick={handleClick} />
+            <button type="button" value = "myLoans"  name= "Mes Emprunts" onClick={handleClick}/>
         </nav>    
     )
     

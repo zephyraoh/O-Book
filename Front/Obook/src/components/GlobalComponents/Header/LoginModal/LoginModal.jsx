@@ -75,7 +75,7 @@ export const LoginModal=()=>{
   
   return (
     
-    <div className="login-modal bg-[#F5F5F5] mx-5 my-20 rounded-md h-1/2 ">
+    <div className="login-modal bg-[#F5F5F5] min-h-max mx-auto rounded-md h-4/6 fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 max-w-3xl px-8 py-6 drop-shadow-lg">
       {/* si un jour on a le temps de refaire les imports : go tout faire en ternaire avec 2 sous composants LoginForm / SignUpForm */}
       
       
@@ -84,30 +84,30 @@ export const LoginModal=()=>{
       <>
           {/* <LoginPartModal/> */}
           <form className="login-form" onSubmit={handleSubmitSignIn}>
-            <h2 className="text-xl p-5">Connexion</h2>
+            <h2 className="text-xl p-4">Connexion</h2>
             {/* //form de login */}
             <Field value= {email} type= "email" name= "email" placeholder="Email" onChange={onChange} />
             <Field value= {password} type= "password" name= "password" placeholder="Mot de Passe" onChange={onChange} />
-            <Button name="Se connecter" type="submit" value="loginButton" className="login-button rounded" />
+            <Button name="Se connecter" type="submit" value="loginButton" className="login-button p-2 px-3 m-3 rounded bg-[#292F44] text-[#F5F5F5]" />
             <a className='block' onClick={handleClick}>Pas encore inscrit ?</a>
           </form>
       <EscapeButton onClick={handleQuit}/>
       </>
       ):
         <>
-        <EscapeButton onClick={handleQuit}/>
           {/* <SignInPartModal/> */}
           <form className="login-form" onSubmit={handleSubmitSignUp}>
-            <h2>Inscription</h2>
+            <h2 className="text-xl p-4">Inscription</h2>
             {/* //form de sign up */}
             <Field value= {newUserName} type= "text" name= "newUserName" placeholder = "Nom d'utilisateur" onChange={onChange} />
             <Field value= {newEmail} type= "email" name= "newEmail" placeholder = "Email" onChange={onChange} />
             <Field value= {newPassword} type= "password" name= "newPassword" placeholder = "Mot de Passe" onChange={onChange} />
             <Field value= {newPasswordConfirm} type= "password" name= "newPasswordConfirm" placeholder = "Confirmez le Mot de Passe" onChange=  {onChange} />
-            <Button name="S'inscrire" value="signupButton" className="signup-button" />
-            <a onClick={handleClick}>Déjà inscrit ?</a>
+            <Button name="S'inscrire" value="signupButton" className="signup-button p-2 px-3 m-2 rounded bg-[#292F44] text-[#F5F5F5]" />
+            <a className='block' onClick={handleClick}>Déjà inscrit ?</a>
             {!isPasswordValid && <p>{errorMessage}</p>}
           </form>
+        <EscapeButton onClick={handleQuit}/>
         </>
       )}
       </div>

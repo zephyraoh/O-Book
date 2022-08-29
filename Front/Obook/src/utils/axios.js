@@ -15,28 +15,8 @@ export const ISBNApiSearchBar = axs.create({
 	
 });
 
-
-export const ISBNApiGetBooks = axs.create({
-	method: 'POST',
-	baseURL: 'https://api2.isbndb.com',
-	headers: {
-		'Authorization': apiKey,
-		'content-type': 'application/json',
-		'accept': '*/*',
-	},
-	data: 'data: isbns=2724289145,2266154117,'
-});
-
-
 export const axiosServerDB = axs.create({
 	baseURL: 'http://localhost:5999',//URL DU FUTUR SERVEUR BACK O'BOOK
 });
 
-
-// Lien de la doc : https://developers.google.com/books/docs/v1/using
-
-// recherche globale = 'https://www.googleapis.com/books/v1/volumes?q={recherche}'
-// recherche par titre = 'https://www.googleapis.com/books/v1/volumes?q=intitle:{recherche}'
-// recherche par auteur = 'https://www.googleapis.com/books/v1/volumes?q=inauthor:{recherche}'
-// recherche par genre = 'https://www.googleapis.com/books/v1/volumes?q=subject:{recherche}'
 
