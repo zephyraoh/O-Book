@@ -1,5 +1,6 @@
 export const SET_USER_FIELD = 'SET_USER_FIELD'; //change user field
 export const SET_USER_MODIFY_ACCOUNT_FIELD = 'SET_USER_MODIFY_ACCOUNT_FIELD'; //change user field
+export const SEND_MODIFIED_INFOS = 'SEND_MODIFIED_INFOS';
 export const SET_USER_DATA ='SET_USER_DATA';
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_UP = 'SIGN_UP';
@@ -66,6 +67,11 @@ export const getMyProfile = () => ({
 export const getMemberProfile = (username) => ({
 	type: GET_MEMBER_PROFILE,
 	payload: username
+});
+
+export const sendModifiedInfos = (data) => ({
+	type: SEND_MODIFIED_INFOS,
+	data,
 });
 
 export const toggleSignInModal = (boolean) =>({

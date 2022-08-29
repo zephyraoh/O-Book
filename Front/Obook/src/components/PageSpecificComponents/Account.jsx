@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setUserData, SetUserLabel, setUserModifyAccountField } from "../../actions/user";
+import { setUserData, SetUserLabel, setUserModifyAccountField, sendModifiedInfos} from "../../actions/user";
 import Axios from "axios";
 import { useState } from "react";
 import Field from "../GlobalComponents/Header/LoginModal/Field";
@@ -11,23 +11,24 @@ const Account = () =>{
     // const
     //NewModifications
     const newProfilePicture = useSelector(state => state.user.accountModifications.newProfilePicture);
-    const newFirstName = useSelector(state => state.user.accountModifications.newFirstName);
-    const newLastName = useSelector(state=>state.user.accountModifications.newLastName);
-    const newUsername = useSelector(state=>state.user.accountModifications.newUsername);
-    const newBiography = useSelector(state=>state.user.accountModifications.newBiography);
-    const newLocalisation = useSelector(state=>state.user.accountModifications.newLocalisation);
-    const newZipcode = useSelector(state=>state.user.accountModifications.newZipcode);
+    const newFirstName = useSelector(state => state.user.accountModifications.firstname);
+    const newLastName = useSelector(state=>state.user.accountModifications.lastname);
+    const newUsername = useSelector(state=>state.user.accountModifications.username);
+    const newBiography = useSelector(state=>state.user.accountModifications.biography);
+    const newLocalisation = useSelector(state=>state.user.accountModifications.localisation);
+    const newZipcode = useSelector(state=>state.user.accountModifications.zipcode);
     const oldPassword = useSelector(state=>state.user.accountModifications.oldPassword);
-    const newPassword = useSelector(state=>state.user.accountModifications.newPassword);
-    const newPasswordConfirm = useSelector(state=>state.user.accountModifications.newPasswordConfirm);
+    const newPassword = useSelector(state=>state.user.accountModifications.password);
+    const newPasswordConfirm = useSelector(state=>state.user.accountModifications.passwordConfirm);
     const accountModifications = useSelector(state=>state.user.accountModifications)
-    //current user
-    const userImg = useSelector(state=>state.user.profilePicture);
+   
+    const userImg = useSelector(state=>state.user.profile_picture);
     // fonctions
    
     const [imageSelected, setImageSelected] = useState("");
     // console.log("notre selected image", imageSelected)
     const uploadImage = (e)=>{
+        e.preventDefault();
         // A dispatch dans une action middleware (auth?)
         const formData = new FormData()
         formData.append("file", imageSelected)
@@ -35,10 +36,10 @@ const Account = () =>{
         
         Axios.post("https://api.cloudinary.com/v1_1/obook/upload",formData)
         .then((response)=>{
-            console.log("J'ai fait une requête à cloudinary !")
-            const profilePicture = {profilePicture: response.data.secure_url};
-            console.log(profilePicture);
-            dispatch(setUserData(accountModifications.newProfilePicture));
+            // dispatch(setUserModifyAccountField(response.data.secure_url, newProfilePicture));
+            dispatch(sendModifiedInfos({
+                "profile_picture": response.data.secure_url,
+            }))
         });
     };
     const handleChange = (value, name) => {
@@ -54,7 +55,25 @@ const Account = () =>{
     }
     const handleSubmit = (e)=> {
         e.preventDefault();
-        console.log("SUBMIT");
+        console.log(accountModifications);
+
+        // Object.keys(data).forEach(key => {
+        //     data[key] = data[key] || '';
+        // }
+        const modifiedInfo = {
+            ...accountModifications,
+        }
+       Object.keys(modifiedInfo).forEach(key=> {
+        if (modifiedInfo[key] === ''){
+            delete modifiedInfo[key];
+        }
+        })
+        console.log("post traitement de l'info", modifiedInfo);
+
+        dispatch(sendModifiedInfos({
+            ...modifiedInfo,
+
+        }))
     }
 
     return (
@@ -66,9 +85,9 @@ const Account = () =>{
     <button name="upload Image" onClick={uploadImage}>Upload Image</button>
 
     {/* Infos "secondaires" */}
-    <Field value={newBiography} type="text" name="newBiography" placeholder="Bio" onChange={handleChange}/>
-    <Field value={newLocalisation}type="text" name="newLocalisation" placeholder="Région" onChange={handleChange}/>
-    <Field value={newZipcode} type="text" name="newZipcode" placeholder="Code postal" onChange={handleChange}/> 
+    <Field value={newBiography} type="text" name="biography" placeholder="Bio" onChange={handleChange}/>
+    <Field value={newLocalisation}type="text" name="localisation" placeholder="Région" onChange={handleChange}/>
+    <Field value={newZipcode} type="text" name="zipcode" placeholder="Code postal" onChange={handleChange}/> 
 
     {/* LABELS BUTTONS */}
         <button value="Romans" name="profileLabelButton" onClick={handleClick}>Romans</button>
@@ -82,18 +101,17 @@ const Account = () =>{
         <button value="Autres" className="profileLabelButton" onClick={handleClick}>Autres</button>
 
         {/* informations dures */}
-         <Field value={newLastName} type="text" name="newLastName" placeholder="Nom" onChange={handleChange}/>
-         <Field value={newFirstName} type="text" name="newFirstName" placeholder="Prénom" onChange={handleChange}/>
-         <Field value={newUsername} type="text" name="newUsername" placeholder="Pseudonyme" onChange={handleChange}/>
+         <Field value={newLastName} type="text" name="lastname" placeholder="Nom" onChange={handleChange}/>
+         <Field value={newFirstName} type="text" name="firstname" placeholder="Prénom" onChange={handleChange}/>
+         <Field value={newUsername} type="text" name="username" placeholder="Pseudonyme" onChange={handleChange}/>
          <Field value={oldPassword}type="password" name="oldPassword" placeholder="ancien Mot de passe" onChange={handleChange}/>
-         <Field value={newPassword} type="password" name="newPassword" placeholder="Nouveau mot de passe" onChange={handleChange}/>
-         <Field value={newPasswordConfirm} type="password" name="newPasswordConfirm" placeholder="Confirmation du mot de passe" onChange={handleChange}/>
+         <Field value={newPassword} type="password" name="password" placeholder="Nouveau mot de passe" onChange={handleChange}/>
+         <Field value={newPasswordConfirm} type="password" name="passwordConfirm" placeholder="Confirmation du mot de passe" onChange={handleChange}/>
 
          <button type="submit" onClick={handleSubmit}>Confirmer</button>
     </form>
     )
 };
-
 
 
 export default Account;

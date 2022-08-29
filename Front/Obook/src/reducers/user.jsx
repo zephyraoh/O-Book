@@ -8,7 +8,7 @@ export const initialState = {
   username: null,  
   email: 'marwan@gmail.com',
   // miscelleanous
-  profilePicture:'https://res.cloudinary.com/obook/image/upload/v1661341818/vcyetnkhrahfxfyxrlhk.jpg',
+  profile_picture:'https://res.cloudinary.com/obook/image/upload/v1661341818/vcyetnkhrahfxfyxrlhk.jpg',
   zipcode:'',
   localisation:'',
   biography:'',
@@ -23,20 +23,17 @@ export const initialState = {
   newPasswordConfirm:'',
   accountModifications: {
     //user infos
-    newProfilePicture: '',
-    newFirstName:'',
-    newLastName:'',
-    newUsername: '',  
-    newBiography:'',
-    newLocalisation:'',
-    newZipcode:'',
+    profilePicture: '',
+    firstname:'',
+    lastname:'',
+    username: '',  
+    biography:'',
+    localisation:'',
+    zipcode:'',
     //connexion
     oldPassword: '',
-    newPassword: '',
-    newPasswordConfirm:'',
-    
-    
-    
+    password: '',
+    passwordConfirm:'', 
     tel:'',
   }
   };

@@ -105,6 +105,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
   //   }));
 
   // console.log(mergeById(books, data));
+  break;
     }
     default:
       next(action);

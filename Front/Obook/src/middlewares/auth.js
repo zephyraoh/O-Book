@@ -1,6 +1,6 @@
 import { axiosServerDB } from '../utils/axios';
 import { SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability } from '../actions/books';
-import { setUserData, SIGN_IN, SIGN_UP, GET_MY_PROFILE, GET_MEMBER_PROFILE, SET_USER_LABEL } from '../actions/user';
+import { setUserData, SIGN_IN, SIGN_UP, GET_MY_PROFILE, GET_MEMBER_PROFILE, SET_USER_LABEL, SEND_MODIFIED_INFOS } from '../actions/user';
 
 
 const authMiddleware = (store) => (next) => async (action) => { 
@@ -95,6 +95,7 @@ const authMiddleware = (store) => (next) => async (action) => {
 		}catch(error){
 			console.log('error getting profile >>>', error);
 		}
+		break;
 		}
 		case GET_MEMBER_PROFILE: {
 			try{
@@ -105,6 +106,7 @@ const authMiddleware = (store) => (next) => async (action) => {
 		}catch(error){
 			// console.log('error getting profile >>>', error);
 		}
+		break;
 		}
 		case SET_USER_LABEL:{
 			try{
@@ -113,7 +115,24 @@ const authMiddleware = (store) => (next) => async (action) => {
 			}catch(error){
 				console.log("error setting label", error);
 			}
-		}set
+			break;
+		}
+		case SEND_MODIFIED_INFOS:{
+			try{
+				console.log(action.data)
+				const { data } = await axiosServerDB.patch('/profile', action.data)
+				Object.keys(data).forEach(key => {
+					data[key] = data[key] || '';
+				}
+				);
+
+				console.log("data currated reçues au ptch profile avec SEND_MODIFIED_INFOS", data)
+				store.dispatch(setUserData(data));
+			}catch(err){
+				console.error("err", err);
+			}
+			break;
+		};
 		case SEND_MY_BOOKS_AVAILABILITY :{
 			try{
 				console.log("on entre dans l'action SEND MY BOOKS", action.libraryId, !action.is_available);
@@ -123,8 +142,9 @@ const authMiddleware = (store) => (next) => async (action) => {
 				store.dispatch(setMyBooksAvailability(data));
 
 			}catch(err){
-				console.log("Telling server the book with library id ", action.libraryId,"is", !action.is_available,"error", err);
+				console.log("Telling server the book with library id ", action.libraryId,"is", !action.is_available,"err", err);
 			}
+			break;
 		}
 		
 		default: 
