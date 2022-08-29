@@ -10,7 +10,7 @@ import { faMagnifyingGlass, faBookOpen, faHouse, faUser, faCircleXmark } from '@
 library.add(faMagnifyingGlass, faBookOpen, faHouse, faUser,faCircleXmark);
 
 //Actions components
-import { getMemberProfile } from '../../actions/user';
+import { getMemberProfile, toggleSignInModal } from '../../actions/user';
 
 //App Components
 import BooksResults from '../GlobalComponents/BooksResults';
@@ -29,7 +29,6 @@ import Error404 from '../PageSpecificComponents/Error404';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-
 function App() {
   //local state hooks
   const isLogged = useSelector((state)=>state.user.isLogged);
@@ -41,22 +40,26 @@ const handleClick = (e) => {
   dispatch(getMemberProfile(e.target.value));
 }
 
+const isSignModalToggled =useSelector (state=>state.user.signInModal)
+
+
   return (
     <div className="App">
      <Header /> 
      <button value ="zephyr" name="profile of user Zephyr" onClick={handleClick}>Test button</button>
      <Routes>
        <Route path="/" element= {<Home />} />
-       <Route path="/account" element= {<Account />} />
        <Route
        path="/mylibrary"
        element={isLogged? 
-          <MyLibrary/> 
-       :  <Navigate to='/'/>} 
+        <MyLibrary/> 
+        :  <Navigate to='/'/>
+      } 
        />
-    
        
-      //  <Route path={isLogged?"/mylibrary":"/"}  element={ isLogged?<MyLibrary/>:<Home/>} />
+      <Route 
+      path="/account" 
+      element= {isLogged?<Account />} />
        <Route path="/book/:id" element= {<Book />} />
        <Route path="/library/:id" element= {<Library />} />
        <Route path="*" element= {<Error404 />} />

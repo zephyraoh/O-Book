@@ -123,7 +123,7 @@ const authMiddleware = (store) => (next) => async (action) => {
 				store.dispatch(setMyBooksAvailability(data));
 
 			}catch(err){
-				console.log("Telling server the book with library id ", action.libraryId,"is", !action.is_available,"errer", err);
+				console.log("Telling server the book with library id ", action.libraryId,"is", !action.is_available,"error", err);
 			}
 		}
 		

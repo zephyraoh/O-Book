@@ -51,14 +51,15 @@ export const initialState = {
           // console.log(bookToModify)
           return{
             ...state,
-            booksData:{
+            booksData: {
               ...state.booksData,
-              myBooks: [
-                ...state.booksData.myBooks,
-                // state.booksData.myBooks[index].is_available = action.payload.is_available,
-                // bookToModify,
-          
-            ]}
+              myBooks: state.booksData.myBooks.map(book => {
+                if(book.libraryid === action.payload.libraryid) {
+                  book.is_available = action.payload.is_available;
+                }
+                return book
+              })
+            }
           };
       default:
         return state;
