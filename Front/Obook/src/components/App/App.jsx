@@ -59,7 +59,7 @@ const isSignModalToggled =useSelector (state=>state.user.signInModal)
        
       <Route 
       path="/account" 
-      element= {isLogged?<Account />} />
+      element= {isLogged?<Account /> : <Navigate to='/'/>} />
        <Route path="/book/:id" element= {<Book />} />
        <Route path="/library/:id" element= {<Library />} />
        <Route path="*" element= {<Error404 />} />
