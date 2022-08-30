@@ -81,7 +81,9 @@ const searchMiddleware = (store) => (next) => async (action) => {
         data: `data: isbns=${[...finalArray]}`
       } 
       const {data} = await axios.request(options2);
+
       console.log(data);
+
        const superBooksPostApi = data.data;
 
       const superBooksPreApi = library;
@@ -89,7 +91,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
       const superJustineBooks = [];
       
       for (const bookSection in library){
-        
+            
             console.log(bookSection, library[bookSection], "librairie", library);
 
             library[bookSection].forEach(bookISBN=>{
