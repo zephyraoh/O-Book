@@ -146,7 +146,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
       }
 
       const {data} = await axios.request(options);
-      console.log(data.data)
+      // console.log(data.data)
       const booksISBNAPI = data.data;
       const booksFullInfo = [];
       booksList.forEach(bookAPI => {

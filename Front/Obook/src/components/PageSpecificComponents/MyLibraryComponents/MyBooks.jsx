@@ -7,57 +7,59 @@ import BookCard from "../../GlobalComponents/BooksResults/BookCard";
 const MyBooks = ()=>{
     // Fonctions
     const dispatch = useDispatch();
+    // console.log(libraryFilter)
     
-    const libraryFilter = useSelector(state=>state.books.libraryFilter)
-    console.log(libraryFilter)
+   
     
     useEffect(() => {
         dispatch(fetchBooks());
+
         console.log("fetching from myBooks")
     }, []);
+
+
     // constantes
+    const libraryFilter = useSelector(state=>state.books.libraryFilter)
+    const statebooks = useSelector(state=>state.books)
+    console.log("STATEBOOKS",statebooks)
+    // const myBooks= useSelector(state=>state.books.booksData.myBooks);
 
-    const books= useSelector(state=>state.books);
-    const myBooks= useSelector(state=>state.books.booksData.myBooks);
-    // const myLends= useSelector(state=>state.books.booksData.myBooks);
-    // const myLoans= useSelector(state=>state.books.booksData.myBooks);
-    console.log("booksData:",books.booksData);
-    
-    // fonctions
 
-/**book:{
-    authors: []
-    binding: "Paperback"
-    date_published: "2019"
-    image: "https://images.isbndb.com/covers/75/98/9782298157598.jpg"
-    isbn: "2298157596"
-    isbn13: "9782298157598"
-    language: "fr"
-    msrp: "0.00"
-    pages: 457
-    synopsis: "Et Si Tous Les Insectes Du Monde Se Mettaient Soudainement à Communiquer Entre Eux ? A S'organiser ? Nous Ne Survivrions Pas Plus De Quelques Jours. Entre Un Crime Spectaculaire Et La Disparition Inexpliquée D'une Jeune Femme, Les Chemins Du Détective Atticus Gore Et De La Privée Kat Kordell Vont S'entremêler. Et Les Confronter à Une Vérité Effrayante. Des Montagnes De Los Angeles Aux Bas-fonds De New York, Un Thriller Implacable Et Documenté Qui Va Vous Démanger."
-    title: "Un(e)secte"
-    title_long: "Un(e)secte" 
-}
-    */
-// {switch (libraryFilter){
-//     case "allMyBooks":
-        return (
-            <>
-                <div className='flex justify-evenly'>
+    return (
+        <>
+        <p>{libraryFilter}</p>
+        <div className='flex justify-evenly'>
                     {myBooks.map((book) =>
                         (<BookCard key={book.libraryid} {...book}/>)
                     )}
-                </div>
-            </>
-        )
-  
-        // case "myLoans":
-        //     return (
+        </div>
+        </>
+    )
+    // if(libraryFilter==='myLends'){
+    //     return (
+    //         <>
+    //             <p>Hello myLends</p>
+    //         </>
+    //     )
+    // }
+    // if (libraryFilter==='allMyBooks'){
+    //     return (
+    //         <>
+    //             <p>{libraryFilter}</p>
+    //         </>
+    //     )           
+    // }
+    // if(libraryFilter==='myBorrows'){
+    //     return (
+    //         <>
+    //             <p>Hello my borrows</p>
+    //         </>
+    //     )
+    // }
 
-        }
+    
 
         
-;
+}
 
-export default MyBooks
+export default MyBooks;
