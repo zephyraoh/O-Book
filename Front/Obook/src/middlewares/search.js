@@ -35,7 +35,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
       break;
     }
     case FETCH_BOOKS: {
-//! working code
+//! old working code
       // const { user: { library: {books} }} = store.getState();
       
       // const booksArray = books.map(book => (book.isbn));
@@ -63,7 +63,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
       // })
   
       // store.dispatch(setBooksResultsInSearchState("myBooks", justineBooks))
-//! working code above
+//! old working code above
 
       // // //! TENTATIVE EN COURS : GENERALISER LA FONCTION AVEC LA REQUETE DE LIBRARY PLUS QUE DE BOOKS
       const { user: { library }} = store.getState();
@@ -130,7 +130,6 @@ const searchMiddleware = (store) => (next) => async (action) => {
     case FETCH_LATEST_BOOKS: {
       // requête au serveur back pour récupérer la liste des livres récents //
       const response = await axiosServerDB.get('/books');
-  
       const booksList = response.data;
       const booksArray = booksList.map(book => (book.isbn));
 

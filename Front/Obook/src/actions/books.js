@@ -52,7 +52,7 @@ export const setMyBooksAvailability =(data) =>({
   type : SET_MY_BOOKS_AVAILABILITY,
   payload: data,
 })
-export const setMyLibrariFilter =(filter) =>({
+export const setMyLibraryFilter =(data) =>({
   type : SET_MY_LIBRARY_FILTER,
-  payload : filter,
+  payload : data,
 })

@@ -15,7 +15,7 @@ const BooksResults = () => {
   const latestBooks = useSelector(state=>state.books.booksData.searchedBooks);
 
   return(
-  <div className= 'flex w-9/12'>
+  <div className= 'flex overflow-x-auto h-1/3'>
     
     {latestBooks.map((book) =>
         (
@@ -49,4 +49,3 @@ export default BooksResults;
     title_long: "Un(e)secte" 
 }
     */
-
