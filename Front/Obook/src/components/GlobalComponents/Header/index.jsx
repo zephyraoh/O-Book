@@ -26,19 +26,30 @@ const Header=()=>{
     const isSignModalToggled =useSelector (state=>state.user.signInModal)
         return (
         <>
-        <div className='flex flex-wrap justify-evenly items-center h-24 border-y-2 border-[#292F44] border-solid'>
-            <div className='flex text-3xl p-4 text-[#292F44] font-semibold items-center'><h2>O'BOOK</h2><FontAwesomeIcon className='p-3' icon="fa-book-open" /></div>     
+        <div className='flex flex-wrap justify-evenly items-center content-baseline h-24 border-y-2 border-[#292F44] border-solid'>
+            <div className='desktop:text-3xl p-4 text-[#292F44] font-semibold mobile:text-2xl flex items-center'>
+                <NavLink className='flex items-center' to='/'>
+                    <h2 >O'BOOK</h2>
+                    <FontAwesomeIcon className='p-3' icon="fa-book-open" />
+                </NavLink>
+            </div> 
             <SearchForm /> 
         {isLogged?
             <div className='flex items-center'>
-                <div className='flex flex-col'>
-                    <NavLink to = "/account"><FontAwesomeIcon className='h-10 text-[#292F44] block pl-8' icon= "user" />Mon compte</NavLink>
+                <div className='flex flex-col mr-4'>
+                    <NavLink className='mobile:hidden desktop:block' to = "/account"><FontAwesomeIcon className='h-10 text-[#292F44] block pl-8' icon= "user" />Mon compte</NavLink>
                 </div>
-                <button className='p-3 m-3 bg-[#292F44] text-[#F5F5F5] rounded-md h-1/2' name="Logout button" onClick={handleLogOut}>Logout button</button>
+                <button className='p-3 m-3 destop:text-lg bg-[#292F44] text-[#F5F5F5] rounded-md h-1/2 mobile:text-sm mobile:p-2 mobile:m-2 hover:drop-shadow-lg duration-100 ease-in-out' name="Logout button" onClick={handleLogOut}>Deconnexion</button>
             </div>
         :
         <>
-            {!isSignModalToggled&&<button className='p-3 m-3 bg-[#292F44] text-[#F5F5F5] rounded-md' name="Connexion/inscription" onClick={handleSignButton}>Connexion/inscription</button>}
+            {!isSignModalToggled&&
+
+                <div>
+                    <button className='mobile:hidden desktop:block p-3 m-3 text-lg bg-[#292F44] text-[#F5F5F5] rounded-md hover:drop-shadow-lg duration-100 ease-in-out' name="Connexion/inscription" onClick={handleSignButton}>Connexion / Inscription</button>
+                    <button className='desktop:hidden mobile:block bg-[#292F44] text-[#F5F5F5] rounded-md text-sm p-2 m-2' name="Connexion/inscription" onClick={handleSignButton}>Connexion</button>
+                </div>
+                }
             
             {isSignModalToggled && <LoginModal />} 
             </>

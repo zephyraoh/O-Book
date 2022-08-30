@@ -13,7 +13,7 @@ const SearchBar =({className})=>{
     const value = useSelector(state => state.books.searchValue);
 
     return (        
-        <input type="text" className= {className} value={value} onChange={handleChange}/>
+        <input type="text" placeholder="Rechercher" className= {className} value={value} onChange={handleChange}/>
     )
 }
 

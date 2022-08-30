@@ -39,7 +39,7 @@ const MobileMenu=()=>{
             {isSearchBarActive? 
                 <>
                     <form className='w-full flex items-center justify-evenly mb-3' onSubmit={handleSubmit}>
-                        <SearchBar className='search-form__input rounded-md h-10 w-11/12' />
+                        <SearchBar className='search-form__input rounded-md h-10 w-11/12 ml-4' />
                         <EscapeButton onClick={handleClick}/>
                     </form>
                 </>
