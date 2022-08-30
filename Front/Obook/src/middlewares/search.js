@@ -65,9 +65,11 @@ const searchMiddleware = (store) => (next) => async (action) => {
       // store.dispatch(setBooksResultsInSearchState("myBooks", justineBooks))
 //! working code above
 
-      // //! TENTATIVE EN COURS : GENERALISER LA FONCTION AVEC LA REQUETE DE LIBRARY PLUS QUE DE BOOKS
+      // // //! TENTATIVE EN COURS : GENERALISER LA FONCTION AVEC LA REQUETE DE LIBRARY PLUS QUE DE BOOKS
       const { user: { library }} = store.getState();
-      const finalArray = [...library.books.map((el=>el.isbn)), ...library.borrow.map(el=>el.isbn), ...library.lends.map(el=>el[0].isbn) ];
+      const finalArray = [...library.books.map((el=>el.isbn)), ...library.borrow.map(el=>el.isbn)
+        // , ...library.lends.map(el=>el[0].isbn) 
+      ];
       
       console.log("FINAL TABLO ! ", finalArray);
 
@@ -86,21 +88,31 @@ const searchMiddleware = (store) => (next) => async (action) => {
 
        const superBooksPostApi = data.data;
 
-      const superBooksPreApi = library;
-
-      const superJustineBooks = [];
+      const superJustineBooks = {};
       
+      const results = [];
       for (const bookSection in library){
-            
-            console.log(bookSection, library[bookSection], "librairie", library);
 
-            library[bookSection].forEach(bookISBN=>{
-              if(library[bookSection].isbn === bookISBN.isbn) {
-                      superJustineBooks.push({...library[bookSection], ...bookISBN})
-              
-              }
-            })}    
+            console.log(bookSection, library[bookSection]);
+
+            library[bookSection].forEach( bookAPI =>{
+
+              superBooksPostApi.forEach(bookISBN => {
+                  if(bookAPI.isbn === bookISBN.isbn) {
+                    results.push({...bookAPI, ...bookISBN})
+                  }
+               })
+            }); superJustineBooks[bookSection] = results; 
+          }
+
+              //je veux push dans la valeur de bookSection
+                      // newLIbrary={
+                      //   myBooks : [{},{}],
+                      //   borrow : [{}],
+                      //   lends : [{}],
+                      // }
         console.log("FINAL method superJustineBooks ==>", superJustineBooks)
+        store.dispatch(setBooksResultsInSearchState("myBooks", superJustineBooks))
 
       // superBooksPreApi.forEach(bookAPI => {
       //   superBooksPostApi.forEach(bookISBN => {
@@ -133,7 +145,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
       }
 
       const {data} = await axios.request(options);
-      console.log(data.data)
+      // console.log(data.data)
       const booksISBNAPI = data.data;
       const booksFullInfo = [];
       booksList.forEach(bookAPI => {

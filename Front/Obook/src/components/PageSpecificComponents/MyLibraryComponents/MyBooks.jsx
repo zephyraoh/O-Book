@@ -25,7 +25,7 @@ const MyBooks = ()=>{
     
     // fonctions
 
-/**book:{
+    /**book:{
     authors: []
     binding: "Paperback"
     date_published: "2019"
@@ -42,18 +42,21 @@ const MyBooks = ()=>{
     */
 // {switch (libraryFilter){
 //     case "allMyBooks":
+        
         return (
             <>
-                {myBooks.map((book) =>
+{/*                
+                    {book.map((book) =>
                     (<BookCard key={book.libraryid} {...book}/>)
-                )}
+                )} */}
             </>
-        )
   
         // case "myLoans":
         //     return (
 
-        }
+        )
+
+    }
 
         
 ;

@@ -15,7 +15,7 @@ const BooksResults = () => {
   const latestBooks = useSelector(state=>state.books.booksData.searchedBooks);
 
   return(
-  <div className= 'flex'>
+  <div className= 'flex w-9/12'>
     
     {latestBooks.map((book) =>
         (
@@ -23,6 +23,8 @@ const BooksResults = () => {
         )
             
         )}
+
+    
   </div>
   )
 };
