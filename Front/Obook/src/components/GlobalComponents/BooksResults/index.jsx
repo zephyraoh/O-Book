@@ -13,13 +13,15 @@ const BooksResults = () => {
   }, []);
   
   const latestBooks = useSelector(state=>state.books.booksData.searchedBooks);
+  console.log("ETUDE", useSelector(state=>state.books))
+  console.log("LATEST BOOKS", latestBooks);
 
   return(
   <div className= 'flex overflow-x-auto h-1/3'>
     
     {latestBooks.map((book) =>
         (
-        <BookPreview key={book.isbn} {...book}/>
+            <BookPreview key={book.isbn} {...book}/>
         )
             
         )}

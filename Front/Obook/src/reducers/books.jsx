@@ -1,4 +1,4 @@
-import { SET_BOOKS_RESULTS_IN_SEARCH_STATE, SET_SEARCH, SET_SELECTED_FILTER, SET_MY_BOOKS_AVAILABILITY, SET_MY_LIBRARY_FILTER } from "../actions/books";
+import { SET_BOOKS_RESULTS_IN_SEARCH_STATE, SET_SEARCH, SET_SELECTED_FILTER, SET_MY_BOOKS_AVAILABILITY, SET_MY_LIBRARY_FILTER, SET_BOOKS } from "../actions/books";
 
 
 // initialstate : search vide et librairie API à affichier vide
@@ -26,12 +26,15 @@ export const initialState = {
                 ...state,
                 searchValue: action.payload,
             }
-        // case SET_BOOKS:
-        //   return{
-        //     //retour du nouveau state chargé de la valeur de la librairie requêtée 
-        //     ...state,
-        //       oldData : action.payload,
-        //   }
+        case SET_BOOKS:
+          return{
+            //retour du nouveau state chargé de la valeur de la librairie requêtée 
+            ...state,
+            booksData: {
+              ...state.booksData,
+              searchedBooks : action.payload,
+          }
+        }
         case SET_SELECTED_FILTER:
           return{
             ...state,

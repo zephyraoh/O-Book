@@ -21,6 +21,7 @@ const MyBooks = ()=>{
     // constantes
     const libraryFilter = useSelector(state=>state.books.libraryFilter)
     const statebooks = useSelector(state=>state.books)
+    const myBooks = useSelector(state=>state.books.booksData.myBooks)
     console.log("STATEBOOKS",statebooks)
     // const myBooks= useSelector(state=>state.books.booksData.myBooks);
 
