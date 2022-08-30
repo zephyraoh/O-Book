@@ -78,7 +78,7 @@ $$ LANGUAGE sql STRICT;
 CREATE FUNCTION update_loan(loan_data json, loan_id int) RETURNS "loan" AS
 $$ 
     UPDATE "loan" SET
-        "status"=COALESCE(loan_data->>'status', null),
+        "status"=COALESCE((loan_data->>'status')::lend_status, null),
         "date"=COALESCE((loan_data->>'date')::timestamptz, null),
         "updated_at"=now()
     WHERE "loan"."id"=loan_id

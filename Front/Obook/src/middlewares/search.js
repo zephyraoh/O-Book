@@ -1,4 +1,4 @@
-import { SEARCH_BOOKS, FETCH_BOOKS, setBooksResultsInSearchState, FETCH_LATEST_BOOKS, setBooks } from '../actions/books';
+import { SEARCH_BOOKS, FETCH_BOOKS, FETCH_UPDATES, setBooksResultsInSearchState, FETCH_LATEST_BOOKS, setBooks, setUpdates } from '../actions/books';
 import { ISBNApiSearchBar, axiosServerDB } from '../utils/axios';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -36,78 +36,81 @@ const searchMiddleware = (store) => (next) => async (action) => {
     }
     case FETCH_BOOKS: {
 //! old working code
-      const { user: { library: {books} }} = store.getState();
+      // const { user: { library: {books} }} = store.getState();
       
-      const booksArray = books.map(book => (book.isbn));
+      // const booksArray = books.map(book => (book.isbn));
       
-      const options = {
-        method: 'POST',
-        url: 'https://api2.isbndb.com/books/',
-        headers: {
-          Authorization: apiKey,
-          'Content-Type': 'application/json'
-        },
-        data: `data: isbns=${[...booksArray]}`
-      }
-      const {data} = await axios.request(options);
-
-      const booksPreApi = books;
-      const booksPostApi = data.data;
-      const justineBooks = [];
-      booksPreApi.forEach(bookAPI => {
-        booksPostApi.forEach(bookISBN => {
-          if(bookAPI.isbn === bookISBN.isbn) {
-            justineBooks.push({...bookAPI, ...bookISBN})
-          }
-        })
-      })
-  
-      store.dispatch(setBooksResultsInSearchState("myBooks", justineBooks))
-//! old working code above
-
-      // // //! TENTATIVE EN COURS : GENERALISER LA FONCTION AVEC LA REQUETE DE LIBRARY PLUS QUE DE BOOKS
-      // const { user: { library }} = store.getState();
-      // const finalArray = [...library.books.map((el=>el.isbn)), ...library.borrow.map(el=>el.isbn)
-      //   // , ...library.lends.map(el=>el[0].isbn) 
-      // ];
-      
-      // console.log("FINAL TABLO ! ", finalArray);
-
-      // const options2 = {
+      // const options = {
       //   method: 'POST',
       //   url: 'https://api2.isbndb.com/books/',
       //   headers: {
       //     Authorization: apiKey,
       //     'Content-Type': 'application/json'
       //   },
-      //   data: `data: isbns=${[...finalArray]}`
-      // } 
-      // const {data} = await axios.request(options2);
+      //   data: `data: isbns=${[...booksArray]}`
+      // }
+      // const {data} = await axios.request(options);
 
-      // console.log(data);
-
-      //  const superBooksPostApi = data.data;
-
-      // const superJustineBooks = {};
-      
-      // const results = [];
-      // for (const bookSection in library){
-
-      //       console.log(bookSection, library[bookSection]);
-
-      //       library[bookSection].forEach( bookAPI =>{
-
-      //         superBooksPostApi.forEach(bookISBN => {
-      //             if(bookAPI.isbn === bookISBN.isbn) {
-      //               results.push({...bookAPI, ...bookISBN})
-      //             }
-      //          })
-      //       }); superJustineBooks[bookSection] = results; 
+      // const booksPreApi = books;
+      // const booksPostApi = data.data;
+      // const justineBooks = [];
+      // booksPreApi.forEach(bookAPI => {
+      //   booksPostApi.forEach(bookISBN => {
+      //     if(bookAPI.isbn === bookISBN.isbn) {
+      //       justineBooks.push({...bookAPI, ...bookISBN})
       //     }
-
+      //   })
+      // })
   
-      //   console.log("FINAL method superJustineBooks ==>", superJustineBooks)
-      //   store.dispatch(setBooksResultsInSearchState("myBooks", superJustineBooks))
+      // store.dispatch(setBooksResultsInSearchState("myBooks", justineBooks))
+//! old working code above
+
+      // //! TENTATIVE EN COURS : GENERALISER LA FONCTION AVEC LA REQUETE DE LIBRARY PLUS QUE DE BOOKS
+      const { user: { library }} = store.getState();
+      const finalArray = [...library.books.map((el=>el.isbn)), ...library.borrow.map(el=>el.isbn)
+        , ...library.lends.map(el=>el.isbn) 
+      ];
+      
+      console.log("FINAL TABLO ! ", finalArray);
+
+      const options2 = {
+        method: 'POST',
+        url: 'https://api2.isbndb.com/books/',
+        headers: {
+          Authorization: apiKey,
+          'Content-Type': 'application/json'
+        },
+        data: `data: isbns=${[...finalArray]}`
+      } 
+      const {data} = await axios.request(options2);
+
+      console.log(data);
+
+       const superBooksPostApi = data.data;
+
+      const superJustineBooks = {};
+      
+      for (const bookSection in library){
+        const results = [];
+
+            console.log(bookSection, library[bookSection]);
+
+            library[bookSection].forEach( bookAPI =>{
+
+              superBooksPostApi.forEach(bookISBN => {
+                  if(bookAPI.isbn === bookISBN.isbn) {
+                    results.push({...bookAPI, ...bookISBN})
+                  }
+               })
+            }); superJustineBooks[bookSection] = results; 
+          }
+          // oneLastArray = {
+          //   ...superJustineBooks,
+          //   {}
+          // }
+  
+        console.log("FINAL method superJustineBooks ==>", superJustineBooks)
+        store.dispatch(setBooksResultsInSearchState("myBooks", superJustineBooks))
       
       // //! A FAIRE : tout simplement in for in englobant l'algo de justine for (object in library){ object.foreach etc etc}
       // //! TENTATIVE EN COURS : GENERALISER LA FONCTION AVEC LA REQUETE DE LIBRARY PLUS QUE DE BOOKS
@@ -130,7 +133,6 @@ const searchMiddleware = (store) => (next) => async (action) => {
       }
 
       const {data} = await axios.request(options);
-      console.log(data.data)
       const booksISBNAPI = data.data;
       const booksFullInfo = [];
       booksList.forEach(bookAPI => {
@@ -141,6 +143,35 @@ const searchMiddleware = (store) => (next) => async (action) => {
         })
       })
       store.dispatch(setBooks(booksFullInfo));
+      break;
+    }
+    case FETCH_UPDATES: {
+      const response = await axiosServerDB.get('/loans');
+      const updatesList = response.data;
+      const updatesBooksArray = updatesList.map(book => (book.isbn));
+
+      const options = {
+        method: 'POST',
+        url: 'https://api2.isbndb.com/books/',
+        headers: {
+          Authorization: apiKey,
+          'Content-Type': 'application/json'
+        },
+        data: `data: isbns=${[...updatesBooksArray]}`
+      }
+
+      const {data} = await axios.request(options);
+
+      const booksISBNAPI = data.data;
+      const updatesFullInfo = [];
+      updatesList.forEach(bookAPI => {
+        booksISBNAPI.forEach(bookISBN => {
+          if(bookAPI.isbn === bookISBN.isbn) {
+            updatesFullInfo.push({...bookAPI, ...bookISBN})
+          }
+        })
+      })
+      store.dispatch(setUpdates(updatesFullInfo));
       break;
     }
     default:

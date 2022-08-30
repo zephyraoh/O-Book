@@ -1,8 +1,8 @@
 const Footer=()=>{
     
     return (
-        <div className='mobile:hidden'>
-            <h2 className='text-black'>Footer</h2>
+        <div className='mobile:hidden desktop:block w-screen h-16 justify-center bg-[#AB9F9F] content-between fixed bottom-0 py-5'>
+            <h2 className='text-black'>O'Book, la plateforme du livre</h2>
         </div>
     )
 }

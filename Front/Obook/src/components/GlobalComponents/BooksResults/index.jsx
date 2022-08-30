@@ -13,11 +13,9 @@ const BooksResults = () => {
   }, []);
   
   const latestBooks = useSelector(state=>state.books.booksData.searchedBooks);
-  console.log("ETUDE", useSelector(state=>state.books))
-  console.log("LATEST BOOKS", latestBooks);
 
   return(
-  <div className= 'flex overflow-x-auto h-1/3'>
+  <div className= 'flex overflow-x-auto h-64'>
     
     {latestBooks.map((book) =>
         (
@@ -32,22 +30,3 @@ const BooksResults = () => {
 };
 
 export default BooksResults;
-
-
-    // fonctions
-
-/**book:{
-    authors: []
-    binding: "Paperback"
-    date_published: "2019"
-    image: "https://images.isbndb.com/covers/75/98/9782298157598.jpg"
-    isbn: "2298157596"
-    isbn13: "9782298157598"
-    language: "fr"
-    msrp: "0.00"
-    pages: 457
-    synopsis: "Et Si Tous Les Insectes Du Monde Se Mettaient Soudainement à Communiquer Entre Eux ? A S'organiser ? Nous Ne Survivrions Pas Plus De Quelques Jours. Entre Un Crime Spectaculaire Et La Disparition Inexpliquée D'une Jeune Femme, Les Chemins Du Détective Atticus Gore Et De La Privée Kat Kordell Vont S'entremêler. Et Les Confronter à Une Vérité Effrayante. Des Montagnes De Los Angeles Aux Bas-fonds De New York, Un Thriller Implacable Et Documenté Qui Va Vous Démanger."
-    title: "Un(e)secte"
-    title_long: "Un(e)secte" 
-}
-    */

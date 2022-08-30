@@ -8,6 +8,8 @@ export const SET_BOOKS_RESULTS_IN_SEARCH_STATE = 'SET_BOOKS_RESULTS_IN_SEARCH_ST
 export const SEND_MY_BOOKS_AVAILABILITY = 'SEND_MY_BOOKS_AVAILABILITY';
 export const SET_MY_BOOKS_AVAILABILITY = 'SET_MY_BOOKS_AVAILABILITY'; 
 export const SET_MY_LIBRARY_FILTER = 'SET_MY_LIBRARY_FILTER';
+export const FETCH_UPDATES = 'FETCH_UPDATES';
+export const SET_UPDATES = 'SET_UPDATES';
 
 export const setSearchField = (search) => ({
   type: SET_SEARCH,
@@ -15,44 +17,52 @@ export const setSearchField = (search) => ({
 });
 
 export const setSelectedFilter = (value)=>({
-  type : SET_SELECTED_FILTER,
+  type: SET_SELECTED_FILTER,
   payload: value,
 })
 export const setBooks =(data)=>({
-  type : SET_BOOKS,
+  type: SET_BOOKS,
   payload: data,
 })
 
 export const searchBooks = ()=>({
-  type : SEARCH_BOOKS,
+  type: SEARCH_BOOKS,
 })
 
 export const fetchBooks = (value)=>({
-  type : FETCH_BOOKS,
+  type: FETCH_BOOKS,
   payload: value
 })
 
 export const fetchLatestBooks = ()=>({
-  type : FETCH_LATEST_BOOKS,
+  type: FETCH_LATEST_BOOKS,
 })
 
 export const setBooksResultsInSearchState = (name, bookData) => ({
-  type : SET_BOOKS_RESULTS_IN_SEARCH_STATE,
+  type: SET_BOOKS_RESULTS_IN_SEARCH_STATE,
   name,
   bookData,
 })
 
 export const sendMyBookAvailability =(is_available, libraryId) =>({
-  type :SEND_MY_BOOKS_AVAILABILITY,
+  type: SEND_MY_BOOKS_AVAILABILITY,
   libraryId,
   is_available,
 })
 
 export const setMyBooksAvailability =(data) =>({
-  type : SET_MY_BOOKS_AVAILABILITY,
+  type: SET_MY_BOOKS_AVAILABILITY,
   payload: data,
 })
 export const setMyLibraryFilter =(data) =>({
-  type : SET_MY_LIBRARY_FILTER,
-  payload : data,
+  type: SET_MY_LIBRARY_FILTER,
+  payload: data,
+})
+export const fetchUpdates =()=>({
+  type: FETCH_UPDATES,
+})
+
+export const setUpdates =(data)=>({
+  type: SET_UPDATES,
+  payload: data
 })

@@ -9,8 +9,6 @@ const MyBooks = ()=>{
     const dispatch = useDispatch();
     // console.log(libraryFilter)
     
-   
-    
     useEffect(() => {
         dispatch(fetchBooks());
 
@@ -20,43 +18,55 @@ const MyBooks = ()=>{
 
     // constantes
     const libraryFilter = useSelector(state=>state.books.libraryFilter)
-    const statebooks = useSelector(state=>state.books)
     const myBooks = useSelector(state=>state.books.booksData.myBooks)
-    console.log("STATEBOOKS",statebooks)
-    // const myBooks= useSelector(state=>state.books.booksData.myBooks);
 
 
-    return (
-        <>
-        <p>{libraryFilter}</p>
-        <div className='flex justify-evenly'>
-                    {myBooks.map((book) =>
+    // return (
+    //     <>
+    //         <p>{libraryFilter}</p>
+    //         <div className='flex justify-evenly'>
+    //                     {/* {myBooks.map((book) =>
+    //                         (<BookCard key={book.libraryid} {...book}/>)
+    //                     )} */}
+    //         </div>
+    //     </>
+    
+    if (libraryFilter==='allMyBooks'){
+        return (
+            <>
+                <h3>My books</h3>
+                <div className='flex justify-evenly'>
+                    {myBooks.books.map((book) =>
                         (<BookCard key={book.libraryid} {...book}/>)
                     )}
-        </div>
-        </>
-    )
-    // if(libraryFilter==='myLends'){
-    //     return (
-    //         <>
-    //             <p>Hello myLends</p>
-    //         </>
-    //     )
-    // }
-    // if (libraryFilter==='allMyBooks'){
-    //     return (
-    //         <>
-    //             <p>{libraryFilter}</p>
-    //         </>
-    //     )           
-    // }
-    // if(libraryFilter==='myBorrows'){
-    //     return (
-    //         <>
-    //             <p>Hello my borrows</p>
-    //         </>
-    //     )
-    // }
+                </div>
+            </>
+        )           
+    }
+    if(libraryFilter==='myLends'){
+        return (
+            <>
+                <h3>My lends</h3>
+                <div className='flex justify-evenly'>
+                    {myBooks.lends.map((book) =>
+                        (<BookCard key={book.libraryid} {...book}/>)
+                    )}
+                </div>
+            </>
+        )
+    }
+    if(libraryFilter==='myBorrows'){
+        return (
+            <>
+                <h3>My borrows</h3>
+                <div className='flex justify-evenly'>
+                    {myBooks.borrow.map((book) =>
+                        (<BookCard key={book.libraryid} {...book}/>)
+                    )}
+                </div>
+            </>
+        )
+    }
 
     
 

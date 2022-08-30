@@ -20,8 +20,9 @@ const libraryController = {
             const book = await Book.getBookByLibraryId(library.id);
             books.push(book);
             const lend = await Loan.getLoanByLibrary(library.id);
-            lends.push(lend);
+            lends.push(...lend);
         });
+        lends.filter((lend) => lend.status !== 'Terminé');
         // Emprunts utilisateur
         const borrow = await Loan.getLoanByUser(id);
         // Prêts utilisateur

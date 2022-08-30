@@ -1,4 +1,4 @@
-import { SET_BOOKS_RESULTS_IN_SEARCH_STATE, SET_SEARCH, SET_SELECTED_FILTER, SET_MY_BOOKS_AVAILABILITY, SET_MY_LIBRARY_FILTER, SET_BOOKS } from "../actions/books";
+import { SET_BOOKS_RESULTS_IN_SEARCH_STATE, SET_SEARCH, SET_SELECTED_FILTER, SET_MY_BOOKS_AVAILABILITY, SET_UPDATES, SET_MY_LIBRARY_FILTER, SET_BOOKS } from "../actions/books";
 
 
 // initialstate : search vide et librairie API à affichier vide
@@ -6,11 +6,16 @@ export const initialState = {
     searchValue: '',
     booksData:{
       searchedBooks:[],
-      myBooks:[],
+      myBooks:{
+        books:[],
+        lends:[],
+        borrow:[],
+      },
       visitedProfileBooks:[],
     },
     libraryFilter:"allMyBooks",
-    selectedSearchFilter: 'all'
+    selectedSearchFilter: 'all',
+    updates:[],
   };
   
   const reducer = (state = initialState, action = {}) => {
@@ -49,7 +54,7 @@ export const initialState = {
               ...state.booksData,
               [action.name]: action.bookData,
               // searchedBooks: [...action.bookData.data],
-          }};
+          }}
           
           case SET_MY_BOOKS_AVAILABILITY:
           console.log("SET MY BOOKS AVAILABILITY", action);
@@ -70,7 +75,12 @@ export const initialState = {
                 return book
               })
             }
-          };
+          }
+          case SET_UPDATES:
+            return{
+              ...state,
+              updates: action.payload,
+            }
       default:
         return state;
     }
