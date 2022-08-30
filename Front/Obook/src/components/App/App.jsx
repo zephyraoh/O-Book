@@ -45,8 +45,7 @@ const isSignModalToggled =useSelector (state=>state.user.signInModal)
 
   return (
     <div className="App w-screen h-screen bg-[#EDE7DF] text-center">
-     <Header className="bg-gray-400"/> 
-     <button value ="zephyr" name="profile of user Zephyr" onClick={handleClick}>Test button</button>
+     <Header className="bg-gray-400"/>
      <Routes>
        <Route path="/" element= {<Home/>} />
        <Route

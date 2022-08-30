@@ -21,7 +21,7 @@ const MyBooks = ()=>{
     const myBooks= useSelector(state=>state.books.booksData.myBooks);
     // const myLends= useSelector(state=>state.books.booksData.myBooks);
     // const myLoans= useSelector(state=>state.books.booksData.myBooks);
-    console.log("my books:",myBooks);
+    console.log("booksData:",books.booksData);
     
     // fonctions
 

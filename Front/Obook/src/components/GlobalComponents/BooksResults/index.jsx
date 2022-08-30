@@ -1,7 +1,7 @@
 import { useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import { fetchBooks, fetchLatestBooks } from '../../../actions/books';
-import BookCard from './BookCard';
+import BookPreview from './BookPreview';
 import './styles.scss';
 
 const BooksResults = () => {
@@ -15,11 +15,11 @@ const BooksResults = () => {
   const latestBooks = useSelector(state=>state.books.booksData.searchedBooks);
 
   return(
-  <div>
+  <div className= 'flex'>
     
     {latestBooks.map((book) =>
         (
-        <BookCard key={book.libraryid} {...book}/>
+        <BookPreview key={book.isbn} {...book}/>
         )
             
         )}
