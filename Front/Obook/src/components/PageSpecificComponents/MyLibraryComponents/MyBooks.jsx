@@ -44,9 +44,11 @@ const MyBooks = ()=>{
 //     case "allMyBooks":
         return (
             <>
-                {myBooks.map((book) =>
-                    (<BookCard key={book.libraryid} {...book}/>)
-                )}
+                <div className='flex justify-evenly'>
+                    {myBooks.map((book) =>
+                        (<BookCard key={book.libraryid} {...book}/>)
+                    )}
+                </div>
             </>
         )
   

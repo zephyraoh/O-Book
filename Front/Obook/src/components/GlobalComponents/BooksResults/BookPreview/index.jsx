@@ -8,9 +8,9 @@ const BookPreview=({
 })=>{
     
     return (
-        <div className='flex-wrap w-3/12'>
+        <div className='w-3/12'>
             <img className='w-full' src= {image}/>
-            <h1>{title}</h1>
+            <h1 className="overflow-clip">{title}</h1>
             <h4>{author}</h4>
         </div>
     )

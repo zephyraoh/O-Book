@@ -15,7 +15,7 @@ const BooksResults = () => {
   const latestBooks = useSelector(state=>state.books.booksData.searchedBooks);
 
   return(
-  <div className= 'flex'>
+  <div className= 'flex overflow-x-auto h-1/3'>
     
     {latestBooks.map((book) =>
         (

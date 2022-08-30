@@ -35,7 +35,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
       break;
     }
     case FETCH_BOOKS: {
-//! working code
+//! old working code
       // const { user: { library: {books} }} = store.getState();
       
       // const booksArray = books.map(book => (book.isbn));
@@ -63,11 +63,13 @@ const searchMiddleware = (store) => (next) => async (action) => {
       // })
   
       // store.dispatch(setBooksResultsInSearchState("myBooks", justineBooks))
-//! working code above
+//! old working code above
 
-      // //! TENTATIVE EN COURS : GENERALISER LA FONCTION AVEC LA REQUETE DE LIBRARY PLUS QUE DE BOOKS
+      // // //! TENTATIVE EN COURS : GENERALISER LA FONCTION AVEC LA REQUETE DE LIBRARY PLUS QUE DE BOOKS
       const { user: { library }} = store.getState();
-      const finalArray = [...library.books.map((el=>el.isbn)), ...library.borrow.map(el=>el.isbn), ...library.lends.map(el=>el[0].isbn) ];
+      const finalArray = [...library.books.map((el=>el.isbn)), ...library.borrow.map(el=>el.isbn)
+        // , ...library.lends.map(el=>el[0].isbn) 
+      ];
       
       console.log("FINAL TABLO ! ", finalArray);
 
@@ -86,21 +88,31 @@ const searchMiddleware = (store) => (next) => async (action) => {
 
        const superBooksPostApi = data.data;
 
-      const superBooksPreApi = library;
-
-      const superJustineBooks = [];
+      const superJustineBooks = {};
       
+      const results = [];
       for (const bookSection in library){
-            
-            console.log(bookSection, library[bookSection], "librairie", library);
 
-            library[bookSection].forEach(bookISBN=>{
-              if(library[bookSection].isbn === bookISBN.isbn) {
-                      superJustineBooks.push({...library[bookSection], ...bookISBN})
-              
-              }
-            })}    
+            console.log(bookSection, library[bookSection]);
+
+            library[bookSection].forEach( bookAPI =>{
+
+              superBooksPostApi.forEach(bookISBN => {
+                  if(bookAPI.isbn === bookISBN.isbn) {
+                    results.push({...bookAPI, ...bookISBN})
+                  }
+               })
+            }); superJustineBooks[bookSection] = results; 
+          }
+
+              //je veux push dans la valeur de bookSection
+                      // newLIbrary={
+                      //   myBooks : [{},{}],
+                      //   borrow : [{}],
+                      //   lends : [{}],
+                      // }
         console.log("FINAL method superJustineBooks ==>", superJustineBooks)
+        store.dispatch(setBooksResultsInSearchState("myBooks", superJustineBooks))
 
       // superBooksPreApi.forEach(bookAPI => {
       //   superBooksPostApi.forEach(bookISBN => {
@@ -112,6 +124,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
       
       // //! A FAIRE : tout simplement in for in englobant l'algo de justine for (object in library){ object.foreach etc etc}
       // //! TENTATIVE EN COURS : GENERALISER LA FONCTION AVEC LA REQUETE DE LIBRARY PLUS QUE DE BOOKS
+
 
   break;
     }
