@@ -131,7 +131,6 @@ const searchMiddleware = (store) => (next) => async (action) => {
     case FETCH_LATEST_BOOKS: {
       // requête au serveur back pour récupérer la liste des livres récents //
       const response = await axiosServerDB.get('/books');
-  
       const booksList = response.data;
       const booksArray = booksList.map(book => (book.isbn));
 

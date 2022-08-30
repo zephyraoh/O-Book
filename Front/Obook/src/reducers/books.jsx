@@ -1,4 +1,4 @@
-import { SET_BOOKS_RESULTS_IN_SEARCH_STATE, SET_SEARCH, SET_SELECTED_FILTER, SET_MY_BOOKS_AVAILABILITY } from "../actions/books";
+import { SET_BOOKS_RESULTS_IN_SEARCH_STATE, SET_SEARCH, SET_SELECTED_FILTER, SET_MY_BOOKS_AVAILABILITY, SET_MY_LIBRARY_FILTER } from "../actions/books";
 
 
 // initialstate : search vide et librairie API à affichier vide
@@ -9,11 +9,17 @@ export const initialState = {
       myBooks:[],
       visitedProfileBooks:[],
     },
+    libraryFilter:"allMyBooks",
     selectedSearchFilter: 'all'
   };
   
   const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
+        case SET_MY_LIBRARY_FILTER:
+          return{
+            ...state,
+            libraryFilter: action.payload,
+          }
         case SET_SEARCH:
             return{
               //retour du nouveau state chargé de la valeur du champ de recherche
@@ -31,6 +37,7 @@ export const initialState = {
             ...state,
             selectedSearchFilter: action.payload,
           }
+          
 
         case SET_BOOKS_RESULTS_IN_SEARCH_STATE:
           return{

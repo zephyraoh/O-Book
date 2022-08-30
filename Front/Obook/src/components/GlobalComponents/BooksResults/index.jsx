@@ -49,4 +49,3 @@ export default BooksResults;
     title_long: "Un(e)secte" 
 }
     */
-
