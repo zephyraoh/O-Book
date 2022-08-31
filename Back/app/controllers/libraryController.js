@@ -79,6 +79,11 @@ const libraryController = {
             throw new ClientError('This library does not exist');
         }
 
+        // Vérifier que le livre n'est pas emprunté
+        const isLoan = await Loan.getLoanByLibrary(libraryId);
+        if (isLoan.status === 'En cours' || isLoan.status === 'En attente de validation') {
+            throw new ClientError("Can't update availability, loan ongoing");
+        }
         // Modification de la librairie
         const updatedLibrary = await Library.update(isAvailable, libraryId);
 
@@ -109,6 +114,16 @@ const libraryController = {
             tags,
             books,
         });
+    },
+
+    async getUserInfosByLibrary(req, res) {
+        // Récupérer les infos utilisateur à partir d'une librairie
+        const libraryId = Number(req.params.id);
+        const userInfos = await User.getUserInfosByLibrary(libraryId);
+        if (!userInfos) {
+            throw new ClientError('This library does not exist');
+        }
+        res.json(userInfos);
     },
 };
 

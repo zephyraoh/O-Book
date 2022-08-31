@@ -39,7 +39,7 @@ module.exports = class Loan extends CoreDatamapper {
     }
 
     static async getLastLoans() {
-        const sql = `SELECT "loan"."id", "loan"."status", "loan"."date", "book"."isbn", "user"."username", "user"."profile_picture" FROM ${this.tableName}
+        const sql = `SELECT "loan"."id" as loanId, "loan"."status", "loan"."date", "book"."isbn", "library"."id" as libraryId, "user"."username", "user"."profile_picture" FROM ${this.tableName}
         JOIN "library" ON "library"."id" = "loan"."library_id"
         JOIN "book" ON "book"."id" = "library"."book_id"
         JOIN "user" ON "user"."id" = "loan"."user_id"
