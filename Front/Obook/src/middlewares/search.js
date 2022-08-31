@@ -1,4 +1,4 @@
-import { SEARCH_BOOKS, FETCH_BOOKS, FETCH_UPDATES, setBooksResultsInSearchState, FETCH_LATEST_BOOKS, setBooks, setUpdates } from '../actions/books';
+import { SEARCH_BOOKS, FETCH_BOOKS, FETCH_UPDATES, setBooksResultsInSearchState, FETCH_LATEST_BOOKS, setBooks, setUpdates, GET_ONE_BOOK_DETAILS, setVisitedBookPage } from '../actions/books';
 import { ISBNApiSearchBar, axiosServerDB } from '../utils/axios';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -149,9 +149,18 @@ const searchMiddleware = (store) => (next) => async (action) => {
       break;
     }
     case FETCH_UPDATES: {
+      // requête au back pour récupérer la liste des updates
       const response = await axiosServerDB.get('/loans');
+      // on stocke la liste
       const updatesList = response.data;
+      // on isole les ISBNS de chaque livre dans un tableau
       const updatesBooksArray = updatesList.map(book => (book.isbn));
+      // on isole les libraryId dans un tableau
+      const updatesLibrariesArray = updatesList.map(book => (book.libraryid));
+      // on itère sur chaque libraryId pour récupérer les infos du user propriétaire du livre
+      // updatesLibrariesArray.forEach(library => {
+      //   const 
+      // })
 
       const options = {
         method: 'POST',
@@ -175,6 +184,13 @@ const searchMiddleware = (store) => (next) => async (action) => {
         })
       })
       store.dispatch(setUpdates(updatesFullInfo));
+      break;
+    }
+    case GET_ONE_BOOK_DETAILS: {
+      const isbn = action.payload;
+      const searchURL= `/book/${isbn}`;
+      const { data } = await ISBNApiSearchBar.get(searchURL);
+      store.dispatch(setVisitedBookPage(data.book));
       break;
     }
     default:

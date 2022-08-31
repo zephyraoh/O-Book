@@ -1,4 +1,4 @@
-import { SET_BOOKS_RESULTS_IN_SEARCH_STATE, SET_SEARCH, SET_SELECTED_FILTER, SET_MY_BOOKS_AVAILABILITY, SET_UPDATES, SET_MY_LIBRARY_FILTER, SET_BOOKS } from "../actions/books";
+import { SET_BOOKS_RESULTS_IN_SEARCH_STATE, SET_SEARCH, SET_SELECTED_FILTER, SET_MY_BOOKS_AVAILABILITY, SET_UPDATES, SET_MY_LIBRARY_FILTER, SET_BOOKS, SET_VISITED_BOOK_PAGE } from "../actions/books";
 
 
 // initialstate : search vide et librairie API à affichier vide
@@ -13,6 +13,7 @@ export const initialState = {
       },
       visitedProfileBooks:[],
     },
+    visitedBookPage: {},
     libraryFilter:"allMyBooks",
     selectedSearchFilter: 'all',
     updates:[],
@@ -45,8 +46,11 @@ export const initialState = {
             ...state,
             selectedSearchFilter: action.payload,
           }
-          
-
+          case SET_VISITED_BOOK_PAGE:
+            return{
+                ...state,
+                visitedBookPage: action.payload,
+                }
         case SET_BOOKS_RESULTS_IN_SEARCH_STATE:
           return{
             ...state,
@@ -92,16 +96,12 @@ export const initialState = {
 
               }
               }
-            
-              
-
-          
-          case SET_UPDATES:
+        case SET_UPDATES:
             return{
               ...state,
               updates: action.payload,
             }
-      default:
+        default:
         return state;
     }
   };

@@ -10,6 +10,8 @@ export const SET_MY_BOOKS_AVAILABILITY = 'SET_MY_BOOKS_AVAILABILITY';
 export const SET_MY_LIBRARY_FILTER = 'SET_MY_LIBRARY_FILTER';
 export const FETCH_UPDATES = 'FETCH_UPDATES';
 export const SET_UPDATES = 'SET_UPDATES';
+export const GET_ONE_BOOK_DETAILS = 'GET_ONE_BOOK_DETAILS';
+export const SET_VISITED_BOOK_PAGE = 'SET_VISITED_BOOK_PAGE';
 
 export const setSearchField = (search) => ({
   type: SET_SEARCH,
@@ -65,4 +67,14 @@ export const fetchUpdates =()=>({
 export const setUpdates =(data)=>({
   type: SET_UPDATES,
   payload: data
+})
+
+export const getOneBookDetails = (isbn)=>({
+  type: GET_ONE_BOOK_DETAILS,
+  payload: isbn
+})
+
+export const setVisitedBookPage = (data)=>({
+  type: SET_VISITED_BOOK_PAGE,
+  payload: data,
 })

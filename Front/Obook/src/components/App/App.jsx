@@ -15,7 +15,6 @@ import { getMemberProfile, toggleSignInModal } from '../../actions/user';
 //App Components
 import BooksResults from '../GlobalComponents/BooksResults';
 import Header from '../GlobalComponents/Header';
-// import DesktopMenu from '../GlobalComponents/DeskTopMyLibraryMenu';
 import Footer from '../GlobalComponents/Footer';
 import MobileMenu from '../GlobalComponents/Footer/MobileMenu';
 
@@ -40,7 +39,7 @@ const handleClick = (e) => {
   dispatch(getMemberProfile(e.target.value));
 }
 
-const isSignModalToggled =useSelector (state=>state.user.signInModal)
+const isSignModalToggled =useSelector (state=>state.user.signInModal);
 
 
   return (
@@ -64,7 +63,7 @@ const isSignModalToggled =useSelector (state=>state.user.signInModal)
        <Route path="*" element= {<Error404 />} />
      </Routes>
      {/* DesktopMenu will show anywhere if logged, except on AccountPage */}
-     {/* {isLogged && !isAccountPage &&<DesktopMenu/>} */}
+     
      <MobileMenu/>
      <Footer />
     </div>
