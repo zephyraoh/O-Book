@@ -16,6 +16,8 @@ const SearchFilters = ()=> {
             <label htmlFor="title">Titre</label>
             <input className='m-1' type="radio" value= "author" name="booksearch" id="author" onChange = {handleChange}/>
             <label htmlFor="author">Auteur</label>
+            <input className='m-1' type="radio" value= "ISBN" name="booksearch" id="ISBN" onChange = {handleChange}/>
+            <label htmlFor="ISBN">ISBN</label>
         </div>
     )
 }

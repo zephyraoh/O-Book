@@ -68,14 +68,34 @@ export const initialState = {
             ...state,
             booksData: {
               ...state.booksData,
-              myBooks: state.booksData.myBooks.map(book => {
+              myBooks: {
+                ...state.booksData.myBooks,
+                books: state.booksData.myBooks.books.map(book => {
                 if(book.libraryid === action.payload.libraryid) {
                   book.is_available = action.payload.is_available;
                 }
                 return book
-              })
-            }
-          }
+                }),
+                borrow: state.booksData.myBooks.borrow.map(book => {
+                  if(book.libraryid === action.payload.libraryid) {
+                    book.is_available = action.payload.is_available;
+                  }
+                  return book
+                }),
+                lends: state.booksData.myBooks.lends.map(book => {
+                  if(book.libraryid === action.payload.libraryid) {
+                    book.is_available = action.payload.is_available;
+                  }
+                  return book
+                }),
+              }
+
+              }
+              }
+            
+              
+
+          
           case SET_UPDATES:
             return{
               ...state,

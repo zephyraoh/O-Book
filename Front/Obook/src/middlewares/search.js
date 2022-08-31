@@ -16,23 +16,26 @@ const searchMiddleware = (store) => (next) => async (action) => {
 
       switch(selectedSearchFilter){
         case "title":{
-          searchURL = `${searchValue}?&column=title`;
+          searchURL = `/books/${searchValue}?&column=title`;
           break;
         }
         case "author":{
-          searchURL= `${searchValue}?&column=author`;
+          searchURL= `/books/${searchValue}?&column=author`;
+          break;
+        }
+        case "ISBN": {
+          searchURL= `/book/${searchValue}`;
           break;
         }
         default:{
-          searchURL = `${searchValue}?`;
+          searchURL = `/books/${searchValue}?`;
         }
       }
-
       const { data } = await ISBNApiSearchBar.get(searchURL);
+        console.log("middleware data", data)
+        store.dispatch(setBooks(data));
+        break;
       
-      console.log("middleware data", data)
-      store.dispatch(setBooks(data));
-      break;
     }
     case FETCH_BOOKS: {
 //! old working code

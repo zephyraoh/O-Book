@@ -7,6 +7,7 @@ const UpdatesFeed = () => {
   
   const dispatch = useDispatch();
   const updates = useSelector(state=> state.books.updates);
+  console.log(updates);
 
   useEffect(() => {
       dispatch(fetchUpdates());
@@ -15,7 +16,7 @@ const UpdatesFeed = () => {
   return(
     <div>
         {updates.map((update) => (
-            <Update key={update.id} {...update}/>
+            <Update key={update.loanid} {...update}/>
         )
         )}
     </div>

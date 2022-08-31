@@ -8,9 +8,9 @@ const BookPreview=({
 })=>{
     
     return (
-        <div className='w-36 m-5'>
-            <img className='w-3/4' src= {image}/>
-            <h1 className="overflow-clip">{title}</h1>
+        <div className='w-36 h-56 flex flex-col m-5'>
+            <img className='w-3/4 h-2/3' src= {image}/>
+            <h1>{title}</h1>
             <h4>{author}</h4>
         </div>
     )

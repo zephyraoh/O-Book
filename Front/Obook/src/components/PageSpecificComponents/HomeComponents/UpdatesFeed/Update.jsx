@@ -5,13 +5,50 @@ const Update=({
     title,
 })=>{
     
+    if(status==="En cours") {
+        return (
+            <div>
+                <div>
+                    <img src={profile_picture}/>
+                    <p>{username}</p>
+                </div>
+                <p>a emprunté <span>{title}</span> à</p>
+                <div>
+                    <img src={profile_picture}/>
+                    <p>utilisateur Y</p>
+                </div>
+            </div>
+        )
+    }
+
     if(status==="En attente de validation") {
         return (
             <div>
-                <img src={profile_picture}/>
-                <h4>{username} a demandé un prêt à Machin </h4>
-                <h4>{title}</h4>
-                <img src=""/>
+                <div>
+                    <img src={profile_picture}/>
+                    <p>{username}</p>
+                </div>
+                <p>a demandé <span>{title}</span> à</p>
+                <div>
+                    <img src={profile_picture}/>
+                    <p>utilisateur Y</p>
+                </div>
+            </div>
+        )
+    }
+
+    if(status==="Terminé") {
+        return (
+            <div>
+                <div>
+                    <img src={profile_picture}/>
+                    <p>{username}</p>
+                </div>
+                <p>a restitué <span>{title}</span> à</p>
+                <div>
+                    <img src={profile_picture}/>
+                    <p>utilisateur Y</p>
+                </div>
             </div>
         )
     }
