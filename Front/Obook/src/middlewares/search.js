@@ -158,9 +158,17 @@ const searchMiddleware = (store) => (next) => async (action) => {
       // on isole les libraryId dans un tableau
       const updatesLibrariesArray = updatesList.map(book => (book.libraryid));
       // on itère sur chaque libraryId pour récupérer les infos du user propriétaire du livre
-      // updatesLibrariesArray.forEach(library => {
-      //   const 
+      const updatesWithLenderInfo = [];
+      
+      // const makeServerRequest = (updatesList) => {
+      //   const res = await axiosServerDB.get(`library/${updatesList.libraryid}`);
+      //   updatesWithLenderInfo.push({...res.data, ...updatesList})
+      // }
+      // updatesList.forEach(update => {
+      //   makeServerRequest(update);
       // })
+
+      // console.log('updatesWithLenderInfo', updatesWithLenderInfo);
 
       const options = {
         method: 'POST',

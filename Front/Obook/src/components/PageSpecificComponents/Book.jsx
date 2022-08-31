@@ -23,21 +23,22 @@ const Book = ( {
         dispatch(getOneBookDetails(params.id));
     }, []);
 
+    console.log(book)
     const cleanSynopsis = DOMPurify.sanitize(book?.synopsis);
-    console.log(cleanSynopsis);
+    
     
 
         return(
          
-            <div className='flex m-8'>
-                <img src={book?.image} alt="" />
-                <div className='flex flex-col'>
-                    <h1>{book?.title}</h1>
-                    <h3>{book?.authors} - {book?.date_published}</h3>
-                    <h3>{book?.edition}</h3>
+            <div className='flex mx-auto my-6 w-11/12 justify-center'>
+                <img className='desktop:w-1/4 desktop:h-3/4 desktop:max-w-[320px] desktop:max-h-[450px] mobile:w-[120px] mobile:h-[180px] my-5' src={book?.image} alt="" />
+                <div className='flex flex-col items-start m-6 w-7/8'>
+                    <h1 className='desktop:text-3xl mobile:text-lg font-bold mb-5'>{book?.title}</h1>
+                    <h3 className='my-5'>{book?.authors} - {book?.date_published}</h3>
+                    <h3 className='my-5'>{book?.publisher}</h3>
                     <h3>Résumé</h3>
-                    <p>{cleanSynopsis}</p>
-                    <button className='p-2 px-3 m-3 rounded bg-[#292F44] text-[#F5F5F5]'>Ajouter à ma bibliothèque</button>
+                    <p>{cleanSynopsis ? cleanSynopsis : 'Résumé indisponible'}</p>
+                    <button className='p-2 px-3 place-self-center rounded bg-[#292F44] text-[#F5F5F5]'>Ajouter à ma bibliothèque</button>
                 </div>
             </div>
         )
