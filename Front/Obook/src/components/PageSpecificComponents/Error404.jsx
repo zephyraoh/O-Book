@@ -1,7 +1,13 @@
 const Error404 = ()=>{
 
 
-    ("Error404 Component")
+    return (
+        <div className="flex-column">
+            <h1>Oups...cette page semble inexistante. À moins qu'elle ait disparu...</h1>
+            <img src="https://cdn.dribbble.com/users/2046015/screenshots/6015680/media/c890b0febd049df48ce2c07a39b08a6c.gif" alt="404" className="block m-auto"/>
+        </div>
+    )
+    
 
 };
 
