@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 const Update=({
+    isbn,
     status,
     username,
     profile_picture,
@@ -50,7 +51,7 @@ const Update=({
     // }
 
     // if(status==="Terminé") {
-
+    const bookNavLink = `/book/${isbn}`
     const userNavLink = `/visitedlibrary/${username}`;
     const lenderNavLink = `visitedlibrary/${lenderusername}`
         return (
@@ -64,9 +65,9 @@ const Update=({
                     {status === 'En attente de validation' && <p>A demandé</p>}
                     {status === 'Terminé' && <p>A restitué</p>}
                 </div>
-                <div className="flex-col">
+                <NavLink to={bookNavLink} className="flex-col" >
                     <img className="rounded-md h-52" src={image} alt={title} />
-                </div>
+                </NavLink>
                 <div>
                     <p>À</p>
                 </div>
