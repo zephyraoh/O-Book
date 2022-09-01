@@ -1,5 +1,5 @@
 import { axiosServerDB } from '../utils/axios';
-import { SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability } from '../actions/books';
+import { FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY, SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability } from '../actions/books';
 import { setUserData, SIGN_IN, SIGN_UP, GET_MY_PROFILE, GET_MEMBER_PROFILE, SET_USER_LABEL, SEND_MODIFIED_INFOS } from '../actions/user';
 
 
@@ -146,7 +146,16 @@ const authMiddleware = (store) => (next) => async (action) => {
 			}
 			break;
 		}
-		
+		case FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY:{
+			try{
+				const {data} = await axiosServerDB.post(`/mylibrary/addBook/`, {
+					"isbn": `${action.payload.data}`});
+					console.log("book successfully added, server response: =>", data)
+				}catch(err){
+				console.log("ERROR ADDING BOOK TO MY LIBRARY",err);
+				}
+			break;
+		}
 		default: 
 			next(action); 
 	} 

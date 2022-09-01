@@ -29,6 +29,14 @@ const Library = ()=>{
     return(
         <div>
             <p>Visited library component</p>
+            {/* user Profile : picture, bio, tags, localisation zipcode */}
+            <div>
+                <h3>{userInfos.username}</h3>
+                <img className="rounded-full h-40 w-40" src={userInfos.profile_picture}></img>
+                <p>{userInfos.biography}</p>
+                <p> {userInfos.localisation}</p>
+                <p> {userInfos.zipcode}</p>
+            </div>
             {books.map(book =>(
                 <>
                     <BookCard key={book.id} {...book}/>

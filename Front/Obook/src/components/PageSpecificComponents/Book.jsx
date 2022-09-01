@@ -2,9 +2,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DOMPurify from 'dompurify';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOneBookDetails } from '../../actions/books';
 import { useParams } from 'react-router-dom';
 
+import { getOneBookDetails, fetchAddNewBookToMyLibrary } from '../../actions/books';
+import { toggleSignInModal } from '../../actions/user';
 function removeTags(str) {
     if ((str===null) || (str===''))
         return false;
@@ -18,18 +19,25 @@ function removeTags(str) {
 }
 
 const Book = ()=>{
+    //const
     const params = useParams();
     const dispatch = useDispatch();
-    
-
     const book = useSelector(state => state.books.visitedBookPage);
+    const cleanSynopsis = DOMPurify.sanitize(book?.synopsis);
+    const synopsisCleanHtml = removeTags(cleanSynopsis);
+    const isLogged = useSelector(state => state.user.isLogged);
+    
+    //fonctions
+    const handleAddBookAction=(e)=>{
+        console.log("value", e.target.value)
+        isLogged?
+            dispatch(fetchAddNewBookToMyLibrary(e.target.value))
+          : dispatch(dispatch(toggleSignInModal(true))) 
+        }   
     useEffect(() => {
         dispatch(getOneBookDetails(params.id));
     }, []);
 
-    const cleanSynopsis = DOMPurify.sanitize(book?.synopsis);
-    const synopsisCleanHtml = removeTags(cleanSynopsis);
-    
 
         return(
          
@@ -41,7 +49,7 @@ const Book = ()=>{
                     <h3 className='my-3'>{book?.publisher}</h3>
                     <h3 className='font-semibold my-3'>Résumé</h3>
                     <p>{synopsisCleanHtml ? synopsisCleanHtml : 'Résumé indisponible'}</p>
-                    <button className='p-2 px-3 my-3 place-self-center rounded bg-[#292F44] text-[#F5F5F5]'>Ajouter à ma bibliothèque</button>
+                    <button className='p-2 px-3 my-3 place-self-center rounded bg-[#292F44] text-[#F5F5F5]' value={book.isbn} onClick={handleAddBookAction}>Ajouter à ma bibliothèque</button>
                 </div>
             </div>
         )

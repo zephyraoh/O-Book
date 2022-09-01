@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const Update=({
     status,
     username,
@@ -48,12 +50,15 @@ const Update=({
     // }
 
     // if(status==="Terminé") {
+
+    const userNavLink = `/visitedlibrary/${username}`;
+    const lenderNavLink = `visitedlibrary/${lenderusername}`
         return (
             <div className="flex justify-evenly m-4 p-5 bg-[#AB9F9F] rounded-md w-1/2 items-center">
-                <div>
+                <NavLink to={userNavLink}>
                     <img className="rounded-full h-30 w-30 max-w-[133px] max-h-[133px] min-w-[133px] min-h-[133px]" src={profile_picture}/>
                     <p>{username}</p>
-                </div>
+                </NavLink>
                 <div>
                     {status === 'En cours' && <p>A emprunté</p>}
                     {status === 'En attente de validation' && <p>A demandé</p>}
@@ -65,10 +70,10 @@ const Update=({
                 <div>
                     <p>À</p>
                 </div>
-                <div>
+                <NavLink to = {lenderNavLink} >
                     <img className="rounded-full border-[#292F44] h-30 w-30 max-w-[133px] max-h-[133px] min-w-[133px] min-h-[133px]" src={lenderprofilepic}/>
                     <p>{lenderusername}</p>
-                </div>
+                </NavLink>
             </div>
         )
     }
