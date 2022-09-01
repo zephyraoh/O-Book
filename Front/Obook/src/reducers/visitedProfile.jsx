@@ -1,7 +1,16 @@
 import { SET_VISITED_PROFILE_DATA } from "../actions/visitedUser";
 
 export const initialstate = {
-
+    profile: {
+        username: '',  
+        email: '',
+        profile_picture:'',
+        zipcode:'',
+        localisation:'',
+        biography:'',
+        tel:'',
+        books: [],
+    },
 };
 
 const reducer = (state = initialstate, action = {}) => {
@@ -11,7 +20,7 @@ const reducer = (state = initialstate, action = {}) => {
                 ...state,
                 ...action.payload
             }
-                
+        
         default:
             return state;
     }

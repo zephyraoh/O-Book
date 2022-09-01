@@ -11,7 +11,8 @@ const BookCard=({
     synopsis,
     is_available,
 })=>{
-    // const libraryFilter = useSelector(state=>state.books.libraryFilter);
+    const libraryFilter = useSelector(state=>state.books.libraryFilter);
+    console.log(libraryFilter)
     ;
     const dispatch = useDispatch();
     // const handleAvailabilityToggle= (e) =>{
@@ -27,7 +28,7 @@ const BookCard=({
                 {synopsis? <p className="mobile:hidden desktop:block text-ellipsis"> {synopsis}</p> : <p className="mobile:hidden   desktop:block">Pas de synopsis disponible </p>}
                
 
-                {!libraryFilter==="myBorrows" && <BookAvailabilityToggleBUtton {...book} libraryid= {libraryid}   /> }
+                {!libraryFilter==="myBorrows" && <BookAvailabilityToggleBUtton {...book} libraryid= {libraryid} is_available={is_available}   /> }
 
                 {/* <label htmlFor={libraryid} className="inline-flex relative items-center cursor-pointer">
                 <input onClick={handleAvailabilityToggle} type="checkbox" defaultChecked={!libraryid} value={libraryid} id={libraryid} className="sr-only peer"></input>

@@ -17,6 +17,8 @@ export const ISBNApiSearchBar = axs.create({
 
 export const axiosServerDB = axs.create({
 	baseURL: 'http://localhost:5999',//URL DU FUTUR SERVEUR BACK O'BOOK
+	// POUR LA PARTIE CORS, AJOUTER :
+	// withCredentials: true,
 });
 
 

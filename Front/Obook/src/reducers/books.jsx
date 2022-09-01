@@ -11,7 +11,6 @@ export const initialState = {
         lends:[],
         borrow:[],
       },
-      visitedProfileBooks:[],
     },
     visitedBookPage: {},
     libraryFilter:"allMyBooks",

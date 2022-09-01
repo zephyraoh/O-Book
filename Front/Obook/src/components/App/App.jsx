@@ -59,10 +59,9 @@ const isSignModalToggled =useSelector (state=>state.user.signInModal);
       path="/account" 
       element= {isLogged?<Account /> : <Navigate to='/'/>} />
        <Route path="/book/:id" element= {<Book />} />
-       <Route path="/library/:id" element= {<Library />} />
+       <Route path="/visitedlibrary/:username" element= {<Library />} />
        <Route path="*" element= {<Error404 />} />
      </Routes>
-     {/* DesktopMenu will show anywhere if logged, except on AccountPage */}
      
      <MobileMenu/>
      <Footer />
