@@ -33,8 +33,8 @@ const MyBooks = ()=>{
                 <div className='flex justify-evenly'>
                     {myBooks.books.map((book) =>
                         (<>
-                            <BookCard  {...book}/>
-                            
+                            <BookCard key={`mybooks_${book.libraryid}`} {...book}/>
+                            <BookAvailabilityToggleBUtton key={`myBooks-button${book.libraryid}`} {...book}/>
                         </>)
                     )}
                 </div>
@@ -48,7 +48,9 @@ const MyBooks = ()=>{
                 <div className='flex justify-evenly'>
                     {myBooks.lends.map((book) =>
                         (<>
-                            <BookCard  {...book}/>
+                            <BookCard key={`myLends${book.libraryid}`} {...book}/>
+                            <BookAvailabilityToggleBUtton key={`myLends-button${book.libraryid}`} {...book}/>
+
                         </>)    
                     )}
                 </div>
@@ -61,7 +63,7 @@ const MyBooks = ()=>{
                 <h3>My borrows</h3>
                 <div className='flex justify-evenly'>
                     {myBooks.borrow.map((book) =>
-                        (<BookCard key={book.libraryid} {...book}/>)
+                        (<BookCard key={`myBorrows_${book.libraryid}`} {...book}/>)
                     )}
                 </div>
             </>
@@ -72,6 +74,4 @@ const MyBooks = ()=>{
 
         
 }
-                            // {/* <BookAvailabilityToggleBUtton {...book}  /> */}
-
 export default MyBooks;

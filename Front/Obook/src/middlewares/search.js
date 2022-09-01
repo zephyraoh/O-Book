@@ -3,7 +3,7 @@ import { ISBNApiSearchBar, axiosServerDB } from '../utils/axios';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setVisitedProfileData, FETCH_VISITED_PROFILE_BOOKS, FETCH_VISITED_PROFILE_DATA, setVisitedProfileBooks, fetchVisitedProfileBooks } from '../actions/visitedUser';
-
+import { FETCH_BORROW_DEMAND } from '../actions/visitedUser';
 
 const apiKey = import.meta.env.VITE_ISBN_API_KEY;
 
@@ -261,6 +261,19 @@ const searchMiddleware = (store) => (next) => async (action) => {
 		  }catch(error){
 			console.log('error getting visited profile >>>', error);
 		  }
+      break;
+    }
+    case FETCH_BORROW_DEMAND: {
+      try{
+        const libraryid={libraryid:`${action.payload}`}
+        console.log("envoi serveur demande de prêt sur le livre", libraryid)
+        const {data} = await axiosServerDB.post({libraryid})
+        console.log("retour serveur sur la demande de prêt du livre id= ",libraryid, "==>",data)
+        //A ce moment là le prêt devrait modifier le statut du livre en question et l'afficher pour le proprio du livre.
+        // à contrôler !!
+      }catch(error){
+        console.log('error getting visited profile >>>', error);
+        }
       break;
     }
     default:

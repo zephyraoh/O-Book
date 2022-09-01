@@ -2,6 +2,8 @@ export const SET_VISITED_PROFILE_DATA = 'SET_VISITED_PROFILE_DATA';
 export const FETCH_VISITED_PROFILE_DATA = 'FETCH_VISITED_PROFILE_DATA';
 export const FETCH_VISITED_PROFILE_BOOKS = 'FETCH_VISITED_PROFILE_BOOKS';
 export const SET_VISITED_PROFILE_BOOKS = 'SET_VISITED_PROFILE_BOOKS';
+export const FETCH_BORROW_DEMAND = 'FETCH_BORROW_DEMAND';
+
 
 export const setVisitedProfileData = (profileData)=>({
     type : SET_VISITED_PROFILE_DATA,
@@ -20,4 +22,9 @@ export const fetchVisitedProfileBooks = () => ({
 export const setVisitedProfileBooks = (booksData) => ({
     type: SET_VISITED_PROFILE_BOOKS,
     payload: booksData,
+})
+
+export const fetchBorrowDemand = (libraryid)=>({
+    type : FETCH_BORROW_DEMAND,
+    payload: libraryid,
 })
