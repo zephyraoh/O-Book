@@ -1,6 +1,6 @@
 import axs from 'axios';
 
-const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
+const apiKey = import.meta.env.VITE_ISBN_API_KEY;
 
 export const axiosBooksApi = axs.create({
 	baseURL: 'https://www.googleapis.com/books/v1/volumes?q=',

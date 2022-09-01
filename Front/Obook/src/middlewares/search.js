@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 
 
-const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
+const apiKey = import.meta.env.VITE_ISBN_API_KEY;
 
 const searchMiddleware = (store) => (next) => async (action) => {
 
@@ -152,46 +152,29 @@ const searchMiddleware = (store) => (next) => async (action) => {
       // requête au back pour récupérer la liste des updates
       const response = await axiosServerDB.get('/loans');
       // on stocke la liste
-      const updatesList = response.data;
-      // on isole les ISBNS de chaque livre dans un tableau
-      const updatesBooksArray = updatesList.map(book => (book.isbn));
-      // on isole les libraryId dans un tableau
-      const updatesLibrariesArray = updatesList.map(book => (book.libraryid));
-      // on itère sur chaque libraryId pour récupérer les infos du user propriétaire du livre
-      const updatesWithLenderInfo = [];
-      
-      // const makeServerRequest = (updatesList) => {
-      //   const res = await axiosServerDB.get(`library/${updatesList.libraryid}`);
-      //   updatesWithLenderInfo.push({...res.data, ...updatesList})
-      // }
-      // updatesList.forEach(update => {
-      //   makeServerRequest(update);
-      // })
+      const latestLoans = response.data;
+      // on crée un tableau vide qui recevra les infos complètes
+      const updates = [];
 
-      // console.log('updatesWithLenderInfo', updatesWithLenderInfo);
+      // on boucle sur chaque entrée de la table emprunt afin de récupérer les infos du "lender" (côté) et les infos sur le livre
+      for (const loan of latestLoans) {
+        const lenderInfos = await axiosServerDB.get(`library/${loan.libraryid}`);
 
-      const options = {
-        method: 'POST',
-        url: 'https://api2.isbndb.com/books/',
-        headers: {
-          Authorization: apiKey,
-          'Content-Type': 'application/json'
-        },
-        data: `data: isbns=${[...updatesBooksArray]}`
+        const options = {
+          method: 'POST',
+          url: 'https://api2.isbndb.com/books/',
+          headers: {
+            Authorization: apiKey,
+            'Content-Type': 'application/json'
+          },
+          data: `data: isbns=${loan.isbn}`
+        }
+
+        const ISBNresponse = await axios.request(options);
+        const ISBNdata = ISBNresponse.data.data[0];
+        updates.push({...loan, ...lenderInfos.data, ...ISBNdata})
       }
-
-      const {data} = await axios.request(options);
-
-      const booksISBNAPI = data.data;
-      const updatesFullInfo = [];
-      updatesList.forEach(bookAPI => {
-        booksISBNAPI.forEach(bookISBN => {
-          if(bookAPI.isbn === bookISBN.isbn) {
-            updatesFullInfo.push({...bookAPI, ...bookISBN})
-          }
-        })
-      })
-      store.dispatch(setUpdates(updatesFullInfo));
+      store.dispatch(setUpdates(updates));
       break;
     }
     case GET_ONE_BOOK_DETAILS: {

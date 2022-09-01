@@ -3,19 +3,25 @@ const Update=({
     username,
     profile_picture,
     title,
+    image,
+    lenderusername,
+    lenderprofilepic,
 })=>{
     
     if(status==="En cours") {
         return (
-            <div>
+            <div className="flex justify-between mx-6">
                 <div>
-                    <img src={profile_picture}/>
+                    <img className="rounded-full h-40 w-40" src={profile_picture}/>
                     <p>{username}</p>
                 </div>
-                <p>a emprunté <span>{title}</span> à</p>
+                <div className="flex-col">
+                    <img className="rounded-md h-52" src={image} alt={title} />
+                    <p>a emprunté <span>{title}</span> à</p>
+                </div>
                 <div>
-                    <img src={profile_picture}/>
-                    <p>utilisateur Y</p>
+                    <img className="rounded-full h-40 w-40" src={lenderprofilepic}/>
+                    <p>{lenderusername}</p>
                 </div>
             </div>
         )
@@ -23,15 +29,18 @@ const Update=({
 
     if(status==="En attente de validation") {
         return (
-            <div>
+            <div className="flex justify-between mx-6">
                 <div>
-                    <img src={profile_picture}/>
+                    <img className="rounded-full h-40 w-40" src={profile_picture}/>
                     <p>{username}</p>
                 </div>
-                <p>a demandé <span>{title}</span> à</p>
+                <div className="flex-col">
+                    <img className="rounded-md h-52" src={image} alt={title} />
+                    <p>a demandé <span>{title}</span> à</p>
+                </div>
                 <div>
-                    <img src={profile_picture}/>
-                    <p>utilisateur Y</p>
+                    <img className="rounded-full h-40 w-40" src={lenderprofilepic}/>
+                    <p>{lenderusername}</p>
                 </div>
             </div>
         )
@@ -39,15 +48,18 @@ const Update=({
 
     if(status==="Terminé") {
         return (
-            <div>
+            <div className="flex justify-between mx-6">
                 <div>
-                    <img src={profile_picture}/>
+                    <img className="rounded-full h-40 w-40" src={profile_picture}/>
                     <p>{username}</p>
                 </div>
-                <p>a restitué <span>{title}</span> à</p>
+                <div className="flex-col">
+                    <img className="rounded-md h-52" src={image} alt={title} />
+                    <p>a restitué <span>{title}</span> à</p>
+                </div>
                 <div>
-                    <img src={profile_picture}/>
-                    <p>utilisateur Y</p>
+                    <img className="rounded-full h-40 w-40" src={lenderprofilepic}/>
+                    <p>{lenderusername}</p>
                 </div>
             </div>
         )

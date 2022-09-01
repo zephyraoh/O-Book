@@ -1,6 +1,5 @@
 import { sendMyBookAvailability } from "../../../../actions/books";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BookAvailabilityToggleBUtton from "./BookAvailabilityToggleButton/bookAvailabilityToggleButton";
 
 const BookCard=({
@@ -12,12 +11,13 @@ const BookCard=({
     synopsis,
     is_available,
 })=>{
-    
+    // const libraryFilter = useSelector(state=>state.books.libraryFilter);
+    ;
     const dispatch = useDispatch();
-    const handleAvailabilityToggle= (e) =>{
-        console.log('button clicked');
-        dispatch(sendMyBookAvailability(is_available, e.target.value))
-    }
+    // const handleAvailabilityToggle= (e) =>{
+    //     console.log('button clicked');
+    //     dispatch(sendMyBookAvailability(is_available, e.target.value))
+    // }
     return (
         <>
             <div value = {isbn} className="w-1/3 h-1/3 mobile:max-h-[280px] desktop:max-h-[300px] desktop:max-w-[200px] flex flex-col items-center">
@@ -26,7 +26,9 @@ const BookCard=({
                 <h4 className="mobile:hidden desktop:block">{author}</h4>
                 {synopsis? <p className="mobile:hidden desktop:block text-ellipsis"> {synopsis}</p> : <p className="mobile:hidden   desktop:block">Pas de synopsis disponible </p>}
                
-                {/* //! ici */}
+
+                {!libraryFilter==="myBorrows" && <BookAvailabilityToggleBUtton {...book} libraryid= {libraryid}   /> }
+
                 {/* <label htmlFor={libraryid} className="inline-flex relative items-center cursor-pointer">
                 <input onClick={handleAvailabilityToggle} type="checkbox" defaultChecked={!libraryid} value={libraryid} id={libraryid} className="sr-only peer"></input>
                 
@@ -34,10 +36,6 @@ const BookCard=({
                 
                 </label> */}
                 {/* {is_available? <p  >Disponible </p> : <p     >Indisponible</p>} */}
-                {/* //! ici
-                //! refactorisation en cours dans le composant ci-dessous */}
-                <BookAvailabilityToggleBUtton libraryid={libraryid} onClick={handleAvailabilityToggle} />
-                
                 {/* reprendre l'algo de O'fig pour les étoiles RATING HERE*/ }
             </div>
          </>

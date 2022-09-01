@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchBooks } from "../../../actions/books";
 import BookCard from "../../GlobalComponents/BooksResults/BookCard";
-
+import BookAvailabilityToggleBUtton from "../../GlobalComponents/BooksResults/BookCard/BookAvailabilityToggleButton/bookAvailabilityToggleButton";
+import { sendMyBookAvailability } from "../../../actions/books";
 
 const MyBooks = ()=>{
     // Fonctions
@@ -15,21 +16,14 @@ const MyBooks = ()=>{
         console.log("fetching from myBooks")
     }, []);
 
+    // const handleAvailabilityToggle= (e) =>{
+    //     console.log('button clicked');
+    //     dispatch(sendMyBookAvailability(is_available, e.target.value))}
 
     // constantes
     const libraryFilter = useSelector(state=>state.books.libraryFilter)
     const myBooks = useSelector(state=>state.books.booksData.myBooks)
 
-
-    // return (
-    //     <>
-    //         <p>{libraryFilter}</p>
-    //         <div className='flex justify-evenly'>
-    //                     {/* {myBooks.map((book) =>
-    //                         (<BookCard key={book.libraryid} {...book}/>)
-    //                     )} */}
-    //         </div>
-    //     </>
     
     if (libraryFilter==='allMyBooks'){
         return (
@@ -37,7 +31,9 @@ const MyBooks = ()=>{
                 <h3>My books</h3>
                 <div className='flex justify-evenly'>
                     {myBooks.books.map((book) =>
-                        (<BookCard key={book.libraryid} {...book}/>)
+                        (<>
+                            <BookCard  {...book}/>
+                        </>)
                     )}
                 </div>
             </>
@@ -49,7 +45,9 @@ const MyBooks = ()=>{
                 <h3>My lends</h3>
                 <div className='flex justify-evenly'>
                     {myBooks.lends.map((book) =>
-                        (<BookCard key={book.libraryid} {...book}/>)
+                        (<>
+                            <BookCard  {...book}/>
+                        </>)    
                     )}
                 </div>
             </>
@@ -72,5 +70,6 @@ const MyBooks = ()=>{
 
         
 }
+                            // {/* <BookAvailabilityToggleBUtton {...book}  /> */}
 
 export default MyBooks;

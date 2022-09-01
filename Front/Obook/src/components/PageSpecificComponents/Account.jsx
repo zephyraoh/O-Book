@@ -80,7 +80,10 @@ const Account = () =>{
     <form>
     
     {/* Upload D' images */}
-    <img src={userImg}></img>
+    <div className="bg-#ff253a flex justify-center h-full mt-5">
+        <img className="rounded-full h-40 w-40" src={userImg}></img>
+    </div>
+    
     <input type="file" onChange={event=>setImageSelected(event.target.files[0])}/>
     <button name="upload Image" onClick={uploadImage}>Upload Image</button>
 
@@ -90,7 +93,7 @@ const Account = () =>{
     <Field value={newZipcode} type="text" name="zipcode" placeholder="Code postal" onChange={handleChange}/> 
 
     {/* LABELS BUTTONS */}
-        <button value="Romans" name="profileLabelButton" onClick={handleClick}>Romans</button>
+        {/* <button value="Romans" name="profileLabelButton" onClick={handleClick}>Romans</button>
         <button value="Science-Fiction & Fantasy" className="profileLabelButton" onClick={handleClick}>Science-Fiction & Fantasy</button>
         <button value="Polar & Thriller" className="profileLabelButton" onClick={handleClick}>Polar & Thriller</button>
         <button value="BD/Comics & Manga" className="profileLabelButton" onClick={handleClick}>BD/Comics & Manga</button>
@@ -98,17 +101,50 @@ const Account = () =>{
         <button value="Enfants & Jeunesse" className="profileLabelButton" onClick={handleClick}>Enfants & Jeunesse</button>
         <button value="Savoir" className="profileLabelButton" onClick={handleClick}>Savoir</button>
         <button value="Loisirs" className="profileLabelButton" onClick={handleClick}>Loisirs</button>
-        <button value="Autres" className="profileLabelButton" onClick={handleClick}>Autres</button>
+        <button value="Autres" className="profileLabelButton" onClick={handleClick}>Autres</button> */}
 
         {/* informations dures */}
-         <Field value={newLastName} type="text" name="lastname" placeholder="Nom" onChange={handleChange}/>
+         {/* <Field value={newLastName} type="text" name="lastname" placeholder="Nom" onChange={handleChange}/>
          <Field value={newFirstName} type="text" name="firstname" placeholder="Prénom" onChange={handleChange}/>
          <Field value={newUsername} type="text" name="username" placeholder="Pseudonyme" onChange={handleChange}/>
          <Field value={oldPassword}type="password" name="oldPassword" placeholder="ancien Mot de passe" onChange={handleChange}/>
          <Field value={newPassword} type="password" name="password" placeholder="Nouveau mot de passe" onChange={handleChange}/>
          <Field value={newPasswordConfirm} type="password" name="passwordConfirm" placeholder="Confirmation du mot de passe" onChange={handleChange}/>
 
-         <button type="submit" onClick={handleSubmit}>Confirmer</button>
+         <button type="submit" onClick={handleSubmit}>Confirmer</button> */}
+
+        <span className="bg-#ff253a flex content-center align-items: stretch justify-center">
+
+        <div className="h- grid grid-cols-3 gap-1 flex content-center justify-center h-full items-center justify-content: space-evenly flex-grow: 12;">
+            <button value="BD/Comics & Manga" className="profileLabelButton p-3 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>BD/Comics & Manga</button>
+            <button value="Science-Fiction & Fantasy" className="profileLabelButton p-3 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Science-Fiction & Fantasy</button>
+            <button value="Polar & Thriller" className="profileLabelButton p-3 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Polar & Thriller</button>
+            <button value="Romans" className="profileLabelButton p-3 max-w-sm mx-auto text-white bg-[#292F44] rounded-xl hover:bg-sky-700 shadow-lg flex text-align: center; space-x-1" onClick={handleClick}>Romans</button>
+            <button value="Littérature classique" className="profileLabelButton p-3 max-w-sm mx-auto text-white bg-[#292F44] rounded-xl hover:bg-sky-700 shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Littérature classique</button>
+            <button value="Enfants & Jeunesse" className="profileLabelButton p-3 max-w-sm mx-auto bg-[#292F44] text-white hover:bg-sky-700 rounded-xl shadow-lg flex text-align: center; space-x-1" onClick={handleClick}>Enfants & Jeunesse</button>
+            <button value="Savoir" className="profileLabelButton p-3 max-w-sm mx-auto bg-[#292F44] text-white hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Savoir</button>
+            <button value="Loisirs" className="profilepLabelButton p-3 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Loisirs</button>
+            <button value="Autres" className="profileLabelButton p-3 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Autres</button>
+
+        </div>
+
+        </span>
+
+
+        {/* Infos "secondaires" */}
+        <Field value={newBiography} classInformation="biography" type="text" name="biography" placeholder="Bio" onChange={handleChange} />
+        <Field value={newLocalisation} classLocalisation="Localisation" type="text" name="localisation" placeholder="Région" onChange={handleChange} />
+        <Field value={newZipcode} classLocalisation="Zipcode" type="text" name="zipcode" placeholder="Code postal" onChange={handleChange} />
+
+        {/* informations dures */}
+        <Field value={newLastName} type="text" name="lastname" placeholder="Nom" onChange={handleChange} />
+        <Field value={newFirstName} type="text" name="firstname" placeholder="Prénom" onChange={handleChange} />
+        <Field value={newUsername} type="text" name="username" placeholder="Pseudonyme" onChange={handleChange} />
+        <Field value={oldPassword} type="password" name="oldPassword" placeholder="ancien Mot de passe" onChange={handleChange} />
+        <Field value={newPassword} type="password" name="password" placeholder="Nouveau mot de passe" onChange={handleChange} />
+        <Field value={newPasswordConfirm} type="password" name="passwordConfirm" placeholder="Confirmation du mot de passe" onChange={handleChange} />
+
+        <button className='bg-blue-700 hover:bg-800 text-white font-bold py-2 px-2rounded' type="submit" onClick={handleSubmit}>Confirmer</button>
     </form>
     )
 };
