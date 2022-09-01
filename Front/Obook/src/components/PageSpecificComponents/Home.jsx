@@ -1,13 +1,22 @@
 import BooksResults from "../GlobalComponents/BooksResults";
 import UpdatesFeed from "../PageSpecificComponents/HomeComponents/UpdatesFeed";
-
-
-
+import { useSelector } from "react-redux";
+import SearchBookResultstest from "../GlobalComponents/SearchBookResultstest";
 const Home = ()=>{
-return(
+const isSearchOn= useSelector(state=>(state.books.searchValue))
+
+    return(
     <>
-        <BooksResults />
-        <UpdatesFeed/>
+        {!isSearchOn?
+            <>
+                <BooksResults />
+                <UpdatesFeed/>
+            </>
+            :
+            <>
+             <SearchBookResultstest/>
+            </>
+            }
     </>
 )
 

@@ -5,6 +5,7 @@ import BookCard from "../../GlobalComponents/BooksResults/BookCard";
 import BookAvailabilityToggleBUtton from "../../GlobalComponents/BooksResults/BookCard/BookAvailabilityToggleButton/bookAvailabilityToggleButton";
 import { sendMyBookAvailability } from "../../../actions/books";
 
+
 const MyBooks = ()=>{
     // Fonctions
     const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const MyBooks = ()=>{
                     {myBooks.books.map((book) =>
                         (<>
                             <BookCard  {...book}/>
+                            
                         </>)
                     )}
                 </div>

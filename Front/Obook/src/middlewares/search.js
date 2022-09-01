@@ -2,7 +2,7 @@ import { SEARCH_BOOKS, FETCH_BOOKS, FETCH_UPDATES, setBooksResultsInSearchState,
 import { ISBNApiSearchBar, axiosServerDB } from '../utils/axios';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { FETCH_VISITED_PROFILE_DATA, setVisitedProfileData } from '../actions/visitedUser';
+import { setVisitedProfileData, FETCH_VISITED_PROFILE_BOOKS, FETCH_VISITED_PROFILE_DATA, setVisitedProfileBooks, fetchVisitedProfileBooks } from '../actions/visitedUser';
 
 
 const apiKey = import.meta.env.VITE_ISBN_API_KEY;
@@ -38,9 +38,38 @@ const searchMiddleware = (store) => (next) => async (action) => {
         break;
       
     }
-    // case FETCH_VISITED_PROFILE_BOOKS:{
+    case FETCH_VISITED_PROFILE_BOOKS:{
+      
+      const { visitedProfile: {books} } = store.getState();
+      
+      const booksArray = books.map(book => (book.isbn));
+      
+      const options = {
+        method: 'POST',
+        url: 'https://api2.isbndb.com/books/',
+        headers: {
+          Authorization: apiKey,
+          'Content-Type': 'application/json'
+        },
+        data: `data: isbns=${[...booksArray]}`
+      }
+      const {data} = await axios.request(options);
+
+      const booksPreApi = books;
+      const booksPostApi = data.data;
+      const justineBooks = [];
+      booksPreApi.forEach(bookAPI => {
+        booksPostApi.forEach(bookISBN => {
+          if(bookAPI.isbn === bookISBN.isbn) {
+            justineBooks.push({...bookAPI, ...bookISBN})
+          }
+        })
+      })
+  
+      store.dispatch(setVisitedProfileBooks(justineBooks))
+      
     //   try{
-		// 		const { data } = await axiosServerDB.get('/mylibrary')
+		// 		const { data } = await axiosServerDB.get('/vis')
 		// 	console.log("receiving profile data !!!>>>", data);
 		// }catch(error){
 		// 	console.log('error getting profile >>>', error);
@@ -70,8 +99,10 @@ const searchMiddleware = (store) => (next) => async (action) => {
     //     })
     //   })
   
-    //   store.dispatch(setBooksResultsInSearchState("myBooks", justineBooks))
-    // }
+    //   store.dispatch(NewActionADefinir  ("myBooks", justineBooks))
+    break;
+    }
+    
     case FETCH_BOOKS: {
 //! old working code
       // const { user: { library: {books} }} = store.getState();
@@ -222,13 +253,14 @@ const searchMiddleware = (store) => (next) => async (action) => {
     case FETCH_VISITED_PROFILE_DATA: {
       try{
         const username = action.payload;
-        console.log(username)
+        console.log("data to fetch to visted profile", username)
 				const { data } = await axiosServerDB.get(`/visitedlibrary/${username}`);
 			  console.log("receiving visited profile data !!!>>>", data);
+        store.dispatch(setVisitedProfileData(data));
+        store.dispatch(fetchVisitedProfileBooks());
 		  }catch(error){
 			console.log('error getting visited profile >>>', error);
 		  }
-      store.dispatch(setVisitedProfileData(data));
       break;
     }
     default:

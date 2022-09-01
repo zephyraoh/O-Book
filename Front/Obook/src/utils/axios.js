@@ -9,9 +9,11 @@ export const ISBNApiSearchBar = axs.create({
 });
 
 export const axiosServerDB = axs.create({
+	// ---------------- version HEROKU ----------------
 	baseURL: 'https://obook-api.herokuapp.com/api',
-	// POUR LA PARTIE CORS, AJOUTER :
 	withCredentials: true,
+	// ---------------- version BACK LOCALHOST ----------------
+	// baseURL: 'https://localhost:5999/api',
 });
 
 

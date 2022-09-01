@@ -8,11 +8,11 @@ export const initialState = {
   username: null,  
   email: 'marwan@gmail.com',
   // miscelleanous
-  profile_picture:'https://res.cloudinary.com/obook/image/upload/v1661341818/vcyetnkhrahfxfyxrlhk.jpg',
+  profile_picture:'https://res.cloudinary.com/obook/image/upload/v1661345211/nl2gtqzgbnqyo5ilgzfz.jpg ',
   zipcode:'',
   localisation:'',
   biography:'',
-  tel:'',
+  tel:'', 
   // connexion
   token: null,
   isLogged: false,
@@ -23,7 +23,7 @@ export const initialState = {
   newPasswordConfirm:'',
   accountModifications: {
     //user infos
-    profilePicture: '',
+    profilePicture: 'https://res.cloudinary.com/obook/image/upload/v1661345211/nl2gtqzgbnqyo5ilgzfz.jpg',
     firstname:'',
     lastname:'',
     username: '',  
