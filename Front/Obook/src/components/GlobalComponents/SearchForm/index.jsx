@@ -27,7 +27,7 @@ const SearchForm=()=>{
    
     
     return (
-    <form className='mobile:hidden desktop:block hover:drop-shadow-lg duration-100 ease-in-out' onSubmit={handleSubmit}>
+    <form className='mobile:hidden desktop:block hover:drop-shadow-lg duration-100 ease-in-out min-w-[300px]' onSubmit={handleSubmit}>
         <div className= 'flex h-8'>
             <SearchBar className= "search-form__input rounded-l-md w-full"/>
             <Button type ="submit" name="Valider" value="searchButton" className="search-button px-2 rounded-r-md bg-[#292F44] text-[#F5F5F5]" />

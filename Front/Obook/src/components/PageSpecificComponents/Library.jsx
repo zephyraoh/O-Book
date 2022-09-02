@@ -31,7 +31,7 @@ const Library = ()=>{
 
             <p>Visited library component</p>
             {/* user Profile : picture, bio, tags, localisation zipcode */}
-            
+           <div className="flex-row"> 
             <div className="p-2">
                 <img className="rounded-full h-40 w-40" src={userInfos.profile_picture}></img>
                 <h3 className="flex content-left pl-11 pt-2">{userInfos.username}</h3>
@@ -40,10 +40,11 @@ const Library = ()=>{
                 {tags.map(tag => (
                     <div className="justify-end pr-2" key={tag.id}>{tag.label} </div>
                 ))}
+                </div>
                 <p>{userInfos.biography}</p>
                 <p> {userInfos.localisation}</p>
                 <p> {userInfos.zipcode}</p>
-            </div>
+            </div> 
             {books.map(book =>(
                 <>
                     <BookCard key={book.id} {...book}/>

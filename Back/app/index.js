@@ -17,6 +17,10 @@ const errorHandler = require('./helpers/errorHandler');
 // Création du serveur express
 const app = express();
 
+// Version localhost
+// app.use(cors('*'))
+
+// Version heroku
 app.use(cors({
     credentials: true,
     origin: 'http://localhost:5173',

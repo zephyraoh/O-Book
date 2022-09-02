@@ -1,4 +1,4 @@
-import { SEARCH_BOOKS, FETCH_BOOKS, FETCH_UPDATES, setBooksResultsInSearchState, FETCH_LATEST_BOOKS, setBooks, setSingleBook, setUpdates, GET_ONE_BOOK_DETAILS, setVisitedBookPage, SEARCH_ISBN } from '../actions/books';
+import { SEARCH_BOOKS, FETCH_BOOKS, FETCH_UPDATES, setBooksResultsInSearchState, FETCH_LATEST_BOOKS, setBooks, setSingleBook, setUpdates, GET_ONE_BOOK_DETAILS, setVisitedBookPage, SEARCH_ISBN, setLoading } from '../actions/books';
 import { ISBNApiSearchBar, axiosServerDB } from '../utils/axios';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -235,6 +235,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
         updates.push({...loan, ...lenderInfos.data, ...ISBNdata})
       }
       store.dispatch(setUpdates(updates));
+      store.dispatch(setLoading(false));
       break;
     }
     case GET_ONE_BOOK_DETAILS: {

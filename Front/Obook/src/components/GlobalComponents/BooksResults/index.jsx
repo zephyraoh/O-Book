@@ -1,6 +1,6 @@
 import { useSelector, useDispatch} from 'react-redux';
-import { useEffect } from 'react';
-import { fetchBooks, fetchLatestBooks } from '../../../actions/books';
+import { useEffect, useState } from 'react';
+import { fetchBooks, fetchLatestBooks, setLoading } from '../../../actions/books';
 import BookPreview from './BookPreview';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css";
@@ -13,13 +13,17 @@ import SwiperCore, { Autoplay } from 'swiper';
 const BooksResults = () => {
   
   const dispatch = useDispatch();
-    
+  const loading = useSelector(state => state.books.loading);
+  
+
   useEffect(() => {
       dispatch(fetchLatestBooks());
   }, []);
   
-  const latestBooks = useSelector(state=>state.books.booksData.searchedBooks);
-
+  const latestBooks = useSelector(state => state.books.booksData.searchedBooks);
+  if(loading){
+    return ''
+  }
   return(
   <div className="m-3">
     <p className="mobile:text-lg desktop:text-2xl mb-3">Les derniers livres ajoutés</p>
@@ -47,7 +51,7 @@ const BooksResults = () => {
             slidesPerView: 5,
             spaceBetween: 20,
           },
-          575: {
+          525: {
             slidesPerView: 3,
             spaceBetween: 20,
           }
