@@ -15,7 +15,7 @@ const UpdatesFeed = () => {
 
   return(
     <div>
-      <p className="text-lg">Les derniers prêts</p>
+      <p className="mobile:text-lg desktop:text-2xl">Les derniers prêts</p>
         {updates.map((update) => (
             <Update key={update.loanid} {...update}/>
         )

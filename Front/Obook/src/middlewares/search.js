@@ -1,4 +1,4 @@
-import { SEARCH_BOOKS, FETCH_BOOKS, FETCH_UPDATES, setBooksResultsInSearchState, FETCH_LATEST_BOOKS, setBooks, setUpdates, GET_ONE_BOOK_DETAILS, setVisitedBookPage } from '../actions/books';
+import { SEARCH_BOOKS, FETCH_BOOKS, FETCH_UPDATES, setBooksResultsInSearchState, FETCH_LATEST_BOOKS, setBooks, setSingleBook, setUpdates, GET_ONE_BOOK_DETAILS, setVisitedBookPage, SEARCH_ISBN } from '../actions/books';
 import { ISBNApiSearchBar, axiosServerDB } from '../utils/axios';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -24,19 +24,21 @@ const searchMiddleware = (store) => (next) => async (action) => {
           searchURL= `/books/${searchValue}?&column=author`;
           break;
         }
-        case "ISBN": {
-          searchURL= `/book/${searchValue}`;
-          break;
-        }
         default:{
           searchURL = `/books/${searchValue}?`;
         }
       }
       const { data } = await ISBNApiSearchBar.get(searchURL);
-        console.log("middleware data", data)
-        store.dispatch(setBooks(data));
+        console.log("middleware data", data);
+        store.dispatch(setBooks(data.books));  
         break;
-      
+    }
+    case SEARCH_ISBN: {
+      const {books : {searchValue}} = store.getState(); 
+      const searchURL= `/book/${searchValue}`;
+      const { data } = await ISBNApiSearchBar.get(searchURL);
+      store.dispatch(setSingleBook(data.book));
+      break;
     }
     case FETCH_VISITED_PROFILE_BOOKS:{
       

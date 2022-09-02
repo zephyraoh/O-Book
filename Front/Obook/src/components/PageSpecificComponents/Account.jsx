@@ -79,9 +79,9 @@ const Account = () =>{
     return (
     <form>
     <div className="flex w-full items-center mobile:flex-col desktop:flex-row">
-        <div className="w-1/2 p-6">
+        <div className="desktop:w-1/2 mobile:w-full">
         {/* Upload D' images */}
-            <div className="flex justify-center items-end m-5 mobile:flex-col desktop:flex-row">
+            <div className="flex justify-center desktop:items-end mobile:items-center m-5 mobile:flex-col desktop:flex-row">
                 <img className="rounded-full h-40 w-40" src={userImg}></img>
                 <div className="flex flex-col">
                     <input type="file" onChange={event=>setImageSelected(event.target.files[0])}/>
@@ -118,32 +118,33 @@ const Account = () =>{
             <span className="bg-#ff253a flex content-center justify-center">
 
             <div className="m-5 grid grid-cols-3 gap-1 flex content-center justify-center h-full items-center justify-content: space-evenly">
-                <button value="BD/Comics & Manga" className="profileLabelButton p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>BD/Comics & Manga</button>
-                <button value="Science-Fiction & Fantasy" className="profileLabelButton p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Science-Fiction & Fantasy</button>
-                <button value="Polar & Thriller" className="profileLabelButton p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Polar & Thriller</button>
-                <button value="Romans" className="profileLabelButton p-2 max-w-sm mx-auto text-white bg-[#292F44] rounded-xl hover:bg-sky-700 shadow-lg flex text-align: center; space-x-1" onClick={handleClick}>Romans</button>
-                <button value="Littérature classique" className="profileLabelButton p-2 max-w-sm mx-auto text-white bg-[#292F44] rounded-xl hover:bg-sky-700 shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Littérature classique</button>
-                <button value="Enfants & Jeunesse" className="profileLabelButton p-2 max-w-sm mx-auto bg-[#292F44] text-white hover:bg-sky-700 rounded-xl shadow-lg flex text-align: center; space-x-1" onClick={handleClick}>Enfants & Jeunesse</button>
-                <button value="Savoir" className="profileLabelButton p-2 max-w-sm mx-auto bg-[#292F44] text-white hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Savoir</button>
-                <button value="Loisirs" className="profilepLabelButton p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Loisirs</button>
-                <button value="Autres" className="profileLabelButton p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Autres</button>
+                <button value="BD/Comics & Manga" className="profileLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>BD & Mangas</button>
+                <button value="Science-Fiction & Fantasy" className="profileLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>SF & Fantasy</button>
+                <button value="Polar & Thriller" className="profileLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Polar & Thriller</button>
+                <button value="Romans" className="profileLabelButton mobile:text-xs desktop:text-xs desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-[#292F44] rounded-xl hover:bg-sky-700 shadow-lg flex text-align: center; space-x-1" onClick={handleClick}>Romans</button>
+                <button value="Littérature classique" className="profileLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-[#292F44] rounded-xl hover:bg-sky-700 shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Classique</button>
+                <button value="Enfants & Jeunesse" className="profileLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto bg-[#292F44] text-white hover:bg-sky-700 rounded-xl shadow-lg flex text-align: center; space-x-1" onClick={handleClick}>Jeunesse</button>
+                <button value="Savoir" className="profileLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto bg-[#292F44] text-white hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Savoir</button>
+                <button value="Loisirs" className="profilepLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Loisirs</button>
+                <button value="Autres" className="profileLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Autres</button>
 
             </div>
 
             </span>
         </div>
 
-        <div className="w-1/2 p-6">
+        <div className="desktop:w-1/2 mobile:w-full">
 
             {/* informations dures */}
             <Field value={newLastName} type="text" name="lastname" placeholder="Nom" onChange={handleChange} />
             <Field value={newFirstName} type="text" name="firstname" placeholder="Prénom" onChange={handleChange} />
             <Field value={newUsername} type="text" name="username" placeholder="Pseudonyme" onChange={handleChange} />
+            {/* <Field value={telephone} type="telephone" name="telephone" placeholder="Téléphone" onChange={handleChange} /> */}
             <Field value={oldPassword} type="password" name="oldPassword" placeholder="Ancien Mot de passe" onChange={handleChange} />
             <Field value={newPassword} type="password" name="password" placeholder="Nouveau mot de passe" onChange={handleChange} />
             <Field value={newPasswordConfirm} type="password" name="passwordConfirm" placeholder="Confirmation du mot de passe" onChange={handleChange} />
 
-            <button className='bg-[#AB9F9F] text-black rounded-md font-bold p-2 text-lg m-3' type="submit" onClick={handleSubmit}>Confirmer</button>
+            <button className='bg-[#AB9F9F] hover:bg-[#8f8585] text-black rounded-md font-bold p-2 text-lg m-3' type="submit" onClick={handleSubmit}>Confirmer</button>
         </div>
     </div>
     

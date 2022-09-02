@@ -9,6 +9,9 @@ module.exports = {
       screens: {
         'mobile':'100px',
         'desktop': '768px',
+      },
+      fontFamily: {
+        'sans': ['Lato', 'sans-serif']
       }
     },
   plugins: [

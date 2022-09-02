@@ -1,18 +1,26 @@
-import { useDispatch } from 'react-redux';
-import { searchBooks } from '../../../actions/books';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchBooks, setSearchField, searchISBN } from '../../../actions/books';
 import Button from '../Button';
 import SearchFilters from './SearchFilters';
 import SearchBar from './SearchBar/SearchBar';
+import { useNavigate } from 'react-router-dom';
 
 const SearchForm=()=>{
 
-
+    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const searchFilter = useSelector(state => state.books.selectedSearchFilter);
+    const searchValue = useSelector(state => state.books.searchValue);
+
+    const endSearch = () => {
+        dispatch(setSearchField(''));
+    }
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(searchBooks())
-    
+        {searchFilter === "ISBN"? dispatch(searchISBN) : dispatch(searchBooks())};
+        endSearch();
+        {searchFilter === "ISBN"? navigate(`/book/${searchValue}`): navigate('/search')};
     };
 
     

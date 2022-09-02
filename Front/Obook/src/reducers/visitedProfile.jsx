@@ -1,4 +1,4 @@
-import { SET_VISITED_PROFILE_DATA, SET_VISITED_PROFILE_BOOKS } from "../actions/visitedUser";
+import { SET_VISITED_PROFILE_DATA, SET_VISITED_PROFILE_BOOKS, SET_VISITED_PROFILE_BOOK_STATUS } from "../actions/visitedUser";
 
 export const initialstate = {
     books:[],
@@ -25,6 +25,13 @@ const reducer = (state = initialstate, action = {}) => {
             return{
                 ...state,
                 books: action.payload,
+            }
+        case SET_VISITED_PROFILE_BOOK_STATUS:
+            return{
+                ...state,
+                books: {
+
+                }
             }
         default:
             return state;

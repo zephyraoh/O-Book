@@ -26,6 +26,7 @@ import Book from '../PageSpecificComponents/Book';
 import Library from '../PageSpecificComponents/Library';
 import Error404 from '../PageSpecificComponents/Error404';
 import { useDispatch, useSelector } from 'react-redux';
+import SearchResult from '../GlobalComponents/SearchResult';
 
 
 function App() {
@@ -54,11 +55,11 @@ const isSignModalToggled =useSelector (state=>state.user.signInModal);
         :  <Navigate to='/'/>
       } 
        />
-       
       <Route 
       path="/account" 
       element= {isLogged?<Account /> : <Navigate to='/'/>} />
        <Route path="/book/:id" element= {<Book />} />
+       <Route path="/search" element= {<SearchResult />} />
        <Route path="/visitedlibrary/:username" element= {<Library />} />
        <Route path="*" element= {<Error404 />} />
      </Routes>

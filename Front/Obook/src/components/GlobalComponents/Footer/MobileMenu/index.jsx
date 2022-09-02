@@ -1,6 +1,6 @@
 //react Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 //possible ajout de classNames plus tard
 
@@ -18,7 +18,7 @@ const MobileMenu=()=>{
 
     const dispatch = useDispatch();
     const [isSearchBarActive, setSearchBarActive]= useState(false);
-    
+    const navigate = useNavigate();
     const endSearch = () => {
         dispatch(setSearchField(''));
     }
@@ -31,7 +31,8 @@ const MobileMenu=()=>{
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(searchBooks())
-        endSearch()
+        navigate('/search');
+        endSearch();
     };
 
     return (

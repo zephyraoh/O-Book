@@ -5,18 +5,19 @@ import { logOut } from '../../../actions/user';
 import Button from '../Button';
 import { toggleSignInModal } from '../../../actions/user';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { NavLink } from 'react-router-dom';
+import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 
 
 const Header=()=>{
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     const handleLogOut = (e) => {
         console.log("LOGOUT !!")
         dispatch(logOut());
         dispatch(toggleSignInModal(false));
-    }
+    };
 
     const handleSignButton = ()=>{
         console.log('sign button clicked');
@@ -28,7 +29,7 @@ const Header=()=>{
         return (
         <>
         <div className='flex flex-wrap justify-evenly items-center content-baseline h-24 border-y-2 border-[#292F44] border-solid'>
-            <div className='desktop:text-3xl p-4 text-[#292F44] font-semibold mobile:text-2xl flex items-center'>
+            <div className='desktop:text-4xl p-4 text-[#292F44] font-semibold mobile:text-2xl flex items-center'>
                 <NavLink className='flex items-center' to='/'>
                     <h2 >O'BOOK</h2>
                     <FontAwesomeIcon className='p-3' icon="fa-book-open" />

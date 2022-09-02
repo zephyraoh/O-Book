@@ -27,12 +27,19 @@ const Library = ()=>{
     }, []);
    
     return(
-        <div>
+        <div className="bg-#ff253a"> 
+
             <p>Visited library component</p>
             {/* user Profile : picture, bio, tags, localisation zipcode */}
-            <div>
-                <h3>{userInfos.username}</h3>
+            
+            <div className="p-2">
                 <img className="rounded-full h-40 w-40" src={userInfos.profile_picture}></img>
+                <h3 className="flex content-left pl-11 pt-2">{userInfos.username}</h3>
+            </div>
+            <div>
+                {tags.map(tag => (
+                    <div className="justify-end pr-2" key={tag.id}>{tag.label} </div>
+                ))}
                 <p>{userInfos.biography}</p>
                 <p> {userInfos.localisation}</p>
                 <p> {userInfos.zipcode}</p>
