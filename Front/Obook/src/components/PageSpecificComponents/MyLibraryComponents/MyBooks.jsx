@@ -7,23 +7,22 @@ import { sendMyBookAvailability } from "../../../actions/books";
 
 
 const MyBooks = ()=>{
+    // constantes
+    const libraryFilter = useSelector(state=>state.books.libraryFilter)
+    const myBooks = useSelector(state=>state.books.booksData.myBooks)
     // Fonctions
     const dispatch = useDispatch();
     // console.log(libraryFilter)
     
     useEffect(() => {
         dispatch(fetchBooks());
-
         console.log("fetching from myBooks")
-    }, []);
+    }, [myBooks]);
 
     // const handleAvailabilityToggle= (e) =>{
     //     console.log('button clicked');
     //     dispatch(sendMyBookAvailability(is_available, e.target.value))}
 
-    // constantes
-    const libraryFilter = useSelector(state=>state.books.libraryFilter)
-    const myBooks = useSelector(state=>state.books.booksData.myBooks)
 
     
     if (libraryFilter==='allMyBooks'){

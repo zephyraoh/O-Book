@@ -149,7 +149,7 @@ const authMiddleware = (store) => (next) => async (action) => {
 		case FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY:{
 			try{
 				const {data} = await axiosServerDB.post(`/mylibrary/addBook/`, {
-					"isbn": `${action.payload.data}`});
+					isbn: `${action.payload}`});
 					console.log("book successfully added, server response: =>", data)
 				}catch(err){
 				console.log("ERROR ADDING BOOK TO MY LIBRARY",err);
