@@ -98,6 +98,12 @@ export const setVisitedBookPage = (data)=>({
 
 export const fetchAddNewBookToMyLibrary=(isbn)=>({
   type : FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY,
-  payload: isbn
+  payload: isbn,
 });
+
+export const setLoading = (data) => ({
+  type: SET_LOADING,
+  payload: data,
+})
+
 
