@@ -40,7 +40,7 @@ const Library = ()=>{
             {books.map(book =>(
                 <>
                     <BookCard key={book.id} {...book}/>
-                    {book.is_available?<button value ={book.id} key={`availablebutton-${book.id}`} onClick={BorrowDemand} >faire une demande de prêt</button>:<p>indisponnible</p>}
+                    {book.is_available?<button value ={book.id} key={`availablebutton-${book.id}`} onClick={BorrowDemand} >faire une demande de prêt</button>:<p>indisponible</p>}
 
                 </>
             )

@@ -4,7 +4,7 @@ import { fetchBooks } from "../../../actions/books";
 import BookCard from "../../GlobalComponents/BooksResults/BookCard";
 import BookAvailabilityToggleBUtton from "../../GlobalComponents/BooksResults/BookCard/BookAvailabilityToggleButton/bookAvailabilityToggleButton";
 import { sendMyBookAvailability } from "../../../actions/books";
-
+import { getMyProfile } from "../../../actions/user";
 
 const MyBooks = ()=>{
     // constantes
@@ -13,12 +13,18 @@ const MyBooks = ()=>{
     // Fonctions
     const dispatch = useDispatch();
     // console.log(libraryFilter)
-    
+    dispatch(getMyProfile());
+
     useEffect(() => {
         dispatch(fetchBooks());
         console.log("fetching from myBooks")
-    }, [myBooks]);
+    }, []);
 
+    // useEffect(() => {
+    //     dispatch(fetchBooks());
+    //     console.log("fetching from myBooks")
+    // }, []);
+    
     // const handleAvailabilityToggle= (e) =>{
     //     console.log('button clicked');
     //     dispatch(sendMyBookAvailability(is_available, e.target.value))}

@@ -17,16 +17,18 @@ const BooksResults = () => {
   
 
   return(
-  <div className= 'flex overflow-x-auto h-64'>
-    
-    {latestBooks.map((book) =>
-        (
-            <BookPreview key={book.isbn} {...book}/>
-        )
-            
-        )}
+  <div className="align-middle m-3">
+    <p className="text-lg">Les derniers livres ajoutés</p>
+    <div className= 'flex overflow-x-auto h-64 mobile:h-52'>
+      {latestBooks.map((book) =>
+          (
+              <BookPreview key={book.isbn} {...book}/>
+          )
+              
+          )}
 
-    
+      
+    </div>
   </div>
   )
 };

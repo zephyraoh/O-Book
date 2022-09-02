@@ -15,6 +15,7 @@ const UpdatesFeed = () => {
 
   return(
     <div>
+      <p className="text-lg">Les derniers prêts</p>
         {updates.map((update) => (
             <Update key={update.loanid} {...update}/>
         )

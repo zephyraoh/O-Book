@@ -3,7 +3,7 @@ import DOMPurify from 'dompurify';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-
+import { getMyProfile } from '../../actions/user';
 import { getOneBookDetails, fetchAddNewBookToMyLibrary } from '../../actions/books';
 import { toggleSignInModal } from '../../actions/user';
 function removeTags(str) {
@@ -31,7 +31,9 @@ const Book = ()=>{
     const handleAddBookAction=(e)=>{
         console.log("value", e.target.value)
         isLogged?
-            dispatch(fetchAddNewBookToMyLibrary(e.target.value))
+            (dispatch(fetchAddNewBookToMyLibrary(e.target.value)),
+            dispatch(getMyProfile())
+            )
           : dispatch(dispatch(toggleSignInModal(true))) 
         }   
     useEffect(() => {

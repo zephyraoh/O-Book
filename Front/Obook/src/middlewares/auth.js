@@ -1,6 +1,6 @@
 import { axiosServerDB } from '../utils/axios';
 import { FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY, SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability } from '../actions/books';
-import { setUserData, SIGN_IN, SIGN_UP, GET_MY_PROFILE, GET_MEMBER_PROFILE, SET_USER_LABEL, SEND_MODIFIED_INFOS } from '../actions/user';
+import { setUserData, SIGN_IN, SIGN_UP, GET_MY_PROFILE, GET_MEMBER_PROFILE, SET_USER_LABEL, SEND_MODIFIED_INFOS, getMyProfile } from '../actions/user';
 
 
 const authMiddleware = (store) => (next) => async (action) => { 
@@ -91,7 +91,16 @@ const authMiddleware = (store) => (next) => async (action) => {
 		case GET_MY_PROFILE: {
 			try{
 				const { data } = await axiosServerDB.get('/mylibrary')
-			console.log("receiving profile data !!!>>>", data);
+				console.log("receiving profile data !!!>>>", data);
+				const correctedData ={
+					library:{
+						books: data.books,
+						borrow: data.borrow,
+						lends: data.lends,
+					},
+				}
+				store.dispatch(setUserData(correctedData))
+			
 		}catch(error){
 			console.log('error getting profile >>>', error);
 		}
@@ -150,7 +159,8 @@ const authMiddleware = (store) => (next) => async (action) => {
 			try{
 				const {data} = await axiosServerDB.post(`/mylibrary/addBook/`, {
 					isbn: `${action.payload}`});
-					console.log("book successfully added, server response: =>", data)
+					console.log("book successfully added, server response: =>", data);
+					
 				}catch(err){
 				console.log("ERROR ADDING BOOK TO MY LIBRARY",err);
 				}

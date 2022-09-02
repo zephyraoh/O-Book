@@ -2,7 +2,7 @@ import { SEARCH_BOOKS, FETCH_BOOKS, FETCH_UPDATES, setBooksResultsInSearchState,
 import { ISBNApiSearchBar, axiosServerDB } from '../utils/axios';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { setVisitedProfileData, FETCH_VISITED_PROFILE_BOOKS, FETCH_VISITED_PROFILE_DATA, setVisitedProfileBooks, fetchVisitedProfileBooks } from '../actions/visitedUser';
+import { setVisitedProfileData, FETCH_VISITED_PROFILE_BOOKS, FETCH_VISITED_PROFILE_DATA, setVisitedProfileBooks, fetchVisitedProfileBooks, fetchVisitedProfileData, setVisitedProfileBookStatus } from '../actions/visitedUser';
 import { FETCH_BORROW_DEMAND } from '../actions/visitedUser';
 
 const apiKey = import.meta.env.VITE_ISBN_API_KEY;
@@ -173,16 +173,8 @@ const searchMiddleware = (store) => (next) => async (action) => {
                })
             }); superJustineBooks[bookSection] = results; 
           }
-          // oneLastArray = {
-          //   ...superJustineBooks,
-          //   {}
-          // }
-  
         console.log("FINAL method superJustineBooks ==>", superJustineBooks)
         store.dispatch(setBooksResultsInSearchState("myBooks", superJustineBooks))
-      
-      // //! A FAIRE : tout simplement in for in englobant l'algo de justine for (object in library){ object.foreach etc etc}
-      // //! TENTATIVE EN COURS : GENERALISER LA FONCTION AVEC LA REQUETE DE LIBRARY PLUS QUE DE BOOKS
     }
     case FETCH_LATEST_BOOKS: {
       // requête au serveur back pour récupérer la liste des livres récents //
@@ -265,10 +257,16 @@ const searchMiddleware = (store) => (next) => async (action) => {
     }
     case FETCH_BORROW_DEMAND: {
       try{
-        const libraryid={libraryId:`${action.payload}`}
-        console.log("envoi serveur demande de prêt sur le livre", libraryid)
-        const {data} = await axiosServerDB.post('/mylibrary/addBook', {libraryid})
-        console.log("retour serveur sur la demande de prêt du livre id= ",libraryid, "==>",data)
+        const libraryId = action.payload;
+        console.log("envoi serveur demande de prêt sur le livre", libraryId)
+        const {data} = await axiosServerDB.post('/loan', {libraryId: libraryId});
+       
+        console.log("retour serveur sur la demande de prêt du livre id= ",libraryId, "==>",data);
+        
+        const { visitedProfile: {userInfos: {username}}} = store.getState();
+
+        // store.dispatch(setVisitedProfileBookStatus(data));
+        store.dispatch(fetchVisitedProfileData(username));
         //A ce moment là le prêt devrait modifier le statut du livre en question et l'afficher pour le proprio du livre.
         // à contrôler !!
       }catch(error){
