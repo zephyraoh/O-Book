@@ -243,6 +243,10 @@ const searchMiddleware = (store) => (next) => async (action) => {
       const searchURL= `/book/${isbn}`;
       const { data } = await ISBNApiSearchBar.get(searchURL);
       store.dispatch(setVisitedBookPage(data.book));
+      setTimeout(() => {
+        store.dispatch(setLoading(false));
+      }, "1000")
+      
       break;
     }
     case FETCH_VISITED_PROFILE_DATA: {

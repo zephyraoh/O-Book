@@ -59,7 +59,7 @@ const BooksResults = () => {
     >
         {latestBooks.map((book) =>
           (
-          <SwiperSlide><BookPreview key={book.isbn} {...book}/></SwiperSlide>
+          <SwiperSlide key={book.isbn}><BookPreview key={book.isbn} {...book}/></SwiperSlide>
           )
         )}
     </Swiper>

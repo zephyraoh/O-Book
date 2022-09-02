@@ -4,8 +4,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getMyProfile } from '../../actions/user';
-import { getOneBookDetails, fetchAddNewBookToMyLibrary } from '../../actions/books';
+import { getOneBookDetails, fetchAddNewBookToMyLibrary, setLoading } from '../../actions/books';
 import { toggleSignInModal } from '../../actions/user';
+import Loading from '../GlobalComponents/Loading';
+
 function removeTags(str) {
     if ((str===null) || (str===''))
         return false;
@@ -26,6 +28,7 @@ const Book = ()=>{
     const cleanSynopsis = DOMPurify.sanitize(book?.synopsis);
     const synopsisCleanHtml = removeTags(cleanSynopsis);
     const isLogged = useSelector(state => state.user.isLogged);
+    const loading = useSelector(state => state.books.loading);
     
     //fonctions
     const handleAddBookAction=(e)=>{
@@ -37,9 +40,13 @@ const Book = ()=>{
           : dispatch(dispatch(toggleSignInModal(true))) 
         }   
     useEffect(() => {
+        dispatch(setLoading(true));
         dispatch(getOneBookDetails(params.id));
     }, []);
 
+    if(loading){
+        return <Loading/>
+    }
 
         return(
          

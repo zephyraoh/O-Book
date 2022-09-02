@@ -8,16 +8,6 @@ const isSearchOn = useSelector(state=>(state.books.searchValue));
 const loading = useSelector(state => state.books.loading);
 
 
-// useEffect(() => {
-//     setTimeout(() => {
-//         setLoading(false);
-//     }, "3000")
-// }, []);
-
-// if (loading){
-//     // return <Loading/>
-//     return <p>Veuillez patienter</p>
-// }
 
     return(
         <>
