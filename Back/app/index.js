@@ -22,6 +22,7 @@ app.use(cors({
     origin: 'http://localhost:5173',
 }));
 
+
 // Configuration du moteur de rendu
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

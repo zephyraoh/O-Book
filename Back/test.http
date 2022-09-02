@@ -2,7 +2,7 @@
 # Fichier de test des routes HTTP de l'API
 #####
 
-@endpoint = http://localhost:5999
+@endpoint = http://localhost:5999/api
 
 #########################
 #          USER         #
