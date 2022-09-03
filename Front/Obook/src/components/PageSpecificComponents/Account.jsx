@@ -8,7 +8,6 @@ const Account = () =>{
     // hooks
     const dispatch = useDispatch();
     
-    // const
     //NewModifications
     const newProfilePicture = useSelector(state => state.user.accountModifications.newProfilePicture);
     const newFirstName = useSelector(state => state.user.accountModifications.firstname);
@@ -21,10 +20,24 @@ const Account = () =>{
     const newPassword = useSelector(state=>state.user.accountModifications.password);
     const newPasswordConfirm = useSelector(state=>state.user.accountModifications.passwordConfirm);
     const accountModifications = useSelector(state=>state.user.accountModifications)
-   
     const userImg = useSelector(state=>state.user.profile_picture);
+
+    // MISE EN PLACE DES DONNÉES LIÉES AUX LABELS
+    const tags = useSelector(state => state.user.tags);
+    const labels = [
+        {name:'BD & Manga', color: 'bg-amber-400', hover: 'hover:bg-amber-500'},
+        {name:'Science-Fiction & Fantasy', color: 'bg-red-600', hover: 'hover:bg-red-700'},
+        {name:'Polar & Thriller', color: 'bg-gray-800', hover: 'hover:bg-gray-900'},
+        {name:'Romans', color: 'bg-sky-600', hover: 'hover:bg-sky-700'},
+        {name:'Littérature classique', color: 'bg-yellow-800', hover: 'hover:bg-yellow-900'},
+        {name:'Enfants & Jeunesse', color: 'bg-fuchsia-500', hover: 'hover:bg-fuchsia-600'},
+        {name:'Savoir', color: 'bg-green-600', hover: 'hover:bg-green-700'},
+        {name:'Autres', color: 'bg-teal-600', hover: 'hover:bg-teal-700'},
+        {name:'Loisirs', color: 'bg-orange-600', hover: 'hover:bg-orange-700'},
+    ];
+
+    let classNameActiveLabel = '';
     // fonctions
-   
     const [imageSelected, setImageSelected] = useState("");
     // console.log("notre selected image", imageSelected)
     const uploadImage = (e)=>{
@@ -50,7 +63,8 @@ const Account = () =>{
     const handleClick = (e) => {
         e.preventDefault();
         console.log(`button ${e.target.value} clicked`);
-        dispatch(SetUserLabel(e.target.value))
+        // la fonction n'était pas complète, à finaliser
+        dispatch(SetUserLabel(e.target.value));
 
     }
     const handleSubmit = (e)=> {
@@ -94,40 +108,32 @@ const Account = () =>{
             <Field value={newZipcode} type="text" name="zipcode" placeholder="Code postal" onChange={handleChange}/> 
             <Field value={newBiography} type="text" name="biography" placeholder="Biographie" onChange={handleChange}/>
 
-        {/* LABELS BUTTONS */}
-            {/* <button value="Romans" name="profileLabelButton" onClick={handleClick}>Romans</button>
-            <button value="Science-Fiction & Fantasy" className="profileLabelButton" onClick={handleClick}>Science-Fiction & Fantasy</button>
-            <button value="Polar & Thriller" className="profileLabelButton" onClick={handleClick}>Polar & Thriller</button>
-            <button value="BD/Comics & Manga" className="profileLabelButton" onClick={handleClick}>BD/Comics & Manga</button>
-            <button value="Littérature classique" className="profileLabelButton" onClick={handleClick}>Littérature classique</button>
-            <button value="Enfants & Jeunesse" className="profileLabelButton" onClick={handleClick}>Enfants & Jeunesse</button>
-            <button value="Savoir" className="profileLabelButton" onClick={handleClick}>Savoir</button>
-            <button value="Loisirs" className="profileLabelButton" onClick={handleClick}>Loisirs</button>
-            <button value="Autres" className="profileLabelButton" onClick={handleClick}>Autres</button> */}
-
-            {/* informations dures */}
-            {/* <Field value={newLastName} type="text" name="lastname" placeholder="Nom" onChange={handleChange}/>
-            <Field value={newFirstName} type="text" name="firstname" placeholder="Prénom" onChange={handleChange}/>
-            <Field value={newUsername} type="text" name="username" placeholder="Pseudonyme" onChange={handleChange}/>
-            <Field value={oldPassword}type="password" name="oldPassword" placeholder="ancien Mot de passe" onChange={handleChange}/>
-            <Field value={newPassword} type="password" name="password" placeholder="Nouveau mot de passe" onChange={handleChange}/>
-            <Field value={newPasswordConfirm} type="password" name="passwordConfirm" placeholder="Confirmation du mot de passe" onChange={handleChange}/>
-
-            <button type="submit" onClick={handleSubmit}>Confirmer</button> */}
-
             <span className="bg-#ff253a flex content-center justify-center">
 
             <div className="m-5 grid grid-cols-3 gap-1 flex content-center justify-center h-full items-center justify-content: space-evenly">
-                <button value="BD/Comics & Manga" className="profileLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>BD & Mangas</button>
-                <button value="Science-Fiction & Fantasy" className="profileLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>SF & Fantasy</button>
-                <button value="Polar & Thriller" className="profileLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Polar & Thriller</button>
-                <button value="Romans" className="profileLabelButton mobile:text-xs desktop:text-xs desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-[#292F44] rounded-xl hover:bg-sky-700 shadow-lg flex text-align: center; space-x-1" onClick={handleClick}>Romans</button>
-                <button value="Littérature classique" className="profileLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-[#292F44] rounded-xl hover:bg-sky-700 shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Classique</button>
-                <button value="Enfants & Jeunesse" className="profileLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto bg-[#292F44] text-white hover:bg-sky-700 rounded-xl shadow-lg flex text-align: center; space-x-1" onClick={handleClick}>Jeunesse</button>
-                <button value="Savoir" className="profileLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto bg-[#292F44] text-white hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Savoir</button>
-                <button value="Loisirs" className="profilepLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Loisirs</button>
-                <button value="Autres" className="profileLabelButton mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-[#292F44] hover:bg-sky-700 rounded-xl shadow-lg flex items-inline-block space-x-1" onClick={handleClick}>Autres</button>
-
+                {/* CRÉATION DES TAGS ET MISE EN FORME CONDITIONNELLE SELON LEUR STATUT (SÉLECTIONNÉ OU NON) */}
+            {labels.map(label => {
+                if (tags.find(tag => tag.label===label.name)){
+                    classNameActiveLabel = `mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white ${label.color} ${label.hover} rounded-xl shadow-lg flex items-inline-block space-x-1`;
+                    return <button
+                    key={label.name}
+                    className={classNameActiveLabel}
+                    value={label.name}
+                    onClick={handleClick}
+                    >
+                    {label.name}
+                    </button>
+                } else {
+                    return <button
+                    key={label.name}
+                    className="mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-gray-300 hover:bg-gray-400 rounded-xl shadow-lg flex items-inline-block space-x-1"
+                    value={label.name}
+                    onClick={handleClick}
+                    >
+                    {label.name}
+                    </button>
+                }
+            })}
             </div>
 
             </span>

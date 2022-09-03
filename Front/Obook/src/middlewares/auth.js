@@ -119,8 +119,10 @@ const authMiddleware = (store) => (next) => async (action) => {
 		}
 		case SET_USER_LABEL:{
 			try{
-				const { data } = await axiosServerDB.post('/addtag')
+				const tagId = action.payload
+				const { data } = await axiosServerDB.post('/addtag', {tagId: tagId})
 				console.log("received data on user label change >>>>", data)
+
 			}catch(error){
 				console.log("error setting label", error);
 			}

@@ -62,8 +62,17 @@ export const initialState = {
         return{
           ...state,
           ...action.data,
-        }
-
+          // MODIFS EN TEST
+          // accountModifications:{
+          //   ...state.accountModifications,
+          //   firstname: action.data.firstname,
+          //   lastname: action.data.lastname,
+          //   username: action.data.username,  
+          //   biography: action.data.biography,
+          //   localisation: action.data.localisation,
+          //   zipcode: action.data.zipcode,
+        // }
+      }
       case CLEAR_PASSWORDS:
         return{
           ...state,
