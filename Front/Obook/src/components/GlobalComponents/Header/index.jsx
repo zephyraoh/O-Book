@@ -44,7 +44,7 @@ const Header=()=>{
                 <div className='flex flex-col mr-4'>
                     <NavLink className='mobile:hidden desktop:block' to = "/mylibrary"><FontAwesomeIcon className='h-10 text-[#292F44] block pl-8' icon= "fa-book-open" />Ma bibliothèque</NavLink>
                 </div>
-                <button className='p-3 m-3 destop:text-lg bg-[#292F44] text-[#F5F5F5] rounded-md h-1/2 mobile:text-sm mobile:p-2 mobile:m-2 hover:drop-shadow-lg duration-100 ease-in-out' name="Logout button" onClick={handleLogOut}>Deconnexion</button>
+                <button className='p-3 m-3 desktop:text-lg bg-[#292F44] text-[#F5F5F5] rounded-md h-1/2 mobile:text-sm mobile:p-2 mobile:m-2 hover:drop-shadow-lg duration-100 ease-in-out' name="Logout button" onClick={handleLogOut}>Deconnexion</button>
             </div>
         :
         <>

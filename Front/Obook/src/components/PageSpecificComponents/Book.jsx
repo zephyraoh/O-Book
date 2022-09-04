@@ -1,5 +1,5 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DOMPurify from 'dompurify';
+import PopUpModal from '../GlobalComponents/PopUpModal';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -31,8 +31,10 @@ const Book = ()=>{
     const loading = useSelector(state => state.books.loading);
     
     //fonctions
+    // const handleClick = () => {
+    //     return <PopUpModal description='Souhaitez vous ajouter ce livre à votre bibliothèque' actionYes={handleAddBookAction} />
+    // };
     const handleAddBookAction=(e)=>{
-        console.log("value", e.target.value)
         isLogged?
             (dispatch(fetchAddNewBookToMyLibrary(e.target.value)),
             dispatch(getMyProfile())

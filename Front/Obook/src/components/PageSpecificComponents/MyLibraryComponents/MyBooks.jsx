@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { fetchBooks } from "../../../actions/books";
 import BookCard from "../../GlobalComponents/BooksResults/BookCard";
 import BookAvailabilityToggleBUtton from "../../GlobalComponents/BooksResults/BookCard/BookAvailabilityToggleButton/bookAvailabilityToggleButton";
@@ -10,6 +11,7 @@ const MyBooks = ()=>{
     // constantes
     const libraryFilter = useSelector(state=>state.books.libraryFilter)
     const myBooks = useSelector(state=>state.books.booksData.myBooks)
+    // const link = `/book/${isbn}`;
     // Fonctions
     const dispatch = useDispatch();
     // console.log(libraryFilter)
@@ -35,10 +37,12 @@ const MyBooks = ()=>{
         return (
             <>
                 <h3>My books</h3>
-                <div className='flex justify-evenly'>
+                <div className='flex flex-wrap w-5/6 ml-56 justify-evenly'>
                     {myBooks.books.map((book) =>
                         (<>
+                            {/* <NavLink to ={link}> */}
                             <BookCard key={`mybooks_${book.libraryid}`} {...book}/>
+                            {/* </NavLink> */}
                             <BookAvailabilityToggleBUtton key={`myBooks-button${book.libraryid}`} {...book}/>
                         </>)
                     )}
