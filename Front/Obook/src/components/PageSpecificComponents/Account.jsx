@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setUserData, SetUserLabel, setUserModifyAccountField, sendModifiedInfos} from "../../actions/user";
+import { setUserData, SetUserLabel, setUserModifyAccountField, sendModifiedInfos, addTagUser, removeTagUser} from "../../actions/user";
 import Axios from "axios";
 import { useState } from "react";
 import Field from "../GlobalComponents/Header/LoginModal/Field";
@@ -60,13 +60,25 @@ const Account = () =>{
         console.log("NOUVELLE VALUE DU", name, "==>",value)
     }
     
-    const handleClick = (e) => {
-        e.preventDefault();
-        console.log(`button ${e.target.value} clicked`);
-        // la fonction n'était pas complète, à finaliser
-        dispatch(SetUserLabel(e.target.value));
+    // const handleClick = (e) => {
+    //     e.preventDefault();
+    //     console.log(`button ${e.target.value} clicked`);
+    //     // la fonction n'était pas complète, à finaliser
+    //     dispatch(SetUserLabel(e.target.value));
+    // };
 
-    }
+    const handleAddTag = (e) => {
+        e.preventDefault();
+        console.log(`label ${e.target.value} added`);
+        dispatch(addTagUser(e.target.value));
+    };
+
+    const handleRemoveTag = (e) => {
+        e.preventDefault();
+        console.log(`label ${e.target.value} removed`);
+        dispatch(removeTagUser(e.target.value));
+    };
+
     const handleSubmit = (e)=> {
         e.preventDefault();
         console.log(accountModifications);
@@ -119,7 +131,7 @@ const Account = () =>{
                     key={label.name}
                     className={classNameActiveLabel}
                     value={label.name}
-                    onClick={handleClick}
+                    onClick={handleRemoveTag}
                     >
                     {label.name}
                     </button>
@@ -128,7 +140,7 @@ const Account = () =>{
                     key={label.name}
                     className="mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-gray-300 hover:bg-gray-400 rounded-xl shadow-lg flex items-inline-block space-x-1"
                     value={label.name}
-                    onClick={handleClick}
+                    onClick={handleAddTag}
                     >
                     {label.name}
                     </button>

@@ -1,6 +1,6 @@
 import { axiosServerDB } from '../utils/axios';
 import { DELETE_BOOK, FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY, SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability, setLoading, fetchBooks } from '../actions/books';
-import { setUserData, SIGN_IN, SIGN_UP, GET_MY_LIBRARY, GET_MEMBER_PROFILE, SET_USER_LABEL, SEND_MODIFIED_INFOS } from '../actions/user';
+import { setUserData, SIGN_IN, SIGN_UP, GET_MY_LIBRARY, GET_MEMBER_PROFILE, SET_USER_LABEL, SEND_MODIFIED_INFOS, ADD_TAG_USER, REMOVE_TAG_USER } from '../actions/user';
 
 
 const authMiddleware = (store) => (next) => async (action) => { 
@@ -171,12 +171,34 @@ const authMiddleware = (store) => (next) => async (action) => {
 		case FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY:{
 			try{
 				const {data} = await axiosServerDB.post(`/mylibrary/addBook/`, {
-					isbn: `${action.payload}`});
-					console.log("book successfully added, server response: =>", data);
+				isbn: `${action.payload}`});
+				console.log("book successfully added, server response: =>", data);
 					
-				}catch(err){
+			}catch(err){
 				console.log("ERROR ADDING BOOK TO MY LIBRARY",err);
-				}
+			}
+			break;
+		}
+		case ADD_TAG_USER:{
+			try{
+				const {data} = await axiosServerDB.post(`/addtag`, {
+				tagId: `${action.payload}`});
+				console.log("tag added ==>", data);
+					
+			}catch(err){
+				console.log(err);
+			}
+			break;
+		}
+		case REMOVE_TAG_USER:{
+			try{
+				const {data} = await axiosServerDB.delete(`/removetag`, {
+				tagId: `${action.payload}`});
+				console.log("tag removed ==>", data);
+					
+			}catch(err){
+				console.log(err);
+			}
 			break;
 		}
 		default: 

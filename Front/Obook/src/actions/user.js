@@ -13,6 +13,8 @@ export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
 //séparation entre action demandant une confirmation et autres infos secondaires
 export const CHANGE_USER_INFO_MISC = 'CHANGE_USER_INFO_MISC'; 
 export const SET_USER_LABEL = 'SET_USER_LABEL';
+export const ADD_TAG_USER = 'ADD_TAG_USER';
+export const REMOVE_TAG_USER = 'REMOVE_TAG_USER';
 // actions requêtant au serveur les données user / another member
 export const GET_MY_LIBRARY = 'GET_MY_LIBRARY'; 
 export const GET_MEMBER_PROFILE = 'GET_MEMBER_PROFILE'
@@ -77,4 +79,14 @@ export const sendModifiedInfos = (data) => ({
 export const toggleSignInModal = (boolean) =>({
 	type: TOGGLE_SIGN_IN_MODAL,
 	payload: boolean
-})
+});
+
+export const addTagUser = (tag) =>({
+	type: ADD_TAG_USER,
+	payload: tag
+});
+
+export const removeTagUser = (tag) =>({
+	type: REMOVE_TAG_USER,
+	payload: tag
+});
