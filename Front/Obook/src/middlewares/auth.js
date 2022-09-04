@@ -101,7 +101,6 @@ const authMiddleware = (store) => (next) => async (action) => {
 				}
 				store.dispatch(setUserData(correctedData));
 				store.dispatch(fetchBooks());
-				store.dispatch(setLoading(false));
 			
 		}catch(error){
 			console.log('error getting profile >>>', error);

@@ -3,6 +3,7 @@ import { useSelector, useDispatch} from 'react-redux';
 import { setMyLibraryFilter } from "../../../actions/books";
 
 import './styles.scss';
+import Loading from "../../GlobalComponents/Loading";
 
 
 const MyLibraryMenu = ()=>{

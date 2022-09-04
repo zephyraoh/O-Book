@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setLoading } from "../../../actions/books";
+import { fetchBooks, setLoading } from "../../../actions/books";
 import BookCard from "../../GlobalComponents/BooksResults/BookCard";
 import BookAvailabilityToggleBUtton from "../../GlobalComponents/BooksResults/BookCard/BookAvailabilityToggleButton/bookAvailabilityToggleButton";
 import { sendMyBookAvailability } from "../../../actions/books";
@@ -34,12 +34,12 @@ const MyBooks = ()=>{
         return (
             <>
                 <h3>Mes livres</h3>
-                <div className=''>
+                <div className='flex justify-evenly'>
                     {allBooks.map((book) =>
-                        (<>
-                            <BookCard key={book.libraryid} {...book}/>
+                        (<div key={book.libraryid}>
+                            <BookCard {...book}/>
                             <DeleteButton key={`delete${book.libraryid}`} {...book}/>
-                        </>
+                        </div>
                         )
                     )}
                 </div>

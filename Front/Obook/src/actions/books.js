@@ -47,9 +47,8 @@ export const searchISBN = ()=>({
   type: SEARCH_ISBN,
 });
 
-export const fetchBooks = (value)=>({
+export const fetchBooks = ()=>({
   type: FETCH_BOOKS,
-  payload: value
 });
 
 export const fetchLatestBooks = ()=>({

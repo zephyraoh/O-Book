@@ -175,8 +175,9 @@ const searchMiddleware = (store) => (next) => async (action) => {
                })
             }); superJustineBooks[bookSection] = results; 
           }
-        console.log("FINAL method superJustineBooks ==>", superJustineBooks)
-        store.dispatch(setBooksResultsInSearchState("myBooks", superJustineBooks))
+        console.log("FINAL method superJustineBooks ==>", superJustineBooks);
+        store.dispatch(setBooksResultsInSearchState("myBooks", superJustineBooks));
+        store.dispatch(setLoading(false));
     }
     case FETCH_LATEST_BOOKS: {
       // requête au serveur back pour récupérer la liste des livres récents //

@@ -8,6 +8,17 @@ import { getOneBookDetails, fetchAddNewBookToMyLibrary, setLoading } from '../..
 import { toggleSignInModal } from '../../actions/user';
 import Loading from '../GlobalComponents/Loading';
 
+const removeTags = (str) => {
+    if ((str===null) || (str===''))
+        return false;
+    else
+        str = str.toString();
+          
+    // Regular expression to identify HTML tags in 
+    // the input string. Replacing the identified 
+    // HTML tag with a null string.
+    return str.replace( /(<([^>]+)>)/ig, '');
+};
 
 const Book = ()=>{
     //const
@@ -35,18 +46,6 @@ const Book = ()=>{
         dispatch(setLoading(true));
         dispatch(getOneBookDetails(params.id));
     }, []);
-
-    const removeTags = (str) => {
-        if ((str===null) || (str===''))
-            return false;
-        else
-            str = str.toString();
-              
-        // Regular expression to identify HTML tags in 
-        // the input string. Replacing the identified 
-        // HTML tag with a null string.
-        return str.replace( /(<([^>]+)>)/ig, '');
-    };
   
 
     if(loading){
