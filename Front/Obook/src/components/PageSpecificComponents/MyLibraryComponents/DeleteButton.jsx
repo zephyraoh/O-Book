@@ -7,7 +7,7 @@ const DeleteButton=({
     const dispatch = useDispatch();
 
     const handleClick = () => {
-        console.log("book deleted (la route n'est pas encore en place côté back");
+        console.log("book deleted (confirmer avec Justine pour la route à requêter côté back");
         // la route pour supprimer un livre n'existe pas : vérifier avec Justine
         // dispatch(deleteBook());
     }
