@@ -34,7 +34,7 @@ const MyBooks = ()=>{
         return (
             <>
                 <h3>Mes livres</h3>
-                <div className='flex flex-wrap w-5/6 ml-56 justify-evenly'>
+                <div className=''>
                     {allBooks.map((book) =>
                         (<>
                             <BookCard key={book.libraryid} {...book}/>

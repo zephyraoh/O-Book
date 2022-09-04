@@ -7,7 +7,6 @@ import './styles.scss';
 
 const MyLibraryMenu = ()=>{
     const libraryFilter = useSelector(state => state.books.libraryFilter);
-    const statebooks = useSelector (state => state.books);
     const loading = useSelector(state => state.books.loading);
     
     const dispatch = useDispatch()

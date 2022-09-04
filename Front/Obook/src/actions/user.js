@@ -14,7 +14,7 @@ export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
 export const CHANGE_USER_INFO_MISC = 'CHANGE_USER_INFO_MISC'; 
 export const SET_USER_LABEL = 'SET_USER_LABEL';
 // actions requêtant au serveur les données user / another member
-export const GET_MY_PROFILE = 'GET_PROFILE'; 
+export const GET_MY_LIBRARY = 'GET_MY_LIBRARY'; 
 export const GET_MEMBER_PROFILE = 'GET_MEMBER_PROFILE'
 //zipcode, area, labels, bio, pic
 // toggle de la modale de connexion/inscription
@@ -60,8 +60,8 @@ export const SetUserLabel = (label) =>({
 	type: SET_USER_LABEL,
 	payload: label,
 })
-export const getMyProfile = () => ({
-	type: GET_MY_PROFILE,
+export const getMyLibrary = () => ({
+	type: GET_MY_LIBRARY,
 });
 
 export const getMemberProfile = (username) => ({

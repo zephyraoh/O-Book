@@ -1,5 +1,5 @@
 import { axiosServerDB } from '../utils/axios';
-import { DELETE_BOOK, FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY, SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability } from '../actions/books';
+import { DELETE_BOOK, FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY, SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability, setLoading, fetchBooks } from '../actions/books';
 import { setUserData, SIGN_IN, SIGN_UP, GET_MY_LIBRARY, GET_MEMBER_PROFILE, SET_USER_LABEL, SEND_MODIFIED_INFOS } from '../actions/user';
 
 
@@ -100,6 +100,7 @@ const authMiddleware = (store) => (next) => async (action) => {
 					},
 				}
 				store.dispatch(setUserData(correctedData));
+				store.dispatch(fetchBooks());
 				store.dispatch(setLoading(false));
 			
 		}catch(error){

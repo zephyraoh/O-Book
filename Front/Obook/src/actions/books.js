@@ -16,6 +16,7 @@ export const GET_ONE_BOOK_DETAILS = 'GET_ONE_BOOK_DETAILS';
 export const SET_VISITED_BOOK_PAGE = 'SET_VISITED_BOOK_PAGE';
 export const FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY= 'FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY';
 export const SET_LOADING = 'SET_LOADING';
+export const DELETE_BOOK = 'DELETE_BOOK';
 
 
 export const setSearchField = (search) => ({
@@ -103,6 +104,12 @@ export const fetchAddNewBookToMyLibrary=(isbn)=>({
 
 export const setLoading = (data) => ({
   type: SET_LOADING,
+  payload: data,
+});
+
+export const deleteBook = (data) => ({
+  // à adapter selon les infos nécessaires à la requête
+  type: DELETE_BOOK,
   payload: data,
 });
 
