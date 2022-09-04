@@ -104,6 +104,5 @@ export const fetchAddNewBookToMyLibrary=(isbn)=>({
 export const setLoading = (data) => ({
   type: SET_LOADING,
   payload: data,
-})
-
+});
 

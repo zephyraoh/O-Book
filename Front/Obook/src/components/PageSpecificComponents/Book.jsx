@@ -2,23 +2,12 @@ import DOMPurify from 'dompurify';
 import PopUpModal from '../GlobalComponents/PopUpModal';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getMyProfile } from '../../actions/user';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getMyLibrary } from '../../actions/user';
 import { getOneBookDetails, fetchAddNewBookToMyLibrary, setLoading } from '../../actions/books';
 import { toggleSignInModal } from '../../actions/user';
 import Loading from '../GlobalComponents/Loading';
 
-function removeTags(str) {
-    if ((str===null) || (str===''))
-        return false;
-    else
-        str = str.toString();
-          
-    // Regular expression to identify HTML tags in 
-    // the input string. Replacing the identified 
-    // HTML tag with a null string.
-    return str.replace( /(<([^>]+)>)/ig, '');
-}
 
 const Book = ()=>{
     //const
@@ -29,22 +18,36 @@ const Book = ()=>{
     const synopsisCleanHtml = removeTags(cleanSynopsis);
     const isLogged = useSelector(state => state.user.isLogged);
     const loading = useSelector(state => state.books.loading);
+    const navigate = useNavigate();
     
-    //fonctions
-    // const handleClick = () => {
-    //     return <PopUpModal description='Souhaitez vous ajouter ce livre à votre bibliothèque' actionYes={handleAddBookAction} />
-    // };
     const handleAddBookAction=(e)=>{
-        isLogged?
-            (dispatch(fetchAddNewBookToMyLibrary(e.target.value)),
-            dispatch(getMyProfile())
-            )
-          : dispatch(dispatch(toggleSignInModal(true))) 
-        }   
+        console.log("value", e.target.value)
+        if (isLogged){
+            // return <PopUpModal description='Souhaitez vous ajouter ce livre à votre bibliothèque' actionYes={handleAddBookAction} />
+            dispatch(fetchAddNewBookToMyLibrary(e.target.value));
+            navigate('/mylibrary');
+        } else {
+            dispatch(toggleSignInModal(true));
+        }
+    };
+   
     useEffect(() => {
         dispatch(setLoading(true));
         dispatch(getOneBookDetails(params.id));
     }, []);
+
+    const removeTags = (str) => {
+        if ((str===null) || (str===''))
+            return false;
+        else
+            str = str.toString();
+              
+        // Regular expression to identify HTML tags in 
+        // the input string. Replacing the identified 
+        // HTML tag with a null string.
+        return str.replace( /(<([^>]+)>)/ig, '');
+    };
+  
 
     if(loading){
         return <Loading/>
@@ -64,7 +67,6 @@ const Book = ()=>{
                 </div>
             </div>
         )
-
 
 };
 

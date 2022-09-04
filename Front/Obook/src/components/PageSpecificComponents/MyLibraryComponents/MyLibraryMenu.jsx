@@ -5,16 +5,19 @@ import { setMyLibraryFilter } from "../../../actions/books";
 import './styles.scss';
 
 
-
-
 const MyLibraryMenu = ()=>{
-    const libraryFilter=useSelector(state=>state.books.libraryFilter)
-    const statebooks=useSelector(state=>state.books)
+    const libraryFilter = useSelector(state => state.books.libraryFilter);
+    const statebooks = useSelector (state => state.books);
+    const loading = useSelector(state => state.books.loading);
     
     const dispatch = useDispatch()
     const handleClick = (e) =>{
          dispatch(setMyLibraryFilter(e.target.value))
          console.log("setting myLibrary with filter : ", e.target.value)
+     }
+
+     if (loading) {
+        return ''
      }
     return (
         <div>
