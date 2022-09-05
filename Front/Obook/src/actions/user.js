@@ -9,10 +9,11 @@ export const SETCREATIONCONFIRMATION = 'SETCREATIONCONFIRMATION';
 export const LOGOUT = 'LOGOUT';
 export const DEL_ACCOUNT = 'DEL_ACCOUNT';
 
-export const SET_ADDED_TAG = 'SET_ADDED_TAG';
+// export const SET_ADDED_TAG = 'SET_ADDED_TAG';
 export const GET_ALL_TAGS = 'GET_ALL_TAGS';
 export const SET_ALL_TAGS = 'SET_ALL_TAGS';
 export const SET_MY_TAGS = 'SET_MY_TAGS'
+
 export const END_LOAN = 'END_LOAN';
 //à voir dans un second temps une fois branché au back
 export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
@@ -98,10 +99,10 @@ export const removeTagUser = (tagId) =>({
 	payload: tagId,
 });
 
-export const setAddedTag = (data) =>({
-	type: SET_ADDED_TAG,
-	payload: data,
-});
+// export const setAddedTag = (data) =>({
+// 	type: SET_ADDED_TAG,
+// 	payload: data,
+// });
 
 export const getAllTags = () =>({
 	type: GET_ALL_TAGS,

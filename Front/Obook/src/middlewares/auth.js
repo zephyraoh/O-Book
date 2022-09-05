@@ -1,6 +1,6 @@
 import { axiosServerDB } from '../utils/axios';
 import { DELETE_BOOK, FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY, SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability, setLoading, fetchBooks, REQUEST_LOAN, GET_BOOK_OWNERS, setBookOwners, ACCEPT_LOAN, END_LOAN } from '../actions/books';
-import { setUserData, SIGN_IN, SIGN_UP, GET_MY_LIBRARY, GET_MEMBER_PROFILE, SEND_MODIFIED_INFOS, ADD_TAG_USER, REMOVE_TAG_USER, setAddedTag, GET_ALL_TAGS, setAllTags } from '../actions/user';
+import { setUserData, SIGN_IN, SIGN_UP, GET_MY_LIBRARY, GET_MEMBER_PROFILE, SEND_MODIFIED_INFOS, ADD_TAG_USER, REMOVE_TAG_USER, GET_ALL_TAGS, setAllTags, setMyTags } from '../actions/user';
 import axios from 'axios';
 
 
@@ -187,8 +187,8 @@ const authMiddleware = (store) => (next) => async (action) => {
 				const tagId = action.payload;
 				const {data} = await axiosServerDB.post('/addtag', {
 				tagId: tagId });
-				console.log("tag added ==>", data);
-				store.dispatch(setAddedTag(data));
+				console.log("tag added DATAAAA==>", data);
+				store.dispatch(setMyTags(data));
 			}catch(err){
 				console.log(err);
 			}
@@ -197,9 +197,8 @@ const authMiddleware = (store) => (next) => async (action) => {
 		case REMOVE_TAG_USER:{
 			try{
 				const tagId = action.payload;
-				console.log(tagId);
 				const {data} = await axiosServerDB.delete(`/removetag/${tagId}`);
-				console.log("tag removed ==>", data);
+				store.dispatch(setMyTags(data));
 					
 			}catch(err){
 				console.log(err);
