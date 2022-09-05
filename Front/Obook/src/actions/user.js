@@ -21,6 +21,7 @@ export const CHANGE_USER_INFO_MISC = 'CHANGE_USER_INFO_MISC';
 export const SET_USER_LABEL = 'SET_USER_LABEL';
 export const ADD_TAG_USER = 'ADD_TAG_USER';
 export const REMOVE_TAG_USER = 'REMOVE_TAG_USER';
+
 // actions requêtant au serveur les données user / another member
 export const GET_MY_LIBRARY = 'GET_MY_LIBRARY'; 
 export const GET_MEMBER_PROFILE = 'GET_MEMBER_PROFILE'
@@ -115,8 +116,8 @@ export const setMyTags = (data)=>({
 	type : SET_MY_TAGS,
 	payload : data,
 });
+
 export const endLoan = (loanId) =>({
 	type: END_LOAN,
 	payload: loanId,
 });
-
