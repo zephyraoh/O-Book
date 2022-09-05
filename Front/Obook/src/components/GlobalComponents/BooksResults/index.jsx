@@ -26,7 +26,7 @@ const BooksResults = () => {
   }
   return(
   <div className="m-3">
-    <p className="mobile:text-lg desktop:text-2xl mb-3">Les derniers livres ajoutés</p>
+    <p className="mobile:text-lg desktop:text-3xl mb-3">Les derniers livres ajoutés</p>
     <Swiper 
         navigation={true}
         modules={[Navigation, Autoplay]}

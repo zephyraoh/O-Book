@@ -1,6 +1,6 @@
 import { axiosServerDB } from '../utils/axios';
-import { DELETE_BOOK, FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY, SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability, setLoading, fetchBooks } from '../actions/books';
-import { setUserData, SIGN_IN, SIGN_UP, GET_MY_LIBRARY, GET_MEMBER_PROFILE, SET_USER_LABEL, SEND_MODIFIED_INFOS, ADD_TAG_USER, REMOVE_TAG_USER, setAddedTag, GET_ALL_TAGS, setAllTags } from '../actions/user';
+import { DELETE_BOOK, FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY, SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability, setLoading, fetchBooks, REQUEST_LOAN, GET_BOOK_OWNERS, setBookOwners } from '../actions/books';
+import { setUserData, SIGN_IN, SIGN_UP, GET_MY_LIBRARY, GET_MEMBER_PROFILE, SET_USER_LABEL, SEND_MODIFIED_INFOS, ADD_TAG_USER, REMOVE_TAG_USER, setAddedTag, GET_ALL_TAGS, setAllTags, END_LOAN } from '../actions/user';
 import axios from 'axios';
 
 
@@ -212,6 +212,41 @@ const authMiddleware = (store) => (next) => async (action) => {
 				console.log("tags received ==>", data);
 				store.dispatch(setAllTags(data));
 				store.dispatch(setLoading(false));
+					
+			}catch(err){
+				console.log(err);
+			}
+			break;
+		}
+		case REQUEST_LOAN:{
+			try{
+				const libraryId = action.payload;
+				const {data} = await axiosServerDB.post('/loan', {libraryId: libraryId});
+				console.log("loan generated ==>", data);
+					
+			}catch(err){
+				console.log(err);
+			}
+			break;
+		}
+		case END_LOAN:{
+			try{
+				const loanId = action.payload;
+				console.log(loanId);
+				const {data} = await axiosServerDB.patch(`/loan/${loanId}`, {status: "Terminé"});
+				console.log("loan generated ==>", data);
+					
+			}catch(err){
+				console.log(err);
+			}
+			break;
+		}
+		case GET_BOOK_OWNERS:{
+			try{
+				const isbn = action.payload;
+				const {data} = await axiosServerDB.get(`/book/${isbn}`);
+				console.log("book owners list fetched ===>", data);
+				store.dispatch(setBookOwners(data));
 					
 			}catch(err){
 				console.log(err);

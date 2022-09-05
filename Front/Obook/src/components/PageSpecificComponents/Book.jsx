@@ -4,9 +4,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getMyLibrary } from '../../actions/user';
-import { getOneBookDetails, fetchAddNewBookToMyLibrary, setLoading } from '../../actions/books';
+import { getOneBookDetails, fetchAddNewBookToMyLibrary, setLoading, getBookOwners } from '../../actions/books';
 import { toggleSignInModal } from '../../actions/user';
 import Loading from '../GlobalComponents/Loading';
+import BookOwners from './BookComponents/BookOwner'
+import BookOwner from './BookComponents/BookOwner';
 
 const removeTags = (str) => {
     if ((str===null) || (str===''))
@@ -29,6 +31,7 @@ const Book = ()=>{
     const synopsisCleanHtml = removeTags(cleanSynopsis);
     const isLogged = useSelector(state => state.user.isLogged);
     const loading = useSelector(state => state.books.loading);
+    const bookOwners = useSelector(state => state.books.bookOwners);
     const navigate = useNavigate();
     
     const handleAddBookAction=(e)=>{
@@ -44,9 +47,11 @@ const Book = ()=>{
    
     useEffect(() => {
         dispatch(setLoading(true));
+        dispatch(getBookOwners(params.id));
         dispatch(getOneBookDetails(params.id));
     }, []);
   
+    console.log(bookOwners);
 
     if(loading){
         return <Loading/>
@@ -64,6 +69,15 @@ const Book = ()=>{
                     <p>{synopsisCleanHtml ? synopsisCleanHtml : 'Résumé indisponible'}</p>
                     <button className='p-2 px-3 my-3 place-self-center rounded bg-[#292F44] text-[#F5F5F5]' value={book.isbn} onClick={handleAddBookAction}>Ajouter à ma bibliothèque</button>
                 </div>
+                <div>
+                    <h3>Ils possèdent ce livre :</h3>
+                    {bookOwners.map((owner) =>
+                        (
+                        <BookOwner key={owner.userid} {...owner}/>
+                        )
+                    )}
+                </div>
+                
             </div>
         )
 

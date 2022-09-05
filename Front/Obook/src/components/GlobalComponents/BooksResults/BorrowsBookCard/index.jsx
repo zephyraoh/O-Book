@@ -1,25 +1,44 @@
 import { sendMyBookAvailability } from "../../../../actions/books";
 import { useDispatch, useSelector } from "react-redux";
+import { endLoan } from "../../../../actions/user";
 
 const BorrowsBookCard=({
     libraryid,
+    status,
     isbn,
     image,
     author,
     title,
+    loanid,
     synopsis,
 })=>{
+
+    const dispatch = useDispatch();
+
+    const handleCancelRequest = (e) => {
+        console.log(e.target.value);
+        dispatch(endLoan(e.target.value));
+    };
+
+    const handleDisplayUserDetails = (e) => {
+        console.log(e.target.value);
+    };
+
     const libraryFilter = useSelector(state=>state.books.libraryFilter);
     console.log(libraryFilter);
     ;
     
+    if (status === "Terminé"){
+        return ''
+    }
     return (
         <>
-            <div value = {isbn} className="w-1/3 h-1/3 mobile:max-h-[280px] desktop:max-h-[300px] desktop:max-w-[200px] flex flex-col items-center">
-                <img className='w-full h-6/8 mobile:max-h-[190px] mobile:max-w-[150px] desktop:max-h-[250px]' src = { image }/>
-                <h1 className="font-semibold">{title}</h1>
-                <h4 className="mobile:hidden desktop:block">{author}</h4>
-                {synopsis? <p className="mobile:hidden desktop:block text-ellipsis"> {synopsis}</p> : <p className="mobile:hidden   desktop:block">Pas de synopsis disponible </p>}
+            <div value = {isbn} className="w-1/3 h-1/3 mobile:max-h-[225px] mobile:min-h-[225px] mobile:min-w-[105px] mobile:max-w-[105px] desktop:max-h-[300px] relative desktop:max-w-[200px] desktop:min-w-[200px] desktop:max-h-[280px] desktop:min-h-[280px] flex flex-col items-center mb-5 mx-3">
+                <img className='w-full h-6/8 mobile:max-h-[160px] mobile:min-h-[160px] mobile:max-w-[105px] mobile:min-w-[105px] desktop:max-h-[230px] desktop:min-h-[230px] desktop:min-w-[160px] desktop:max-w-[160px] rounded-lg' src = { image }/>
+                <h1 className="font-semibold desktop:max-h-[48px] mobile:max-h-[60px] mobile:max-w-[100px] text-ellipsis overflow-hidden desktop:text-base mobile:text-sm">{title}</h1>
+                {status === "En attente de validation" && <button className='text-[#FFF] bg-red-400 p-1 desktop:w-[160px] mobile:w-[105px] absolute desktop:bottom-[48px] mobile:bottom-[65px] rounded-b-lg mobile:text-xs desktop:text-base' value ={loanid} key={loanid} onClick={handleCancelRequest} >Annuler la demande</button>}
+                {status === "En cours" && <button className='text-[#FFF] bg-green-400 p-1 desktop:w-[160px] mobile:w-[105px] absolute desktop:bottom-[48px] mobile:bottom-[65px] rounded-b-lg mobile:text-xs desktop:text-base' value ={loanid} key={loanid} onClick={handleDisplayUserDetails}>Voir les coordonnées</button>}
+                
             </div>
          </>
     )

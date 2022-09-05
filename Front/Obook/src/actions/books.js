@@ -17,6 +17,9 @@ export const SET_VISITED_BOOK_PAGE = 'SET_VISITED_BOOK_PAGE';
 export const FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY= 'FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY';
 export const SET_LOADING = 'SET_LOADING';
 export const DELETE_BOOK = 'DELETE_BOOK';
+export const REQUEST_LOAN = 'REQUEST_LOAN';
+export const GET_BOOK_OWNERS = 'GET_BOOK_OWNERS';
+export const SET_BOOK_OWNERS = 'SET_BOOK_OWNERS';
 
 
 export const setSearchField = (search) => ({
@@ -107,8 +110,22 @@ export const setLoading = (data) => ({
 });
 
 export const deleteBook = (id) => ({
-  // à adapter selon les infos nécessaires à la requête
   type: DELETE_BOOK,
   payload: id,
+});
+
+export const requestLoan = (id) => ({
+  type: REQUEST_LOAN,
+  payload: id,
+});
+
+export const getBookOwners = (id) => ({
+  type: GET_BOOK_OWNERS,
+  payload: id,
+});
+
+export const setBookOwners = (data) => ({
+  type: SET_BOOK_OWNERS,
+  payload: data,
 });
 

@@ -9,6 +9,7 @@ import BorrowsBookCard from "../../GlobalComponents/BooksResults/BorrowsBookCard
 import Loading from "../../GlobalComponents/Loading";
 import DeleteButton from "./DeleteButton";
 import BookCardWithToggle from "./BookCardWithToggle";
+import LendsBookCard from "./LendsBookCard";
 
 const MyBooks = ()=>{
     // constantes
@@ -33,8 +34,8 @@ const MyBooks = ()=>{
     }
     if (libraryFilter==='allMyBooks'){
         return (
-            <div className='w-5/6 ml-64'>
-                <h3 className='w-full text-3xl font-bold mb-4'>Mes livres</h3>
+            <div className='desktop:w-5/6 mobile:w-full h-3/4 desktop:ml-64'>
+                <h3 className='w-full desktop:text-3xl mobile:text-xl font-bold mb-4'>Mes livres</h3>
                 <div className='w-full flex flex-wrap justify-evenly'>
                     {allBooks.map((book) =>
                         (<>
@@ -49,30 +50,30 @@ const MyBooks = ()=>{
     }
     if(libraryFilter==='myLends'){
         return (
-            <>
-                <h3 className='text-3xl font-bold mb-4'>Mes prêts en cours</h3>
-                <div className='flex justify-evenly'>
+            <div className='desktop:w-5/6 mobile:w-full h-3/4 desktop:ml-64'>
+                <h3 className='w-full desktop:text-3xl mobile:text-xl font-bold mb-4'>Mes prêts en cours</h3>
+                <div className='w-full flex flex-wrap justify-evenly'>
                     {lends.map((book) =>
                         (<>
-                            <BookCard key={book.libraryid} {...book}/>
+                            <LendsBookCard key={book.libraryid} {...book}/>
                         </>)    
                     )}
                 </div>
-            </>
+            </div>
         )
     }
     if(libraryFilter==='myBorrows'){
         return (
-            <>
-                <h3 className='text-3xl font-bold mb-4'>Mes emprunts en cours</h3>
-                <div className='flex justify-evenly'>
+            <div className='desktop:w-5/6 mobile:w-full h-3/4 desktop:ml-64'>
+                <h3 className='w-full desktop:text-3xl mobile:text-xl font-bold mb-4'>Mes emprunts en cours</h3>
+                <div className='w-full flex flex-wrap justify-evenly'>
                     {borrow.map((book) =>
                         (<>
                             <BorrowsBookCard key={book.libraryid} {...book}/>
                         </>)
                     )}
                 </div>
-            </>
+            </div>
         )
     }
 

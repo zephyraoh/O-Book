@@ -23,9 +23,9 @@ const BookCardWithToggle=({
     }
     return (
         <>
-            <div value = {isbn} className="mobile:max-h-[280px] desktop:max-h-[300px] desktop:min-w-[200px] desktop:max-w-[200px] flex flex-col items-center relative">
-                <img className='mobile:max-h-[190px] mobile:max-w-[150px] desktop:max-h-[220px] desktop:w-[160px] rounded-lg' src = { image }/>
-                <h1 className="font-semibold">{title}</h1>
+            <div value = {isbn} className="mobile:max-h-[300px] mobile:min-h-[250px] desktop:max-h-[300px] desktop:min-w-[200px] desktop:min-h-[320px] desktop:max-w-[200px] flex flex-col items-center relative mb-5 mx-3">
+                <img className='mobile:max-h-[150px] mobile:max-w-[105px] mobile:min-h-[150px] mobile:min-w-[105px] desktop:min-h-[230px] desktop:max-h-[220px] desktop:min-w-[160px] desktop:max-w-[160px] rounded-lg' src = { image }/>
+                <h1 className="font-semibold desktop:max-h-[48px] mobile:max-h-[60px] mobile:max-w-[100px] text-ellipsis overflow-hidden desktop:text-base mobile:text-sm">{title}</h1>
                 <h4 className="mobile:hidden desktop:block">{author}</h4>
                 {/* {synopsis? <p className="mobile:hidden desktop:block text-ellipsis"> {synopsis}</p> : <p className="mobile:hidden   desktop:block">Pas de synopsis disponible </p>} */}
                
@@ -38,12 +38,14 @@ const BookCardWithToggle=({
                 <div className="w-11 h-6 bg-[#292F44] rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white     after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border    after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
                 
                 </label> */}
-                <EscapeButton className='text-[#d62828] text-3xl m-3 absolute right-3 cursor-pointer' onClick={handleClick}/>
-                <label htmlFor={libraryid} className="inline-flex relative items-center cursor-pointer position-absolute bottom-0">
+                <EscapeButton className='text-[#d62828] desktop:text-3xl mobile:text-2xl absolute desktop:right-5 mobile:right-0 top-0 cursor-pointer' onClick={handleClick}/>
+                <div className="absolute bottom-0">
+                    <label htmlFor={libraryid} className="inline-flex relative items-center cursor-pointer position-absolute bottom-0">
                     <input onClick={handleAvailabilityToggle} type="checkbox" defaultChecked={is_available} value={libraryid} id={libraryid} className="sr-only peer"/>
                     <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">{is_available? "Disponible" : "Indisponible"}</span>
-                </label>
+                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300 mobile:hidden desktop:inline">{is_available? "Disponible" : "Indisponible"}</span>
+                    </label>
+                </div>
             </div>
          </>
     )
