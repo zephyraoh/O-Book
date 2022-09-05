@@ -9,6 +9,11 @@ import { toggleSignInModal } from '../../actions/user';
 import Loading from '../GlobalComponents/Loading';
 import BookOwners from './BookComponents/BookOwner'
 import BookOwner from './BookComponents/BookOwner';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper';
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper";
 
 const removeTags = (str) => {
     if ((str===null) || (str===''))
@@ -58,10 +63,10 @@ const Book = ()=>{
     }
 
         return(
-         
-            <div className='flex mx-auto my-6 w-11/12 justify-center'>
-                <img className='desktop:w-1/4 desktop:min-w-[200px] desktop:h-3/4 desktop:max-w-[320px] desktop:max-h-[450px] mobile:w-[120px] mobile:h-[180px] my-5' src={book?.image} alt="" />
-                <div className='flex flex-col items-start m-6 w-7/8'>
+        <div className=' flex my-6 w-full justify-center'>
+            <div className='flex mx-auto w-3/4 justify-center'>
+                <img className='desktop:w-1/4 desktop:min-w-[200px] desktop:min-h-[450px] desktop:max-w-[320px] desktop:max-h-[450px] mobile:w-[120px] mobile:h-[180px] my-5' src={book?.image} alt="" />
+                <div className='flex flex-col items-start m-6 pl-8 w-7/8'>
                     <h1 className='desktop:text-3xl mobile:text-lg font-bold mb-5'>{book?.title}</h1>
                     <h3 className='my-3'>{book?.authors} - {book?.date_published}</h3>
                     <h3 className='my-3'>{book?.publisher}</h3>
@@ -69,16 +74,35 @@ const Book = ()=>{
                     <p>{synopsisCleanHtml ? synopsisCleanHtml : 'Résumé indisponible'}</p>
                     <button className='p-2 px-3 my-3 place-self-center rounded bg-[#292F44] text-[#F5F5F5]' value={book.isbn} onClick={handleAddBookAction}>Ajouter à ma bibliothèque</button>
                 </div>
-                <div>
-                    <h3>Ils possèdent ce livre :</h3>
+            </div>
+                <div className='w-1/4 flex flex-col items-center h-3/4'>
+                    <h3 className='font-bold desktop:text-2xl my-4'>Ils possèdent ce livre :</h3>
+                    <Swiper 
+                        direction={"vertical"}
+                        pagination={{
+                            clickable: true,
+                        }}
+                        modules={[Pagination, Autoplay]}
+                        className="mySwiper"
+                        spaceBetween={2}
+                        slidesPerView={3}
+                        loop={true}
+                        autoplay={{
+                            delay: 2500,
+                            disableOnInteraction: false
+                        }}
+                    >
                     {bookOwners.map((owner) =>
                         (
-                        <BookOwner key={owner.userid} {...owner}/>
+                        <SwiperSlide>   
+                            <BookOwner key={owner.userid} {...owner}/>
+                        </SwiperSlide>
                         )
                     )}
+                    </Swiper>
                 </div>
                 
-            </div>
+        </div>
         )
 
 };

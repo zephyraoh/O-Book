@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { searchBooks, setSearchField, searchISBN } from '../../../actions/books';
+import { searchBooks, setSearchField, searchISBN, setLoading } from '../../../actions/books';
 import Button from '../Button';
 import SearchFilters from './SearchFilters';
 import SearchBar from './SearchBar/SearchBar';
@@ -19,8 +19,9 @@ const SearchForm=()=>{
     const handleSubmit = (e) => {
         e.preventDefault();
         {searchFilter === "ISBN"? dispatch(searchISBN) : dispatch(searchBooks())};
-        endSearch();
         {searchFilter === "ISBN"? navigate(`/book/${searchValue}`): navigate('/search')};
+        endSearch();
+        
     };
 
     

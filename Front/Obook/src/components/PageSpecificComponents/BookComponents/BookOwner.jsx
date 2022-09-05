@@ -10,12 +10,13 @@ const BookOwner = ({
     const link = `/visitedlibrary/${username}`
 
     return(
-        <NavLink to={link}>
-            <img src={profile_picture} alt={username} />
-            <p>{username}</p>
-            <p>{zipcode}</p>
-            <p>{localisation}</p>
-        </NavLink>
+        <div className="my-2">
+            <NavLink to={link}>
+                <img className='rounded-full w-32 h-32' src={profile_picture} alt={username} />
+                <p>{username}</p>
+                <p>{zipcode}, {localisation}</p>
+            </NavLink>
+        </div>
     )
 
 };

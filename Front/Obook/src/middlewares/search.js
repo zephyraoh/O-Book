@@ -30,7 +30,8 @@ const searchMiddleware = (store) => (next) => async (action) => {
       }
       const { data } = await ISBNApiSearchBar.get(searchURL);
         console.log("middleware data", data);
-        store.dispatch(setBooks(data.books));  
+        store.dispatch(setBooks(data.books));
+        store.dispatch(setLoading(false));  
         break;
     }
     case SEARCH_ISBN: {
@@ -38,6 +39,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
       const searchURL= `/book/${searchValue}`;
       const { data } = await ISBNApiSearchBar.get(searchURL);
       store.dispatch(setSingleBook(data.book));
+      store.dispatch(setLoading(false));
       break;
     }
     case FETCH_VISITED_PROFILE_BOOKS:{

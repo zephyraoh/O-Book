@@ -29,7 +29,7 @@ const Library = ()=>{
    
     return(
         <div> 
-            <div className="flex flex-nowrap flex justify-evenly">
+            <div className="flex flex-nowrap flex justify-evenly pr-3 pl-3 pt -10">
                 <div className="flex w-1/3 flex-col justify-evenly items-center ">
                     <img className="block rounded-full h-52 w-52" src={userInfos.profile_picture}></img>
                     <h3 className="text-2xl w-1/2 font-bold p-2 m-3 bg-[#AB9F9F] text-black rounded-md">{userInfos.username}</h3>
@@ -41,7 +41,7 @@ const Library = ()=>{
                     <p className="font-bold text-xl pt-4">Localisation</p>
                     <p className="text-lg"> {userInfos.localisation}, {userInfos.zipcode}</p>
                     <p className='flex font-bold pt-4 text-xl'>Aime</p>
-                <div class="h-20 grid grid-cols-3 gap-1 content-evenly">
+                <div class="h-10 grid grid-cols-2 gap-1 content-evenly pt-20">
                     {tags.map(tag => (
                          <div className=" desktop:text-base bg-[#292F44] text-[#F5F5F5] rounded-md" key={tag.id}>{tag.label} </div>
                     ))} 
@@ -55,11 +55,11 @@ const Library = ()=>{
                         <div className="p-2 m-2 desktop:text-base bg-[#292F44] text-[#F5F5F5] rounded-md" key={tag.id}>{tag.label} </div>
                     ))} */}
                 
-            <div className="justift-self-center w-2/3 pt-6">
+            <div className="justift-self-center w-2/3 pt-20 pl-16">
                 <p className="text-3xl font-bold mb-4">Sa bibliothèque</p>
-                <div className='flex flex-col grid-cols-2 flex-wrap justify-evenly'>
+                <div className='flex flex-wrap justify-evenly'>
                 {books.map(book =>(
-                    <div className="flex flex-col items-center h- w-1/5 max-h-[300px] relative">
+                    <div className="flex flex-row items-center h- w-1/5 max-h-[300px] relative pt-7">
                     <BookCard key={book.id} {...book}/>
                     {book.is_available && <button className='text-[#FFF] bg-[#097941] p-1 w-[150px] absolute top-[190px] left-[51px] rounded-b-lg' value ={book.id} key={`availablebutton-${book.id}`} onClick={handleClick} >Emprunter</button>}
                     </div>
