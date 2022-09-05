@@ -234,7 +234,7 @@ const authMiddleware = (store) => (next) => async (action) => {
 			try{
 				const loanId = action.payload;
 				console.log(loanId);
-				const {data} = await axiosServerDB.patch(`/loans/${loanId}`, {status: "Terminé"});
+				const {data} = await axiosServerDB.patch(`/loan/${loanId}`, {status: "Terminé"});
 				console.log("loan ended ==>", data);
 					
 			}catch(err){
@@ -245,7 +245,7 @@ const authMiddleware = (store) => (next) => async (action) => {
 		case ACCEPT_LOAN:{
 			try{
 				const loanId = action.payload;
-				const {data} = await axiosServerDB.patch(`/loans/${loanId}`, {status: "En cours"});
+				const {data} = await axiosServerDB.patch(`/loan/${loanId}`, {status: "En cours"});
 				console.log("loan status changed ===>", data);		
 			}catch(err){
 				console.log(err);
