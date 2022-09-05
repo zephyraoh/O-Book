@@ -15,7 +15,6 @@ const MyBooks = ()=>{
     // constantes
     const loading = useSelector(state => state.books.loading);
     const libraryFilter = useSelector(state => state.books.libraryFilter);
-    // const myBooks = useSelector(state=>state.books.booksData.myBooks);
     const allBooks = useSelector(state => state.books.booksData.myBooks.books);
     const lends = useSelector(state => state.books.booksData.myBooks.lends);
     const borrow = useSelector(state => state.books.booksData.myBooks.borrow);

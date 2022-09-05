@@ -8,9 +8,12 @@ export const CLEAR_PASSWORDS = 'CLEAR_PASSWORDS';
 export const SETCREATIONCONFIRMATION = 'SETCREATIONCONFIRMATION';
 export const LOGOUT = 'LOGOUT';
 export const DEL_ACCOUNT = 'DEL_ACCOUNT';
+
 export const SET_ADDED_TAG = 'SET_ADDED_TAG';
 export const GET_ALL_TAGS = 'GET_ALL_TAGS';
 export const SET_ALL_TAGS = 'SET_ALL_TAGS';
+export const SET_MY_TAGS = 'SET_MY_TAGS'
+export const END_LOAN = 'END_LOAN';
 //à voir dans un second temps une fois branché au back
 export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
 //séparation entre action demandant une confirmation et autres infos secondaires
@@ -18,6 +21,7 @@ export const CHANGE_USER_INFO_MISC = 'CHANGE_USER_INFO_MISC';
 export const SET_USER_LABEL = 'SET_USER_LABEL';
 export const ADD_TAG_USER = 'ADD_TAG_USER';
 export const REMOVE_TAG_USER = 'REMOVE_TAG_USER';
+
 // actions requêtant au serveur les données user / another member
 export const GET_MY_LIBRARY = 'GET_MY_LIBRARY'; 
 export const GET_MEMBER_PROFILE = 'GET_MEMBER_PROFILE'
@@ -106,4 +110,14 @@ export const getAllTags = () =>({
 export const setAllTags = (data) =>({
 	type: SET_ALL_TAGS,
 	payload: data,
+});
+
+export const setMyTags = (data)=>({
+	type : SET_MY_TAGS,
+	payload : data,
+});
+
+export const endLoan = (loanId) =>({
+	type: END_LOAN,
+	payload: loanId,
 });

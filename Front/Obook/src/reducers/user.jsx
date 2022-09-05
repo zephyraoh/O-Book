@@ -1,4 +1,4 @@
-import { SET_USER_FIELD, SET_USER_DATA, LOGOUT, CLEAR_PASSWORDS, TOGGLE_SIGN_IN_MODAL, SET_USER_MODIFY_ACCOUNT_FIELD, SET_ALL_TAGS, SET_ADDED_TAG }  from "../actions/user";
+import { SET_USER_FIELD, SET_USER_DATA, LOGOUT, CLEAR_PASSWORDS, TOGGLE_SIGN_IN_MODAL, SET_USER_MODIFY_ACCOUNT_FIELD, SET_ALL_TAGS, SET_ADDED_TAG, SET_MY_TAGS }  from "../actions/user";
 
 
 export const initialState = {
@@ -83,22 +83,22 @@ export const initialState = {
             // password:'',
           }
 
-        case TOGGLE_SIGN_IN_MODAL:
-          return{
-            ...state,
-            signInModal: action.payload,
-          }
-        case SET_ALL_TAGS:
-          return{
-            ...state,
-            allTags: action.payload,
-          }
-          case SET_ADDED_TAG:
-          return{
-            ...state,
-            tags: [...state.tags,
-            action.payload]
-          }
+      case TOGGLE_SIGN_IN_MODAL:
+        return{
+          ...state,
+          signInModal: action.payload,
+        }
+      case SET_ALL_TAGS:
+        return{
+          ...state,
+          allTags: action.payload,
+        }     
+      case SET_ADDED_TAG:
+        return{
+          ...state,
+          tags: [...state.tags,
+          action.payload]
+        }
       default:
         return state;
     }
