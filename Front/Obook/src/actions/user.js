@@ -11,7 +11,6 @@ export const DEL_ACCOUNT = 'DEL_ACCOUNT';
 export const SET_ADDED_TAG = 'SET_ADDED_TAG';
 export const GET_ALL_TAGS = 'GET_ALL_TAGS';
 export const SET_ALL_TAGS = 'SET_ALL_TAGS';
-export const END_LOAN = 'END_LOAN';
 //à voir dans un second temps une fois branché au back
 export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
 //séparation entre action demandant une confirmation et autres infos secondaires
@@ -108,8 +107,3 @@ export const setAllTags = (data) =>({
 	type: SET_ALL_TAGS,
 	payload: data,
 });
-
-export const endLoan = (loanId) =>({
-	type: END_LOAN,
-	payload: loanId,
-})
