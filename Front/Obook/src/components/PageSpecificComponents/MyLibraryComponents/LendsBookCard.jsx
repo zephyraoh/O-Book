@@ -1,4 +1,4 @@
-import { sendMyBookAvailability } from "../../../actions/books";
+import { acceptLoan, endLoan } from "../../../actions/books";
 import { useDispatch, useSelector } from "react-redux";
 
 const LendsBookCard=({
@@ -16,11 +16,11 @@ const LendsBookCard=({
     const dispatch = useDispatch();
 
     const handleAcceptRequest = (e) => {
-        console.log(e.target.value);
+        dispatch(acceptLoan(e.target.value));
     }
 
-    const handleCancelRequest = (e) => {
-        console.log(e.target.value);
+    const handleEndRequest = (e) => {
+        dispatch(endLoan(e.target.value));
     }
     return (
         <>
@@ -29,7 +29,7 @@ const LendsBookCard=({
                 <h1 className="font-semibold">{title}</h1>
                 <h4 className="mobile:hidden desktop:block">{author}</h4>
                 {status === "En attente de validation" && <button className='text-[#FFF] bg-red-400 p-1 desktop:w-[160px] mobile:w-[105px] absolute desktop:bottom-[48px] mobile:bottom-[65px] rounded-b-lg mobile:text-xs desktop:text-base' value ={loanid} key={loanid} onClick={handleAcceptRequest} >Accepter la demande</button>}
-                {status === "En cours" && <button className='text-[#FFF] bg-green-400 p-1 desktop:w-[160px] mobile:w-[105px] absolute desktop:bottom-[48px] mobile:bottom-[65px] rounded-b-lg mobile:text-xs desktop:text-base' value ={loanid} key={loanid} onClick={handleEndRequest}>Terminer le prêt</button>}
+                {status === "En cours" && <button className='text-[#FFF] bg-green-400 p-1 desktop:w-[160px] mobile:w-[105px] absolute desktop:bottom-[48px] mobile:bottom-[65px] rounded-b-lg mobile:text-xs desktop:text-base' value ={loanid} key={loanid} onClick={handleEndRequest}>Mettre fin au prêt</button>}
             </div>
          </>
     )

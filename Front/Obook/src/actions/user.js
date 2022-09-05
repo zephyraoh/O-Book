@@ -119,3 +119,4 @@ export const endLoan = (loanId) =>({
 	type: END_LOAN,
 	payload: loanId,
 });
+

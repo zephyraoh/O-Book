@@ -20,6 +20,8 @@ export const DELETE_BOOK = 'DELETE_BOOK';
 export const REQUEST_LOAN = 'REQUEST_LOAN';
 export const GET_BOOK_OWNERS = 'GET_BOOK_OWNERS';
 export const SET_BOOK_OWNERS = 'SET_BOOK_OWNERS';
+export const ACCEPT_LOAN = 'ACCEPT_LOAN';
+export const END_LOAN = 'END_LOAN';
 
 
 export const setSearchField = (search) => ({
@@ -118,6 +120,16 @@ export const requestLoan = (id) => ({
   type: REQUEST_LOAN,
   payload: id,
 });
+
+export const acceptLoan = (loanId) => ({
+  type: ACCEPT_LOAN,
+  payload: loanId,
+});
+
+export const endLoan = (loanId) =>({
+	type: END_LOAN,
+	payload: loanId,
+})
 
 export const getBookOwners = (id) => ({
   type: GET_BOOK_OWNERS,

@@ -1,6 +1,5 @@
-import { sendMyBookAvailability } from "../../../../actions/books";
+import { endLoan } from "../../../../actions/books";
 import { useDispatch, useSelector } from "react-redux";
-import { endLoan } from "../../../../actions/user";
 
 const BorrowsBookCard=({
     libraryid,

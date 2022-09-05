@@ -92,14 +92,7 @@ export const initialState = {
         return{
           ...state,
           allTags: action.payload,
-        }
-       //  plus simple de juste prendre la réponse serveur ?
-      case SET_MY_TAGS :{
-          return{
-            ...state,
-            tags: action.payload,
-          }
-        }        
+        }     
       case SET_ADDED_TAG:
         return{
           ...state,
