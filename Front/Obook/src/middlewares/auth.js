@@ -199,6 +199,7 @@ const authMiddleware = (store) => (next) => async (action) => {
 				const tagId = action.payload;
 				console.log(tagId);
 				const response = await axiosServerDB.delete(`/removetag/${tagId}`);
+
 				console.log("tag removed ==>", response);
 					
 			}catch(err){

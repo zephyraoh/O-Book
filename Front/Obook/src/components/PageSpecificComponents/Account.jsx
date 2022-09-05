@@ -10,6 +10,7 @@ const Account = () =>{
     const tags = useSelector(state => state.user.tags);
     // hooks
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(setLoading(true));
         dispatch(getAllTags());
@@ -79,7 +80,9 @@ const Account = () =>{
     const handleRemoveTag = (e) => {
         e.preventDefault();
         console.log(`label ${e.target.value} removed`);
-        dispatch(removeTagUser(e.target.value));
+        dispatch(removeTagUser(e.target.value))
+        console.log("TAGS POST RM",  tags);
+        dispatch(getAllTags)
     };
 
     const handleSubmit = (e)=> {
