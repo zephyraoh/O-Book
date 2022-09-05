@@ -60,6 +60,6 @@ UPDATE "tag"
 SET 
     "color" = 'bg-teal-600',
     "hover" = 'hover:bg-teal-700'
-WHERE "label" = 'Autres';
+WHERE "label" = 'Autre';
 
 COMMIT;
