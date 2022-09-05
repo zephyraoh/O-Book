@@ -1,6 +1,7 @@
 import { axiosServerDB } from '../utils/axios';
 import { DELETE_BOOK, FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY, SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability, setLoading, fetchBooks } from '../actions/books';
-import { setUserData, SIGN_IN, SIGN_UP, GET_MY_LIBRARY, GET_MEMBER_PROFILE, SET_USER_LABEL, SEND_MODIFIED_INFOS, ADD_TAG_USER, REMOVE_TAG_USER } from '../actions/user';
+import { setUserData, SIGN_IN, SIGN_UP, GET_MY_LIBRARY, GET_MEMBER_PROFILE, SET_USER_LABEL, SEND_MODIFIED_INFOS, ADD_TAG_USER, REMOVE_TAG_USER, setAddedTag, GET_ALL_TAGS, setAllTags } from '../actions/user';
+import axios from 'axios';
 
 
 const authMiddleware = (store) => (next) => async (action) => { 
@@ -118,17 +119,17 @@ const authMiddleware = (store) => (next) => async (action) => {
 		}
 		break;
 		}
-		case SET_USER_LABEL:{
-			try{
-				const tagId = action.payload
-				const { data } = await axiosServerDB.post('/addtag', {tagId: tagId})
-				console.log("received data on user label change >>>>", data)
+		// case SET_USER_LABEL:{
+		// 	try{
+		// 		const tagId = action.payload
+		// 		const { data } = await axiosServerDB.post('/addtag', {tagId: tagId})
+		// 		console.log("received data on user label change >>>>", data)
 
-			}catch(error){
-				console.log("error setting label", error);
-			}
-			break;
-		}
+		// 	}catch(error){
+		// 		console.log("error setting label", error);
+		// 	}
+		// 	break;
+		// }
 		case SEND_MODIFIED_INFOS:{
 			try{
 				console.log(action.data)
@@ -160,8 +161,10 @@ const authMiddleware = (store) => (next) => async (action) => {
 		}
 		case DELETE_BOOK:{
 			try{
+				const id = action.payload;
 				console.log('On supprime un livre');
-				// const {data} = await axiosServerDB.delete('à confirmer')
+				const {data} = await axiosServerDB.delete(`/mylibrary/book/${id}`);
+				console.log(data);
 
 			}catch(err){
 				console.log(err);
@@ -181,10 +184,11 @@ const authMiddleware = (store) => (next) => async (action) => {
 		}
 		case ADD_TAG_USER:{
 			try{
-				const {data} = await axiosServerDB.post(`/addtag`, {
-				tagId: `${action.payload}`});
+				const tagId = action.payload;
+				const {data} = await axiosServerDB.post('/addtag', {
+				tagId: tagId });
 				console.log("tag added ==>", data);
-					
+				store.dispatch(setAddedTag(data));
 			}catch(err){
 				console.log(err);
 			}
@@ -192,9 +196,22 @@ const authMiddleware = (store) => (next) => async (action) => {
 		}
 		case REMOVE_TAG_USER:{
 			try{
-				const {data} = await axiosServerDB.delete(`/removetag`, {
-				tagId: `${action.payload}`});
-				console.log("tag removed ==>", data);
+				const tagId = action.payload;
+				console.log(tagId);
+				const response = await axiosServerDB.delete(`/removetag/${tagId}`);
+				console.log("tag removed ==>", response);
+					
+			}catch(err){
+				console.log(err);
+			}
+			break;
+		}
+		case GET_ALL_TAGS:{
+			try{
+				const {data} = await axiosServerDB.get('/tags');
+				console.log("tags received ==>", data);
+				store.dispatch(setAllTags(data));
+				store.dispatch(setLoading(false));
 					
 			}catch(err){
 				console.log(err);

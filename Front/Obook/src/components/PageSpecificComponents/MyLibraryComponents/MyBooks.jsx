@@ -8,6 +8,7 @@ import { getMyLibrary } from "../../../actions/user";
 import BorrowsBookCard from "../../GlobalComponents/BooksResults/BorrowsBookCard";
 import Loading from "../../GlobalComponents/Loading";
 import DeleteButton from "./DeleteButton";
+import BookCardWithToggle from "./BookCardWithToggle";
 
 const MyBooks = ()=>{
     // constantes
@@ -32,24 +33,24 @@ const MyBooks = ()=>{
     }
     if (libraryFilter==='allMyBooks'){
         return (
-            <>
-                <h3>Mes livres</h3>
-                <div className='flex justify-evenly'>
+            <div className='w-5/6 ml-64'>
+                <h3 className='w-full text-3xl font-bold mb-4'>Mes livres</h3>
+                <div className='w-full flex flex-wrap justify-evenly'>
                     {allBooks.map((book) =>
-                        (<div key={book.libraryid}>
-                            <BookCard {...book}/>
-                            <DeleteButton key={`delete${book.libraryid}`} {...book}/>
-                        </div>
+                        (<>
+                            <BookCardWithToggle key={book.libraryid} {...book}/>
+                            {/* <DeleteButton key={`delete${book.libraryid}`} {...book}/> */}
+                        </>
                         )
                     )}
                 </div>
-            </>
+            </div>
         )           
     }
     if(libraryFilter==='myLends'){
         return (
             <>
-                <h3>Mes prêts en cours</h3>
+                <h3 className='text-3xl font-bold mb-4'>Mes prêts en cours</h3>
                 <div className='flex justify-evenly'>
                     {lends.map((book) =>
                         (<>
@@ -63,7 +64,7 @@ const MyBooks = ()=>{
     if(libraryFilter==='myBorrows'){
         return (
             <>
-                <h3>Mes emprunts en cours</h3>
+                <h3 className='text-3xl font-bold mb-4'>Mes emprunts en cours</h3>
                 <div className='flex justify-evenly'>
                     {borrow.map((book) =>
                         (<>

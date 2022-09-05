@@ -1,12 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setUserData, SetUserLabel, setUserModifyAccountField, sendModifiedInfos, addTagUser, removeTagUser} from "../../actions/user";
+import { setUserData, SetUserLabel, setUserModifyAccountField, sendModifiedInfos, addTagUser, removeTagUser, getAllTags} from "../../actions/user";
 import Axios from "axios";
 import { useState } from "react";
 import Field from "../GlobalComponents/Header/LoginModal/Field";
+import { useEffect } from "react";
+import { setLoading } from "../../actions/books";
 
 const Account = () =>{
+    const tags = useSelector(state => state.user.tags);
     // hooks
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(setLoading(true));
+        dispatch(getAllTags());
+    }, [tags]);
     
     //NewModifications
     const newProfilePicture = useSelector(state => state.user.accountModifications.newProfilePicture);
@@ -23,18 +30,21 @@ const Account = () =>{
     const userImg = useSelector(state=>state.user.profile_picture);
 
     // MISE EN PLACE DES DONNÉES LIÉES AUX LABELS
-    const tags = useSelector(state => state.user.tags);
-    const labels = [
-        {name:'BD & Manga', color: 'bg-amber-400', hover: 'hover:bg-amber-500'},
-        {name:'Science-Fiction & Fantasy', color: 'bg-red-600', hover: 'hover:bg-red-700'},
-        {name:'Polar & Thriller', color: 'bg-gray-800', hover: 'hover:bg-gray-900'},
-        {name:'Romans', color: 'bg-sky-600', hover: 'hover:bg-sky-700'},
-        {name:'Littérature classique', color: 'bg-yellow-800', hover: 'hover:bg-yellow-900'},
-        {name:'Enfants & Jeunesse', color: 'bg-fuchsia-500', hover: 'hover:bg-fuchsia-600'},
-        {name:'Savoir', color: 'bg-green-600', hover: 'hover:bg-green-700'},
-        {name:'Autres', color: 'bg-teal-600', hover: 'hover:bg-teal-700'},
-        {name:'Loisirs', color: 'bg-orange-600', hover: 'hover:bg-orange-700'},
-    ];
+    
+    console.log(tags);
+    const allTags = useSelector(state => state.user.allTags);
+
+    // const labels = [
+    //     {id: 1, name:'Romans', color: 'bg-sky-600', hover: 'hover:bg-sky-700'},
+    //     {id: 2, name:'Science-Fiction & Fantasy', color: 'bg-red-600', hover: 'hover:bg-red-700'},
+    //     {id: 3, name:'Polar & Thriller', color: 'bg-gray-800', hover: 'hover:bg-gray-900'},
+    //     {id: 4, name:'BD & Manga', color: 'bg-amber-400', hover: 'hover:bg-amber-500'},
+    //     {id: 5, name:'Littérature classique', color: 'bg-yellow-800', hover: 'hover:bg-yellow-900'},
+    //     {id: 6, name:'Enfants & Jeunesse', color: 'bg-fuchsia-500', hover: 'hover:bg-fuchsia-600'},
+    //     {id: 7, name:'Savoir', color: 'bg-green-600', hover: 'hover:bg-green-700'},
+    //     {id: 8, name:'Loisirs', color: 'bg-orange-600', hover: 'hover:bg-orange-700'},
+    //     {id: 9, name:'Autres', color: 'bg-teal-600', hover: 'hover:bg-teal-700'},
+    // ];
 
     let classNameActiveLabel = '';
     // fonctions
@@ -59,13 +69,6 @@ const Account = () =>{
 		dispatch(setUserModifyAccountField(value, name));
         console.log("NOUVELLE VALUE DU", name, "==>",value)
     }
-    
-    // const handleClick = (e) => {
-    //     e.preventDefault();
-    //     console.log(`button ${e.target.value} clicked`);
-    //     // la fonction n'était pas complète, à finaliser
-    //     dispatch(SetUserLabel(e.target.value));
-    // };
 
     const handleAddTag = (e) => {
         e.preventDefault();
@@ -123,26 +126,48 @@ const Account = () =>{
             <span className="bg-#ff253a flex content-center justify-center">
 
             <div className="m-5 grid grid-cols-3 gap-1 flex content-center justify-center h-full items-center justify-content: space-evenly">
-                {/* CRÉATION DES TAGS ET MISE EN FORME CONDITIONNELLE SELON LEUR STATUT (SÉLECTIONNÉ OU NON) */}
-            {labels.map(label => {
+                {/* VERSION INITIALE FONCTIONNELLE */}
+            {/* {labels.map(label => {
                 if (tags.find(tag => tag.label===label.name)){
                     classNameActiveLabel = `mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white ${label.color} ${label.hover} rounded-xl shadow-lg flex items-inline-block space-x-1`;
                     return <button
-                    key={label.name}
+                    key={label.id}
                     className={classNameActiveLabel}
-                    value={label.name}
+                    value={label.id}
                     onClick={handleRemoveTag}
                     >
                     {label.name}
                     </button>
                 } else {
                     return <button
-                    key={label.name}
+                    key={label.id}
                     className="mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-gray-300 hover:bg-gray-400 rounded-xl shadow-lg flex items-inline-block space-x-1"
-                    value={label.name}
+                    value={label.id}
                     onClick={handleAddTag}
                     >
                     {label.name}
+                    </button>
+                }
+            })} */}
+            {allTags?.map(label => {
+                if (tags.find(tag => tag.label===label.label)){
+                    classNameActiveLabel = `mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white ${label.color} ${label.hover} rounded-xl shadow-lg flex items-inline-block space-x-1`;
+                    return <button
+                    key={label.id}
+                    className={classNameActiveLabel}
+                    value={label.id}
+                    onClick={handleRemoveTag}
+                    >
+                    {label.label}
+                    </button>
+                } else {
+                    return <button
+                    key={label.id}
+                    className="mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-gray-300 hover:bg-gray-400 rounded-xl shadow-lg flex items-inline-block space-x-1"
+                    value={label.id}
+                    onClick={handleAddTag}
+                    >
+                    {label.label}
                     </button>
                 }
             })}

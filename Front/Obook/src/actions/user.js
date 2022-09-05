@@ -8,6 +8,9 @@ export const CLEAR_PASSWORDS = 'CLEAR_PASSWORDS';
 export const SETCREATIONCONFIRMATION = 'SETCREATIONCONFIRMATION';
 export const LOGOUT = 'LOGOUT';
 export const DEL_ACCOUNT = 'DEL_ACCOUNT';
+export const SET_ADDED_TAG = 'SET_ADDED_TAG';
+export const GET_ALL_TAGS = 'GET_ALL_TAGS';
+export const SET_ALL_TAGS = 'SET_ALL_TAGS';
 //à voir dans un second temps une fois branché au back
 export const CHANGE_USER_INFO = 'CHANGE_USER_INFO';
 //séparation entre action demandant une confirmation et autres infos secondaires
@@ -81,12 +84,26 @@ export const toggleSignInModal = (boolean) =>({
 	payload: boolean
 });
 
-export const addTagUser = (tag) =>({
+export const addTagUser = (tagId) =>({
 	type: ADD_TAG_USER,
-	payload: tag
+	payload: tagId,
 });
 
-export const removeTagUser = (tag) =>({
+export const removeTagUser = (tagId) =>({
 	type: REMOVE_TAG_USER,
-	payload: tag
+	payload: tagId,
+});
+
+export const setAddedTag = (data) =>({
+	type: SET_ADDED_TAG,
+	payload: data,
+});
+
+export const getAllTags = () =>({
+	type: GET_ALL_TAGS,
+});
+
+export const setAllTags = (data) =>({
+	type: SET_ALL_TAGS,
+	payload: data,
 });

@@ -91,7 +91,7 @@ export const LoginModal=()=>{
             <Button name="Se connecter" type="submit" value="loginButton" className="login-button p-2 px-3 m-3 rounded bg-[#292F44] text-[#F5F5F5]" />
             <a className='block' onClick={handleClick}>Pas encore inscrit ?</a>
           </form>
-      <EscapeButton onClick={handleQuit}/>
+      <EscapeButton className='text-[#292F44] text-3xl m-3 cursor-pointer' onClick={handleQuit}/>
       </>
       ):
         <>
@@ -107,7 +107,7 @@ export const LoginModal=()=>{
             <a className='block' onClick={handleClick}>Déjà inscrit ?</a>
             {!isPasswordValid && <p>{errorMessage}</p>}
           </form>
-        <EscapeButton onClick={handleQuit}/>
+        <EscapeButton className='text-[#292F44] text-3xl m-3 cursor-pointer' onClick={handleQuit}/>
         </>
       )}
       </div>

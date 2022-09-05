@@ -106,9 +106,9 @@ export const setLoading = (data) => ({
   payload: data,
 });
 
-export const deleteBook = (data) => ({
+export const deleteBook = (id) => ({
   // à adapter selon les infos nécessaires à la requête
   type: DELETE_BOOK,
-  payload: data,
+  payload: id,
 });
 

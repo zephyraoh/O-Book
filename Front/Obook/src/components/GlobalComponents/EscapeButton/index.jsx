@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const EscapeButton =({onClick})=>{
+const EscapeButton =({onClick, className})=>{
 
 
     return(
-        <FontAwesomeIcon className='text-[#292F44] text-3xl m-3' icon="fa-solid fa-circle-xmark" onClick={onClick}/>
+        <FontAwesomeIcon className={className} icon="fa-solid fa-circle-xmark" onClick={onClick}/>
     )
 }
 
