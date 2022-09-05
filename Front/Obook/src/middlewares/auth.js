@@ -1,6 +1,6 @@
 import { axiosServerDB } from '../utils/axios';
-import { DELETE_BOOK, FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY, SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability, setLoading, fetchBooks, REQUEST_LOAN, GET_BOOK_OWNERS, setBookOwners } from '../actions/books';
-import { setUserData, SIGN_IN, SIGN_UP, GET_MY_LIBRARY, GET_MEMBER_PROFILE, SET_USER_LABEL, SEND_MODIFIED_INFOS, ADD_TAG_USER, REMOVE_TAG_USER, setAddedTag, GET_ALL_TAGS, setAllTags, END_LOAN } from '../actions/user';
+import { DELETE_BOOK, FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY, SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability, setLoading, fetchBooks, REQUEST_LOAN, GET_BOOK_OWNERS, setBookOwners, ACCEPT_LOAN, END_LOAN } from '../actions/books';
+import { setUserData, SIGN_IN, SIGN_UP, GET_MY_LIBRARY, GET_MEMBER_PROFILE, SEND_MODIFIED_INFOS, ADD_TAG_USER, REMOVE_TAG_USER, setAddedTag, GET_ALL_TAGS, setAllTags } from '../actions/user';
 import axios from 'axios';
 
 
@@ -199,6 +199,7 @@ const authMiddleware = (store) => (next) => async (action) => {
 				const tagId = action.payload;
 				console.log(tagId);
 				const response = await axiosServerDB.delete(`/removetag/${tagId}`);
+
 				console.log("tag removed ==>", response);
 					
 			}catch(err){
@@ -233,9 +234,19 @@ const authMiddleware = (store) => (next) => async (action) => {
 			try{
 				const loanId = action.payload;
 				console.log(loanId);
-				const {data} = await axiosServerDB.patch(`/loan/${loanId}`, {status: "Terminé"});
-				console.log("loan generated ==>", data);
+				const {data} = await axiosServerDB.patch(`/loans/${loanId}`, {status: "Terminé"});
+				console.log("loan ended ==>", data);
 					
+			}catch(err){
+				console.log(err);
+			}
+			break;
+		}
+		case ACCEPT_LOAN:{
+			try{
+				const loanId = action.payload;
+				const {data} = await axiosServerDB.patch(`/loans/${loanId}`, {status: "En cours"});
+				console.log("loan status changed ===>", data);		
 			}catch(err){
 				console.log(err);
 			}

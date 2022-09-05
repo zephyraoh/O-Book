@@ -61,7 +61,7 @@ const Library = ()=>{
                 {books.map(book =>(
                     <div className="flex flex-row items-center h- w-1/5 max-h-[300px] relative pt-7">
                     <BookCard key={book.id} {...book}/>
-                    {book.is_available && <button className='text-[#FFF] bg-[#097941] p-1 w-[150px] absolute top-[190px] left-[51px] rounded-b-lg' value ={book.id} key={`availablebutton-${book.id}`} onClick={handleClick} >Emprunter</button>}
+                    {book.is_available && <button className='text-[#FFF] bg-[#097941] p-1 w-[150px] absolute top-[190px] left-[51px] rounded-b-lg' value ={book.id} key={`availablebutton-${book.id}`} onClick={handleClick}>Emprunter</button>}
                     </div>
                     )
                 )}
