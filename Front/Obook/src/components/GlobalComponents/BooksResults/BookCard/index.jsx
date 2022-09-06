@@ -19,8 +19,8 @@ const BookCard=({
 
     return (
         <>
-            <div value = {isbn} className="mobile:max-h-[280px] desktop:max-h-[350px] desktop:min-h-[30px] desktop:max-w-[200px] flex flex-col items-center">
-                <img className='mobile:max-h-[190px] mobile:max-w-[150px] desktop:max-h-[220px] desktop:w-[160px] rounded-lg' src = { image }/>
+            <div value = {isbn} className="mobile:max-h-[280px] desktop:max-h-[260px] desktop:min-h-[260px] desktop:max-w-[170px] desktop:min-w-[170px] flex flex-col items-center">
+                <img className=' block mobile:max-h-[190px] mobile:max-w-[170px] desktop:max-h-[240px] desktop:min-h-[240px] desktop:min-w-[170px] desktop:max-w-[170px] rounded-lg' src = { image }/>
                 <h1 className="font-semibold desktop:max-h-[72px] text-ellipsis overflow-hidden">{title}</h1>
                 {/* <h4 className="mobile:hidden desktop:block">{author}</h4> */}
                 {/* {synopsis? <p className="mobile:hidden desktop:block text-ellipsis"> {synopsis}</p> : <p className="mobile:hidden   desktop:block">Pas de synopsis disponible </p>} */}
