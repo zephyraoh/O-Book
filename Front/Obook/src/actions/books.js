@@ -22,6 +22,8 @@ export const GET_BOOK_OWNERS = 'GET_BOOK_OWNERS';
 export const SET_BOOK_OWNERS = 'SET_BOOK_OWNERS';
 export const ACCEPT_LOAN = 'ACCEPT_LOAN';
 export const END_LOAN = 'END_LOAN';
+export const FETCH_LENDER_INFOS = 'FETCH_LENDER_INFOS';
+export const SET_LENDER_INFOS = 'SET_LENDER_INFOS';
 
 
 export const setSearchField = (search) => ({
@@ -141,3 +143,12 @@ export const setBookOwners = (data) => ({
   payload: data,
 });
 
+export const fetchLenderInfos = (libraryid) => ({
+  type: FETCH_LENDER_INFOS,
+  payload: libraryid,
+});
+
+export const setLenderInfos = (data) => ({
+  type: SET_LENDER_INFOS,
+  payload: data,
+});

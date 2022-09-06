@@ -1,5 +1,5 @@
 import { axiosServerDB } from '../utils/axios';
-import { DELETE_BOOK, FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY, SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability, setLoading, fetchBooks, REQUEST_LOAN, GET_BOOK_OWNERS, setBookOwners, ACCEPT_LOAN, END_LOAN } from '../actions/books';
+import { DELETE_BOOK, FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY, SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability, setLoading, fetchBooks, REQUEST_LOAN, GET_BOOK_OWNERS, setBookOwners, ACCEPT_LOAN, END_LOAN, FETCH_LENDER_INFOS, setLenderInfos } from '../actions/books';
 import { setUserData, SIGN_IN, SIGN_UP, GET_MY_LIBRARY, GET_MEMBER_PROFILE, SEND_MODIFIED_INFOS, ADD_TAG_USER, REMOVE_TAG_USER, GET_ALL_TAGS, setAllTags, setMyTags } from '../actions/user';
 import axios from 'axios';
 
@@ -261,6 +261,15 @@ const authMiddleware = (store) => (next) => async (action) => {
 				console.log(err);
 			}
 			break;
+		}
+		case FETCH_LENDER_INFOS:{
+			try{
+				const {data} = await axiosServerDB.get(`/userinfos/${action.payload}`)
+				console.log("received LENDER INFOS from Serv ==>", data)
+				store.dispatch(setLenderInfos(data));
+			}catch(err){
+				console.log(err);
+			}
 		}
 		default: 
 			next(action); 

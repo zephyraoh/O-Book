@@ -14,7 +14,7 @@ const BookOwner = ({
             <NavLink to={link}>
                 <img className='rounded-full w-32 h-32' src={profile_picture} alt={username} />
                 <p>{username}</p>
-                <p>{zipcode}, {localisation}</p>
+                <p>{zipcode} {localisation}</p>
             </NavLink>
         </div>
     )

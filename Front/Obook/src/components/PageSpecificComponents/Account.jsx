@@ -154,7 +154,7 @@ const Account = () =>{
             })} */}
             {allTags?.map(label => {
                 if (tags.find(tag => tag.label===label.label)){
-                    classNameActiveLabel = `mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white ${label.color} ${label.hover} rounded-xl shadow-lg flex items-inline-block space-x-1`;
+                    classNameActiveLabel = `mobile:text-xs desktop:text-sm desktop:w-[190px] mobile:w-[100px] p-2 mx-auto text-white ${label.color} ${label.hover} rounded-xl shadow-lg flex`;
                     return <button
                     key={label.id}
                     className={classNameActiveLabel}
@@ -166,7 +166,7 @@ const Account = () =>{
                 } else {
                     return <button
                     key={label.id}
-                    className="mobile:text-xs desktop:text-sm desktop:w-[120px] mobile:w-[100px] p-2 max-w-sm mx-auto text-white bg-gray-300 hover:bg-gray-400 rounded-xl shadow-lg flex items-inline-block space-x-1"
+                    className="mobile:text-xs desktop:text-sm desktop:w-[190px] mobile:w-[100px] p-2 mx-auto text-white bg-gray-300 hover:bg-gray-400 rounded-xl shadow-lg"
                     value={label.id}
                     onClick={handleAddTag}
                     >
