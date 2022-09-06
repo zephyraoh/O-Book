@@ -6,16 +6,18 @@ import { useEffect } from "react";
 
 const PopUpContact = ({
     handleQuit,
-    libraryid,
+    userid,
 }) => {
 
 const dispatch= useDispatch();
+console.log(userid)
+
+useEffect(() => {
+    dispatch(fetchLenderInfos(userid));
+}, []);
 
 const lenderUserInfos = useSelector(state=>state.books.lenderUserInfos)
-// console.log(lenderUserInfos);
-useEffect(() => {
-    dispatch(fetchLenderInfos(libraryid));
-}, []);
+console.log('LENDER USER INFOS====>', lenderUserInfos);
 
     return (
        <>
@@ -25,12 +27,13 @@ useEffect(() => {
                 </div>
                 <div className="p-6 text-center">
                     <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Hello, voici mes coordonnées :</h3>
-                    <h4 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"> </h4>
+                    <h4 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"></h4>
                     <h4 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"> </h4>
                     <h4 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"> </h4>
                 </div>
             </div>
         </>
     )
+
 }
 export default PopUpContact;

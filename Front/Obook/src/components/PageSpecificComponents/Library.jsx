@@ -11,6 +11,7 @@ const Library = ()=>{
     const params = useParams();
     const dispatch = useDispatch();
     const books = useSelector(state => state.visitedProfile.books);
+    console.log('BOOKS ====> ',books);
     const tags = useSelector(state => state.visitedProfile.tags);
     const userInfos = useSelector(state => state.visitedProfile.userInfos);
 
@@ -55,9 +56,9 @@ const Library = ()=>{
                 <p className="text-3xl font-bold mb-4">Sa bibliothèque</p>
                 <div className='flex desktop:flex-row flex-wrap mobile:flex-col h-full justify-evenly'>
                     {books.map(book =>(
-                        <div className="justify-evenly desktop:min-w-[160px] desktop:max-w-[160px] desktop:max-h-[300px] desktop:min-h-[300px] relative pt-7 pl-7">
+                        <div className=" flex flex-col justify-evenly relative">
                             <BookCard key={book.id} {...book}/>
-                            {book.is_available && <button className='text-[#FFF] bg-[#097941] p-1 w-[150px] absolute bottom-[52px] desktop:right-[6px] rounded-b-lg' value ={book.id} key={`availablebutton-${book.id}`} onClick={handleClick}>Emprunter</button>}
+                            {book.is_available && <button className='text-[#FFF] bg-[#097941] p-1 w-[150px] absolute bottom-[52px] desktop:right-[6px] rounded-b-lg' value ={book.libraryid} key={`availablebutton-${book.libraryid}`} onClick={handleClick}>Emprunter</button>}
                         </div>
                         )
                     )}

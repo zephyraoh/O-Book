@@ -5,6 +5,7 @@ import LoginPartModal from "../../Header/LoginModal/LoginPartModal/LoginPartModa
 import PopUpContact from "../../PopUpContactModal";
 
 const BorrowsBookCard=({
+    userid,
     libraryid,
     status,
     isbn,
@@ -43,7 +44,7 @@ const BorrowsBookCard=({
                 <h1 className="font-semibold desktop:max-h-[48px] mobile:max-h-[60px] mobile:max-w-[100px] text-ellipsis overflow-hidden desktop:text-base mobile:text-sm">{title}</h1>
                 {status === "En attente de validation" && <button className='text-[#FFF] bg-red-400 p-1 desktop:w-[160px] mobile:w-[105px] absolute desktop:bottom-[48px] mobile:bottom-[65px] rounded-b-lg mobile:text-xs desktop:text-base' value ={loanid} key={loanid} onClick={handleCancelRequest} >Annuler la demande</button>}
                 {status === "En cours" && <button className='text-[#FFF] bg-green-400 p-1 desktop:w-[160px] mobile:w-[105px] absolute desktop:bottom-[48px] mobile:bottom-[65px] rounded-b-lg mobile:text-xs desktop:text-base' value ={loanid} key={loanid} onClick={handleDisplayUserDetails}>Voir les coordonnées</button>}
-                {toggleLenderInfosModal && <PopUpContact libraryid={libraryid} handleQuit={()=>{setToggleLenderInfosModal(false)}} />}
+                {toggleLenderInfosModal && <PopUpContact userid={userid} handleQuit={()=>{setToggleLenderInfosModal(false)}} />}
             </div>
          </>
     )

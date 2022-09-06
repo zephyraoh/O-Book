@@ -154,7 +154,7 @@ const Account = () =>{
             })} */}
             {allTags?.map(label => {
                 if (tags.find(tag => tag.label===label.label)){
-                    classNameActiveLabel = `mobile:text-xs desktop:text-sm desktop:w-[190px] mobile:w-[100px] p-2 mx-auto text-white ${label.color} ${label.hover} rounded-xl shadow-lg flex`;
+                    classNameActiveLabel = `mobile:text-xs desktop:text-sm desktop:w-[190px] mobile:w-[100px] p-2 mx-auto text-white ${label.color} ${label.hover} rounded-xl shadow-lg `;
                     return <button
                     key={label.id}
                     className={classNameActiveLabel}
