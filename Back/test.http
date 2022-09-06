@@ -85,7 +85,10 @@ content-type: application/json
 }
 
 ### Get user loaner informations
-GET {{ endpoint }}/userinfos/2
+GET {{ endpoint }}/userinfos/16
+
+### Get user loaner informations
+GET {{ endpoint }}/library/16
 
 ### Get user library
 GET {{ endpoint }}/visitedlibrary/Duke
