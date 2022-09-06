@@ -22,7 +22,7 @@ export const initialState = {
   newPassword: '',
   newPasswordConfirm:'',
   accountModifications: {
-    //user infos
+    // user infos
     profilePicture: 'https://res.cloudinary.com/obook/image/upload/v1661345211/nl2gtqzgbnqyo5ilgzfz.jpg',
     firstname:'',
     lastname:'',

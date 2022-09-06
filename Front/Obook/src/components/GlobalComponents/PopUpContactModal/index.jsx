@@ -6,17 +6,17 @@ import { useEffect } from "react";
 
 const PopUpContact = ({
     handleQuit,
-    userid,
+    libraryid,
 }) => {
 
 const dispatch= useDispatch();
-console.log(userid)
 
 useEffect(() => {
-    dispatch(fetchLenderInfos(userid));
+    console.log("DISPATCHING LENDER INFOS WITH ", libraryid)
+    dispatch(fetchLenderInfos(libraryid));
 }, []);
 
-const lenderUserInfos = useSelector(state=>state.books.lenderUserInfos)
+const lenderUserInfos = useSelector(state=>state.books.lenderUserInfos);
 console.log('LENDER USER INFOS====>', lenderUserInfos);
 
     return (
@@ -27,9 +27,10 @@ console.log('LENDER USER INFOS====>', lenderUserInfos);
                 </div>
                 <div className="p-6 text-center">
                     <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Hello, voici mes coordonnées :</h3>
-                    <h4 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"></h4>
-                    <h4 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"> </h4>
-                    <h4 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"> </h4>
+                    <h4 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">email: {lenderUserInfos?.email}</h4>
+                    <h4 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">firstname : {lenderUserInfos?.firstname}</h4>
+                    <h4 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"> lastname : {lenderUserInfos?.lastname} </h4>
+                    <h4 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"> tél : {lenderUserInfos?.tel} </h4>
                 </div>
             </div>
         </>

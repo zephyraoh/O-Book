@@ -27,7 +27,8 @@ const Account = () =>{
     const oldPassword = useSelector(state=>state.user.accountModifications.oldPassword);
     const newPassword = useSelector(state=>state.user.accountModifications.password);
     const newPasswordConfirm = useSelector(state=>state.user.accountModifications.passwordConfirm);
-    const accountModifications = useSelector(state=>state.user.accountModifications)
+    const accountModifications = useSelector(state=>state.user.accountModifications);
+    const tel = useSelector(state=> state.user.accountModifications.tel);
     const userImg = useSelector(state=>state.user.profile_picture);
 
     // MISE EN PLACE DES DONNÉES LIÉES AUX LABELS
@@ -125,6 +126,7 @@ const Account = () =>{
             <Field value={newLocalisation}type="text" name="localisation" placeholder="Région" onChange={handleChange}/>
             <Field value={newZipcode} type="text" name="zipcode" placeholder="Code postal" onChange={handleChange}/> 
             <Field value={newBiography} type="text" name="biography" placeholder="Biographie" onChange={handleChange}/>
+            <Field value={tel} type="text" name="tel" placeholder="Numéro de téléphone" onChange={handleChange}/>
 
             <span className="bg-#ff253a flex content-center justify-center">
 
