@@ -42,6 +42,7 @@ export const LoginModal=()=>{
     e.preventDefault();
 		dispatch(signIn());
     dispatch(clearPasswords());
+    setLoginForm(!loginForm)
 	};
 
   const handleSubmitSignUp = (e) => {

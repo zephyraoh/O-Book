@@ -46,7 +46,7 @@ const SignInPartModal = ()=>{
         <Field value= {newEmail} type= "email" name= "newEmail" placeholder = "Email" onChange={onChange} />
         <Field value= {newPassword} type= "password" name= "newPassword" placeholder = "Mot de Passe" onChange={onChange} />
         <Field value= {newPasswordConfirm} type= "password" name= "newPasswordConfirm" placeholder = "Confirmez le Mot de Passe" onChange={onChange} />
-        <Button name="S'inscrire" value="signupButton" className="signup-button" />
+        <Button name="S'inscrire" value="signupButton" className="signup-button"/>
         <a onClick={handleClick}>Déjà inscrit ?</a>
         {!isPasswordValid && <p>{errorMessage}</p>}
       </form>
