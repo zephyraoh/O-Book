@@ -12,10 +12,16 @@ const loanController = {
         const libraryId = Number(req.body.libraryId);
 
         // Vérifier que l'emprunt n'existe pas déjà en BDD
-        const isLoanExist = await Loan.isLoanExist(userId, libraryId);
-        if (isLoanExist) {
-            throw new ClientError('This loan already exist');
-        }
+        // const isLoanExist = await Loan.isLoanExist(userId, libraryId);
+        // if (isLoanExist?.status === 'En cours' || isLoanExist?.status === 'En attente de validation') {
+        //     throw new ClientError('This loan already exist');
+        // }
+
+        // Vérifier qu'un emprunt n'est pas déjà en cours
+        // const bookLend = await Loan.findOne('libary_id', libraryId);
+        // if (bookLend?.status === 'En cours' || bookLend?.status === 'En attente de validation') {
+        //     throw new ClientError('A loan is already in progress for this book');
+        // }
 
         // Création d'un nouvel emprunt
         const loan = new Loan({

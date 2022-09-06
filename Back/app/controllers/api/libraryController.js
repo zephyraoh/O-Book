@@ -113,7 +113,7 @@ const libraryController = {
     async getLibrary(req, res) {
         // Récupérer les infos de librairie d'un autre utiliateur
         const { username } = req.params;
-        const userInfos = await User.getUserInformations(username);
+        const userInfos = await User.getUserInformationsByUsername(username);
         const tags = await Tag.getTagsByUserId(userInfos.id);
         const books = await Book.getBooksByUserId(userInfos.id);
         res.json({
