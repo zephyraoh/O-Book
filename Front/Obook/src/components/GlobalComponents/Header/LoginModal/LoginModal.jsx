@@ -42,7 +42,7 @@ export const LoginModal=()=>{
     e.preventDefault();
 		dispatch(signIn());
     dispatch(clearPasswords());
-    setLoginForm(!loginForm)
+    
 	};
 
   const handleSubmitSignUp = (e) => {
@@ -53,6 +53,7 @@ export const LoginModal=()=>{
       if(newPasswordConfirm === newPassword){
         dispatch(signUp()),
         setIsPasswordValid(true)
+        setLoginForm(!loginForm)
       }else{
         setErrorMessage("Erreur : les mots de passe sont différents"),
         setIsPasswordValid(false)
