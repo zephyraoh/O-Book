@@ -23,7 +23,7 @@ const app = express();
 // Version heroku
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'http://localhost:34829', 'https://o-book-front.vercel.app'],
 }));
 
 // Configuration du moteur de rendu
