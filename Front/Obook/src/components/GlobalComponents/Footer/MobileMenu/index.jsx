@@ -39,8 +39,8 @@ const MobileMenu=()=>{
         <nav className='flex w-screen h-15 justify-center bg-[#EDE7DF] content-between fixed bottom-0 desktop:hidden'>
             {isSearchBarActive? 
                 <>
-                    <form className='w-full flex items-center justify-evenly mb-3' onSubmit={handleSubmit}>
-                        <SearchBar className='search-form__input rounded-md h-10 w-11/12 ml-4' />
+                    <form className='w-full flex items-center justify-evenly my-3' onSubmit={handleSubmit}>
+                        <SearchBar className='search-form__input rounded-md px-2 h-10 w-10/12 ml-4' />
                         <EscapeButton onClick={handleClick}/>
                     </form>
                 </>
