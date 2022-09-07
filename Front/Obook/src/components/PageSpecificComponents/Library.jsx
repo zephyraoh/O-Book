@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import { fetchBorrowDemand, fetchVisitedProfileData } from "../../actions/visitedUser";
 import BookCard from "../GlobalComponents/BooksResults/BookCard";
 import { requestLoan } from "../../actions/books";
-
+import { LoginModal } from "../GlobalComponents/Header/LoginModal/LoginModal";
+import { toggleSignInModal } from "../../actions/user";
 
 const Library = ()=>{
     //const
@@ -15,11 +16,17 @@ const Library = ()=>{
     console.log("les books du profil visité ==>", books)
     const tags = useSelector(state => state.visitedProfile.tags);
     const userInfos = useSelector(state => state.visitedProfile.userInfos);
+    const isSignModalToggled =useSelector (state=>state.user.signInModal)
 
     //fonctions
     const handleClick =(e)=> {
-        dispatch(requestLoan(e.target.value))
-        console.log("demande de prêt dispatchée sur le livre ", e.target.value)
+        isLogged?(
+            dispatch(requestLoan(e.target.value)),
+            console.log("demande de prêt dispatchée sur le livre ", e.target.value)
+        ):(
+            dispatch(toggleSignInModal(true)),
+            console.log("user pas connecté")
+        );
     }
     console.log("books", books);
     console.log("tags", tags);
@@ -30,7 +37,7 @@ const Library = ()=>{
     }, []);
    
     return(
-        <div className='flex desktop:flex-row mobile:flex-col w-full h-full mobile:px-4 desktop:px-8 desktop:my-6 mobile:my-0 mobile:pb-24 desktop:pb-0'> 
+        <div className='flex desktop:flex-row mobile:flex-col w-full h-full mobile:px-4 desktop:px-8 desktop:my-6 mobile:my-0 mobile:pb-24 desktop:pb-8'> 
             <div className="flex desktop:flex-col mobile:flex-row justify-evenly items-center desktop:h-3/4 desktop:w-1/3 mobile:w-full mobile:h-[250px]">
                 <div className="flex w-1/3 flex-col justify-evenly items-center ">
                     <img className="block rounded-full desktop:max-h-[200px] desktop:min-h-[200px] desktop:max-w-[200px] desktop:min-w-[200px] mobile:max-h-[125px] mobile:min-h-[125px] mobile:max-w-[125px] mobile:min-w-[125px]" src={userInfos.profile_picture}></img>
@@ -60,6 +67,8 @@ const Library = ()=>{
                         <div className=" flex flex-col desktop:min-w-[200px] desktop:max-w-[200px] desktop:max-h-[300px] desktop:min-h-[300px] mobile:min-w-[120px] mobile:max-w-[120px] mobile:min-h-[230px] mobile:max-h-[230px] justify-between items-center relative mobile:mb-4">
                             <BookCard key={book.id} {...book}/>
                             {book.is_available && <button className=' block text-[#FFF] bg-[#097941] p-1 desktop:w-[170px] mobile:w-[105px] absolute desktop:bottom-[60px] desktop:right-[15px] mobile:bottom-[70px] mobile:right-[7px] rounded-b-lg' value ={book.libraryid} key={`availablebutton-${book.libraryid}`} onClick={handleClick}>Emprunter</button>}
+                            {!book.is_available && <button className=' cursor-default block text-[#FFF] bg-[#FF0000] p-1 desktop:w-[170px] mobile:w-[105px] absolute desktop:bottom-[60px] desktop:right-[15px] mobile:bottom-[70px] mobile:right-[7px] rounded-b-lg' value ={book.libraryid} key={`availablebutton-${book.libraryid}`}>Indisponible</button>}
+                            {isSignModalToggled && <LoginModal />}
                         </div>
                         )
                     )}

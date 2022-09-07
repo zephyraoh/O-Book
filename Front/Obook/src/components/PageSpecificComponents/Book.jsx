@@ -65,8 +65,8 @@ const Book = ()=>{
         return(
         <div className='flex desktop:flex-row mobile:flex-col my-6 w-full justify-center pb-20'>
             <div className='flex desktop:mx-12 mobile:mx-2 desktop:w-3/4 mobile:w-full justify-center'>
-                <img className=' rounded-md desktop:w-1/4 desktop:min-w-[300px] desktop:min-h-[450px] desktop:max-w-[320px] desktop:max-h-[450px] mobile:w-[120px] mobile:h-[180px] my-5' src={book?.image} alt="" />
-                <div className='flex flex-col items-start desktop:mr-6 mobile:mr-0 desktop:pl-8 mobile:pl-2 mobile:max-w-[240px] mobile:min-w-[240px] desktop:max-w-[700px] desktop:min-w-[700px]'>
+                <img className='rounded-md desktop:w-1/4 desktop:min-w-[300px] desktop:min-h-[450px] desktop:max-w-[320px] desktop:max-h-[450px] mobile:w-[120px] mobile:h-[180px] my-5' src={book?.image} alt="" />
+                <div className='flex flex-col items-start desktop:mr-6 mobile:mr-0 desktop:pl-8 mobile:pl-2 mobile:max-w-[240px] mobile:min-w-[240px] desktop:max-w-1/2 desktop:min-w-[700px]'>
                     <h1 className='desktop:text-3xl mobile:text-lg font-bold desktop:mb-5 mobile:mb-1 text-ellipsis break-words'>{book?.title?.split('(')[0]}</h1>
                     <h3 className='desktop:my-3 mobile:my-1'>{book?.authors} - {book?.date_published}</h3>
                     <h3 className='desktop:my-3 mobile:my-1'>{book?.publisher}</h3>
@@ -76,7 +76,7 @@ const Book = ()=>{
                 </div>
             </div>
                 <div className='desktop:w-1/4 mobile:w-full flex flex-col items-center px-auto h-3/4'>
-                    <h3 className='font-bold desktop:text-2xl my-4'>Ils possèdent ce livre :</h3>
+                    <h3 className='font-bold desktop:text-2xl mobile:text-xl my-4'>Ils possèdent ce livre :</h3>
                     {/* <Swiper
                         pagination={{
                             clickable: true,
@@ -84,7 +84,7 @@ const Book = ()=>{
                         modules={[Navigation]}
                         className="mySwiper"
                         spaceBetween={2}
-                        slidesPerView={"auto"}
+                        slidesPerView={1}
                         loop={true}
                         autoplay={{
                             delay: 2500,
@@ -96,7 +96,7 @@ const Book = ()=>{
                         (
                         // <SwiperSlide>   
                             <BookOwner key={owner.userid} {...owner}/>
-                        /* </SwiperSlide> */
+                        // </SwiperSlide>
                         )
                     )}
                     {/* </Swiper> */}

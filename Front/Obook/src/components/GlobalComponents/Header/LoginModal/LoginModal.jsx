@@ -52,6 +52,7 @@ export const LoginModal=()=>{
       if(newPasswordConfirm === newPassword){
         dispatch(signUp()),
         setIsPasswordValid(true)
+        
       }else{
         setErrorMessage("Erreur : les mots de passe sont différents"),
         setIsPasswordValid(false)
