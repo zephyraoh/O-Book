@@ -7,7 +7,7 @@ const MyLibrary = ()=>{
    const dispatch = useDispatch();
 
 return (
-    <div className='w-screen h-7/8'>
+    <div className='w-screen h-7/8 mobile: pb-20'>
     <MyLibraryMenu/>
     <MyBooks />
     </div>

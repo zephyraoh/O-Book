@@ -1,7 +1,8 @@
 import { deleteBook, sendMyBookAvailability } from "../../../actions/books";
 import { useDispatch, useSelector } from "react-redux";
-import EscapeButton from "../../GlobalComponents/EscapeButton";
+import { useNavigate, useParams } from 'react-router-dom';
 
+import EscapeButton from "../../GlobalComponents/EscapeButton";
 const BookCardWithToggle=({
     libraryid,
     isbn,
@@ -17,6 +18,8 @@ const BookCardWithToggle=({
         
     }
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const handleAvailabilityToggle= (e) =>{
         console.log('button clicked');
         dispatch(sendMyBookAvailability(is_available, e.target.value))
@@ -24,8 +27,8 @@ const BookCardWithToggle=({
     return (
         <>
             <div value = {isbn} className="mobile:max-h-[300px] mobile:min-h-[250px] desktop:max-h-[300px] desktop:min-w-[200px] desktop:min-h-[320px] desktop:max-w-[200px] flex flex-col items-center relative mb-5 mx-3">
-                <img className='mobile:max-h-[150px] mobile:max-w-[105px] mobile:min-h-[150px] mobile:min-w-[105px] desktop:min-h-[230px] desktop:max-h-[220px] desktop:min-w-[160px] desktop:max-w-[160px] rounded-lg' src = { image }/>
-                <h1 className="font-semibold desktop:max-h-[48px] mobile:max-h-[60px] mobile:max-w-[100px] text-ellipsis overflow-hidden desktop:text-base mobile:text-sm">{title}</h1>
+                <img onClick={() => navigate(`/book/${isbn}`)} className='mobile:max-h-[150px] mobile:max-w-[105px] mobile:min-h-[150px] mobile:min-w-[105px] desktop:min-h-[230px] desktop:max-h-[220px] desktop:min-w-[160px] desktop:max-w-[160px] rounded-lg' src = { image }/>
+                <h1 className="font-semibold desktop:max-h-[48px] mobile:max-h-[60px] mobile:max-w-[100px] text-ellipsis overflow-hidden desktop:text-base mobile:text-sm">{title?.split('(')[0]}</h1>
                 <h4 className="mobile:hidden desktop:block">{author}</h4>
                 {/* {synopsis? <p className="mobile:hidden desktop:block text-ellipsis"> {synopsis}</p> : <p className="mobile:hidden   desktop:block">Pas de synopsis disponible </p>} */}
                

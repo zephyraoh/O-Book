@@ -12,7 +12,7 @@ const loading = useSelector(state => state.books.loading);
     return(
         <>
             {!isSearchOn?
-                <div className='min-h-screen'>
+                <div className='min-h-screen pb-24'>
                     <BooksResults />
                     <UpdatesFeed/>
                 </div>

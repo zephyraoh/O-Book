@@ -111,7 +111,7 @@ const Account = () =>{
 
     return (
     <form>
-    <div className="flex w-full items-center mobile:flex-col desktop:flex-row">
+    <div className="flex w-full items-center mobile:flex-col desktop:flex-row mobile:pb-24">
         <div className="desktop:w-1/2 mobile:w-full">
         {/* Upload D' images */}
             <div className="flex justify-center desktop:items-end mobile:items-center m-5 mobile:flex-col desktop:flex-row">

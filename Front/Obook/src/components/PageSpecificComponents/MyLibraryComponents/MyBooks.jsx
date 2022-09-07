@@ -10,6 +10,7 @@ import Loading from "../../GlobalComponents/Loading";
 import DeleteButton from "./DeleteButton";
 import BookCardWithToggle from "./BookCardWithToggle";
 import LendsBookCard from "./LendsBookCard";
+import { useNavigate, useParams } from 'react-router-dom';
 
 const MyBooks = ()=>{
     // constantes
@@ -20,7 +21,7 @@ const MyBooks = ()=>{
     const borrow = useSelector(state => state.books.booksData.myBooks.borrow);
     // Fonctions
     const dispatch = useDispatch();
-    
+    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(setLoading(true));
