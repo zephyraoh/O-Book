@@ -45,7 +45,7 @@ const Library = ()=>{
                 </div>
                 <div className="flex-col items-center h-full mobile:py-4 mobile:px-2">
                     <p className="font-bold text-left text-xl desktop:block mobile:hidden">Biographie</p>
-                    <p className="desktop:w-1/2 mobile:w-full desktop:text-left mobile:text-center">"{userInfos.biography}"</p> 
+                    <p className="desktop:w-1/2 mobile:w-full desktop:text-left mobile:text-center">"{userInfos.biography||"N'a pas encore rédigé sa biographie !"}"</p> 
                     <p className="font-bold text-left text-xl pt-4 desktop:block mobile:hidden">Localisation</p>
                     <p className="desktop:text-left mobile:text-center">{userInfos.localisation} ({userInfos.zipcode})</p>
                     <p className='font-bold pt-4 text-left text-xl desktop:block mobile:hidden'>Aime</p>
@@ -68,7 +68,7 @@ const Library = ()=>{
                             <BookCard key={book.id} {...book}/>
                             {book.is_available && <button className=' block text-[#FFF] bg-[#097941] p-1 desktop:w-[170px] mobile:w-[105px] absolute desktop:bottom-[60px] desktop:right-[15px] mobile:bottom-[70px] mobile:right-[7px] rounded-b-lg' value ={book.libraryid} key={`availablebutton-${book.libraryid}`} onClick={handleClick}>Emprunter</button>}
                             {!book.is_available && <button className=' cursor-default block text-[#FFF] bg-[#FF0000] p-1 desktop:w-[170px] mobile:w-[105px] absolute desktop:bottom-[60px] desktop:right-[15px] mobile:bottom-[70px] mobile:right-[7px] rounded-b-lg' value ={book.libraryid} key={`availablebutton-${book.libraryid}`}>Indisponible</button>}
-                            {isSignModalToggled && <LoginModal />}
+                            {!isLogged && isSignModalToggled && <LoginModal />}
                         </div>
                         )
                     )}
