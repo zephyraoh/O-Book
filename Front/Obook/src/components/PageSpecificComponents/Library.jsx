@@ -68,7 +68,7 @@ const Library = ()=>{
                             <BookCard key={book.id} {...book}/>
                             {book.is_available && <button className=' block text-[#FFF] bg-[#097941] p-1 desktop:w-[170px] mobile:w-[105px] absolute desktop:bottom-[60px] desktop:right-[15px] mobile:bottom-[70px] mobile:right-[7px] rounded-b-lg' value ={book.libraryid} key={`availablebutton-${book.libraryid}`} onClick={handleClick}>Emprunter</button>}
                             {!book.is_available && <button className=' cursor-default block text-[#FFF] bg-[#FF0000] p-1 desktop:w-[170px] mobile:w-[105px] absolute desktop:bottom-[60px] desktop:right-[15px] mobile:bottom-[70px] mobile:right-[7px] rounded-b-lg' value ={book.libraryid} key={`availablebutton-${book.libraryid}`}>Indisponible</button>}
-                            {isSignModalToggled && <LoginModal />}
+                            {!isLogged && isSignModalToggled && <LoginModal />}
                         </div>
                         )
                     )}
