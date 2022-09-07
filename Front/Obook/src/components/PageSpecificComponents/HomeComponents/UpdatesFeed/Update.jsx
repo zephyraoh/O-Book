@@ -26,7 +26,7 @@ const Update=({
                     {status === 'Terminé' && <p>A restitué</p>}
                 </div>
                 <NavLink to={bookNavLink} >
-                    <img className="rounded-md w-1/2 desktop:min-w-[170px] desktop:min-h-[250] mobile:min-w-[65px] mx-auto" src={image} alt={title} />
+                    <img className="rounded-md w-1/2 desktop:min-w-[170px] desktop:min-h-[250] mobile:min-w-[65px] mobile:max-w-[65px] mx-auto" src={image} alt={title} />
                 </NavLink>
                 <div className="desktop:block mobile:hidden">
                     <p>à</p>
