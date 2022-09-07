@@ -41,7 +41,7 @@ const MobileMenu=()=>{
                 <>
                     <form className='w-full flex items-center justify-evenly my-3' onSubmit={handleSubmit}>
                         <SearchBar className='search-form__input rounded-md px-2 h-10 w-10/12 ml-4' />
-                        <EscapeButton onClick={handleClick}/>
+                        <EscapeButton className="text-2xl" onClick={handleClick}/>
                     </form>
                 </>
                  : 
