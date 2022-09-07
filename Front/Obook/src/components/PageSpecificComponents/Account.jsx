@@ -126,7 +126,7 @@ const Account = () =>{
             <Field value={newLocalisation}type="text" name="localisation" placeholder="Région" onChange={handleChange}/>
             <Field value={newZipcode} type="text" name="zipcode" placeholder="Code postal" onChange={handleChange}/> 
             <Field value={newBiography} type="text" name="biography" placeholder="Biographie" onChange={handleChange}/>
-            <Field value={tel} type="text" name="tel" placeholder="Numéro de téléphone" onChange={handleChange}/>
+            <Field value={tel} type="number" name="tel" placeholder="Numéro de téléphone" onChange={handleChange}/>
 
             <span className="bg-#ff253a flex content-center justify-center">
 

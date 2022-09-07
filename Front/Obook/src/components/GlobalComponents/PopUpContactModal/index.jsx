@@ -25,9 +25,8 @@ console.log('LENDER USER INFOS====>', lenderUserInfos);
             <div className="relative my-0 p-2 w-full max-w-md h-full md:h-auto bg-[#F5F5F5] rounded-md drop-shadow-lg ">
                 
                 <h3 className="mb-5 text-sm font-normal text-gray-500 dark:text-gray-400">Hello, voici mes coordonnées :</h3>
-                <h4 className="mb-5 text-sm font-normal text-gray-500 dark:text-gray-400">email: {lenderUserInfos?.email}</h4>
-                <h4 className="mb-5 text-sm font-normal text-gray-500 dark:text-gray-400">firstname : {lenderUserInfos?.firstname}</h4>
-                <h4 className="mb-5 text-sm font-normal text-gray-500 dark:text-gray-400"> lastname : {lenderUserInfos?.lastname} </h4>
+                <h4 className="mb-5 text-sm font-normal text-gray-500 dark:text-gray-400">{lenderUserInfos?.firstname} {lenderUserInfos?.lastname} </h4>
+                <h4 className="mb-5 text-sm font-normal text-gray-500 dark:text-gray-400">{lenderUserInfos?.email}</h4>
                 <h4 className="mb-5 text-sm font-normal text-gray-500 dark:text-gray-400"> tél : {lenderUserInfos?.tel} </h4>
             </div>
         </div>
