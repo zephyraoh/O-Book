@@ -7,7 +7,7 @@ export const initialState = {
   firstName:'',
   lastName:'',
   username: '',  
-  email: 'marwan@gmail.com',
+  email: '',
   // miscelleanous
   profile_picture:'https://res.cloudinary.com/obook/image/upload/v1661345211/nl2gtqzgbnqyo5ilgzfz.jpg ',
   zipcode:'',
@@ -17,7 +17,7 @@ export const initialState = {
   // connexion
   token: null,
   isLogged: false,
-  password: 'azerty1234',
+  password: null,
   newUserName:'',
   newEmail: '',
   newPassword: '',
