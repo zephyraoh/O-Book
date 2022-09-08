@@ -1,8 +1,9 @@
-import { deleteBook, sendMyBookAvailability } from "../../../actions/books";
+import { deleteBook, sendMyBookAvailability, unsetBook } from "../../../actions/books";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 import EscapeButton from "../../GlobalComponents/EscapeButton";
+import { getMyLibrary } from "../../../actions/user";
+
 const BookCardWithToggle=({
     libraryid,
     isbn,
@@ -11,19 +12,24 @@ const BookCardWithToggle=({
     title,
     is_available,
 })=>{
-
+    
     const handleClick = () => {
-        // la route pour supprimer un livre n'existe pas : vérifier avec Justine
         dispatch(deleteBook(libraryid));
         
+        // AJOUT DUKE, FONCTIONNEL - à supprimer si besoin
+        dispatch(unsetBook(libraryid));
     }
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    // TEST DUKE
+    // const books = useSelector(state => state.books.booksData.myBooks);
+
     const handleAvailabilityToggle= (e) =>{
         console.log('button clicked');
         dispatch(sendMyBookAvailability(is_available, e.target.value))
-    }
+    };
+
     return (
         <>
             <div value = {isbn} className="mobile:max-h-[300px] mobile:min-h-[250px] desktop:max-h-[300px] desktop:min-w-[200px] desktop:min-h-[320px] desktop:max-w-[200px] flex flex-col items-center relative mb-5 mx-3">

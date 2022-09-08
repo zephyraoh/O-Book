@@ -25,6 +25,9 @@ export const END_LOAN = 'END_LOAN';
 export const FETCH_LENDER_INFOS = 'FETCH_LENDER_INFOS';
 export const SET_LENDER_INFOS = 'SET_LENDER_INFOS';
 
+// --------- AJOUT DUKE TEST CI-DESSOUS ------------- //
+export const UNSET_BOOK = 'UNSET_BOOK';
+// export const SET_LOAN_IN_PROGRESS = 'SET_LOAN_IN_PROGRESS';
 
 export const setSearchField = (search) => ({
   type: SET_SEARCH,
@@ -152,3 +155,27 @@ export const setLenderInfos = (data) => ({
   type: SET_LENDER_INFOS,
   payload: data,
 });
+
+// --------- AJOUT DUKE TEST CI-DESSOUS ------------- //
+export const unsetBook = (data) => ({
+  type: UNSET_BOOK,
+  payload: data,
+});
+
+// export const setNewBookStatus
+
+// const newBooks = state.books.map(book => {
+//   if(book.libraryid === Number(action.payload)){
+//       book.is_available = false
+//       return book
+//   } else {
+//       return book
+
+// }});
+// console.log('NEWBOOKS===>', newBooks);
+// console.log('PAYLOAD ===>', action.payload);
+// return{
+//   ...state,
+//   books: newBooks,
+  
+// }
