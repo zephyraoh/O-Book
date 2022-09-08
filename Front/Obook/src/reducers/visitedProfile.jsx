@@ -27,11 +27,20 @@ const reducer = (state = initialstate, action = {}) => {
                 books: action.payload,
             }
         case SET_VISITED_PROFILE_BOOK_STATUS:
+            const newBooks = state.books.map(book => {
+                if(book.libraryid === Number(action.payload)){
+                    book.is_available = false
+                    return book
+                } else {
+                    return book
+            
+            }});
+            console.log('NEWBOOKS===>', newBooks);
+            console.log('PAYLOAD ===>', action.payload);
             return{
                 ...state,
-                books: {
-
-                }
+                books: newBooks,
+                
             }
         default:
             return state;

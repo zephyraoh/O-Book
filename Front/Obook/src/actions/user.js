@@ -29,6 +29,7 @@ export const GET_MEMBER_PROFILE = 'GET_MEMBER_PROFILE'
 //zipcode, area, labels, bio, pic
 // toggle de la modale de connexion/inscription
 export const TOGGLE_SIGN_IN_MODAL = 'TOGGLE_SIGN_IN_MODAL';
+export const DISPATCH_ERROR = 'DISPATCH_ERROR';
 
 export const setUserField = (value, name) => ({
 	type: SET_USER_FIELD,
@@ -121,4 +122,8 @@ export const setMyTags = (data)=>({
 export const endLoan = (loanId) =>({
 	type: END_LOAN,
 	payload: loanId,
+});
+
+export const dispatchError = () =>({
+	type: DISPATCH_ERROR,
 });

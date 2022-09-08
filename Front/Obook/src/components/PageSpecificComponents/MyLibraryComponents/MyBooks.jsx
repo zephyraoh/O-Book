@@ -67,7 +67,7 @@ const MyBooks = ()=>{
     if(libraryFilter==='myBorrows'){
         return (
             <div className='desktop:w-5/6 mobile:w-full h-3/4 desktop:ml-64'>
-                <h3 className='w-full desktop:text-3xl mobile:text-xl font-bold mb-4'>Mes emprunts en cours</h3>
+                <h3 className='w-full desktop:text-3xl mobile:text-xl font-bold mb-5'>Mes emprunts en cours</h3>
                 <div className='w-full flex flex-wrap justify-evenly'>
                     {borrow.map((book) =>
                         (<>

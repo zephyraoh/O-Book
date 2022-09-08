@@ -162,8 +162,20 @@ export const unsetBook = (data) => ({
   payload: data,
 });
 
-// --------- AJOUT DUKE TEST CI-DESSOUS ------------- //
-// export const setLoanInProgress = (data) => ({
-//   type: SET_LOAN_IN_PROGRESS,
-//   payload: data,
-// });
+// export const setNewBookStatus
+
+// const newBooks = state.books.map(book => {
+//   if(book.libraryid === Number(action.payload)){
+//       book.is_available = false
+//       return book
+//   } else {
+//       return book
+
+// }});
+// console.log('NEWBOOKS===>', newBooks);
+// console.log('PAYLOAD ===>', action.payload);
+// return{
+//   ...state,
+//   books: newBooks,
+  
+// }

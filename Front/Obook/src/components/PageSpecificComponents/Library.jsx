@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fetchBorrowDemand, fetchVisitedProfileData } from "../../actions/visitedUser";
+import { fetchBorrowDemand, fetchVisitedProfileData, setVisitedProfileBookStatus } from "../../actions/visitedUser";
 import BookCard from "../GlobalComponents/BooksResults/BookCard";
 import { requestLoan } from "../../actions/books";
 import { LoginModal } from "../GlobalComponents/Header/LoginModal/LoginModal";
@@ -22,6 +22,7 @@ const Library = ()=>{
     const handleClick =(e)=> {
         isLogged?(
             dispatch(requestLoan(e.target.value)),
+            dispatch(setVisitedProfileBookStatus(e.target.value)),
             console.log("demande de prêt dispatchée sur le livre ", e.target.value)
         ):(
             dispatch(toggleSignInModal(true)),

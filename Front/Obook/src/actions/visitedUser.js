@@ -30,8 +30,7 @@ export const fetchBorrowDemand = (libraryid)=>({
     payload: libraryid,
 });
 
-export const setVisitedProfileBookStatus = (data)=>({
+export const setVisitedProfileBookStatus = (libraryid)=>({
     type : SET_VISITED_PROFILE_BOOK_STATUS,
-    id: data.id,
-    payload: data,
+    payload: libraryid,
 })

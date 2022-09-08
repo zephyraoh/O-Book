@@ -1,6 +1,6 @@
 import { axiosServerDB } from '../utils/axios';
 import { DELETE_BOOK, FETCH_ADD_NEW_BOOK_TO_MY_LIBRARY, SEND_MY_BOOKS_AVAILABILITY, setMyBooksAvailability, setLoading, fetchBooks, REQUEST_LOAN, GET_BOOK_OWNERS, setBookOwners, ACCEPT_LOAN, END_LOAN, FETCH_LENDER_INFOS, setLenderInfos } from '../actions/books';
-import { setUserData, SIGN_IN, SIGN_UP, GET_MY_LIBRARY, GET_MEMBER_PROFILE, SEND_MODIFIED_INFOS, ADD_TAG_USER, REMOVE_TAG_USER, GET_ALL_TAGS, setAllTags, setMyTags } from '../actions/user';
+import { setUserData, SIGN_IN, SIGN_UP, GET_MY_LIBRARY, GET_MEMBER_PROFILE, SEND_MODIFIED_INFOS, ADD_TAG_USER, REMOVE_TAG_USER, GET_ALL_TAGS, setAllTags, setMyTags, dispatchError } from '../actions/user';
 import axios from 'axios';
 
 
@@ -14,30 +14,34 @@ const authMiddleware = (store) => (next) => async (action) => {
 			// On utilise une instance d'axios qui est configurée avec un baseUrl me permettant de ne plus spéficier à chaque fois http://localhost:3001
             //BASE URL SERVEUR à remplir ici
             // const BASE_URL_OBOOK_SERV = 
+			try {
+				const { data } = await axiosServerDB.post('/login', {
+					email,
+					password,
+				});
 
-			const { data } = await axiosServerDB.post('/login', {
-				email,
-				password,
-			});
-
-			// Une fois connecté, je modifie les headers de base de mon instance axios
-			// Cela me permet de ne plus avoir à spéficier dans chaque requête ses headers
-			axiosServerDB.defaults.headers.common.Authorization = `Bearer ${ data.token }`;
-			console.log("réponse serveur",data);
-			// Objet transitoire pour add les data au state.user via le dispatch(setUserData)
-			const correctedData ={
-				library:{
-					books: data.library.books,
-					borrow: data.library.borrow,
-					lends: data.library.lends
-				},
-				token: data.token,
-				isLogged: data.isLogged,
-				...data.library.userInfos,
-				tags: data.library.tags,
+				// Une fois connecté, je modifie les headers de base de mon instance axios
+				// Cela me permet de ne plus avoir à spéficier dans chaque requête ses headers
+				axiosServerDB.defaults.headers.common.Authorization = `Bearer ${ data.token }`;
+				console.log("réponse serveur",data);
+				// Objet transitoire pour add les data au state.user via le dispatch(setUserData)
+				const correctedData ={
+					library:{
+						books: data.library.books,
+						borrow: data.library.borrow,
+						lends: data.library.lends
+					},
+					token: data.token,
+					isLogged: data.isLogged,
+					...data.library.userInfos,
+					tags: data.library.tags,
+				}
+				store.dispatch(setUserData(correctedData));
+				console.log("infos serveur reçues à la connexion", correctedData);
+			} catch(e){
+				console.log(e);
+				store.dispatch(dispatchError());
 			}
-			store.dispatch(setUserData(correctedData));
-			console.log("infos serveur reçues à la connexion", correctedData);
 			break;
 		}
 		case SIGN_UP: {
@@ -222,6 +226,7 @@ const authMiddleware = (store) => (next) => async (action) => {
 				const libraryId = action.payload;
 				const {data} = await axiosServerDB.post('/loan', {libraryId: libraryId});
 				console.log("loan generated ==>", data);
+
 					
 			}catch(err){
 				console.log(err);

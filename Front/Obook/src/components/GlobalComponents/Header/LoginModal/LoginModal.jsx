@@ -73,6 +73,7 @@ export const LoginModal=()=>{
  
   const [loginForm, setLoginForm] = useState(true);
   const isLogged = useSelector(state => state.user.isLogged);
+  const error = useSelector(state => state.user.error);
   
   return (
     
@@ -89,6 +90,7 @@ export const LoginModal=()=>{
             {/* //form de login */}
             <Field value= {email} type= "email" name= "email" placeholder="Email" onChange={onChange} />
             <Field value= {password} type= "password" name= "password" placeholder="Mot de Passe" onChange={onChange} />
+            {error && <p className="text-red-700">Email ou mot de passe invalide !</p>}
             <Button name="Se connecter" type="submit" value="loginButton" className="login-button p-2 px-3 m-3 rounded bg-[#292F44] text-[#F5F5F5]" />
             <a className='block' onClick={handleClick}>Pas encore inscrit ?</a>
           </form>

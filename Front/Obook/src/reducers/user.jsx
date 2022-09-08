@@ -1,12 +1,13 @@
-import { SET_USER_FIELD, SET_USER_DATA, LOGOUT, CLEAR_PASSWORDS, TOGGLE_SIGN_IN_MODAL, SET_USER_MODIFY_ACCOUNT_FIELD, SET_ALL_TAGS,  SET_MY_TAGS }  from "../actions/user";
+import { SET_USER_FIELD, SET_USER_DATA, LOGOUT, CLEAR_PASSWORDS, TOGGLE_SIGN_IN_MODAL, SET_USER_MODIFY_ACCOUNT_FIELD, SET_ALL_TAGS,  SET_MY_TAGS, DISPATCH_ERROR }  from "../actions/user";
 
 
 export const initialState = {
   // user infos
+  error: false,
   firstName:'',
   lastName:'',
-  username: null,  
-  email: '',
+  username: '',  
+  email: 'marwan@gmail.com',
   // miscelleanous
   profile_picture:'https://res.cloudinary.com/obook/image/upload/v1661345211/nl2gtqzgbnqyo5ilgzfz.jpg ',
   zipcode:'',
@@ -16,7 +17,7 @@ export const initialState = {
   // connexion
   token: null,
   isLogged: false,
-  password: '',
+  password: 'azerty1234',
   newUserName:'',
   newEmail: '',
   newPassword: '',
@@ -97,6 +98,11 @@ export const initialState = {
         return{
           ...state,
           tags: action.payload,
+        }
+        case DISPATCH_ERROR:
+        return{
+          ...state,
+          error: true,
         }
       default:
         return state;
