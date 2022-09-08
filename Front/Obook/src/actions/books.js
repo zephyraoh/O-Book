@@ -24,6 +24,7 @@ export const ACCEPT_LOAN = 'ACCEPT_LOAN';
 export const END_LOAN = 'END_LOAN';
 export const FETCH_LENDER_INFOS = 'FETCH_LENDER_INFOS';
 export const SET_LENDER_INFOS = 'SET_LENDER_INFOS';
+export const SET_NEW_BOOK_STATUS = 'SET_NEW_BOOK_STATUS';
 
 // --------- AJOUT DUKE TEST CI-DESSOUS ------------- //
 export const UNSET_BOOK = 'UNSET_BOOK';
@@ -162,20 +163,8 @@ export const unsetBook = (data) => ({
   payload: data,
 });
 
-// export const setNewBookStatus
-
-// const newBooks = state.books.map(book => {
-//   if(book.libraryid === Number(action.payload)){
-//       book.is_available = false
-//       return book
-//   } else {
-//       return book
-
-// }});
-// console.log('NEWBOOKS===>', newBooks);
-// console.log('PAYLOAD ===>', action.payload);
-// return{
-//   ...state,
-//   books: newBooks,
-  
-// }
+export const setNewBookStatus = (libraryid, status) => ({
+  type: SET_NEW_BOOK_STATUS,
+  libraryid,
+  status,
+});

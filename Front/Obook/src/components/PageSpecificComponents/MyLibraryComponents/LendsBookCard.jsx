@@ -1,4 +1,4 @@
-import { acceptLoan, endLoan } from "../../../actions/books";
+import { acceptLoan, endLoan, setNewBookStatus } from "../../../actions/books";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -21,12 +21,16 @@ const LendsBookCard=({
 
     const handleAcceptRequest = (e) => {
         dispatch(acceptLoan(e.target.value));
-        // TEST DUKE (à virer si ça casse todo)
-        // dispatch(setLoanInProgress(e.target.value));
+        dispatch(setNewBookStatus(libraryid, "En attente de validation"));
     }
 
     const handleEndRequest = (e) => {
         dispatch(endLoan(e.target.value));
+        dispatch(setNewBookStatus(libraryid, "En cours"));
+    }
+
+    if (status === "Terminé"){
+        return ''
     }
     return (
         // rounded-full border-[#292F44] desktop:h-30 desktop:w-30 desktop:max-w-[133px] desktop:max-h-[133px] desktop:min-w-[133px] desktop:min-h-[133px] mobile:h-[70px] mobile:w-[70px] mobile:min-h-[70px] mobile:min-w-[70px]
