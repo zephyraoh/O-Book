@@ -1,4 +1,4 @@
-import { SET_BOOKS_RESULTS_IN_SEARCH_STATE, SET_SEARCH, SET_SELECTED_FILTER, SET_MY_BOOKS_AVAILABILITY, SET_UPDATES, SET_MY_LIBRARY_FILTER, SET_BOOKS, SET_VISITED_BOOK_PAGE, SET_SINGLE_BOOK, SET_LOADING, SET_BOOK_OWNERS, SET_LENDER_INFOS, UNSET_BOOK } from "../actions/books";
+import { SET_BOOKS_RESULTS_IN_SEARCH_STATE, SET_SEARCH, SET_SELECTED_FILTER, SET_MY_BOOKS_AVAILABILITY, SET_UPDATES, SET_MY_LIBRARY_FILTER, SET_BOOKS, SET_VISITED_BOOK_PAGE, SET_SINGLE_BOOK, SET_LOADING, SET_BOOK_OWNERS, SET_LENDER_INFOS, UNSET_BOOK, SET_NEW_BOOK_STATUS } from "../actions/books";
 
 
 // initialstate : search vide et librairie API à affichier vide
@@ -122,7 +122,6 @@ export const initialState = {
             ...state,
             lenderUserInfos: action.payload,
           }
-          // TEST DUKE
           case UNSET_BOOK:
             return{
               ...state,
@@ -134,27 +133,38 @@ export const initialState = {
                 }
             }
             }
-          // -------- TEST DUKE (à virer si ça casse todo) --------------
-          // case SET_LOAN_IN_PROGRESS:
-          //   const index = state.booksData.myBooks.lends.findIndex(object => {
-          //     return object.loanid === action.payload;
-          //   });
-          //   return{
-          //     ...state,
-          //     booksData: {
-          //       ...state.booksData,
-          //       myBooks: {
-          //         ...state.booksData.myBooks,
-          //         lends: [
-          //           ...state.booksData.myBooks.lends,
-          //           state.booksData.myBooks.lends[action.payload].status = "En cours",
-          //         ]
-          //       }
-          //   }
-          //   }
+          case SET_NEW_BOOK_STATUS:
+            console.log('STATUS ===>',action.status);
+            console.log('LIBRARYID ===>', action.libraryid);
+
+             const newLends = state.booksData.myBooks.lends.map(book => {
+                if(book.libraryid === Number(action.libraryid)){
+                  if(action.status === 'En cours'){
+                    book.status = 'Terminé';
+                    return book
+                  } else if(action.status === 'En attente de validation'){
+                    book.status = 'En cours';
+                    return book
+                  }
+                } else {
+                    return book
+              }});
+              console.log('NEW LENDS ===>', newLends);
+            return{
+              ...state,
+              booksData: {
+                ...state.booksData,
+                myBooks: {
+                  ...state.booksData.myBooks,
+                  lends: newLends,
+              }
+            }
+            }
         default:
           return state;
     }
   };
   
   export default reducer;
+
+ 
