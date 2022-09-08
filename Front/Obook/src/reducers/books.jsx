@@ -1,4 +1,4 @@
-import { SET_BOOKS_RESULTS_IN_SEARCH_STATE, SET_SEARCH, SET_SELECTED_FILTER, SET_MY_BOOKS_AVAILABILITY, SET_UPDATES, SET_MY_LIBRARY_FILTER, SET_BOOKS, SET_VISITED_BOOK_PAGE, SET_SINGLE_BOOK, SET_LOADING, SET_BOOK_OWNERS, SET_LENDER_INFOS } from "../actions/books";
+import { SET_BOOKS_RESULTS_IN_SEARCH_STATE, SET_SEARCH, SET_SELECTED_FILTER, SET_MY_BOOKS_AVAILABILITY, SET_UPDATES, SET_MY_LIBRARY_FILTER, SET_BOOKS, SET_VISITED_BOOK_PAGE, SET_SINGLE_BOOK, SET_LOADING, SET_BOOK_OWNERS, SET_LENDER_INFOS, UNSET_BOOK } from "../actions/books";
 
 
 // initialstate : search vide et librairie API à affichier vide
@@ -122,7 +122,36 @@ export const initialState = {
             ...state,
             lenderUserInfos: action.payload,
           }
-          
+          // TEST DUKE
+          case UNSET_BOOK:
+            return{
+              ...state,
+              booksData: {
+                ...state.booksData,
+                myBooks: {
+                  ...state.booksData.myBooks,
+                  books: state.booksData.myBooks.books.filter(book => book.libraryid !== action.payload),
+                }
+            }
+            }
+          // -------- TEST DUKE (à virer si ça casse todo) --------------
+          // case SET_LOAN_IN_PROGRESS:
+          //   const index = state.booksData.myBooks.lends.findIndex(object => {
+          //     return object.loanid === action.payload;
+          //   });
+          //   return{
+          //     ...state,
+          //     booksData: {
+          //       ...state.booksData,
+          //       myBooks: {
+          //         ...state.booksData.myBooks,
+          //         lends: [
+          //           ...state.booksData.myBooks.lends,
+          //           state.booksData.myBooks.lends[action.payload].status = "En cours",
+          //         ]
+          //       }
+          //   }
+          //   }
         default:
           return state;
     }

@@ -19,9 +19,9 @@ const MyBooks = ()=>{
     const allBooks = useSelector(state => state.books.booksData.myBooks.books);
     const lends = useSelector(state => state.books.booksData.myBooks.lends);
     const borrow = useSelector(state => state.books.booksData.myBooks.borrow);
+
     // Fonctions
     const dispatch = useDispatch();
-    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(setLoading(true));
@@ -33,6 +33,7 @@ const MyBooks = ()=>{
     if(loading){
         return <Loading/>
     }
+
     if (libraryFilter==='allMyBooks'){
         return (
             <div className='desktop:w-5/6 mobile:w-full h-3/4 desktop:ml-64'>
@@ -77,9 +78,6 @@ const MyBooks = ()=>{
             </div>
         )
     }
-
-    
-
         
 }
 export default MyBooks;

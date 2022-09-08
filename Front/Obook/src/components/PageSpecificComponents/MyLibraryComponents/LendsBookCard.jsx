@@ -19,6 +19,8 @@ const LendsBookCard=({
 
     const handleAcceptRequest = (e) => {
         dispatch(acceptLoan(e.target.value));
+        // TEST DUKE (à virer si ça casse todo)
+        // dispatch(setLoanInProgress(e.target.value));
     }
 
     const handleEndRequest = (e) => {
